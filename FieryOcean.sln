@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieryOcean.CSharp.Plugins", "FieryOcean.CSharp.Plugins.csproj", "{4199E1C3-49BD-8CEB-8CF6-C3BC36517ADB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieryOcean.CSharp", "FieryOcean.CSharp.csproj", "{FD10CD14-1568-8219-3BF9-C10D17ED70DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4199E1C3-49BD-8CEB-8CF6-C3BC36517ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4199E1C3-49BD-8CEB-8CF6-C3BC36517ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4199E1C3-49BD-8CEB-8CF6-C3BC36517ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4199E1C3-49BD-8CEB-8CF6-C3BC36517ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD10CD14-1568-8219-3BF9-C10D17ED70DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD10CD14-1568-8219-3BF9-C10D17ED70DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD10CD14-1568-8219-3BF9-C10D17ED70DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD10CD14-1568-8219-3BF9-C10D17ED70DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

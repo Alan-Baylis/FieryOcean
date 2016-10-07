@@ -26,3 +26,4 @@
 # macos build
 *.app
 # macos*/
+/Library/ShaderCache

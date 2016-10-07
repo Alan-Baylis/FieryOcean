@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/AQUAS-Lite/Demo/DEMO.unity
+  isLoaded: 1
+  isActive: 1
