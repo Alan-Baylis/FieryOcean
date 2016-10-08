@@ -1,3 +1,10 @@
+# Unity build results
+/client/[Bb]uild/
+/client/[Ll]ibrary/*
+/client/[Oo]bj/
+/client/[Tt]emp/
+
+
 *.bak
 *.unityproj
 *.pidb
@@ -27,3 +34,4 @@
 *.app
 # macos*/
 /Library/ShaderCache
+/Library
