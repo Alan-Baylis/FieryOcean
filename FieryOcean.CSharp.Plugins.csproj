@@ -109,7 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AQUAS-Lite\Readme.txt" />
+    <None Include="Assets\AQUAS-Lite\Shaders\AQUAS-Lite.origin.shader" />
     <None Include="Assets\AQUAS-Lite\Shaders\AQUAS-Lite.shader" />
+    <None Include="Assets\Shaders\simple1.shader" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
