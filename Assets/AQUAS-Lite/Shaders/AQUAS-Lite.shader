@@ -114,19 +114,21 @@ Shader "AQUAS Lite" {
             };
             VertexOutput vert (VertexInput v) {
                 VertexOutput o = (VertexOutput)0;
-                o.uv0 = v.texcoord0;
-                o.normalDir = UnityObjectToWorldNormal(v.normal);
-                o.tangentDir = normalize( mul( unity_ObjectToWorld, float4( v.tangent.xyz, 0.0 ) ).xyz );
-                o.bitangentDir = normalize(cross(o.normalDir, o.tangentDir) * v.tangent.w);
-                float3 recipObjScale = float3( length(unity_WorldToObject[0].xyz), length(unity_WorldToObject[1].xyz), length(unity_WorldToObject[2].xyz) );
-                float3 objScale = 1.0/recipObjScale;
-                o.posWorld = mul(unity_ObjectToWorld, v.vertex);
-                float3 lightColor = _LightColor0.rgb;
+				//o.pos = v.vertex;
+				
+                //o.uv0 = v.texcoord0;
+                //o.normalDir = UnityObjectToWorldNormal(v.normal);
+                //o.tangentDir = normalize( mul( unity_ObjectToWorld, float4( v.tangent.xyz, 0.0 ) ).xyz );
+                //o.bitangentDir = normalize(cross(o.normalDir, o.tangentDir) * v.tangent.w);
+                //float3 recipObjScale = float3( length(unity_WorldToObject[0].xyz), length(unity_WorldToObject[1].xyz), length(unity_WorldToObject[2].xyz) );
+                //float3 objScale = 1.0/recipObjScale;
+                //o.posWorld = mul(unity_ObjectToWorld, v.vertex);
+                //float3 lightColor = _LightColor0.rgb;
                 o.pos = mul(UNITY_MATRIX_MVP, v.vertex );
-                UNITY_TRANSFER_FOG(o,o.pos);
-                o.projPos = ComputeScreenPos (o.pos);
-                COMPUTE_EYEDEPTH(o.projPos.z);
-                o.screenPos = o.pos;
+                //UNITY_TRANSFER_FOG(o,o.pos);
+                //o.projPos = ComputeScreenPos (o.pos);
+                //COMPUTE_EYEDEPTH(o.projPos.z);
+                //o.screenPos = o.pos;
                 return o;
             }
             float4 frag(VertexOutput i) : COLOR {
@@ -155,30 +157,31 @@ Shader "AQUAS Lite" {
                 float2 _multiplier6 = ((i.uv0+_multiplier7)*_division1);
                 float4 _texture2 = tex2D(_NormalTexture,TRANSFORM_TEX(_multiplier6, _NormalTexture));
                 float3 _subtractor1 = (_texture1.rgb-_texture2.rgb);
-                float _multiplier1 = (pow(saturate((sceneZ-partZ)/_DepthTransparency),_ShoreFade)*saturate((sceneZ-partZ)/_ShoreTransparency));
+				float _multiplier1 = 0.85; // (pow(saturate((sceneZ - partZ) / _DepthTransparency), _ShoreFade)*saturate((sceneZ - partZ) / _ShoreTransparency));
                 float2 sceneUVs = float2(1,grabSign)*i.screenPos.xy*0.5+0.5 + ((_subtractor1.rg*(_Refraction*0.2))*_multiplier1);
                 float4 sceneColor = tex2D(Refraction, sceneUVs);
-                float3x3 tangentTransform = float3x3( i.tangentDir, i.bitangentDir, i.normalDir);
+                //float3x3 tangentTransform = float3x3( i.tangentDir, i.bitangentDir, i.normalDir);
 /////// Vectors:
-                float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
+                /*float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
                 float3 normalLocal = lerp(float3(0,0,1),_subtractor1,_Refraction);
                 float3 normalDirection = normalize(mul( normalLocal, tangentTransform )); // Perturbed normals
                 float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);
                 float3 lightColor = _LightColor0.rgb;
-                float3 halfDirection = normalize(viewDirection+lightDirection);
+                float3 halfDirection = normalize(viewDirection+lightDirection);*/
 ////// Lighting:
-                float attenuation = 1;
-                float3 attenColor = attenuation * _LightColor0.xyz;
+                //float attenuation = 1;
+                //float3 attenColor = attenuation * _LightColor0.xyz;
 ///////// Gloss:
-                float gloss = _Gloss;
-                float specPow = exp2( gloss * 10.0+1.0);
+                //float gloss = _Gloss;
+                //float specPow = exp2( gloss * 10.0+1.0);
 ////// Specular:
-                float NdotL = max(0, dot( normalDirection, lightDirection ));
+                /*float NdotL = max(0, dot( normalDirection, lightDirection ));
                 float3 specularColor = (_Specular*_SpecularColor.rgb);
                 float3 directSpecular = (floor(attenuation) * _LightColor0.xyz) * pow(max(0,dot(halfDirection,normalDirection)),specPow)*specularColor;
-                float3 specular = directSpecular;
+                float3 specular = directSpecular;*/
+				//float3 specular = 0.4;
 /////// Diffuse:
-                NdotL = dot( normalDirection, lightDirection );
+                /*NdotL = dot( normalDirection, lightDirection );
                 float3 w = float3(_LightWrapping,_LightWrapping,_LightWrapping)*0.5; // Light wrapping
                 float3 NdotLWrap = NdotL * ( 1.0 - w );
                 float3 forwardLight = max(float3(0.0,0.0,0.0), NdotLWrap + w );
@@ -209,12 +212,15 @@ Shader "AQUAS Lite" {
                 float3 _multiplier2 = ((saturate((sceneZ-partZ)/_FoamBlend)*-1.0+1.0)*(((_value2 + ( (dot((_texture3.rgb-_texture4.rgb),float3(0.3,0.59,0.11)) - _FoamContrast) * (1.0 - _value2) ) / ((1.0 - _FoamContrast) - _FoamContrast))*_FoamColor.rgb)*(_FoamIntensity*(-1.0))));
                 float3 _lerp = lerp(lerp( _blend1, lerp(_ReflectionTex_var.rgb,_blend1,(1.0 - _ReflectionIntensity)), _EnableReflections ),(_multiplier2*_multiplier2),_FoamVisibility);
                 float3 diffuseColor = lerp( _lerp, lerp(_lerp,_FogColor.rgb,saturate(pow((distance(i.posWorld.rgb,_WorldSpaceCameraPos)/_FogDistance),_FogFade))), _EnableCustomFog );
-                float3 diffuse = (directDiffuse + indirectDiffuse) * diffuseColor;
+                float3 diffuse = (directDiffuse + indirectDiffuse) * diffuseColor;*/
 /// Final Color:
-                float3 finalColor = diffuse + specular;
-                fixed4 finalRGBA = fixed4(lerp(sceneColor.rgb, finalColor,_multiplier1),1);
-                UNITY_APPLY_FOG(i.fogCoord, finalRGBA);
-                return finalRGBA;
+               // float3 finalColor = /*diffuse +*/ specular;
+				//fixed4 finalRGBA = fixed4(lerp(sceneColor.rgb, finalColor, _multiplier1), 1); //fixed4(sceneColor.rgb,1);//fixed4(lerp(sceneColor.rgb, finalColor,_multiplier1),1);
+               
+                //return finalRGBA;
+				fixed4 finalRGBA = fixed4(0.3, 0.3, 0.5, 0.8);
+				//UNITY_APPLY_FOG(i.fogCoord, finalRGBA);
+				return finalRGBA;
             }
             ENDCG
         }

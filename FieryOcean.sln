@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieryOcean.CSharp.Plugins",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieryOcean.CSharp", "FieryOcean.CSharp.csproj", "{FD10CD14-1568-8219-3BF9-C10D17ED70DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieryOcean.CSharp.Editor", "FieryOcean.CSharp.Editor.csproj", "{64B10D7F-1570-C0CC-4D84-A6EB76CE1CF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{FD10CD14-1568-8219-3BF9-C10D17ED70DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD10CD14-1568-8219-3BF9-C10D17ED70DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD10CD14-1568-8219-3BF9-C10D17ED70DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64B10D7F-1570-C0CC-4D84-A6EB76CE1CF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64B10D7F-1570-C0CC-4D84-A6EB76CE1CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64B10D7F-1570-C0CC-4D84-A6EB76CE1CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64B10D7F-1570-C0CC-4D84-A6EB76CE1CF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
