@@ -33,6 +33,5 @@
 # macos build
 *.app
 # macos*/
-/Library/ShaderCache
-/Library
 /Temp
+Library

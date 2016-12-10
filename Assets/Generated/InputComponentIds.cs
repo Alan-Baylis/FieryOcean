@@ -8,11 +8,35 @@
 //------------------------------------------------------------------------------
 public static class InputComponentIds {
 
-    public const int TotalComponents = 0;
+    public const int Collision = 0;
+    public const int InputOwner = 1;
+    public const int MoveInput = 2;
+    public const int ShootInput = 3;
+    public const int SlowMotion = 4;
+    public const int Tick = 5;
+    public const int Rigidbody = 7;
+
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
+        "Collision",
+        "InputOwner",
+        "MoveInput",
+        "ShootInput",
+        "SlowMotion",
+        "Tick",
+        null,
+        "Rigidbody"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(CollisionComponent),
+        typeof(InputOwnerComponent),
+        typeof(MoveInputComponent),
+        typeof(ShootInputComponent),
+        typeof(SlowMotionComponent),
+        typeof(TickComponent),
+        null,
+        typeof(RigidbodyComponent)
     };
 }
