@@ -1,44 +1,49 @@
-﻿using Entitas;
+﻿using System;
+using Entitas;
 using UnityEngine;
 
-public sealed class InputSystem : ISetPools, IExecuteSystem, ICleanupSystem {
+public sealed class InputSystem : ISetPools, IExecuteSystem, IInitializeSystem, ICleanupSystem {
 
     const string PLAYER1_ID = "Player1";
 
     Pools _pools;
     Group _moveInputs;
-    Group _shootInputs;
+    PlayerControlController _playerControlController;
+
+    public InputSystem(PlayerControlController playerControlController)
+    {
+        _playerControlController = playerControlController;
+    }
 
     public void SetPools(Pools pools) {
         _pools = pools;
-        //_moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);
-        //_shootInputs = pools.input.GetGroup(InputMatcher.ShootInput);
+        _moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);
     }
 
-    public void Execute() {
-        var moveX = Input.GetAxisRaw("Horizontal");
-        var moveY = Input.GetAxisRaw("Vertical");
+    PlayerControlController.speedTypes _curSpeedType = PlayerControlController.speedTypes.Stop;
 
-        /*_pools.input.CreateEntity()
-                 .AddMoveInput(new Vector3(moveX, moveY))
-                 .AddInputOwner(PLAYER1_ID);
+    public void Execute()
+    {
+        if (_curSpeedType != _playerControlController.currentSpeedType)
+        {
+            _curSpeedType = _playerControlController.currentSpeedType;
 
-        if(Input.GetAxisRaw("Fire1") != 0) {
             _pools.input.CreateEntity()
-                     .IsShootInput(true)
-                     .AddInputOwner(PLAYER1_ID);
+               .AddMoveInput(_playerControlController.inputAccelerate)
+               .AddInputOwner(PLAYER1_ID);
         }
-
-        _pools.input.isSlowMotion = Input.GetAxisRaw("Fire2") != 0;*/
     }
 
     public void Cleanup() {
         foreach(var e in _moveInputs.GetEntities()) {
             _pools.input.DestroyEntity(e);
         }
+    }
 
-        foreach(var e in _shootInputs.GetEntities()) {
-            _pools.input.DestroyEntity(e);
-        }
+    public void Initialize()
+    {
+        /*_pools.input.CreateEntity()
+               .AddMoveInput(_playerControlController.inputAccelerate)
+               .AddInputOwner(PLAYER1_ID);*/
     }
 }

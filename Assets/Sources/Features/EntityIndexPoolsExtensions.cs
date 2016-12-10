@@ -5,7 +5,7 @@ public static class EntityIndexPoolsExtensions {
     public const string PlayerKey = "Player";
 
     public static void AddEntityIndices(this Pools pools) {
-       /* var playerIndex = new PrimaryEntityIndex<string>(
+        var playerIndex = new PrimaryEntityIndex<string>(
             pools.core.GetGroup(CoreMatcher.Player),
             (entity, component) => {
                 var playerComponent = (PlayerComponent)component;
@@ -15,7 +15,7 @@ public static class EntityIndexPoolsExtensions {
             }
         );
 
-        pools.core.AddEntityIndex(PlayerKey, playerIndex);*/
+        pools.core.AddEntityIndex(PlayerKey, playerIndex);
     }
 
     public static Entity GetEntityWithPlayerId(this Pool pool, string id) {
