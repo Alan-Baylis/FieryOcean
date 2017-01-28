@@ -16,9 +16,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000014186717834}
+  - component: {fileID: 4000014186717834}
   m_Layer: 12
   m_Name: Bone002
   m_TagString: Untagged
@@ -31,25 +31,25 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000012104042784}
-  - 54: {fileID: 54000010367216124}
-  - 114: {fileID: 114000013562955754}
-  - 136: {fileID: 136000011987631660}
-  - 114: {fileID: 114000014072155166}
-  - 114: {fileID: 114000012670451686}
-  - 114: {fileID: 114000010088791026}
-  - 114: {fileID: 114000013535219610}
-  - 114: {fileID: 114000010325620848}
-  - 114: {fileID: 114000013199154022}
-  - 114: {fileID: 114000011160490380}
-  - 114: {fileID: 114000012735264442}
-  - 114: {fileID: 114000011461865718}
-  - 114: {fileID: 114000012532714588}
-  - 114: {fileID: 114000010692797748}
-  - 114: {fileID: 114000014253112090}
-  - 114: {fileID: 114000012691714836}
+  - component: {fileID: 4000012104042784}
+  - component: {fileID: 54000010367216124}
+  - component: {fileID: 114000013562955754}
+  - component: {fileID: 136000011987631660}
+  - component: {fileID: 114000014072155166}
+  - component: {fileID: 114000012670451686}
+  - component: {fileID: 114000010088791026}
+  - component: {fileID: 114000013535219610}
+  - component: {fileID: 114000010325620848}
+  - component: {fileID: 114000013199154022}
+  - component: {fileID: 114000011160490380}
+  - component: {fileID: 114000012735264442}
+  - component: {fileID: 114000011461865718}
+  - component: {fileID: 114000012532714588}
+  - component: {fileID: 114000010692797748}
+  - component: {fileID: 114000014253112090}
+  - component: {fileID: 114000012691714836}
   m_Layer: 12
   m_Name: enemy
   m_TagString: Untagged
@@ -62,9 +62,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000013864213712}
+  - component: {fileID: 4000013864213712}
   m_Layer: 12
   m_Name: Bone003
   m_TagString: Untagged
@@ -77,9 +77,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000010188141546}
+  - component: {fileID: 4000010188141546}
   m_Layer: 12
   m_Name: Bone004
   m_TagString: Untagged
@@ -92,9 +92,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000011265792476}
+  - component: {fileID: 4000011265792476}
   m_Layer: 12
   m_Name: Ship01
   m_TagString: Untagged
@@ -107,9 +107,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000011611844044}
+  - component: {fileID: 4000011611844044}
   m_Layer: 12
   m_Name: Bone001
   m_TagString: Untagged
@@ -122,11 +122,11 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000011184843208}
-  - 33: {fileID: 33000010719202650}
-  - 23: {fileID: 23000013931219290}
+  - component: {fileID: 4000011184843208}
+  - component: {fileID: 33000010719202650}
+  - component: {fileID: 23000013931219290}
   m_Layer: 12
   m_Name: Loft002
   m_TagString: Untagged
@@ -139,11 +139,11 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000013344396228}
-  - 33: {fileID: 33000012902574056}
-  - 23: {fileID: 23000011813120074}
+  - component: {fileID: 4000013344396228}
+  - component: {fileID: 33000012902574056}
+  - component: {fileID: 23000011813120074}
   m_Layer: 12
   m_Name: Box006
   m_TagString: Untagged
@@ -160,10 +160,10 @@ Transform:
   m_LocalRotation: {x: 0.0000005773127, y: 0.00000055784614, z: -0.7071066, w: 0.70710695}
   m_LocalPosition: {x: -1.83002, y: 2.0212364, z: -0.3320768}
   m_LocalScale: {x: 0.8349588, y: 0.8349589, z: 3.4823072}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000013864213712}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000011184843208
 Transform:
   m_ObjectHideFlags: 1
@@ -173,10 +173,10 @@ Transform:
   m_LocalRotation: {x: 8.659561e-17, y: 0.7071068, z: -0.7071068, w: 1.7431529e-32}
   m_LocalPosition: {x: -0.14662887, y: 1.9760268, z: 2.061351}
   m_LocalScale: {x: -0.29750985, y: -0.29820707, z: -0.29750985}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000011265792476}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000011265792476
 Transform:
   m_ObjectHideFlags: 1
@@ -186,7 +186,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -2.22, y: 0, z: 0}
   m_LocalScale: {x: 0.2778052, y: 0.22146045, z: 0.31948605}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
   - {fileID: 4000011611844044}
   - {fileID: 4000014186717834}
@@ -195,6 +194,7 @@ Transform:
   - {fileID: 4000011184843208}
   m_Father: {fileID: 4000012104042784}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4000011611844044
 Transform:
   m_ObjectHideFlags: 1
@@ -204,10 +204,10 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: -0.000000016148144, w: -0.000000016148144}
   m_LocalPosition: {x: 6.5432286, y: 2.494, z: 0.33452228}
   m_LocalScale: {x: 0.4011324, y: 0.4011324, z: 0.09640561}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000011265792476}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000012104042784
 Transform:
   m_ObjectHideFlags: 1
@@ -215,13 +215,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011079988362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.4, y: 1.02, z: -58.6}
+  m_LocalPosition: {x: 15.4, y: 13.11, z: -58.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000011265792476}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000013344396228
 Transform:
   m_ObjectHideFlags: 1
@@ -231,10 +231,10 @@ Transform:
   m_LocalRotation: {x: 8.659561e-17, y: 0.7071068, z: -0.7071068, w: 1.7431529e-32}
   m_LocalPosition: {x: 1.1996329, y: 0, z: -0.6045459}
   m_LocalScale: {x: -0.29750985, y: -0.15623516, z: -0.048000086}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000011265792476}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000013864213712
 Transform:
   m_ObjectHideFlags: 1
@@ -244,11 +244,11 @@ Transform:
   m_LocalRotation: {x: -0.000000066033245, y: 0.000000066033245, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -4.3565183, y: 2.7040656, z: 0.3345265}
   m_LocalScale: {x: -0.40113255, y: -0.40113255, z: -0.09640561}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010188141546}
   m_Father: {fileID: 4000011265792476}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000014186717834
 Transform:
   m_ObjectHideFlags: 1
@@ -258,10 +258,10 @@ Transform:
   m_LocalRotation: {x: -0.00000007701298, y: 1, z: -0.000000023852817, w: -0.00000034252105}
   m_LocalPosition: {x: 7.3426623, y: 1.7727301, z: 0.36654228}
   m_LocalScale: {x: 0.33492923, y: 0.33492905, z: 0.33571416}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000011265792476}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23000011813120074
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -276,7 +276,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 3e117a4ad9d92b849b1eb7803532ca48, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -284,7 +286,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -307,7 +309,9 @@ MeshRenderer:
   - {fileID: 2100000, guid: 7260af92b2c5f7946b2fb5f83fb01999, type: 2}
   - {fileID: 2100000, guid: d9c406e1469ca8c438e03bf10b9e4d5b, type: 2}
   - {fileID: 2100000, guid: 3e117a4ad9d92b849b1eb7803532ca48, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -315,7 +319,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -382,7 +386,7 @@ MonoBehaviour:
   priority: 5
   slowingDistance: 1.5
   autoCalculateSlowingDistance: 1
-  arrivalDistance: 0.2
+  arrivalDistance: 10
   slowingAlgorithm: 1
   pathingPriority: 0
   usePathSmoothing: 1
@@ -529,7 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347a442cc38b34e42b389507e5408474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravity: -9.81
+  _gravity: 0
   _providerType: 1
   groundStickynessFactor: 1
   terminalVelocity: 50
@@ -545,7 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  slowingDistance: 0.8
+  slowingDistance: 1
   slowingAlgorithm: 1
   minimumSpeedToTurn: 0.1
   alignWithElevation: 0

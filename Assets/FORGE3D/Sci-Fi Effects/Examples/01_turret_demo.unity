@@ -4368,7 +4368,7 @@ MonoBehaviour:
   ElevationTrackingSpeed: 2
   headingVetor: {x: 0, y: 0, z: 0}
   HeadingLimit: {x: -39.867283, y: 38.767757}
-  ElevationLimit: {x: -32.198048, y: 37.91385}
+  ElevationLimit: {x: -35.771324, y: 37.91385}
   smoothControlling: 1
   DebugDraw: 0
   Animators: []

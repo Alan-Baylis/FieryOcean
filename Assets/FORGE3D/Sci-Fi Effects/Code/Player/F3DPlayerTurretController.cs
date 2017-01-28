@@ -39,7 +39,7 @@ namespace Forge3D
             Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             // Raycast
-            if (Physics.Raycast(cameraRay, out hitInfo, 500f))
+            if (Physics.Raycast(cameraRay, out hitInfo, 900f))
             {
                 turret.SetNewTarget(hitInfo.point);
             }

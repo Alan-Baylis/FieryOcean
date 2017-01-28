@@ -161,8 +161,8 @@ namespace Apex.Services
         }
         public int solverIterationCount
         {
-            get { return Physics.solverIterationCount; }
-            set { Physics.solverIterationCount = value; }
+            get { return Physics.defaultSolverIterations; }
+            set { Physics.defaultSolverIterations = value; }
         }
 
 	    public bool CheckSphere(UnityEngine.Vector3 position, float radius, int layerMask)
