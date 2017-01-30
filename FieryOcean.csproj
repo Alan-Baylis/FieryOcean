@@ -541,6 +541,7 @@
     <Compile Include="Assets\Scripts\ArrayList.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Commons\Movement\Movement1.cs" />
+    <Compile Include="Assets\Scripts\ComputerToPlayerPathRequest.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Input\CollisionEmitter.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
