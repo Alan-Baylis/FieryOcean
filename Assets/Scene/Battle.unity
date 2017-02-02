@@ -203,7 +203,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 298138804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -927418779, guid: 41cdb5d7253968f41a8659c7eba5c2a3, type: 3}
   m_Name: 
@@ -326,15 +326,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad65028fc7907c4681efbb71f560ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawAlways: 1
+  drawAlways: 0
   drawMode: 0
   modelHeightNavigationCapabilities:
     maxSlopeAngle: 30
     maxClimbHeight: 0.5
     maxDropHeight: 1
   modelAttributes: 0
-  drawSubSections: 1
-  drawAllGrids: 1
+  drawSubSections: 0
+  drawAllGrids: 0
   editorRefreshDelay: 100
   drawDistanceThreshold: 375
   gridLinesColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 298138804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed1e2492ff96d04a84aad5225acd2b7, type: 3}
   m_Name: 
@@ -576,7 +576,7 @@ Prefab:
     - target: {fileID: 114998160210100184, guid: ae5e6f3b287ce384c917e4d48ea9f11e,
         type: 2}
       propertyPath: _allowCornerCutting
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114547375836207042, guid: ae5e6f3b287ce384c917e4d48ea9f11e,
         type: 2}
@@ -586,7 +586,7 @@ Prefab:
     - target: {fileID: 114998160210100184, guid: ae5e6f3b287ce384c917e4d48ea9f11e,
         type: 2}
       propertyPath: _optimizeUnobstructedPaths
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ae5e6f3b287ce384c917e4d48ea9f11e, type: 2}
@@ -1562,19 +1562,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 419.32
+      value: 619.8525
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1013.3199
+      value: 1009.27747
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 379.76
+      value: 378.245
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 379.76
+      value: 378.245
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_AnchorMin.x
@@ -1634,19 +1634,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22469012, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 1.8800049
+      value: 1.8724976
       objectReference: {fileID: 0}
     - target: {fileID: 22469012, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1.8800049
+      value: 1.8724976
       objectReference: {fileID: 0}
     - target: {fileID: 22469012, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 376
+      value: 374.5
       objectReference: {fileID: 0}
     - target: {fileID: 22469012, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 376
+      value: 374.5
       objectReference: {fileID: 0}
     - target: {fileID: 11496818, guid: 1a5154ebeae449e4994357609381b281, type: 2}
       propertyPath: m_Enabled
