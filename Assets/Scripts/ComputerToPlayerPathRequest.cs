@@ -5,16 +5,17 @@ using Apex.PathFinding;
 using Apex.Services;
 using System;
 using Apex;
+using Apex.Units;
 
 public class ComputerToPlayerPathRequest : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update ()
     {
-       if(Vector3.Distance(lastPosition , target.position)>5)
+       /*if(Vector3.Distance(lastPosition , target.position)>5)
             this.GetUnitFacade().MoveTo(target.position, false);
 
-        StartCoroutine(DoStuff());
+        StartCoroutine(DoStuff());*/
     }
 
     IEnumerator DoStuff()
@@ -25,15 +26,25 @@ public class ComputerToPlayerPathRequest : MonoBehaviour {
 
     private Vector3 lastPosition;
     public Transform target;
+    private IUnitFacade unitFacade;
+    private Apex.Input.InputController inputController = new Apex.Input.InputController();
 
     [Tooltip("The amount of seconds after which the enemy will update path to player.")]
     public float pathUpdateInterval = 1;
 
     private void Start()
     {
-        lastPosition = target.position;
-        MoveTo3();
+        /*
+            lastPosition = target.position;
+            unitFacade = this.GetUnitFacade();
+        
+            MoveTo3(unitFacade);
+        */
+
+        this.GetUnitFacade().MoveTo(target.position, false);
     }
+
+  
 
     private void MoveTo1()
     {
@@ -57,8 +68,10 @@ public class ComputerToPlayerPathRequest : MonoBehaviour {
             requesterProperties = unit,
             pathFinderOptions = unit.pathFinderOptions
         };
+        
+        GameServices.pathService.QueueRequest(req,0);
 
-        GameServices.pathService.QueueRequest(req);
+        
 
         // System.Threading.Thread.Sleep(1000);
     }
@@ -70,7 +83,7 @@ public class ComputerToPlayerPathRequest : MonoBehaviour {
         unit.MoveAlong(p);
     }
 
-    private void MoveTo3()
+    private void MoveTo3(IUnitFacade unitFacade)
     {
         this.GetUnitFacade().MoveTo(target.position, false);
     }
