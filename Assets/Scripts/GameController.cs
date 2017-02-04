@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 
     public Blueprints blueprints;
     public Camera cam;
-    public PlayerControlController playerControlController;
+    public PlayerInputController playerControlController;
     Systems _systems;
     // Use this for initialization
     void Start () {

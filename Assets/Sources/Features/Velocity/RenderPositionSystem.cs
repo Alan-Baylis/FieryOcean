@@ -12,7 +12,7 @@ public sealed class RenderPositionSystem : ISetPools, IExecuteSystem
     Pools _pools;
     private UltimateJoystick _joystick;
     Movement1 move1;
-    public RenderPositionSystem(UltimateJoystick joystick, Dictionary<PlayerControlController.speedTypes, float> speedMap)
+    public RenderPositionSystem(UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap)
     {
         _joystick = joystick;
         
