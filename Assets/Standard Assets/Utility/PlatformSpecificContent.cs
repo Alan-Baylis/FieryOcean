@@ -12,7 +12,8 @@ namespace UnityStandardAssets.Utility
 #endif
     public class PlatformSpecificContent : MonoBehaviour
     {
-        private enum BuildTargetGroup
+        private enum BuildTarget
+
         {
             Standalone,
             Mobile
@@ -56,7 +57,7 @@ namespace UnityStandardAssets.Utility
         private void CheckEnableContent()
         {
 #if (UNITY_IPHONE || UNITY_ANDROID || UNITY_WP8 || UNITY_TIZEN || UNITY_STV )
-		if (m_BuildTargetGroup == BuildTargetGroup.Mobile)
+		if (m_BuildTargetGroup == BuildTargetGroup.Android)
 		{
 			EnableContent(true);
 		} else {

@@ -8,11 +8,11 @@ public sealed class InputSystem : ISetPools, IExecuteSystem, IInitializeSystem, 
 
     Pools _pools;
     Group _moveInputs;
-    PlayerControlController _playerControlController;
+    PlayerInputController _playerController;
 
-    public InputSystem(PlayerControlController playerControlController)
+    public InputSystem(PlayerInputController playerController)
     {
-        _playerControlController = playerControlController;
+        _playerController = playerController;
     }
 
     public void SetPools(Pools pools) {
@@ -20,16 +20,12 @@ public sealed class InputSystem : ISetPools, IExecuteSystem, IInitializeSystem, 
         _moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);
     }
 
-    PlayerControlController.speedTypes _curSpeedType = PlayerControlController.speedTypes.Stop;
-
     public void Execute()
     {
-        if (_curSpeedType != _playerControlController.currentSpeedType)
+        if (_playerController.IsSpeedChanged)
         {
-            _curSpeedType = _playerControlController.currentSpeedType;
-
             _pools.input.CreateEntity()
-               .AddMoveInput(_playerControlController.inputAccelerate)
+               .AddMoveInput(_playerController.accelerate)
                .AddInputOwner(PLAYER1_ID);
         }
     }

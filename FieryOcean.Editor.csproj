@@ -191,6 +191,7 @@
     <Compile Include="Assets\FORGE3D\Sci-Fi Effects\Code\Turrets\Constructor\Editor\F3DTurretEditorWindow.cs" />
     <Compile Include="Assets\FORGE3D\Sci-Fi Effects\Code\Turrets\Editor\F3DTurretEditor.cs" />
     <Compile Include="Assets\FORGE3D\Sci-Fi Effects\Code\Turrets\Editor\F3DTurretHandles.cs" />
+    <Compile Include="Assets\Inspector Name Drawer\Editor\InspectorNameDrawer.cs" />
     <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\CodeGenerator.cs" />
     <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Generators\BlueprintsGenerator.cs" />
     <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Generators\ComponentExtensionsGenerator.cs" />

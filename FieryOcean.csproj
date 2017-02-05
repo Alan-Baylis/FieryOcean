@@ -479,6 +479,7 @@
     <Compile Include="Assets\Generated\VelocityComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewObjectPoolComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Inspector Name Drawer\InspectorNameAttribute.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\EntitasCache.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\ObjectCache.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\ObjectPool.cs" />
@@ -538,6 +539,7 @@
     <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\GameObjectDestroyExtension.cs" />
     <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\PoolObserver\PoolObserver.cs" />
     <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\PoolObserver\PoolObserverBehaviour.cs" />
+    <Compile Include="Assets\Scripts\AIController.cs" />
     <Compile Include="Assets\Scripts\ArrayList.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Commons\Movement\Movement1.cs" />
@@ -545,7 +547,7 @@
     <Compile Include="Assets\Scripts\Input\CollisionEmitter.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
-    <Compile Include="Assets\Scripts\PlayerControlController.cs" />
+    <Compile Include="Assets\Scripts\PlayerInputController.cs" />
     <Compile Include="Assets\Scripts\ShipDirectional.cs" />
     <Compile Include="Assets\Scripts\View\AnimationEventHandler\PathCompleteEventHandler.cs" />
     <Compile Include="Assets\Scripts\View\CameraShake.cs" />

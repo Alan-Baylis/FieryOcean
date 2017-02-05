@@ -7,7 +7,6 @@ public class ShipDirectional : MonoBehaviour {
     public Transform bow;
 
     public Vector3 GetShipDirectional()  {
-        return stern.transform.position - bow.transform.position;
-
+        return bow.transform.position - stern.transform.position;
     }
 }
