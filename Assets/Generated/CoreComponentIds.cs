@@ -22,10 +22,14 @@ public static class CoreComponentIds {
     public const int BulletCoolDown = 11;
     public const int Camera = 12;
     public const int CameraPosition = 13;
-    public const int Enemy = 14;
-    public const int Player = 15;
+    public const int EnemyBehaviour = 14;
+    public const int Enemy = 15;
+    public const int EnemyPosition = 16;
+    public const int EnemyView = 17;
+    public const int Player = 18;
+    public const int PlayerPosition = 19;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -42,8 +46,12 @@ public static class CoreComponentIds {
         "BulletCoolDown",
         "Camera",
         "CameraPosition",
+        "EnemyBehaviour",
         "Enemy",
-        "Player"
+        "EnemyPosition",
+        "EnemyView",
+        "Player",
+        "PlayerPosition"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -61,7 +69,11 @@ public static class CoreComponentIds {
         typeof(BulletCoolDownComponent),
         typeof(CameraComponent),
         typeof(CameraPositionComponent),
+        typeof(EnemyBehaviourComponent),
         typeof(EnemyComponent),
-        typeof(PlayerComponent)
+        typeof(EnemyPositionComponent),
+        typeof(EnemyViewComponent),
+        typeof(PlayerComponent),
+        typeof(PlayerPositionComponent)
     };
 }

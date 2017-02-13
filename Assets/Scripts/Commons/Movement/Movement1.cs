@@ -1,41 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Movement1
+public class PlayerMovementController
 {
     float angel = 0.1f;
     float joystickMistake = 0.1f;
-    float applyForseMistake = 0.5f;
     TransformSlowAccelerate slowAccelerate;
-    TransformRotateSlow trRotateSlow;
     Dictionary<PlayerInputController.speedTypes, float> speedMap;
-
-    public Movement1(Dictionary<PlayerInputController.speedTypes, float> speedMap)
+    private float _masterY;
+    public PlayerMovementController(Dictionary<PlayerInputController.speedTypes, float> speedMap, float masterY)
     {
         slowAccelerate = new TransformSlowAccelerate();
         this.speedMap = speedMap;
+        this._masterY = masterY;
+    }
+    public void SetMasterY(float masterY)
+    {
+        this._masterY = masterY;
     }
 
-    public void Move(Vector3 shipDirect, Rigidbody rb, Vector2 jpystickPos, float lastAc, Transform tr)
+    public Vector3 Move(Vector3 shipDirect, Rigidbody rb, Vector2 jpystickPos, float lastAc)
     {
+
         if (lastAc == speedMap[PlayerInputController.speedTypes.HalfSpeed])
         {
             PlayerRotation(shipDirect, rb, jpystickPos);
 
             float nextAc = slowAccelerate.CalcNextAccelerate(lastAc, rb.velocity.magnitude);
-            rb.velocity = shipDirect.normalized * nextAc; // TODO direction not correct
+            rb.velocity = shipDirect.normalized * nextAc; 
         }
 
         if (lastAc == speedMap[PlayerInputController.speedTypes.Stop])
         {
-            //float delta = rb.velocity.magnitude;
-
-            //Vector3 vector = tr.position;
-
-            // vector.x *= -1;
-            // vector.z *= -1;
-            //vector.y = 0;
-
             if (Vector3.Angle(rb.velocity, shipDirect) > 90)
                 rb.velocity = shipDirect.normalized * slowAccelerate.CalcNextAccelerate(lastAc, -rb.velocity.magnitude);
             else
@@ -44,17 +40,14 @@ public class Movement1
 
         if (lastAc == speedMap[PlayerInputController.speedTypes.Reversal])
         {
-            /*float delta = rb.velocity.magnitude - speedMap[PlayerInputController.speedTypes.Reversal];
-
-            if (Mathf.Abs(delta) > applyForseMistake)
-                rb.AddForce(shipDirect.normalized * delta);
-                */
-
             PlayerRotation(shipDirect, rb, jpystickPos);
 
             float nextAc = slowAccelerate.CalcNextAccelerate(lastAc, -rb.velocity.magnitude);
-            rb.velocity = shipDirect.normalized * nextAc; // TODO direction not correct
+            rb.velocity = shipDirect.normalized * nextAc;
         }
+
+        rb.position = new Vector3(rb.position.x, _masterY, rb.position.z);
+        return rb.position;
     }
 
     private void PlayerRotation(Vector3 shipDirect, Rigidbody rb, Vector2 jpystickPos)

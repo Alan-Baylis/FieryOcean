@@ -15,8 +15,8 @@
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>Android:13</UnityBuildTarget>
-    <UnityVersion>5.4.1f1</UnityVersion>
+    <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
+    <UnityVersion>5.5.0f3</UnityVersion>
     <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
@@ -27,7 +27,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_1;UNITY_5_4;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT;MOBILE_INPUT</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_5_0;UNITY_5_5;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VIDEO;ENABLE_VR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -37,7 +37,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_1;UNITY_5_4;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT;MOBILE_INPUT</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_5_0;UNITY_5_5;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VIDEO;ENABLE_VR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
@@ -57,6 +57,18 @@
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PlaymodeTestsRunner">
+      <HintPath>Library\UnityAssemblies\UnityEngine.PlaymodeTestsRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HoloLens">
+      <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VR">
+      <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -448,7 +460,10 @@
     <Compile Include="Assets\Generated\CoreComponentIds.cs" />
     <Compile Include="Assets\Generated\DamageComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\EnemyBehaviourComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\EnemyComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\EnemyPositionComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\EnemyViewComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ForseComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\HealthComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\InputAttribute.cs" />
@@ -457,6 +472,7 @@
     <Compile Include="Assets\Generated\MoveInputComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\OutOfScreenComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PlayerComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\PlayerPositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PlayerViewComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
@@ -467,6 +483,7 @@
     <Compile Include="Assets\Generated\VelocityComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewObjectPoolComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Inspector Name Drawer\InspectorNameAttribute.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\EntitasCache.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\ObjectCache.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\ObjectPool.cs" />
@@ -526,14 +543,16 @@
     <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\GameObjectDestroyExtension.cs" />
     <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\PoolObserver\PoolObserver.cs" />
     <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\PoolObserver\PoolObserverBehaviour.cs" />
+    <Compile Include="Assets\Scripts\AIController.cs" />
     <Compile Include="Assets\Scripts\ArrayList.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Commons\Movement\Movement1.cs" />
+    <Compile Include="Assets\Scripts\EnemiesStartPositions.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Input\CollisionEmitter.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
-    <Compile Include="Assets\Scripts\PlayerControlController.cs" />
+    <Compile Include="Assets\Scripts\PlayerInputController.cs" />
     <Compile Include="Assets\Scripts\ShipDirectional.cs" />
     <Compile Include="Assets\Scripts\View\AnimationEventHandler\PathCompleteEventHandler.cs" />
     <Compile Include="Assets\Scripts\View\CameraShake.cs" />
@@ -554,17 +573,24 @@
     <Compile Include="Assets\Sources\Features\Bullets\BulletCoolDownSystem.cs" />
     <Compile Include="Assets\Sources\Features\Bullets\BulletOutOfScreenSystem.cs" />
     <Compile Include="Assets\Sources\Features\Bullets\BulletViewController.cs" />
-    <Compile Include="Assets\Sources\Features\Camera\CameraComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Camera\CameraPositionComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Camera\CameraSystem.cs" />
-    <Compile Include="Assets\Sources\Features\Camera\CreateCameraSystem.cs" />
+    <Compile Include="Assets\Sources\Features\Camera\__components\CameraComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Camera\__components\CameraPositionComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Camera\__systems\CameraSystem.cs" />
+    <Compile Include="Assets\Sources\Features\Camera\__systems\CreateCameraSystem.cs" />
     <Compile Include="Assets\Sources\Features\Components\BlueprintsComponent.cs" />
     <Compile Include="Assets\Sources\Features\Components\OutOfScreenComponent.cs" />
     <Compile Include="Assets\Sources\Features\Destroy\AnimateDestroyViewSystem.cs" />
     <Compile Include="Assets\Sources\Features\Destroy\AnimateOutOfScreenViewSystem.cs" />
     <Compile Include="Assets\Sources\Features\Destroy\DestroyComponent.cs" />
     <Compile Include="Assets\Sources\Features\Destroy\DestroyEntitySystem.cs" />
-    <Compile Include="Assets\Sources\Features\Enemies\EnemyComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__components\EnemyBehaviourComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__components\EnemyComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__components\EnemyPositionComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__components\EnemyViewComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__controllers\EnemyViewController.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__systems\AddEnemyStartPositionSystem.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__systems\CreateEnemySystem.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__systems\EnemyPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\EntityIndexPoolsExtensions.cs" />
     <Compile Include="Assets\Sources\Features\Health\DamageComponent.cs" />
     <Compile Include="Assets\Sources\Features\Health\HealthComponent.cs" />
@@ -577,26 +603,27 @@
     <Compile Include="Assets\Sources\Features\Input\ProcessShootInputSystem.cs" />
     <Compile Include="Assets\Sources\Features\Input\ShootInputComponent.cs" />
     <Compile Include="Assets\Sources\Features\Input\SlowMotionComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Physics\AddRigidbodySystem.cs" />
     <Compile Include="Assets\Sources\Features\Physics\ForseComponent.cs" />
     <Compile Include="Assets\Sources\Features\Physics\ForseSystem.cs" />
     <Compile Include="Assets\Sources\Features\Physics\RigidbodyComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Player\CreatePlayerSystem.cs" />
-    <Compile Include="Assets\Sources\Features\Player\PlayerComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Player\PlayerViewComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Player\PlayerViewController.cs" />
+    <Compile Include="Assets\Sources\Features\Player\__components\PlayerComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Player\__components\PlayerPositionComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Player\__components\PlayerViewComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Player\__components\PlayerViewController.cs" />
+    <Compile Include="Assets\Sources\Features\Player\__systems\AddPlayerStartPosition.cs" />
+    <Compile Include="Assets\Sources\Features\Player\__systems\CreatePlayerSystem.cs" />
+    <Compile Include="Assets\Sources\Features\Player\__systems\PlayerPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\Position\PositionComponent.cs" />
     <Compile Include="Assets\Sources\Features\Tick\IncrementTickSystem.cs" />
     <Compile Include="Assets\Sources\Features\Tick\TickComponent.cs" />
     <Compile Include="Assets\Sources\Features\Velocity\RederCameraPositionSystem.cs" />
-    <Compile Include="Assets\Sources\Features\Velocity\RenderPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\Velocity\VelocityComponent.cs" />
     <Compile Include="Assets\Sources\Features\Velocity\VelocitySystem.cs" />
-    <Compile Include="Assets\Sources\Features\View\AddViewFromObjectPoolSystem.cs" />
-    <Compile Include="Assets\Sources\Features\View\AddViewSystem.cs" />
-    <Compile Include="Assets\Sources\Features\View\AssetComponent.cs" />
-    <Compile Include="Assets\Sources\Features\View\ViewComponent.cs" />
-    <Compile Include="Assets\Sources\Features\View\ViewObjectPoolComponent.cs" />
+    <Compile Include="Assets\Sources\Features\View\__components\AssetComponent.cs" />
+    <Compile Include="Assets\Sources\Features\View\__components\ViewComponent.cs" />
+    <Compile Include="Assets\Sources\Features\View\__components\ViewObjectPoolComponent.cs" />
+    <Compile Include="Assets\Sources\Features\View\__systems\AddViewFromObjectPoolSystem.cs" />
+    <Compile Include="Assets\Sources\Features\View\__systems\AddViewSystems.cs" />
     <Compile Include="Assets\Sources\GameRandom.cs" />
     <Compile Include="Assets\Sources\VirtualJoystickRegion.cs" />
     <Compile Include="Assets\Ultimate Joystick Examples\Spaceship Example\Scripts\AsteroidController.cs" />

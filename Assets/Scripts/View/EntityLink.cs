@@ -34,7 +34,7 @@ public class EntityLink : MonoBehaviour {
 public static class EntityLinkExtension {
 
     public static EntityLink GetEntityLink(this GameObject gameObject) {
-        return gameObject.GetComponent<EntityLink>(); ;
+        return gameObject.GetComponent<EntityLink>();
     }
 
     public static EntityLink Link(this GameObject gameObject, Entity entity, Pool pool) {

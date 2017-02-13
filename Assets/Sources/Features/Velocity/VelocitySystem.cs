@@ -26,7 +26,5 @@ public sealed class VelocitySystem : ISetPools, IExecuteSystem {
                 //e.ReplacePosition(Vector3.zero);
             }
         }*/
-
-       
     }
 }

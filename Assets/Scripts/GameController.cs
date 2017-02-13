@@ -8,7 +8,9 @@ public class GameController : MonoBehaviour {
 
     public Blueprints blueprints;
     public Camera cam;
-    public PlayerInputController playerControlController;
+    public PlayerInputController playerInputController;
+    public EnemiesStartPositions enemisStartPositions;
+    
     Systems _systems;
     // Use this for initialization
     void Start () {
@@ -41,14 +43,15 @@ public class GameController : MonoBehaviour {
     {
         return new Feature("Systems")
              // Initialize
-            .Add(pools.core.CreateSystem(new CreateCameraSystem(cam)))
             .Add(pools.CreateSystem(new IncrementTickSystem()))
-            .Add(pools.CreateSystem(new CreatePlayerSystem()))
-            .Add(pools.core.CreateSystem(new AddViewSystem()))
+            .Add(pools.CreateSystem(new CreatePlayerSystem(playerInputController.Position())))
+            .Add(pools.core.CreateSystem(new CreateCameraSystem(cam)))
+            .Add(pools.CreateSystem(new CreateEnemySystem(new Vector3[] { enemisStartPositions.startPoint.position })))
+            .Add(pools.core.CreateSystem(new AddViewSystems()))
             .Add(pools.bullets.CreateSystem(new AddViewFromObjectPoolSystem()))
            
             // Input
-            .Add(pools.CreateSystem(new InputSystem(playerControlController)))
+            .Add(pools.CreateSystem(new InputSystem(playerInputController)))
             .Add(pools.input.CreateSystem(new ProcessMoveInputSystem()))
             .Add(pools.core.CreateSystem(new CameraSystem()))
             
@@ -57,8 +60,10 @@ public class GameController : MonoBehaviour {
             //.Add(pools.core.CreateSystem(new StartEnemyWaveSystem()))
 
             .Add(pools.CreateSystem(new VelocitySystem()))
-            .Add(pools.CreateSystem(new RenderPositionSystem(playerControlController.joystick, playerControlController.speedMap)))
-            .Add(pools.core.CreateSystem(new AddRigidbodySystem()))
+            .Add(pools.core.CreateSystem(new AddPlayerStartPosition()))
+            .Add(pools.CreateSystem(new PlayerPositionSystem(playerInputController.joystick, playerInputController.speedMap, playerInputController.Position())))
+            .Add(pools.core.CreateSystem(new EnemyPositionSystem()))
+            .Add(pools.core.CreateSystem(new AddEnemyStartPositionSystem()))
             // Destroy
             .Add(pools.CreateSystem(new DestroyEntitySystem()));
     }

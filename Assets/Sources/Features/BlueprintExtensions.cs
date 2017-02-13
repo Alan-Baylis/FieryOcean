@@ -6,8 +6,8 @@ namespace Entitas.Unity.Serialization.Blueprints {
 
         public Entity ApplyPlayer1(Entity entity, Vector3 position) {
             return entity.ApplyBlueprint(Player1)
-                .AddPosition(position)
-                .AddForse(Vector3.zero,0);
+                .AddPlayerPosition(position)
+                .AddForse(Vector3.zero, 0);
 
         }
 
@@ -17,8 +17,9 @@ namespace Entitas.Unity.Serialization.Blueprints {
                 .AddVelocity(velocity)
                 .AddViewObjectPool(gameObjectPool);
         }*/
-        public Entity ApplyEnemy(Entity entity) {
-            return entity.ApplyBlueprint(Enemy);
+        public Entity ApplyEnemy(Entity entity, Vector3 position) {
+            return entity.ApplyBlueprint(Enemy)
+                         .AddEnemyPosition(position);
         }
     }
 }

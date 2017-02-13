@@ -5,5 +5,5 @@
     public static string Bullet = "Bullet/Bullet";
 
     // Enemies
-    public static string Enemy = "Enemies/Enemy";
+    public static string Enemy = "Ships/Prefabs/enemy";
 }
