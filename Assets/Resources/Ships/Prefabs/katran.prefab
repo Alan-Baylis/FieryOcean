@@ -35,6 +35,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4606085536061780}
+  - component: {fileID: 114921628354477602}
+  - component: {fileID: 54013289455068974}
   m_Layer: 0
   m_Name: katran
   m_TagString: Untagged
@@ -244,6 +246,21 @@ Transform:
   m_Father: {fileID: 4324833798209782}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &54013289455068974
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1311757138538444}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &95956916859283806
 Animator:
   serializedVersion: 3
@@ -261,6 +278,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114921628354477602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1311757138538444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf94df2d10042d64cac9ebde2b07587f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stern: {fileID: 4934197009438788}
+  bow: {fileID: 4963060415635450}
 --- !u!137 &137506662911051230
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

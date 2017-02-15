@@ -14,6 +14,7 @@ public class PlayerMovementController
         this.speedMap = speedMap;
         this._masterY = masterY;
     }
+
     public void SetMasterY(float masterY)
     {
         this._masterY = masterY;

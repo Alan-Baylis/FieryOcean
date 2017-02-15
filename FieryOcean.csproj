@@ -124,6 +124,7 @@
     <Compile Include="Assets\Apex\Apex Path\Scripts\Deprecated\LoadBalancerPerformanceVisualizerOld.cs" />
     <Compile Include="Assets\Apex\Apex Path\Scripts\Deprecated\SelectableUnitComponent.cs" />
     <Compile Include="Assets\Apex\Apex Path\Scripts\Deprecated\TurnableUnitComponent.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Scripts\GameObjectExtension.cs" />
     <Compile Include="Assets\Apex\Apex Path\Scripts\GameState\GameStateManager.cs" />
     <Compile Include="Assets\Apex\Apex Path\Scripts\GameState\Selections.cs" />
     <Compile Include="Assets\Apex\Apex Path\Scripts\Input\InputController.cs" />
@@ -474,6 +475,7 @@
     <Compile Include="Assets\Generated\PlayerComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PlayerPositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PlayerViewComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\PlayerViewControllerComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RigidbodyComponentGeneratedExtension.cs" />
@@ -483,6 +485,7 @@
     <Compile Include="Assets\Generated\VelocityComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewObjectPoolComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\WhoIAmGeneratedExtension.cs" />
     <Compile Include="Assets\Inspector Name Drawer\InspectorNameAttribute.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\EntitasCache.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\ObjectCache.cs" />
@@ -624,8 +627,8 @@
     <Compile Include="Assets\Sources\Features\View\__components\ViewComponent.cs" />
     <Compile Include="Assets\Sources\Features\View\__components\ViewObjectPoolComponent.cs" />
     <Compile Include="Assets\Sources\Features\View\__systems\AddViewFromObjectPoolSystem.cs" />
-    <Compile Include="Assets\Sources\Features\View\__systems\AddViewSystem.cs" />
     <Compile Include="Assets\Sources\Features\View\__systems\AddViewSystems.cs" />
+    <Compile Include="Assets\Sources\Features\WhoIAm\WhoIAm.cs" />
     <Compile Include="Assets\Sources\GameRandom.cs" />
     <Compile Include="Assets\Sources\VirtualJoystickRegion.cs" />
     <Compile Include="Assets\Ultimate Joystick Examples\Spaceship Example\Scripts\AsteroidController.cs" />
