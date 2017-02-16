@@ -17,13 +17,7 @@ using UnityEditor;
 
 public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiveSystem
 {
-    public TriggerOnEvent[] triggers
-    {
-        get
-        {
-            return new TriggerOnEvent[] { CoreMatcher.WhoIAm.OnEntityAdded(), CoreMatcher.Asset.OnEntityAdded() };
-        }
-    }
+    public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoIAm.OnEntityAdded(), CoreMatcher.Asset.OnEntityAdded() }; } }
 
     Pool _pool;
     Transform _container;
@@ -35,7 +29,6 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
     public void Initialize() {
         _container = new GameObject(_pool.metaData.poolName + " PlayerViews").transform;
     }
-
 
     public void Execute(List<Entity> entities) {
         foreach(var e in entities)
@@ -54,66 +47,69 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
             {
                 gameObject.SetActive(false);
                 //gameObject.AddComponent<NavigatingUnitQuickStart>();
+                Transform tr = gameObject.GetComponentInChildren<Transform>();
+                tr.Rotate(90, 90, 90);
+                Component[] c = gameObject.GetComponentsInChildren(typeof(Transform));
 
-                QuickStarts.NavigatingUnit(gameObject, false);
+                //QuickStarts.NavigatingUnit(gameObject, false);
 
                 ////Rigidbody rb;
 
-                //ApexComponentMaster master;
+                ApexComponentMaster master;
 
-                ////Add the required components
-                ////gameObject.AddIfMissing<Rigidbody>(false, out rb);
-                //bool toggleAll = gameObject.AddIfMissing<ApexComponentMaster>(false, out master);
-                //gameObject.AddIfMissing<HumanoidSpeedComponent>(false);
+                //Add the required components
+                //gameObject.AddIfMissing<Rigidbody>(false, out rb);
+                bool toggleAll = gameObject.AddIfMissing<ApexComponentMaster>(false, out master);
+                gameObject.AddIfMissing<HumanoidSpeedComponent>(false);
 
-                //// 
-                //gameObject.AddIfMissing<SteerableUnitComponent>(false);
+                // 
+                gameObject.AddIfMissing<SteerableUnitComponent>(false);
 
-                //// DefaultHeightNavigator
-                //DefaultHeightNavigator defaultHeightNavigator = gameObject.AddComponent<DefaultHeightNavigator>();
-                //defaultHeightNavigator.provider = ProviderType.ZeroHeight;
+                // DefaultHeightNavigator
+                DefaultHeightNavigator defaultHeightNavigator = gameObject.AddComponent<DefaultHeightNavigator>();
+                defaultHeightNavigator.provider = ProviderType.ZeroHeight;
 
-                ////  PathOptionsComponent 
-                //PathOptionsComponent pathOptionComponent = gameObject.AddComponent<PathOptionsComponent>();
-                //pathOptionComponent.usePathSmoothing = true;
-                //pathOptionComponent.optimizeUnobstructedPaths = true;
-                //pathOptionComponent.replanMode = ReplanMode.Dynamic;
-                //pathOptionComponent.maxEscapeCellDistanceIfOriginBlocked = 3;
-                //pathOptionComponent.nextNodeDistance = 1;
-                //pathOptionComponent.requestNextWaypointDistance = 2;
-                //pathOptionComponent.replanInterval = 0.5f;
+                //  PathOptionsComponent 
+                PathOptionsComponent pathOptionComponent = gameObject.AddComponent<PathOptionsComponent>();
+                pathOptionComponent.usePathSmoothing = true;
+                pathOptionComponent.optimizeUnobstructedPaths = true;
+                pathOptionComponent.replanMode = ReplanMode.Dynamic;
+                pathOptionComponent.maxEscapeCellDistanceIfOriginBlocked = 3;
+                pathOptionComponent.nextNodeDistance = 1;
+                pathOptionComponent.requestNextWaypointDistance = 2;
+                pathOptionComponent.replanInterval = 0.5f;
 
-                ////
-                //gameObject.AddIfMissing<PathVisualizer>(false);
+                //
+                gameObject.AddIfMissing<PathVisualizer>(false);
                 gameObject.AddComponent<AIController>();
 
                 gameObject.AddComponent<EnemyViewController>();
                 e.AddEnemyView(gameObject.GetComponent<IEnemyController>());
 
-                //CapsuleCollider cc = gameObject.AddComponent<CapsuleCollider>();
+                CapsuleCollider cc = gameObject.AddComponent<CapsuleCollider>();
 
-                //gameObject.AddComponent<SteerToAlignWithVelocity>();
+                gameObject.AddComponent<SteerToAlignWithVelocity>();
 
-                //SteerForPathComponent steerForPathComponent = gameObject.AddComponent<SteerForPathComponent>();
-                //steerForPathComponent.priority = 5;
-                //steerForPathComponent.weight = 1;
-                //steerForPathComponent.slowingAlgorithm = SlowingAlgorithm.Logarithmic;
-                //steerForPathComponent.autoCalculateSlowingDistance = true;
-                //steerForPathComponent.arrivalDistance = 10.4f;
+                SteerForPathComponent steerForPathComponent = gameObject.AddComponent<SteerForPathComponent>();
+                steerForPathComponent.priority = 5;
+                steerForPathComponent.weight = 1;
+                steerForPathComponent.slowingAlgorithm = SlowingAlgorithm.Logarithmic;
+                steerForPathComponent.autoCalculateSlowingDistance = true;
+                steerForPathComponent.arrivalDistance = 10.4f;
 
-                ////  UnitComponent
-                //UnitComponent uc = gameObject.AddComponent<UnitComponent>();
-                //uc.radius = 10;
-                //uc.fieldOfView = 200;
+                //  UnitComponent
+                UnitComponent uc = gameObject.AddComponent<UnitComponent>();
+                uc.radius = 10;
+                uc.fieldOfView = 200;
 
-                //gameObject.NukeSingle<BasicScanner>();
-                //gameObject.NukeSingle<SteerForBasicAvoidanceComponent>();
+                gameObject.NukeSingle<BasicScanner>();
+                gameObject.NukeSingle<SteerForBasicAvoidanceComponent>();
 
-                //gameObject.AddIfMissing<SteeringScanner>(false);
-                //AddIfMissing<SteerForSeparationComponent>(gameObject, 9);
-                //AddIfMissing<SteerForUnitAvoidanceComponent>(gameObject, 15);
+                gameObject.AddIfMissing<SteeringScanner>(false);
+                AddIfMissing<SteerForSeparationComponent>(gameObject, 9);
+                AddIfMissing<SteerForUnitAvoidanceComponent>(gameObject, 15);
 
-                //GameWorld(gameObject);
+                GameWorld(gameObject);
                 gameObject.SetActive(true);
             }
 

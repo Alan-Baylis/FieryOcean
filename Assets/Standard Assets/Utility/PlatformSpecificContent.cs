@@ -66,7 +66,7 @@ namespace UnityStandardAssets.Utility
 #endif
 
 #if !(UNITY_IPHONE || UNITY_ANDROID || UNITY_WP8 || UNITY_TIZEN || UNITY_STV )
-            if (m_BuildTargetGroup == BuildTargetGroup.Mobile)
+            if (m_BuildTargetGroup == BuildTargetGroup.Android)
             {
                 EnableContent(false);
             }

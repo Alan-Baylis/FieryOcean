@@ -62,8 +62,8 @@ public class GameController : MonoBehaviour {
             .Add(pools.CreateSystem(new VelocitySystem()))
             .Add(pools.core.CreateSystem(new AddPlayerStartPosition()))
             .Add(pools.CreateSystem(new PlayerPositionSystem(playerInputController.joystick, playerInputController.speedMap, playerInputController.Position())))
-            .Add(pools.core.CreateSystem(new EnemyPositionSystem()))
             .Add(pools.core.CreateSystem(new AddEnemyStartPositionSystem()))
+            .Add(pools.core.CreateSystem(new EnemyPositionSystem()))
             // Destroy
             .Add(pools.CreateSystem(new DestroyEntitySystem()));
     }

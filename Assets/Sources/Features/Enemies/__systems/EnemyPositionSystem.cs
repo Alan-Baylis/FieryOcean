@@ -17,6 +17,7 @@ public sealed class EnemyPositionSystem : ISetPools, IReactiveSystem
             foreach (var enemy in _movableGroups.GetEntities())
             {
                 enemy.enemyView.controller.AIController.RecalculatePath(e.playerPosition.position);
+                enemy.enemyView.controller.transform.Rotate(90, 90, 90);
             }
         }
     }
