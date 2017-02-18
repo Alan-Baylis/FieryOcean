@@ -13,11 +13,20 @@ public interface IEnemyController : IViewController
 
 }
 
+// for testing
+//public class MyTransform :Transform
+//{
+//   new public Vector3 position { get { return base.position; } set { base.position = value; } }
+//}
+
+
 public class EnemyViewController : ViewController, IEnemyController
 {
     new public Rigidbody rigidbody { get { return GetComponent<Rigidbody>(); }  }
 
-    new public Transform transform { get { return GetComponent<Transform>(); }  }
+    new public Transform transform {
+        get { return GetComponent<Transform>(); }
+    }
 
     public ShipDirectional shipDirectional { get { return GetComponent<ShipDirectional>(); }  }
 

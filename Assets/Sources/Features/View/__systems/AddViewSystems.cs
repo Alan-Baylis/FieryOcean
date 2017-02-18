@@ -47,10 +47,11 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
             {
                 gameObject.SetActive(false);
                 //gameObject.AddComponent<NavigatingUnitQuickStart>();
-                Transform tr = gameObject.GetComponentInChildren<Transform>();
+                //Transform tr = gameObject.GetComponentInChildren<Transform>();
+
                 //gameObject.get
-                tr.Rotate(0, 90, 0);
-                Component[] c = gameObject.GetComponentsInChildren(typeof(Transform));
+                //tr.Rotate(0, 90, 0);
+                //Component[] c = gameObject.GetComponentsInChildren(typeof(Transform));
 
                 //QuickStarts.NavigatingUnit(gameObject, false);
 
@@ -109,6 +110,11 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
                 gameObject.AddIfMissing<SteeringScanner>(false);
                 AddIfMissing<SteerForSeparationComponent>(gameObject, 9);
                 AddIfMissing<SteerForUnitAvoidanceComponent>(gameObject, 15);
+               
+                //gameObject.transform.rotation *= Quaternion.Euler(0, 90, 0);
+                //GameObject go = GameObject.FindGameObjectWithTag("Katran");
+                //Transform tr = go.GetComponent<Transform>();
+                //tr.rotation *= Quaternion.Euler(0, 90, 0);
 
                 GameWorld(gameObject);
                 gameObject.SetActive(true);

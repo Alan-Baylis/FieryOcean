@@ -14,10 +14,7 @@ public class AIController : MonoBehaviour {
     public void RecalculatePath(Vector3 pos)
     {
         //if(Vector3.Distance(lastPosition , target.position) > RecalculatePathDistance)
-
-        CapsuleCollider cc = this.GetComponent<CapsuleCollider>();
         this.GetUnitFacade().MoveTo(pos, false);
-        
        // StartCoroutine(DoStuff());
     }
 
