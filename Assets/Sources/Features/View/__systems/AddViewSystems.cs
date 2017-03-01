@@ -48,7 +48,8 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
                 gameObject.SetActive(false);
                 //gameObject.AddComponent<NavigatingUnitQuickStart>();
                 Transform tr = gameObject.GetComponentInChildren<Transform>();
-                tr.Rotate(90, 90, 90);
+                //gameObject.get
+                tr.Rotate(0, 90, 0);
                 Component[] c = gameObject.GetComponentsInChildren(typeof(Transform));
 
                 //QuickStarts.NavigatingUnit(gameObject, false);
