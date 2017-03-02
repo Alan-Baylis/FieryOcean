@@ -5,7 +5,9 @@ namespace Apex
     using Apex.Services;
     using Apex.Units;
     using Apex.WorldGeometry;
+    using System.Runtime.CompilerServices;
     using UnityEngine;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Various extension to Unity types.

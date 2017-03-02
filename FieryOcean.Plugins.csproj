@@ -78,6 +78,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\Server\Bundle.cs" />
+    <Compile Include="Assets\Plugins\Server\DataTypes.cs" />
+    <Compile Include="Assets\Plugins\Server\Dbg.cs" />
+    <Compile Include="Assets\Plugins\Server\Entity.cs" />
+    <Compile Include="Assets\Plugins\Server\EntityDef.cs" />
+    <Compile Include="Assets\Plugins\Server\Event.cs" />
+    <Compile Include="Assets\Plugins\Server\KBEMain.cs" />
+    <Compile Include="Assets\Plugins\Server\KBEngine.cs" />
+    <Compile Include="Assets\Plugins\Server\KBEngineArgs.cs" />
+    <Compile Include="Assets\Plugins\Server\Mailbox.cs" />
+    <Compile Include="Assets\Plugins\Server\Math.cs" />
+    <Compile Include="Assets\Plugins\Server\MemoryStream.cs" />
+    <Compile Include="Assets\Plugins\Server\Message.cs" />
+    <Compile Include="Assets\Plugins\Server\MessageReader.cs" />
+    <Compile Include="Assets\Plugins\Server\Method.cs" />
+    <Compile Include="Assets\Plugins\Server\NetworkInterface.cs" />
+    <Compile Include="Assets\Plugins\Server\ObjectPool.cs" />
+    <Compile Include="Assets\Plugins\Server\PacketReceiver.cs" />
+    <Compile Include="Assets\Plugins\Server\PacketSender.cs" />
+    <Compile Include="Assets\Plugins\Server\PersistentInfos.cs" />
+    <Compile Include="Assets\Plugins\Server\Profile.cs" />
+    <Compile Include="Assets\Plugins\Server\Property.cs" />
+    <Compile Include="Assets\Plugins\Server\ScriptModule.cs" />
     <Compile Include="Assets\Plugins\Ultimate Joystick\Scripts\UltimateJoystick.cs" />
     <Compile Include="Assets\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
     <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\Displace.cs" />

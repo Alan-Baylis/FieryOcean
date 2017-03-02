@@ -58,7 +58,7 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
                 ////Rigidbody rb;
 
                 ApexComponentMaster master;
-
+                
                 //Add the required components
                 //gameObject.AddIfMissing<Rigidbody>(false, out rb);
                 bool toggleAll = gameObject.AddIfMissing<ApexComponentMaster>(false, out master);

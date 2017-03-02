@@ -19,7 +19,6 @@ public interface IEnemyController : IViewController
 //   new public Vector3 position { get { return base.position; } set { base.position = value; } }
 //}
 
-
 public class EnemyViewController : ViewController, IEnemyController
 {
     new public Rigidbody rigidbody { get { return GetComponent<Rigidbody>(); }  }

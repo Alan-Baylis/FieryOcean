@@ -40,9 +40,9 @@ public sealed class PlayerPositionSystem : ISetPools, IExecuteSystem
             lastAc = inputs.GetEntities()[0].moveInput.accelerate;
 
         _nextPosition = move1.Move( player.playerView.controller.shipDirectional.GetShipDirectional(),
-                    player.playerView.controller.rigidbody,
-                    _joystick.GetPosition(),
-                    lastAc                                                              );
+                                    player.playerView.controller.rigidbody,
+                                    _joystick.GetPosition(),
+                                    lastAc                                                              );
 
         if(Vector3.Distance(_beforePosition,_nextPosition)>2f)
             player.ReplacePlayerPosition(player.playerView.controller.transform.position);
