@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -66,6 +69,9 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -474,7 +480,6 @@
     <Compile Include="Assets\Generated\PlayerComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PlayerPositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PlayerViewComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\PlayerViewControllerComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RigidbodyComponentGeneratedExtension.cs" />
@@ -484,7 +489,7 @@
     <Compile Include="Assets\Generated\VelocityComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewObjectPoolComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\WhoIAmGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\WhoAMiGeneratedExtension.cs" />
     <Compile Include="Assets\Inspector Name Drawer\InspectorNameAttribute.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\EntitasCache.cs" />
     <Compile Include="Assets\Library\Entitas\Caching\ObjectCache.cs" />
@@ -553,8 +558,6 @@
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameEntity.cs" />
     <Compile Include="Assets\Scripts\Input\CollisionEmitter.cs" />
-    <Compile Include="Assets\Scripts\Map.cs" />
-    <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\PlayerInputController.cs" />
     <Compile Include="Assets\Scripts\Server\Account.cs" />
     <Compile Include="Assets\Scripts\Server\Avatar.cs" />
@@ -571,6 +574,11 @@
     <Compile Include="Assets\Scripts\ShipDirectional.cs" />
     <Compile Include="Assets\Scripts\ShowFPS.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
+    <Compile Include="Assets\Scripts\UI\EventsRegistrator.cs" />
+    <Compile Include="Assets\Scripts\UI\Login.cs" />
+    <Compile Include="Assets\Scripts\UI\SelAvatars.cs" />
+    <Compile Include="Assets\Scripts\UI\StartUI.cs" />
+    <Compile Include="Assets\Scripts\UI\UIcommon.cs" />
     <Compile Include="Assets\Scripts\View\AnimationEventHandler\PathCompleteEventHandler.cs" />
     <Compile Include="Assets\Scripts\View\CameraShake.cs" />
     <Compile Include="Assets\Scripts\View\Effects\AudioClipPlayer.cs" />
@@ -581,10 +589,10 @@
     <Compile Include="Assets\Scripts\View\ViewController\IViewController.cs" />
     <Compile Include="Assets\Scripts\View\ViewController\PoolableViewController.cs" />
     <Compile Include="Assets\Scripts\View\ViewController\ViewController.cs" />
-    <Compile Include="Assets\Scripts\World.cs" />
     <Compile Include="Assets\Scripts\joystickController.cs" />
     <Compile Include="Assets\Sources\Assets.cs" />
     <Compile Include="Assets\Sources\Assets\Res.cs" />
+    <Compile Include="Assets\Sources\CommonTypes.cs" />
     <Compile Include="Assets\Sources\Features\BlueprintExtensions.cs" />
     <Compile Include="Assets\Sources\Features\Bullets\BulletComponent.cs" />
     <Compile Include="Assets\Sources\Features\Bullets\BulletCoolDownComponent.cs" />
@@ -627,15 +635,15 @@
     <Compile Include="Assets\Sources\Features\Player\__components\PlayerComponent.cs" />
     <Compile Include="Assets\Sources\Features\Player\__components\PlayerPositionComponent.cs" />
     <Compile Include="Assets\Sources\Features\Player\__components\PlayerViewComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Player\__controllers\PlayerViewController.cs" />
     <Compile Include="Assets\Sources\Features\Player\__systems\AddPlayerStartPosition.cs" />
     <Compile Include="Assets\Sources\Features\Player\__systems\CreatePlayerSystem.cs" />
     <Compile Include="Assets\Sources\Features\Player\__systems\PlayerPositionSystem.cs" />
+    <Compile Include="Assets\Sources\Features\Player\_controllers\PlayerViewController.cs" />
     <Compile Include="Assets\Sources\Features\Position\PositionComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Position\RederCameraPositionSystem.cs" />
+    <Compile Include="Assets\Sources\Features\Position\RenderPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\Tick\IncrementTickSystem.cs" />
     <Compile Include="Assets\Sources\Features\Tick\TickComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Velocity\RederCameraPositionSystem.cs" />
-    <Compile Include="Assets\Sources\Features\Velocity\RenderPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\Velocity\VelocityComponent.cs" />
     <Compile Include="Assets\Sources\Features\Velocity\VelocitySystem.cs" />
     <Compile Include="Assets\Sources\Features\View\__components\AssetComponent.cs" />
@@ -643,7 +651,8 @@
     <Compile Include="Assets\Sources\Features\View\__components\ViewObjectPoolComponent.cs" />
     <Compile Include="Assets\Sources\Features\View\__systems\AddViewFromObjectPoolSystem.cs" />
     <Compile Include="Assets\Sources\Features\View\__systems\AddViewSystems.cs" />
-    <Compile Include="Assets\Sources\Features\WhoIAm\WhoIAm.cs" />
+    <Compile Include="Assets\Sources\Features\WhoAMi\WhoAMi.cs" />
+    <Compile Include="Assets\Sources\Features\World\WorldSystem.cs" />
     <Compile Include="Assets\Sources\GameRandom.cs" />
     <Compile Include="Assets\Sources\VirtualJoystickRegion.cs" />
     <Compile Include="Assets\Ultimate Joystick Examples\Spaceship Example\Scripts\AsteroidController.cs" />

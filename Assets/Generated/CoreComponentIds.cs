@@ -28,10 +28,9 @@ public static class CoreComponentIds {
     public const int EnemyView = 17;
     public const int Player = 18;
     public const int PlayerPosition = 19;
-    public const int PlayerViewController = 20;
-    public const int WhoIAm = 21;
+    public const int WhoAMi = 20;
 
-    public const int TotalComponents = 22;
+    public const int TotalComponents = 21;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -54,8 +53,7 @@ public static class CoreComponentIds {
         "EnemyView",
         "Player",
         "PlayerPosition",
-        "PlayerViewController",
-        "WhoIAm"
+        "WhoAMi"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -79,7 +77,6 @@ public static class CoreComponentIds {
         typeof(EnemyViewComponent),
         typeof(PlayerComponent),
         typeof(PlayerPositionComponent),
-        typeof(PlayerViewControllerComponent),
-        typeof(WhoIAm)
+        typeof(WhoAMi)
     };
 }

@@ -26,15 +26,15 @@ public class UI : MonoBehaviour
 	
 	void Awake() 
 	 {
-		inst = this;
-		DontDestroyOnLoad(transform.gameObject);
+		//inst = this;
+		//DontDestroyOnLoad(transform.gameObject);
 	 }
 	 
 	// Use this for initialization
 	void Start () 
 	{
-		installEvents();
-		Application.LoadLevel("login");
+		//installEvents();
+		//Application.LoadLevel("login");
 	}
 
 	void installEvents()
@@ -70,11 +70,11 @@ public class UI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-			Debug.Log("KeyCode.Space");
-			KBEngine.Event.fireIn("jump");
-        }
+   //     if (Input.GetKeyUp(KeyCode.Space))
+   //     {
+			//Debug.Log("KeyCode.Space");
+			//KBEngine.Event.fireIn("jump");
+   //     }
 	}
 	
 	void onSelAvatarUI()
@@ -228,42 +228,42 @@ public class UI : MonoBehaviour
 		}
 	}
 
-    void OnGUI()  
-    {  
-		if(ui_state == 1)
-		{
-			onSelAvatarUI();
-   		}
-   		else if(ui_state == 2)
-   		{
-			onWorldUI();
-   		}
-   		else
-   		{
-   			onLoginUI();
-   		}
+    //void OnGUI()  
+   // {  
+		//if(ui_state == 1)
+		//{
+		//	onSelAvatarUI();
+  // 		}
+  // 		else if(ui_state == 2)
+  // 		{
+		//	onWorldUI();
+  // 		}
+  // 		else
+  // 		{
+  // 			onLoginUI();
+  // 		}
    		
-		if(KBEngineApp.app != null && KBEngineApp.app.serverVersion != "" 
-			&& KBEngineApp.app.serverVersion != KBEngineApp.app.clientVersion)
-		{
-			labelColor = Color.red;
-			labelMsg = "version not match(curr=" + KBEngineApp.app.clientVersion + ", srv=" + KBEngineApp.app.serverVersion + " )(版本不匹配)";
-		}
-		else if(KBEngineApp.app != null && KBEngineApp.app.serverScriptVersion != "" 
-			&& KBEngineApp.app.serverScriptVersion != KBEngineApp.app.clientScriptVersion)
-		{
-			labelColor = Color.red;
-			labelMsg = "scriptVersion not match(curr=" + KBEngineApp.app.clientScriptVersion + ", srv=" + KBEngineApp.app.serverScriptVersion + " )(脚本版本不匹配)";
-		}
+		//if(KBEngineApp.app != null && KBEngineApp.app.serverVersion != "" 
+		//	&& KBEngineApp.app.serverVersion != KBEngineApp.app.clientVersion)
+		//{
+		//	labelColor = Color.red;
+		//	labelMsg = "version not match(curr=" + KBEngineApp.app.clientVersion + ", srv=" + KBEngineApp.app.serverVersion + " )(版本不匹配)";
+		//}
+		//else if(KBEngineApp.app != null && KBEngineApp.app.serverScriptVersion != "" 
+		//	&& KBEngineApp.app.serverScriptVersion != KBEngineApp.app.clientScriptVersion)
+		//{
+		//	labelColor = Color.red;
+		//	labelMsg = "scriptVersion not match(curr=" + KBEngineApp.app.clientScriptVersion + ", srv=" + KBEngineApp.app.serverScriptVersion + " )(脚本版本不匹配)";
+		//}
 		
-		GUI.contentColor = labelColor;
-		GUI.Label(new Rect((Screen.width / 2) - 100, 40, 400, 100), labelMsg);
+		//GUI.contentColor = labelColor;
+		//GUI.Label(new Rect((Screen.width / 2) - 100, 40, 400, 100), labelMsg);
 
-		GUI.Label(new Rect(0, 5, 400, 100), "client version: " + KBEngine.KBEngineApp.app.clientVersion);
-		GUI.Label(new Rect(0, 20, 400, 100), "client script version: " + KBEngine.KBEngineApp.app.clientScriptVersion);
-		GUI.Label(new Rect(0, 35, 400, 100), "server version: " + KBEngine.KBEngineApp.app.serverVersion);
-		GUI.Label(new Rect(0, 50, 400, 100), "server script version: " + KBEngine.KBEngineApp.app.serverScriptVersion);
-	}  
+		//GUI.Label(new Rect(0, 5, 400, 100), "client version: " + KBEngine.KBEngineApp.app.clientVersion);
+		//GUI.Label(new Rect(0, 20, 400, 100), "client script version: " + KBEngine.KBEngineApp.app.clientScriptVersion);
+		//GUI.Label(new Rect(0, 35, 400, 100), "server version: " + KBEngine.KBEngineApp.app.serverVersion);
+		//GUI.Label(new Rect(0, 50, 400, 100), "server script version: " + KBEngine.KBEngineApp.app.serverScriptVersion);
+	//}  
 	
 	public void err(string s)
 	{
@@ -350,6 +350,7 @@ public class UI : MonoBehaviour
 
 	public void onLoginSuccessfully(UInt64 rndUUID, Int32 eid, Account accountEntity)
 	{
+
 		info("login is successfully!(登陆成功!)");
 		ui_state = 1;
 

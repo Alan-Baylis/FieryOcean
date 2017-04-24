@@ -21,9 +21,9 @@ class AddEnemyStartPositionSystem : ISetPool, IReactiveSystem
     {
         foreach (var e in entities)
         {
-            e.enemyView.controller.transform.position = e.enemyPosition.position;
+            //e.enemyView.controller.transform.position = e.enemyPosition.position;
+            e.enemyView.controller.transform.position = e.position.value;
 
-            
         }
     }
 }

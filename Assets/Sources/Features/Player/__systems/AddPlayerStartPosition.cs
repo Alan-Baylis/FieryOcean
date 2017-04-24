@@ -22,7 +22,8 @@ public sealed class AddPlayerStartPosition : ISetPool, IReactiveSystem
         foreach (var e in entities)
         {
             var player = _pool.GetEntityWithPlayerId(PLAYER_ID);
-            player.playerView.controller.transform.position = e.playerPosition.position;
+            //player.playerView.controller.transform.position = e.playerPosition.position;
+            player.playerView.controller.transform.position = e.position.value;
         }
     }
 }

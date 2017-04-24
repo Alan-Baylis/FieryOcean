@@ -17,7 +17,7 @@ using UnityEditor;
 
 public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiveSystem
 {
-    public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoIAm.OnEntityAdded(), CoreMatcher.Asset.OnEntityAdded() }; } }
+    public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoAMi.OnEntityAdded()/*, CoreMatcher.Asset.OnEntityAdded() */}; } }
 
     Pool _pool;
     Transform _container;
@@ -35,15 +35,14 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
         {
             var gameObject = Assets.Instantiate<GameObject>(e.asset.name);
             //var gameObject = GameObject.FindGameObjectWithTag("Player");
-            
 
-            if (e.whoIAm.iAm == WhoIAm.IAm.PLAYER)
+            if (e.whoAMi.value == /*WhoIAm.IAm.PLAYER*/ 0)
             {
                 gameObject.AddComponent<PlayerViewController>();
                 e.AddPlayerView(gameObject.GetComponent<IPlayerController>());
             }
 
-            if (e.whoIAm.iAm == WhoIAm.IAm.ENEMY)
+            if (e.whoAMi.value == /*WhoIAm.IAm.ENEMY*/ 1)
             {
                 gameObject.SetActive(false);
                 //gameObject.AddComponent<NavigatingUnitQuickStart>();
