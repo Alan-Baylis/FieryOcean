@@ -10,7 +10,14 @@ public class GameEntity : MonoBehaviour
 {
 	public bool isPlayer = false;
 	
-	private Vector3 _position = Vector3.zero;
+
+    public Entitas.Entity gameEngineEntity
+    {
+        get;
+        set;
+    }
+
+	//private Vector3 _position = Vector3.zero;
 	private Vector3 _eulerAngles = Vector3.zero;
 	private Vector3 _scale = Vector3.zero;
 	
@@ -29,7 +36,7 @@ public class GameEntity : MonoBehaviour
 	
 	float npcHeight = 2.0f;
 	
-	public CharacterController characterController;
+	//public CharacterController characterController { get; set; }
 	
 	public bool isOnGround = true;
 
@@ -42,7 +49,7 @@ public class GameEntity : MonoBehaviour
 	
 	void Start() 
 	{
-		characterController = ((UnityEngine.GameObject)gameObject).GetComponent<CharacterController>();
+		//characterController = ((UnityEngine.GameObject)gameObject).GetComponent<CharacterController>();
 	}
 	
 	void OnGUI()
@@ -83,16 +90,20 @@ public class GameEntity : MonoBehaviour
     public Vector3 position {  
 		get
 		{
-			return _position;
-		}
+            //return _position;
+            return gameEngineEntity.playerView.controller.transform.position;
+        }
 
 		set
 		{
-			_position = value;
+
+            gameEngineEntity.playerView.controller.transform.position = value;
+
+            //_position = value;
 			
-			if(gameObject != null)
-				gameObject.transform.position = _position;
-		}    
+		//	if(gameObject != null)
+		//		gameObject.transform.position = _position;
+	    }    
     }  
   
     public Vector3 eulerAngles {  
@@ -191,98 +202,98 @@ public class GameEntity : MonoBehaviour
 		KBEngine.Event.fireIn("updatePlayer", gameObject.transform.position.x, 
 			gameObject.transform.position.y, gameObject.transform.position.z, gameObject.transform.rotation.eulerAngles.y);
     }
-    
-	void Update () 
-	{
-		if (!entityEnabled) 
-		{
-			position = destPosition;
-			return;
-		}
 
-		float deltaSpeed = (speed * Time.deltaTime);
-		
-		if(isPlayer == true && isControlled == false)
-		{
-			characterController.stepOffset = deltaSpeed;
-			
-			if(isOnGround != characterController.isGrounded)
-			{
-		    	KBEngine.Entity player = KBEngineApp.app.player();
-		    	player.isOnGround = characterController.isGrounded;
-		    	isOnGround = characterController.isGrounded;
-		    }
-		    
-			return;
-		}
-		
-		if(Vector3.Distance(eulerAngles, destDirection) > 0.0004f)
-		{
-			rotation = Quaternion.Slerp(rotation, Quaternion.Euler(destDirection), 8f * Time.deltaTime);
-		}
+    void Update()
+    {
+        if (!entityEnabled)
+        {
+            position = destPosition;
+            return;
+        }
 
-		float dist = 0.0f;
+        float deltaSpeed = (speed * Time.deltaTime);
 
-		if(isOnGround)
-		{
-			dist = Vector3.Distance(new Vector3(destPosition.x, 0f, destPosition.z), 
-				new Vector3(position.x, 0f, position.z));
-		}
-		else
-		{
-			dist = Vector3.Distance(destPosition, position);
-		}
+        if (isPlayer == true && isControlled == false)
+        {
+        //    characterController.stepOffset = deltaSpeed;
 
-		if(jumpState > 0)
-		{
-			if(jumpState == 1)
-			{
-				currY += 0.05f;
-				
-				if(currY > 2.0f)
-					jumpState = 2;
-			}
-			else
-			{
-				currY -= 0.05f;
-				if(currY < 1.0f)
-				{
-					jumpState = 0;
-					currY = 1.0f;
-				}
-			}
-			
-			Vector3 pos = position;
-			pos.y = currY;
-			position = pos;
-		}
-		
-		if(dist > 0.01f)
-		{
-			Vector3 pos = position;
+        //    if (isOnGround != characterController.isGrounded)
+        //    {
+        //        KBEngine.Entity player = KBEngineApp.app.player();
+        //        player.isOnGround = characterController.isGrounded;
+        //        isOnGround = characterController.isGrounded;
+        //    }
 
-			Vector3 movement = destPosition - pos;
-			movement.y = 0f;
-			movement.Normalize();
-			
-			movement *= deltaSpeed;
-			
-			if(dist > deltaSpeed || movement.magnitude > deltaSpeed)
-				pos += movement;
-			else
-				pos = destPosition;
-			
-			if(isOnGround)
-				pos.y = currY;
-			
-			position = pos;
-		}
-		else
-		{
-		}
-	}
-	
-	public void OnJump()
+            return;
+        }
+
+        if (Vector3.Distance(eulerAngles, destDirection) > 0.0004f)
+        {
+            rotation = Quaternion.Slerp(rotation, Quaternion.Euler(destDirection), 8f * Time.deltaTime);
+        }
+
+        float dist = 0.0f;
+
+        if (isOnGround)
+        {
+            dist = Vector3.Distance(new Vector3(destPosition.x, 0f, destPosition.z),
+                new Vector3(position.x, 0f, position.z));
+        }
+        else
+        {
+            dist = Vector3.Distance(destPosition, position);
+        }
+
+        if (jumpState > 0)
+        {
+            if (jumpState == 1)
+            {
+                currY += 0.05f;
+
+                if (currY > 2.0f)
+                    jumpState = 2;
+            }
+            else
+            {
+                currY -= 0.05f;
+                if (currY < 1.0f)
+                {
+                    jumpState = 0;
+                    currY = 1.0f;
+                }
+            }
+
+            Vector3 pos = position;
+            pos.y = currY;
+            position = pos;
+        }
+
+        if (dist > 0.01f)
+        {
+            Vector3 pos = position;
+
+            Vector3 movement = destPosition - pos;
+            movement.y = 0f;
+            movement.Normalize();
+
+            movement *= deltaSpeed;
+
+            if (dist > deltaSpeed || movement.magnitude > deltaSpeed)
+                pos += movement;
+            else
+                pos = destPosition;
+
+            if (isOnGround)
+                pos.y = currY;
+
+            position = pos;
+        }
+        else
+        {
+        }
+    }
+
+    public void OnJump()
 	{
 		Debug.Log("jumpState: " + jumpState);
 		

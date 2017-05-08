@@ -21,9 +21,18 @@ public sealed class AddPlayerStartPosition : ISetPool, IReactiveSystem
     {
         foreach (var e in entities)
         {
-            var player = _pool.GetEntityWithPlayerId(PLAYER_ID);
-            //player.playerView.controller.transform.position = e.playerPosition.position;
-            player.playerView.controller.transform.position = e.position.value;
+            if (e.whoAMi.value == 0)
+            {
+                var player = _pool.GetEntityWithPlayerId(PLAYER_ID);
+                //player.playerView.controller.transform.position = e.playerPosition.position;
+                player.playerView.controller.transform.position = e.position.value;
+            }
+
+            // set start position for remote player
+            if(e.whoAMi.value == 2)
+            {
+                e.playerView.controller.transform.position = e.serverImpOfUnit.entity.position;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using KBEngine;
 
 namespace Entitas.Unity.Serialization.Blueprints {
 
@@ -24,5 +25,17 @@ namespace Entitas.Unity.Serialization.Blueprints {
                          //.AddEnemyPosition(position);
                          //.AddWhoIAm(WhoIAm.IAm.ENEMY);
         }
+
+        public Entity AddUnit(Entity entity, KBEngine.Entity server_entity)
+        {
+            return entity.ApplyBlueprint(RemotePlayer)
+                         .AddPosition(server_entity.position)
+                         .AddServerImpOfUnit(server_entity);
+                         
+                         
+            //.AddEnemyPosition(position);
+            //.AddWhoIAm(WhoIAm.IAm.ENEMY);
+        }
+
     }
 }

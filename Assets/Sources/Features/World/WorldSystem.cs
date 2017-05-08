@@ -6,34 +6,29 @@ using Entitas;
 using UnityEngine;
 using KBEngine;
 
-public sealed class WorldSystem : ISetPool, IReactiveSystem
+public sealed class WorldSystem : ISetPools, IInitializeSystem
 {
     const string PLAYER_ID = "Player1";
+    private float _ocean_y;
     public TriggerOnEvent trigger { get { return CoreMatcher.PlayerView.OnEntityAdded(); } }
 
-    Pool _pool;
+    Pools _pools;
 
-    public void SetPool(Pool pool)
+    public void SetPools(Pools pools)
     {
-        _pool = pool;
+        _pools = pools; 
     }
 
-    public void Execute(List<Entitas.Entity> entities)
+    public void Initialize()
     {
-        //foreach (var e in entities)
-        //{
-            //var player = _pool.GetEntityWithPlayerId(PLAYER_ID);
-        //    player.playerView.controller.transform.position = e.playerPosition.position;
-        //}
-
         installEvents();
-
     }
 
-    //public void Initialize()
-    //{
-    //    installEvents();
-    //}
+    public WorldSystem(float ocean_y)
+    {
+        _ocean_y=ocean_y;
+
+    }
 
     void installEvents()
     {
@@ -95,6 +90,16 @@ public sealed class WorldSystem : ISetPool, IReactiveSystem
         if (entity.isPlayer())
             return;
 
+        entity.position.y = _ocean_y;
+
+        UnityEngine.GameObject go = new UnityEngine.GameObject();
+        go.AddComponent<GameEntity>();
+        entity.renderObj = go;
+
+        _pools.core.CreateEntity().AddUnitAdd(entity);
+
+        //_pools.core.repl
+
         //float y = entity.position.y;
         //if (entity.isOnGround)
         //    y = 1.3f;
@@ -102,7 +107,7 @@ public sealed class WorldSystem : ISetPool, IReactiveSystem
         //entity.renderObj = Instantiate(entityPerfab, new Vector3(entity.position.x, y, entity.position.z),
         //    Quaternion.Euler(new Vector3(entity.direction.y, entity.direction.z, entity.direction.x))) as UnityEngine.GameObject;
 
-        //((UnityEngine.GameObject)entity.renderObj).name = entity.className + "_" + entity.id;
+        ((UnityEngine.GameObject)entity.renderObj).name = entity.className + "_" + entity.id; 
     }
 
     public void onLeaveWorld(KBEngine.Entity entity)
@@ -112,32 +117,38 @@ public sealed class WorldSystem : ISetPool, IReactiveSystem
 
         //UnityEngine.GameObject.Destroy((UnityEngine.GameObject)entity.renderObj);
         //entity.renderObj = null;
-    }
+            
+        _pools.core.CreateEntity().AddDestroyUnit(entity.id);
 
+        Debug.Log("onLeaveWorld was called");
+    }
+    
+    /// <summary>
+    /// set remote player position
+    /// </summary>
+    /// <param name="entity"></param>
     public void set_position(KBEngine.Entity entity)
     {
-        //if (entity.renderObj == null)
-        //    return;
+        if (entity.renderObj == null)
+            return;
 
-        //((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().destPosition = entity.position;
-        //((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().position = entity.position;
+        //Entitas.Entity e = (Entitas.Entity)entity.renderObj;
+        //e.playerView.controller.rigidbody.position = new Vector3(entity.position.x,e.playerView.controller.rigidbody.position.y, entity.position.z);
 
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().destPosition = entity.position;
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().position = entity.position;
 
-        Debug.Log("onAddSkill");
+        Debug.Log("set_position was called");
     }
 
     public void updatePosition(KBEngine.Entity entity)
     {
-        //if (entity.renderObj == null)
-        //    return;
+        if (entity.renderObj == null)
+            return;
 
-        //GameEntity gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>();
-        //gameEntity.destPosition = entity.position;
-        //gameEntity.isOnGround = entity.isOnGround;
-
-        var player = _pool.GetEntityWithPlayerId(PLAYER_ID);
-
-        player.AddPosition(entity.position);
+        GameEntity gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>();
+        gameEntity.destPosition = entity.position;
+        gameEntity.isOnGround = entity.isOnGround;
 
     }
 
@@ -245,5 +256,7 @@ public sealed class WorldSystem : ISetPool, IReactiveSystem
             ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().OnJump();
         }
     }
+
+   
 }
 

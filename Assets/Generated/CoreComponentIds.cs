@@ -22,15 +22,18 @@ public static class CoreComponentIds {
     public const int BulletCoolDown = 11;
     public const int Camera = 12;
     public const int CameraPosition = 13;
-    public const int EnemyBehaviour = 14;
-    public const int Enemy = 15;
-    public const int EnemyPosition = 16;
-    public const int EnemyView = 17;
-    public const int Player = 18;
-    public const int PlayerPosition = 19;
-    public const int WhoAMi = 20;
+    public const int DestroyUnit = 14;
+    public const int EnemyBehaviour = 15;
+    public const int Enemy = 16;
+    public const int EnemyPosition = 17;
+    public const int EnemyView = 18;
+    public const int Player = 19;
+    public const int PlayerPosition = 20;
+    public const int ServerImpOfUnit = 21;
+    public const int UnitAdd = 22;
+    public const int WhoAMi = 23;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 24;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -47,12 +50,15 @@ public static class CoreComponentIds {
         "BulletCoolDown",
         "Camera",
         "CameraPosition",
+        "DestroyUnit",
         "EnemyBehaviour",
         "Enemy",
         "EnemyPosition",
         "EnemyView",
         "Player",
         "PlayerPosition",
+        "ServerImpOfUnit",
+        "UnitAdd",
         "WhoAMi"
     };
 
@@ -71,12 +77,15 @@ public static class CoreComponentIds {
         typeof(BulletCoolDownComponent),
         typeof(CameraComponent),
         typeof(CameraPositionComponent),
+        typeof(DestroyUnitComponent),
         typeof(EnemyBehaviourComponent),
         typeof(EnemyComponent),
         typeof(EnemyPositionComponent),
         typeof(EnemyViewComponent),
         typeof(PlayerComponent),
         typeof(PlayerPositionComponent),
+        typeof(ServerImpOfUnitComponent),
+        typeof(UnitAddComponent),
         typeof(WhoAMi)
     };
 }

@@ -6,7 +6,6 @@ public interface IPlayerController : IViewController {
   
 }
 
-
 public class PlayerViewController : ViewController, IPlayerController {
     public virtual Rigidbody rigidbody
     {
@@ -26,7 +25,12 @@ public class PlayerViewController : ViewController, IPlayerController {
 
     public virtual ShipDirectional shipDirectional
     {
-        set{ShipDirectional shipDirectional = GetComponent<ShipDirectional>();shipDirectional=value;}
-        get{ return GetComponent<ShipDirectional>();  }
+        set
+        {
+            ShipDirectional shipDirectional = GetComponent<ShipDirectional>();
+            shipDirectional = value;
+        }
+
+        get { return GetComponent<ShipDirectional>();  }
     }
 }

@@ -43,13 +43,16 @@ public class GameController : MonoBehaviour {
     {
         return new Feature("Systems")
              // Initialize
+            .Add(pools.CreateSystem(new WorldSystem(enemisStartPositions.startPoint.position.y)))
             .Add(pools.CreateSystem(new IncrementTickSystem()))
             .Add(pools.CreateSystem(new CreatePlayerSystem(playerInputController.Position())))
             .Add(pools.core.CreateSystem(new CreateCameraSystem(cam)))
-            .Add(pools.CreateSystem(new CreateEnemySystem(new Vector3[] { enemisStartPositions.startPoint.position })))
             .Add(pools.core.CreateSystem(new AddViewSystems()))
             .Add(pools.bullets.CreateSystem(new AddViewFromObjectPoolSystem()))
-           
+
+            // Initialize and Reactive
+            .Add(pools.core.CreateSystem(new CreateEnemySystem(new Vector3[] { enemisStartPositions.startPoint.position })))
+
             // Input
             .Add(pools.CreateSystem(new InputSystem(playerInputController)))
             .Add(pools.input.CreateSystem(new ProcessMoveInputSystem()))
@@ -64,6 +67,7 @@ public class GameController : MonoBehaviour {
             .Add(pools.CreateSystem(new PlayerPositionSystem(playerInputController.joystick, playerInputController.speedMap, playerInputController.Position())))
             .Add(pools.core.CreateSystem(new AddEnemyStartPositionSystem()))
             .Add(pools.core.CreateSystem(new EnemyPositionSystem()))
+            
             // Destroy
             .Add(pools.CreateSystem(new DestroyEntitySystem()));
     }

@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -69,9 +66,6 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -411,6 +405,7 @@
     <Compile Include="Assets\Apex\Apex Steer\Scripts\Units\DefaultSteeringUnitGroupingStrategy.cs" />
     <Compile Include="Assets\Apex\Apex Steer\Scripts\Units\SteeringUnitGroupingStrategyFactory.cs" />
     <Compile Include="Assets\Apex\Apex Steer\Scripts\Units\TransientGroupSteer.cs" />
+    <Compile Include="Assets\ExportTerrainData.cs" />
     <Compile Include="Assets\FORGE3D\PoolManager\F3DPool.cs" />
     <Compile Include="Assets\FORGE3D\PoolManager\F3DPoolContainer.cs" />
     <Compile Include="Assets\FORGE3D\PoolManager\F3DPoolManager.cs" />
@@ -466,6 +461,7 @@
     <Compile Include="Assets\Generated\CoreComponentIds.cs" />
     <Compile Include="Assets\Generated\DamageComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\DestroyUnitComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\EnemyBehaviourComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\EnemyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\EnemyPositionComponentGeneratedExtension.cs" />
@@ -483,9 +479,11 @@
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RigidbodyComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ServerImpOfUnitComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ShootInputComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SlowMotionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\TickComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\UnitAddComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\VelocityComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewObjectPoolComponentGeneratedExtension.cs" />
@@ -609,13 +607,17 @@
     <Compile Include="Assets\Sources\Features\Destroy\AnimateOutOfScreenViewSystem.cs" />
     <Compile Include="Assets\Sources\Features\Destroy\DestroyComponent.cs" />
     <Compile Include="Assets\Sources\Features\Destroy\DestroyEntitySystem.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__components\DestroyUnitComponent.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__components\EnemyBehaviourComponent.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__components\EnemyComponent.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__components\EnemyPositionComponent.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__components\EnemyViewComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__components\ServerImpOfUnitComponent.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__components\UnitAddComponent.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__controllers\EnemyViewController.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__systems\AddEnemyStartPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__systems\CreateEnemySystem.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__systems\DestroyEnemySystem.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__systems\EnemyPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\EntityIndexPoolsExtensions.cs" />
     <Compile Include="Assets\Sources\Features\Health\DamageComponent.cs" />
@@ -695,6 +697,10 @@
     <None Include="Assets\FORGE3D\Sci-Fi Effects\Shaders\WarpTunnel.shader" />
     <None Include="Assets\FORGE3D\Sci-Fi Effects\Shaders\WarpTunnelDistortion.shader" />
     <None Include="Assets\Plugins\Ultimate Joystick\README.txt" />
+    <None Include="Assets\Resources\Shaders\OpaqueFlora.shader" />
+    <None Include="Assets\Resources\Shaders\OpaqueFloraMask.shader" />
+    <None Include="Assets\Resources\Shaders\TransparentFlora.shader" />
+    <None Include="Assets\Resources\Shaders\TransparentFloraMask.shader" />
     <None Include="Assets\Shaders\simple1.shader" />
     <None Include="Assets\Standard Assets\Environment\Skyboxes\SkyboxGuidelines.txt" />
     <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />

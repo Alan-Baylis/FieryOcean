@@ -30,11 +30,26 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
         _container = new GameObject(_pool.metaData.poolName + " PlayerViews").transform;
     }
 
-    public void Execute(List<Entity> entities) {
+    public void Execute(List<Entity> entities)
+    {
         foreach(var e in entities)
         {
             var gameObject = Assets.Instantiate<GameObject>(e.asset.name);
             //var gameObject = GameObject.FindGameObjectWithTag("Player");
+
+            if (e.whoAMi.value == /*WhoIAm.IAm.ENEMY_PLAYER*/ 2)
+            {
+                gameObject.AddComponent<PlayerViewController>();
+                e.AddPlayerView(gameObject.GetComponent<IPlayerController>());
+
+                ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().gameEngineEntity = e;
+
+                ////set start position
+                //if (e.serverImpOfUnit.entity == null)
+                //    throw new ArgumentNullException();
+
+                //e.playerView.controller.transform.position = e.serverImpOfUnit.entity.position; 
+            }
 
             if (e.whoAMi.value == /*WhoIAm.IAm.PLAYER*/ 0)
             {

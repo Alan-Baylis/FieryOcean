@@ -1,4 +1,6 @@
-﻿using Entitas;
+﻿using System;
+using System.Collections.Generic;
+using Entitas;
 using UnityEngine;
 
 public sealed class CreatePlayerSystem : ISetPools, IInitializeSystem {

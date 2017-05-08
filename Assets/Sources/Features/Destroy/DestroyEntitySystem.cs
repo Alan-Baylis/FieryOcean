@@ -16,8 +16,10 @@ public sealed class DestroyEntitySystem : ISetPools, IEntityCollectorSystem {
     public void Execute(List<Entity> entities) {
         foreach(var e in entities) {
             foreach(var pool in _pools) {
-                if(pool.HasEntity(e)) {
+                if(pool.HasEntity(e))
+                {
                     pool.DestroyEntity(e);
+                    
                     break;
                 }
             }
