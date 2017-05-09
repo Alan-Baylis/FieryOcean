@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour {
     Systems createSystems(Pools pools)
     {
         return new Feature("Systems")
-             // Initialize
+            // Initialize
             .Add(pools.CreateSystem(new WorldSystem(enemisStartPositions.startPoint.position.y)))
             .Add(pools.CreateSystem(new IncrementTickSystem()))
             .Add(pools.CreateSystem(new CreatePlayerSystem(playerInputController.Position())))
@@ -57,7 +57,7 @@ public class GameController : MonoBehaviour {
             .Add(pools.CreateSystem(new InputSystem(playerInputController)))
             .Add(pools.input.CreateSystem(new ProcessMoveInputSystem()))
             .Add(pools.core.CreateSystem(new CameraSystem()))
-            
+
             // Update
             //.Add(pools.core.CreateSystem(new BulletCoolDownSystem()))
             //.Add(pools.core.CreateSystem(new StartEnemyWaveSystem()))
@@ -67,8 +67,9 @@ public class GameController : MonoBehaviour {
             .Add(pools.CreateSystem(new PlayerPositionSystem(playerInputController.joystick, playerInputController.speedMap, playerInputController.Position())))
             .Add(pools.core.CreateSystem(new AddEnemyStartPositionSystem()))
             .Add(pools.core.CreateSystem(new EnemyPositionSystem()))
-            
+
             // Destroy
-            .Add(pools.CreateSystem(new DestroyEntitySystem()));
+            //.Add(pools.CreateSystem(new DestroyEntitySystem()));
+            .Add(pools.CreateSystem(new DestroyEnemySystem()));
     }
 }
