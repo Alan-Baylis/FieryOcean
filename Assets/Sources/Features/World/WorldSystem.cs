@@ -134,7 +134,7 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
 
         //Entitas.Entity e = (Entitas.Entity)entity.renderObj;
         //e.playerView.controller.rigidbody.position = new Vector3(entity.position.x,e.playerView.controller.rigidbody.position.y, entity.position.z);
-
+        entity.position.y = _ocean_y;
         ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().destPosition = entity.position;
         ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().position = entity.position;
 
@@ -146,6 +146,7 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
         if (entity.renderObj == null)
             return;
 
+        entity.position.y = _ocean_y;
         GameEntity gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>();
         gameEntity.destPosition = entity.position;
         gameEntity.isOnGround = entity.isOnGround;

@@ -9,15 +9,10 @@ using System.Collections.Generic;
 public class GameEntity : MonoBehaviour 
 {
 	public bool isPlayer = false;
-	
 
-    public Entitas.Entity gameEngineEntity
-    {
-        get;
-        set;
-    }
+    public Entitas.Entity gameEngineEntity;
 
-	//private Vector3 _position = Vector3.zero;
+	private Vector3 _position = Vector3.zero;
 	private Vector3 _eulerAngles = Vector3.zero;
 	private Vector3 _scale = Vector3.zero;
 	
@@ -54,56 +49,55 @@ public class GameEntity : MonoBehaviour
 	
 	void OnGUI()
 	{
-		if(!gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().GetComponent<Renderer>().isVisible)
-			return;
+		//if(!gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().GetComponent<Renderer>().isVisible)
+		//	return;
 		
-		Vector3 worldPosition = new Vector3 (transform.position.x , transform.position.y + npcHeight, transform.position.z);
+		//Vector3 worldPosition = new Vector3 (transform.position.x , transform.position.y + npcHeight, transform.position.z);
 		
-		if(playerCamera == null)
-			playerCamera = Camera.main;
+		//if(playerCamera == null)
+		//	playerCamera = Camera.main;
 		
-		//根据NPC头顶的3D坐标换算成它在2D屏幕中的坐标
-		Vector2 uiposition = playerCamera.WorldToScreenPoint(worldPosition);
+		////根据NPC头顶的3D坐标换算成它在2D屏幕中的坐标
+		//Vector2 uiposition = playerCamera.WorldToScreenPoint(worldPosition);
 		
-		//得到真实NPC头顶的2D坐标
-		uiposition = new Vector2 (uiposition.x, Screen.height - uiposition.y);
+		////得到真实NPC头顶的2D坐标
+		//uiposition = new Vector2 (uiposition.x, Screen.height - uiposition.y);
 		
-		//计算NPC名称的宽高
-		Vector2 nameSize = GUI.skin.label.CalcSize (new GUIContent(entity_name));
+		////计算NPC名称的宽高
+		//Vector2 nameSize = GUI.skin.label.CalcSize (new GUIContent(entity_name));
 		
-		//设置显示颜色为黄色
-		GUI.color  = Color.yellow;
+		////设置显示颜色为黄色
+		//GUI.color  = Color.yellow;
 		
-		//绘制NPC名称
-		GUI.Label(new Rect(uiposition.x - (nameSize.x / 2), uiposition.y - nameSize.y - 5.0f, nameSize.x, nameSize.y), entity_name);
+		////绘制NPC名称
+		//GUI.Label(new Rect(uiposition.x - (nameSize.x / 2), uiposition.y - nameSize.y - 5.0f, nameSize.x, nameSize.y), entity_name);
 		
-		//计算NPC名称的宽高
-		Vector2 hpSize = GUI.skin.label.CalcSize (new GUIContent(hp));
+		////计算NPC名称的宽高
+		//Vector2 hpSize = GUI.skin.label.CalcSize (new GUIContent(hp));
 
-		//设置显示颜色为红
-		GUI.color = Color.red;
+		////设置显示颜色为红
+		//GUI.color = Color.red;
 		
-		//绘制HP
-		GUI.Label(new Rect(uiposition.x - (hpSize.x / 2), uiposition.y - hpSize.y - 30.0f, hpSize.x, hpSize.y), hp);
+		////绘制HP
+		//GUI.Label(new Rect(uiposition.x - (hpSize.x / 2), uiposition.y - hpSize.y - 30.0f, hpSize.x, hpSize.y), hp);
 	}
 	
     public Vector3 position {  
 		get
 		{
-            //return _position;
-            return gameEngineEntity.playerView.controller.transform.position;
+            return _position;
         }
 
 		set
 		{
+            _position = value;
 
-            gameEngineEntity.playerView.controller.transform.position = value;
+            if (gameEngineEntity != null)
+                gameEngineEntity.playerView.controller.transform.position = value;
 
-            //_position = value;
-			
-		//	if(gameObject != null)
-		//		gameObject.transform.position = _position;
-	    }    
+            //	if(gameObject != null)
+            //		gameObject.transform.position = _position;
+        }    
     }  
   
     public Vector3 eulerAngles {  
@@ -115,12 +109,15 @@ public class GameEntity : MonoBehaviour
 		set
 		{
 			_eulerAngles = value;
-			
-			if(gameObject != null)
-			{
-				gameObject.transform.eulerAngles = _eulerAngles;
-			}
-		}    
+
+            //if(gameObject != null)
+            //{
+            //	gameObject.transform.eulerAngles = _eulerAngles;
+            //}
+
+            if (gameEngineEntity != null)
+                gameEngineEntity.playerView.controller.transform.eulerAngles = value;
+        }    
     }  
 
     public Quaternion rotation {  
@@ -174,21 +171,21 @@ public class GameEntity : MonoBehaviour
 
 	public void set_state(sbyte v)
 	{
-		if (v == 3) 
-		{
-			if(isPlayer)
-				gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.green;
-			else
-				gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.red;
-		} else if (v == 0) 
-		{
-			if(isPlayer)
-				gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.blue;
-			else
-				gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.white;
-		} else if (v == 1) {
-			gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.black;
-		}
+		//if (v == 3) 
+		//{
+		//	if(isPlayer)
+		//		gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.green;
+		//	else
+		//		gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.red;
+		//} else if (v == 0) 
+		//{
+		//	if(isPlayer)
+		//		gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.blue;
+		//	else
+		//		gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.white;
+		//} else if (v == 1) {
+		//	gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.black;
+		//}
 	}
 	
     void FixedUpdate () 
@@ -199,8 +196,11 @@ public class GameEntity : MonoBehaviour
     	if(isPlayer == isControlled)
     		return;
 
-		KBEngine.Event.fireIn("updatePlayer", gameObject.transform.position.x, 
-			gameObject.transform.position.y, gameObject.transform.position.z, gameObject.transform.rotation.eulerAngles.y);
+        //KBEngine.Event.fireIn("updatePlayer", gameObject.transform.position.x, 
+        //	gameObject.transform.position.y, gameObject.transform.position.z, gameObject.transform.rotation.eulerAngles.y);
+
+        KBEngine.Event.fireIn("updatePlayer", position.x,
+			position.y, position.z, eulerAngles.y);
     }
 
     void Update()

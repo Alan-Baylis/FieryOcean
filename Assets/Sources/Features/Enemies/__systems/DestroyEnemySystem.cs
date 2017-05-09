@@ -12,7 +12,7 @@ public sealed class DestroyEnemySystem : ISetPools, IEntityCollectorSystem
     Pool[] _pools;
     public void SetPools(Pools pools)
     {
-        _pools = new[] { pools.core, pools.bullets };
+        _pools = new[] { pools.core };
         _groupObserver = _pools.CreateEntityCollector(Matcher.AnyOf(CoreMatcher.DestroyUnit));
     }
 
@@ -24,7 +24,6 @@ public sealed class DestroyEnemySystem : ISetPools, IEntityCollectorSystem
             {
                 if (pool.HasEntity(e))
                 {
-                   
                     pool.DestroyEntity(e);
                     break;
                 }
