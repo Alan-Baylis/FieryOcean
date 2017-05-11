@@ -218,10 +218,10 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
         {
             Debug.Log("player->set_state: " + v);
 
-            if (((SByte)v) == 1)
-                UI.inst.showReliveGUI = true;
-            else
-                UI.inst.showReliveGUI = false;
+            //if (((SByte)v) == 1)
+            //    UI.inst.showReliveGUI = true;
+            //else
+            //    UI.inst.showReliveGUI = false;
 
             return;
         }
