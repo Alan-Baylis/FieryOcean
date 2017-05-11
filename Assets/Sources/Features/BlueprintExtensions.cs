@@ -6,10 +6,11 @@ namespace Entitas.Unity.Serialization.Blueprints {
     public partial class Blueprints {
 
         public Entity ApplyPlayer1(Entity entity, Vector3 position) {
-            return   entity.ApplyBlueprint(Player1)
+            return entity.ApplyBlueprint(Player1)
                 .AddPosition(position)
                 ////.AddPlayerPosition(position)
-                .AddForse(Vector3.zero, 0);
+                .AddForse(Vector3.zero, 0)
+                .AddServerImpOfUnit(null);
                 ////.AddWhoIAm(WhoIAm.IAm.PLAYER);
         }
 

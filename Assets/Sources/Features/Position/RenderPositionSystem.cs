@@ -34,7 +34,7 @@ public sealed class RenderPositionSystem : ISetPools, IExecuteSystem
     {    
         var player = _pools.core.GetEntityWithPlayerId(PLAYER_ID);
 
-        createPlayer(player);
+      
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
@@ -54,52 +54,4 @@ public sealed class RenderPositionSystem : ISetPools, IExecuteSystem
 
         player.ReplacePlayerPosition(player.playerView.controller.transform.position);
     }
-
-    private UnityEngine.GameObject player_server_impl = null;
-
-    private void createPlayer(Entitas.Entity e)
-    {
-        if (player_server_impl != null)
-        {
-            //if (terrain != null)
-                player_server_impl.GetComponent<GameEntity>().entityEnable();
-            return;
-        }
-
-        if (KBEngineApp.app.entity_type != "Avatar")
-        {
-            return;
-        }
-
-        KBEngine.Avatar avatar = (KBEngine.Avatar)KBEngineApp.app.player();
-        if (avatar == null)
-        {
-            Debug.Log("wait create(palyer)!");
-            return;
-        }
-
-        //float y = avatar.position.y;
-        //if (avatar.isOnGround)
-        //    y = 1.3f;
-
-        //player_server_impl = Instantiate(avatarPerfab, new Vector3(avatar.position.x, y, avatar.position.z),
-        //                     Quaternion.Euler(new Vector3(avatar.direction.y, avatar.direction.z, avatar.direction.x))) as UnityEngine.GameObject;
-
-        UnityEngine.GameObject go = new UnityEngine.GameObject();
-        go.AddComponent<GameEntity>();
-        player_server_impl = go;
-        player_server_impl.GetComponent<GameEntity>().entityDisable();
-
-        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().gameEngineEntity = e;
-
-        avatar.renderObj = player_server_impl;
-        ((UnityEngine.GameObject)avatar.renderObj).GetComponent<GameEntity>().isPlayer = true;
-
-        // 有必要设置一下，由于该接口由Update异步调用，有可能set_position等初始化信息已经先触发了
-        // 那么如果不设置renderObj的位置和方向将为0，人物会陷入地下
-
-        //set_position(avatar);
-        //set_direction(avatar);
-    }
-
 }
