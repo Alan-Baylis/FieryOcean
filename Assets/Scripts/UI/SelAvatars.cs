@@ -73,7 +73,7 @@ public class SelAvatars : MonoBehaviour {
 
         if (startCreateAvatar)
         {
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height - 40, 200, 30), "CreateAvatar-OK"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height/2 + 40, 200, buttonHeight), "CreateAvatar-OK"))
             {
                 if (stringAvatarName.Length > 1)
                 {
@@ -86,7 +86,7 @@ public class SelAvatars : MonoBehaviour {
                 }
             }
 
-            stringAvatarName = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height - 75, 200, 30), stringAvatarName, 20);
+            stringAvatarName = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height/2, 200, 30), stringAvatarName, 20);
         }
 
         if (ui_avatarList != null && EventsRegistrator.inst.sel_avatars.ui_avatarList.Count > 0)
