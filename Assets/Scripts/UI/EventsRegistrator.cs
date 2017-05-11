@@ -65,9 +65,9 @@ public class EventsRegistrator : MonoBehaviour {
 
     public class Login
     {
-        private string stringAccount;
+        private string stringAccount="";
 
-        public Login()
+        public void InstallEvents()
         {
             // login
             KBEngine.Event.registerOut("onCreateAccountResult", this, "onCreateAccountResult");
@@ -81,7 +81,6 @@ public class EventsRegistrator : MonoBehaviour {
             KBEngine.Event.registerOut("Baseapp_importClientMessages", this, "Baseapp_importClientMessages");
             KBEngine.Event.registerOut("Baseapp_importClientEntityDef", this, "Baseapp_importClientEntityDef");
         }
-
         public void onCreateAccountResult(UInt16 retcode, byte[] datas)
         {
             if (retcode != 0)
@@ -153,6 +152,7 @@ public class EventsRegistrator : MonoBehaviour {
         {
             UIcommon.inst.info("importClientEntityDef ...");
         }
+
     }
 
     public class Common
@@ -207,6 +207,7 @@ public class EventsRegistrator : MonoBehaviour {
     {
         sel_avatars = new SelAvatars();
         login = new Login();
+        login.InstallEvents();
         sel_avatars = new SelAvatars();
     }
     

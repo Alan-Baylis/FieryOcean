@@ -27,10 +27,12 @@ public class SelAvatars : MonoBehaviour {
         onSelAvatarUI();
     }
 
+    int buttonHeight = 30;
+
     void onSelAvatarUI()
     {
         ui_avatarList = EventsRegistrator.inst.sel_avatars.ui_avatarList;
-        if (startCreateAvatar == false && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height - 40, 200, 30), "RemoveAvatar"))
+        if (startCreateAvatar == false && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height/2 - buttonHeight*1.5f, 200, buttonHeight), "RemoveAvatar"))
         {
             if (selAvatarDBID == 0)
             {
@@ -48,12 +50,12 @@ public class SelAvatars : MonoBehaviour {
             }
         }
 
-        if (startCreateAvatar == false && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height - 75, 200, 30), "CreateAvatar"))
+        if (startCreateAvatar == false && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height/2 + buttonHeight*1.5f, 200, buttonHeight), "CreateAvatar"))
         {
             startCreateAvatar = !startCreateAvatar;
         }
 
-        if (startCreateAvatar == false && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height - 110, 200, 30), "EnterGame"))
+        if (startCreateAvatar == false && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height/2, 200, buttonHeight), "EnterGame"))
         {
             if (selAvatarDBID == 0)
             {
@@ -106,7 +108,7 @@ public class SelAvatars : MonoBehaviour {
                     GUI.contentColor = Color.red;
                 }
 
-                if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 120 - 35 * idx, 200, 30), name))
+                if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + Screen.height / 3 - 35 * idx, 200, 30), name))
                 {
                     Debug.Log("selAvatar:" + name);
                     selAvatarDBID = idbid;
@@ -125,7 +127,7 @@ public class SelAvatars : MonoBehaviour {
             }
         }
 
-        GUI.Label(new Rect((Screen.width / 2) - 100, 40, 400, 100), UIcommon.inst.labelMsg);
+        GUI.Label(new Rect((Screen.width / 2) - (Screen.width / 4), (Screen.height / 2) - (Screen.height / 4), 400, 100), UIcommon.inst.labelMsg);
 
     }
 }
