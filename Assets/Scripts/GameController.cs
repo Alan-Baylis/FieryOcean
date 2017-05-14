@@ -70,6 +70,7 @@ public class GameController : MonoBehaviour {
 
             // Destroy
             //.Add(pools.CreateSystem(new DestroyEntitySystem()));
-            .Add(pools.CreateSystem(new DestroyEnemySystem()));
+            //.Add(pools.CreateSystem(new DestroyEnemySystem()));
+            .Add(pools.core.CreateSystem(new DestroyRemotePlayerSystem()));
     }
 }

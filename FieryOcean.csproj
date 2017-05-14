@@ -618,6 +618,7 @@
     <Compile Include="Assets\Sources\Features\Enemies\__systems\AddEnemyStartPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__systems\CreateEnemySystem.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__systems\DestroyEnemySystem.cs" />
+    <Compile Include="Assets\Sources\Features\Enemies\__systems\DestroyRemotePlayerSystem.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__systems\EnemyPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\EntityIndexPoolsExtensions.cs" />
     <Compile Include="Assets\Sources\Features\Health\DamageComponent.cs" />
@@ -657,6 +658,7 @@
     <Compile Include="Assets\Sources\Features\World\WorldSystem.cs" />
     <Compile Include="Assets\Sources\GameRandom.cs" />
     <Compile Include="Assets\Sources\VirtualJoystickRegion.cs" />
+    <Compile Include="Assets\Tests\Position.cs" />
     <Compile Include="Assets\Ultimate Joystick Examples\Spaceship Example\Scripts\AsteroidController.cs" />
     <Compile Include="Assets\Ultimate Joystick Examples\Spaceship Example\Scripts\GameManager.cs" />
     <Compile Include="Assets\Ultimate Joystick Examples\Spaceship Example\Scripts\PlayerController.cs" />

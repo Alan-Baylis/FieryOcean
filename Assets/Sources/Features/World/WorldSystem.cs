@@ -87,6 +87,11 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
 
     public void onEnterWorld(KBEngine.Entity entity)
     {
+        Debug.Log("------------ OnEnterWorld -------------");
+        Debug.Log(entity.className);
+        Debug.Log(entity.id);
+        Debug.Log(entity.isPlayer());
+
         if (entity.isPlayer())
             return;
 
@@ -112,13 +117,12 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
 
     public void onLeaveWorld(KBEngine.Entity entity)
     {
-        //if (entity.renderObj == null)
-        //    return;
+        if (entity.renderObj == null)
+            return;
 
-        //UnityEngine.GameObject.Destroy((UnityEngine.GameObject)entity.renderObj);
-        //entity.renderObj = null;
-            
-        _pools.core.CreateEntity().AddDestroyUnit(entity.id);
+        UnityEngine.GameObject.Destroy(((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().gameEngineEntity.playerView.controller.gameObject);
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().gameEngineEntity.AddDestroyUnit(entity.id);
+        entity.renderObj = null;
 
         Debug.Log("onLeaveWorld was called");
     }
@@ -143,6 +147,10 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
 
     public void updatePosition(KBEngine.Entity entity)
     {
+        Debug.Log("---------   updatePosition   ------------");
+        Debug.Log(entity.className);
+        Debug.Log(entity.id);
+
         if (entity.renderObj == null)
             return;
 
