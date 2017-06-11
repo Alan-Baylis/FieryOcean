@@ -64,8 +64,8 @@ public class SelAvatars : MonoBehaviour {
             else
             {
                 UIcommon.inst.info("Please wait...");
+                PlayerPrefs.SetFloat("selAvatarDBID", selAvatarDBID);
 
-                KBEngine.Event.fireIn("selectAvatarGame", selAvatarDBID);
                 Application.LoadLevel("battle");
                 //ui_state = 2;
             }

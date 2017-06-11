@@ -92,10 +92,9 @@ public sealed class PlayerPositionSystem : ISetPools, IExecuteSystem
 
         // 有必要设置一下，由于该接口由Update异步调用，有可能set_position等初始化信息已经先触发了
         // 那么如果不设置renderObj的位置和方向将为0，人物会陷入地下
-
-        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().destPosition = e.playerView.controller.transform.position;
-        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().position = e.playerView.controller.transform.position;
-
+       
+        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().destPosition = avatar.position;
+        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().position = avatar.position;
 
         //set_position(avatar);
         //set_direction(avatar);

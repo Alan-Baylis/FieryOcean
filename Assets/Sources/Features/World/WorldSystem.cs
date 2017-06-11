@@ -26,14 +26,15 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
 
     public WorldSystem(float ocean_y)
     {
-        _ocean_y=ocean_y;
-
+        _ocean_y = ocean_y;
     }
 
     void installEvents()
     {
-        // in world
+        KBEngine.Event.registerOut("onAvatarEnterWorld", this, "onAvatarEnterWorld");
         KBEngine.Event.registerOut("addSpaceGeometryMapping", this, "addSpaceGeometryMapping");
+        // in world
+
         KBEngine.Event.registerOut("onEnterWorld", this, "onEnterWorld");
         KBEngine.Event.registerOut("onLeaveWorld", this, "onLeaveWorld");
         KBEngine.Event.registerOut("set_position", this, "set_position");
@@ -42,7 +43,7 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
         KBEngine.Event.registerOut("onControlled", this, "onControlled");
 
         // in world(register by scripts)
-        KBEngine.Event.registerOut("onAvatarEnterWorld", this, "onAvatarEnterWorld");
+        
         KBEngine.Event.registerOut("set_HP", this, "set_HP");
         KBEngine.Event.registerOut("set_MP", this, "set_MP");
         KBEngine.Event.registerOut("set_HP_Max", this, "set_HP_Max");
@@ -57,11 +58,10 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
         KBEngine.Event.registerOut("otherAvatarOnJump", this, "otherAvatarOnJump");
         KBEngine.Event.registerOut("onAddSkill", this, "onAddSkill");
     }
-
     public void addSpaceGeometryMapping(string respath)
     {
         Debug.Log("loading scene(" + respath + ")...");
-        UI.inst.info("scene(" + respath + "), spaceID=" + KBEngineApp.app.spaceID);
+        //UI.inst.info("scene(" + respath + "), spaceID=" + KBEngineApp.app.spaceID);
 
         //if (terrain == null)
         //    terrain = Instantiate(terrainPerfab) as UnityEngine.GameObject;
@@ -69,16 +69,17 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
         //if (player)
         //    player.GetComponent<GameEntity>().entityEnable();
     }
-    public void onAvatarEnterWorld(UInt64 rndUUID, Int32 eid/*, KBEngine.Avatar avatar*/)
+    public void onAvatarEnterWorld(UInt64 rndUUID, Int32 eid, KBEngine.Avatar avatar)
     {
         //if (!avatar.isPlayer())
         //{
         //    return;
         //}
 
-        UI.inst.info("loading scene...(加载场景中...)");
+        //UI.inst.info("loading scene...(加载场景中...)");
         Debug.Log("loading scene...");
     }
+
 
     public void onAddSkill(KBEngine.Entity entity)
     {
@@ -87,6 +88,11 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
 
     public void onEnterWorld(KBEngine.Entity entity)
     {
+        Debug.Log("------------ OnEnterWorld -------------");
+        Debug.Log(entity.className);
+        Debug.Log(entity.id);
+        Debug.Log(entity.isPlayer());
+
         if (entity.isPlayer())
             return;
 
@@ -112,13 +118,12 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
 
     public void onLeaveWorld(KBEngine.Entity entity)
     {
-        //if (entity.renderObj == null)
-        //    return;
+        if (entity.renderObj == null)
+            return;
 
-        //UnityEngine.GameObject.Destroy((UnityEngine.GameObject)entity.renderObj);
-        //entity.renderObj = null;
-            
-        _pools.core.CreateEntity().AddDestroyUnit(entity.id);
+        UnityEngine.GameObject.Destroy(((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().gameEngineEntity.playerView.controller.gameObject);
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().gameEngineEntity.AddDestroyUnit(entity.id);
+        entity.renderObj = null;
 
         Debug.Log("onLeaveWorld was called");
     }
@@ -143,6 +148,10 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
 
     public void updatePosition(KBEngine.Entity entity)
     {
+        Debug.Log("---------   updatePosition   ------------");
+        Debug.Log(entity.className);
+        Debug.Log(entity.id);
+
         if (entity.renderObj == null)
             return;
 

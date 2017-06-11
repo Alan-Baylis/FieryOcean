@@ -26,6 +26,15 @@ public class GameController : MonoBehaviour {
         _systems = createSystems(pools);
 
         _systems.Initialize();
+
+        float selAvatarDBID = PlayerPrefs.GetFloat("selAvatarDBID",0);
+
+        if(selAvatarDBID!=0)
+            KBEngine.Event.fireIn("selectAvatarGame", (ulong)selAvatarDBID);
+        //else
+            // TODO : pring error
+
+
     }
 	
 	// Update is called once per frame
@@ -41,6 +50,7 @@ public class GameController : MonoBehaviour {
 
     Systems createSystems(Pools pools)
     {
+
         return new Feature("Systems")
             // Initialize
             .Add(pools.CreateSystem(new WorldSystem(enemisStartPositions.startPoint.position.y)))
@@ -70,6 +80,7 @@ public class GameController : MonoBehaviour {
 
             // Destroy
             //.Add(pools.CreateSystem(new DestroyEntitySystem()));
-            .Add(pools.CreateSystem(new DestroyEnemySystem()));
+            //.Add(pools.CreateSystem(new DestroyEnemySystem()));
+            .Add(pools.core.CreateSystem(new DestroyRemotePlayerSystem()));
     }
 }

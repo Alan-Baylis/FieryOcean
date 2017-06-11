@@ -187,7 +187,7 @@ public class GameEntity : MonoBehaviour
 		//	gameObject.transform.FindChild ("Graphics").GetComponent<MeshRenderer> ().material.color = Color.black;
 		//}
 	}
-	
+  
     void FixedUpdate () 
     {
 		if (!entityEnabled || KBEngineApp.app == null)
@@ -199,8 +199,12 @@ public class GameEntity : MonoBehaviour
         //KBEngine.Event.fireIn("updatePlayer", gameObject.transform.position.x, 
         //	gameObject.transform.position.y, gameObject.transform.position.z, gameObject.transform.rotation.eulerAngles.y);
 
-        KBEngine.Event.fireIn("updatePlayer", position.x,
-			position.y, position.z, eulerAngles.y);
+      
+        KBEngine.Event.fireIn(  "updatePlayer",
+                                gameEngineEntity.playerView.controller.transform.position.x,
+                                gameEngineEntity.playerView.controller.transform.position.y,
+                                gameEngineEntity.playerView.controller.transform.position.z,
+                                gameEngineEntity.playerView.controller.transform.eulerAngles.y  );
     }
 
     void Update()
