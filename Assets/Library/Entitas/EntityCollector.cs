@@ -5,7 +5,7 @@ namespace Entitas {
 
     /// An EntityCollector can observe one or more groups and collects
     /// changed entities based on the specified eventType.
-    public class EntityCollector {
+    public class Collector {
 
         /// Returns all collected entities.
         /// Call collector.ClearCollectedEntities()
@@ -16,19 +16,19 @@ namespace Entitas {
 
         readonly HashSet<Entity> _collectedEntities;
         readonly Group[] _groups;
-        readonly GroupEventType[] _eventTypes;
+        readonly GroupEvent[] _eventTypes;
         Group.GroupChanged _addEntityCache;
         string _toStringCache;
 
         /// Creates an EntityCollector and will collect changed entities
         /// based on the specified eventType.
-        public EntityCollector(Group group, GroupEventType eventType)
+        public Collector(Group group, GroupEvent eventType)
             : this(new [] { group }, new [] { eventType }) {
         }
 
         /// Creates an EntityCollector and will collect changed entities
         /// based on the specified eventTypes.
-        public EntityCollector(Group[] groups, GroupEventType[] eventTypes) {
+        public Collector(Group[] groups, GroupEvent[] eventTypes) {
             _groups = groups;
             _collectedEntities = new HashSet<Entity>(
                 EntityEqualityComparer.comparer
@@ -53,13 +53,13 @@ namespace Entitas {
             for (int i = 0; i < _groups.Length; i++) {
                 var group = _groups[i];
                 var eventType = _eventTypes[i];
-                if(eventType == GroupEventType.OnEntityAdded) {
+                if(eventType == GroupEvent.Added) {
                     group.OnEntityAdded -= _addEntityCache;
                     group.OnEntityAdded += _addEntityCache;
-                } else if(eventType == GroupEventType.OnEntityRemoved) {
+                } else if(eventType == GroupEvent.Removed) {
                     group.OnEntityRemoved -= _addEntityCache;
                     group.OnEntityRemoved += _addEntityCache;
-                } else if(eventType == GroupEventType.OnEntityAddedOrRemoved) {
+                } else if(eventType == GroupEvent.AddedOrRemoved) {
                     group.OnEntityAdded -= _addEntityCache;
                     group.OnEntityAdded += _addEntityCache;
                     group.OnEntityRemoved -= _addEntityCache;
@@ -118,7 +118,7 @@ namespace Entitas {
             return _toStringCache;
         }
 
-        ~EntityCollector () {
+        ~Collector () {
             Deactivate();
         }
     }

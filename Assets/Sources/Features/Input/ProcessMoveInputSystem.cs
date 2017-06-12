@@ -9,9 +9,9 @@ public sealed class ProcessMoveInputSystem : ISetPools, IMultiReactiveSystem
 
     public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { InputMatcher.MoveInput.OnEntityAdded() /*, CoreMatcher.Rigidbody.OnEntityAdded()*/ }; } }
 
-    Pools _pools;
+    Contexts _pools;
 
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         _pools = pools;
     }
 

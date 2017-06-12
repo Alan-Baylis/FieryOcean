@@ -17,8 +17,8 @@ public class GameController : MonoBehaviour {
         GameRandom.core = new Rand(0);
         GameRandom.view = new Rand(0);
         //Pools.sharedInstance.core.CreateEntity().AddCamera(cam).AddCameraPosition(cam.transform.position);
-        var pools = Pools.sharedInstance;
-        pools.SetAllPools();
+        var pools = Contexts.sharedInstance;
+        pools.SetAllContexts();
         pools.AddEntityIndices();
 
         pools.blueprints.SetBlueprints(blueprints);
@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour {
         _systems.TearDown();
     }
 
-    Systems createSystems(Pools pools)
+    Systems createSystems(Contexts pools)
     {
 
         return new Feature("Systems")

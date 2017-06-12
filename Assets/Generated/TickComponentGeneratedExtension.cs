@@ -33,7 +33,7 @@ namespace Entitas {
         }
     }
 
-    public partial class Pool {
+    public partial class Context {
 
         public Entity tickEntity { get { return GetGroup(InputMatcher.Tick).GetSingleEntity(); } }
         public TickComponent tick { get { return tickEntity.tick; } }

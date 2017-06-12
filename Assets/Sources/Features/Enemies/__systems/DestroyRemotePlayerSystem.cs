@@ -9,9 +9,9 @@ public partial class DestroyRemotePlayerSystem : ISetPools, IMultiReactiveSystem
 {
     public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.DestroyUnit.OnEntityAdded() }; } }
 
-    Pool[] _pools;
+    Context[] _pools;
 
-    public void SetPools(Pools pools)
+    public void SetPools(Contexts pools)
     {
         _pools = new[] { pools.core };
     }

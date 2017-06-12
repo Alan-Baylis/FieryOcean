@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 using Entitas.CodeGenerator;
 
-public class BulletsAttribute : PoolAttribute {
+public class BulletsAttribute : ContextAttribute {
 
     public BulletsAttribute() : base("Bullets") {
     }

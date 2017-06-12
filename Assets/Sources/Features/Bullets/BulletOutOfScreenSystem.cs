@@ -4,7 +4,7 @@ public sealed class BulletOutOfScreenSystem : ISetPools, IExecuteSystem {
 
     Group _bullets;
 
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         _bullets = pools.bullets.GetGroup(Matcher.AllOf(BulletsMatcher.Bullet, BulletsMatcher.Position));
     }
 

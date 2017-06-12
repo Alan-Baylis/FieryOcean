@@ -10,9 +10,9 @@ public sealed class AddPlayerStartPosition : ISetPool, IReactiveSystem
     const string PLAYER_ID = "Player1";
     public TriggerOnEvent trigger { get { return CoreMatcher.PlayerView.OnEntityAdded(); } }
 
-    Pool _pool;
+    Context _pool;
 
-    public void SetPool(Pool pool)
+    public void SetPool(Context pool)
     {
         _pool = pool;
     }

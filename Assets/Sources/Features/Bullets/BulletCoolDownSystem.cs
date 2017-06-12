@@ -6,7 +6,7 @@ public sealed class BulletCoolDownSystem : ISetPools, IExecuteSystem {
 
     Group _coolDowns;
 
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         _coolDowns = pools.core.GetGroup(CoreMatcher.BulletCoolDown);
     }
 

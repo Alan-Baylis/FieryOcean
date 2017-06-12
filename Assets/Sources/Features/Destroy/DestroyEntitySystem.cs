@@ -3,12 +3,12 @@ using Entitas;
 
 public sealed class DestroyEntitySystem : ISetPools, IEntityCollectorSystem {
 
-    public EntityCollector entityCollector { get { return _groupObserver; } }
+    public Collector entityCollector { get { return _groupObserver; } }
 
-    Pool[] _pools;
-    EntityCollector _groupObserver;
+    Context[] _pools;
+    Collector _groupObserver;
 
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         _pools = new [] { pools.core, pools.bullets };
         _groupObserver = _pools.CreateEntityCollector(Matcher.AnyOf(CoreMatcher.Destroy, CoreMatcher.OutOfScreen));
     }

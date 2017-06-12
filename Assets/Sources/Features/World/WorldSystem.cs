@@ -12,9 +12,9 @@ public sealed class WorldSystem : ISetPools, IInitializeSystem
     private float _ocean_y;
     public TriggerOnEvent trigger { get { return CoreMatcher.PlayerView.OnEntityAdded(); } }
 
-    Pools _pools;
+    Contexts _pools;
 
-    public void SetPools(Pools pools)
+    public void SetPools(Contexts pools)
     {
         _pools = pools; 
     }

@@ -19,10 +19,10 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
 {
     public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoAMi.OnEntityAdded()/*, CoreMatcher.Asset.OnEntityAdded() */}; } }
 
-    Pool _pool;
+    Context _pool;
     Transform _container;
 
-    public void SetPool(Pool pool) {
+    public void SetPool(Context pool) {
         _pool = pool;
     }
 

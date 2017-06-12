@@ -8,11 +8,11 @@ public sealed class CameraSystem : ISetPools, IExecuteSystem, IInitializeSystem
 {
     const string PLAYER_ID = "Player1";
 
-    Pools _pools;
+    Contexts _pools;
     Group _cameraGroup;
     Group _playerView;
 
-    public void SetPools(Pools pools)
+    public void SetPools(Contexts pools)
     {
         _pools = pools;
         _cameraGroup = pools.core.GetGroup(Matcher.AllOf(CoreMatcher.Camera));

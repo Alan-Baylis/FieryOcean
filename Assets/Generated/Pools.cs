@@ -8,32 +8,32 @@
 //------------------------------------------------------------------------------
 namespace Entitas {
 
-    public partial class Pools {
+    public partial class Contexts {
 
-        public static Pool CreateBlueprintsPool() {
-            return CreatePool("Blueprints", BlueprintsComponentIds.TotalComponents, BlueprintsComponentIds.componentNames, BlueprintsComponentIds.componentTypes);
+        public static Context CreateBlueprintsPool() {
+            return CreateContext("Blueprints", BlueprintsComponentIds.TotalComponents, BlueprintsComponentIds.componentNames, BlueprintsComponentIds.componentTypes);
         }
 
-        public static Pool CreateBulletsPool() {
-            return CreatePool("Bullets", BulletsComponentIds.TotalComponents, BulletsComponentIds.componentNames, BulletsComponentIds.componentTypes);
+        public static Context CreateBulletsPool() {
+            return CreateContext("Bullets", BulletsComponentIds.TotalComponents, BulletsComponentIds.componentNames, BulletsComponentIds.componentTypes);
         }
 
-        public static Pool CreateCorePool() {
-            return CreatePool("Core", CoreComponentIds.TotalComponents, CoreComponentIds.componentNames, CoreComponentIds.componentTypes);
+        public static Context CreateCorePool() {
+            return CreateContext("Core", CoreComponentIds.TotalComponents, CoreComponentIds.componentNames, CoreComponentIds.componentTypes);
         }
 
-        public static Pool CreateInputPool() {
-            return CreatePool("Input", InputComponentIds.TotalComponents, InputComponentIds.componentNames, InputComponentIds.componentTypes);
+        public static Context CreateInputPool() {
+            return CreateContext("Input", InputComponentIds.TotalComponents, InputComponentIds.componentNames, InputComponentIds.componentTypes);
         }
 
-        public Pool[] allPools { get { return new [] { blueprints, bullets, core, input }; } }
+        public Context[] allPools { get { return new [] { blueprints, bullets, core, input }; } }
 
-        public Pool blueprints;
-        public Pool bullets;
-        public Pool core;
-        public Pool input;
+        public Context blueprints;
+        public Context bullets;
+        public Context core;
+        public Context input;
 
-        public void SetAllPools() {
+        public void SetAllContexts() {
             blueprints = CreateBlueprintsPool();
             bullets = CreateBulletsPool();
             core = CreateCorePool();

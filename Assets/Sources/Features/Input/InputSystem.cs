@@ -6,7 +6,7 @@ public sealed class InputSystem : ISetPools, IExecuteSystem, IInitializeSystem, 
 
     const string PLAYER1_ID = "Player1";
 
-    Pools _pools;
+    Contexts _pools;
     Group _moveInputs;
     PlayerInputController _playerController;
 
@@ -15,7 +15,7 @@ public sealed class InputSystem : ISetPools, IExecuteSystem, IInitializeSystem, 
         _playerController = playerController;
     }
 
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         _pools = pools;
         _moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);
     }

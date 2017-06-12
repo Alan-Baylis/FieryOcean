@@ -9,10 +9,10 @@ public sealed class AddViewFromObjectPoolSystem : ISetPool, IInitializeSystem, I
 
     public IMatcher ensureComponents  {  get {  return BulletsMatcher.ViewObjectPool; } }
 
-    Pool _pool;
+    Context _pool;
     Transform _container;
 
-    public void SetPool(Pool pool) {
+    public void SetPool(Context pool) {
         _pool = pool;
     }
 

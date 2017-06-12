@@ -10,7 +10,7 @@ public sealed class RenderPositionSystem : ISetPools, IExecuteSystem
 
     //EntityCollector _groupObserver;
     Group inputs;
-    Pools _pools;
+    Contexts _pools;
     private UltimateJoystick _joystick;
     PlayerMovementController move1;
     public RenderPositionSystem(UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap, float masterY)
@@ -20,7 +20,7 @@ public sealed class RenderPositionSystem : ISetPools, IExecuteSystem
         move1 = new PlayerMovementController(speedMap, masterY);
     }
 
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         /*_groupObserver = new [] { pools.core, pools.bullets }
             .CreateEntityCollector(Matcher.AllOf(CoreMatcher.PlayerView,  CoreMatcher.Position, CoreMatcher.Forse));
             */

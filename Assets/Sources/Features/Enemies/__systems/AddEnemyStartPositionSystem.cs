@@ -9,9 +9,9 @@ class AddEnemyStartPositionSystem : ISetPool, IReactiveSystem
 {
     public TriggerOnEvent trigger { get { return CoreMatcher.EnemyView.OnEntityAdded(); } }
 
-    Pool _pool;
+    Context _pool;
     Group _enemiesGroup;
-    public void SetPool(Pool pool)
+    public void SetPool(Context pool)
     {
         _pool = pool;
         _enemiesGroup = pool.GetGroup(Matcher.AllOf(CoreMatcher.Enemy));

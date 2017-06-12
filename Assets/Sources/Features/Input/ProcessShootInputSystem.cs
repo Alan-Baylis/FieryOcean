@@ -8,10 +8,10 @@ public sealed class ProcessShootInputSystem : ISetPools, IReactiveSystem
 
     public TriggerOnEvent trigger { get {  return InputMatcher.ShootInput.OnEntityAdded(); } }
 
-    Pools _pools;
+    Contexts _pools;
     ObjectPool<GameObject> _bulletsObjectPool;
 
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         _pools = pools;
 
        // TODO Put on a component

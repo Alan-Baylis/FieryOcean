@@ -33,7 +33,7 @@ namespace Entitas {
         }
     }
 
-    public partial class Pool {
+    public partial class Context {
 
         public Entity blueprintsEntity { get { return GetGroup(BlueprintsMatcher.Blueprints).GetSingleEntity(); } }
         public BlueprintsComponent blueprints { get { return blueprintsEntity.blueprints; } }

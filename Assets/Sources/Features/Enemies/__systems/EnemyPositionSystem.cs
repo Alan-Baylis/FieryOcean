@@ -21,7 +21,7 @@ public sealed class EnemyPositionSystem : ISetPools, IReactiveSystem
         }
     }
 
-    public void SetPools(Pools pools)
+    public void SetPools(Contexts pools)
     {
         _movableGroups = pools.core.GetGroup(CoreMatcher.EnemyView);
     }

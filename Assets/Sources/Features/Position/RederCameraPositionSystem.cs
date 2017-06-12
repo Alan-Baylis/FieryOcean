@@ -5,11 +5,11 @@ using Entitas;
 
 public sealed class RederCameraPositionSystem : ISetPools, IEntityCollectorSystem
 {
-    public EntityCollector entityCollector { get { return _groupObserver; } }
+    public Collector entityCollector { get { return _groupObserver; } }
 
-    EntityCollector _groupObserver;
+    Collector _groupObserver;
 
-    public void SetPools(Pools pools)
+    public void SetPools(Contexts pools)
     {
         _groupObserver = new[] { pools.core, pools.bullets }
             .CreateEntityCollector(Matcher.AllOf(CoreMatcher.CameraPosition, CoreMatcher.Position));

@@ -6,10 +6,10 @@ public sealed class ProcessCollisionSystem : ISetPool, IReactiveSystem, ICleanup
 
     public TriggerOnEvent trigger { get { return InputMatcher.Collision.OnEntityAdded(); } }
 
-    Pool _pool;
+    Context _pool;
     Group _collisions;
 
-    void ISetPool.SetPool(Pool pool) {
+    void ISetPool.SetPool(Context pool) {
         _pool = pool;
         _collisions = pool.GetGroup(InputMatcher.Collision);
     }

@@ -1,11 +1,11 @@
 namespace Entitas {
 
-    public partial class Pools {
+    public partial class Contexts {
 
-        public static Pools sharedInstance {
+        public static Contexts sharedInstance {
             get {
                 if(_sharedInstance == null) {
-                    _sharedInstance = new Pools();
+                    _sharedInstance = new Contexts();
                 }
 
                 return _sharedInstance;
@@ -13,13 +13,13 @@ namespace Entitas {
             set { _sharedInstance = value; }
         }
 
-        static Pools _sharedInstance;
+        static Contexts _sharedInstance;
 
-        public static Pool CreatePool(string poolName,
+        public static Context CreateContext(string poolName,
                                       int totalComponents,
                                       string[] componentNames,
                                       System.Type[] componentTypes) {
-            var pool = new Pool(totalComponents, 0, new PoolMetaData(
+            var pool = new Context(totalComponents, 0, new PoolMetaData(
                 poolName, componentNames, componentTypes)
             );
             #if(!ENTITAS_DISABLE_VISUAL_DEBUGGING && UNITY_EDITOR)

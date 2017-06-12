@@ -5,9 +5,9 @@ using UnityEngine;
 
 public sealed class CreatePlayerSystem : ISetPools, IInitializeSystem {
     private Vector3 _position;
-    Pools _pools;
+    Contexts _pools;
 
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         _pools = pools;
     }
     public CreatePlayerSystem(Vector3 playerStartPosition)

@@ -19,7 +19,7 @@ namespace Entitas {
     /// This is useful when you want to react to changes in multiple groups
     /// from different pools.
     public interface IEntityCollectorSystem : IReactiveExecuteSystem {
-        EntityCollector entityCollector { get; }
+        Collector entityCollector { get; }
     }
 
     /// Not meant to be implemented. Use IReactiveSystem, IMultiReactiveSystem

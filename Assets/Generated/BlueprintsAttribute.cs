@@ -6,11 +6,13 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 using Entitas.CodeGenerator;
 
-public class BlueprintsAttribute : PoolAttribute {
+public class BlueprintsAttribute : ContextAttribute {
 
     public BlueprintsAttribute() : base("Blueprints") {
+
     }
 }
 

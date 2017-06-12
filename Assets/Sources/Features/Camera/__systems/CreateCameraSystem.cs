@@ -6,10 +6,10 @@ using System;
 public sealed class CreateCameraSystem : ISetPools, IInitializeSystem
 {
 
-    Pools _pools;
+    Contexts _pools;
     Camera _cam;
 
-    public void SetPools(Pools pools)
+    public void SetPools(Contexts pools)
     {
         _pools = pools;
     }

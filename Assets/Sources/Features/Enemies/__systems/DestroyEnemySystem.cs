@@ -6,11 +6,11 @@ using Entitas;
 
 public sealed class DestroyEnemySystem : ISetPools, IEntityCollectorSystem
 {
-    public EntityCollector entityCollector { get { return _groupObserver; } }
-    EntityCollector _groupObserver;
+    public Collector entityCollector { get { return _groupObserver; } }
+    Collector _groupObserver;
 
-    Pool[] _pools;
-    public void SetPools(Pools pools)
+    Context[] _pools;
+    public void SetPools(Contexts pools)
     {
         _pools = new[] { pools.core };
         _groupObserver = _pools.CreateEntityCollector(Matcher.AnyOf(CoreMatcher.DestroyUnit));

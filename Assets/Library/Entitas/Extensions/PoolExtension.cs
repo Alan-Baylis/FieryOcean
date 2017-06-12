@@ -11,7 +11,7 @@ namespace Entitas {
     /// rather than using Pools.sharedInstance.pool directly within the system
     /// to avoid tight coupling.
     public interface ISetPool {
-        void SetPool(Pool pool);
+        void SetPool(Context pool);
     }
 
     /// Implement this interface if you want to create a system which needs a
@@ -23,13 +23,13 @@ namespace Entitas {
     /// rather than using Pools.sharedInstance directly within the system
     /// to avoid tight coupling.
     public interface ISetPools {
-        void SetPools(Pools pools);
+        void SetPools(Contexts pools);
     }
 
     public static class PoolExtension {
 
         /// Returns all entities matching the specified matcher.
-        public static Entity[] GetEntities(this Pool pool, IMatcher matcher) {
+        public static Entity[] GetEntities(this Context pool, IMatcher matcher) {
             return pool.GetGroup(matcher).GetEntities();
         }
 
@@ -38,16 +38,16 @@ namespace Entitas {
         /// It will inject the Pools.sharedInstance if ISetPools is implemented.
         /// It will automatically create a ReactiveSystem if it is a
         /// IReactiveSystem, IMultiReactiveSystem or IEntityCollectorSystem.
-        public static ISystem CreateSystem(this Pool pool, ISystem system) {
-            return CreateSystem(pool, system, Pools.sharedInstance);
+        public static ISystem CreateSystem(this Context pool, ISystem system) {
+            return CreateSystem(pool, system, Contexts.sharedInstance);
         }
 
         /// This is the recommended way to create systems.
         /// It will inject the pool if ISetPool is implemented.
         /// It will inject the pools if ISetPools is implemented.
-        public static ISystem CreateSystem(this Pool pool,
+        public static ISystem CreateSystem(this Context pool,
                                            ISystem system,
-                                           Pools pools) {
+                                           Contexts pools) {
             SetPool(system, pool);
             SetPools(system, pools);
             return system;
@@ -58,9 +58,9 @@ namespace Entitas {
         /// It will inject the pools if ISetPools is implemented.
         /// It will automatically create a ReactiveSystem if it is a
         /// IReactiveSystem, IMultiReactiveSystem or IEntityCollectorSystem.
-        public static ISystem CreateSystem(this Pool pool,
+        public static ISystem CreateSystem(this Context pool,
                                            IReactiveExecuteSystem system) {
-            return CreateSystem(pool, system, Pools.sharedInstance);
+            return CreateSystem(pool, system, Contexts.sharedInstance);
         }
 
         /// This is the recommended way to create systems.
@@ -68,9 +68,9 @@ namespace Entitas {
         /// It will inject the pools if ISetPools is implemented.
         /// It will automatically create a ReactiveSystem if it is a
         /// IReactiveSystem, IMultiReactiveSystem or IEntityCollectorSystem.
-        public static ISystem CreateSystem(this Pool pool,
+        public static ISystem CreateSystem(this Context pool,
                                            IReactiveExecuteSystem system,
-                                           Pools pools) {
+                                           Contexts pools) {
             SetPool(system, pool);
             SetPools(system, pools);
 
@@ -96,7 +96,7 @@ namespace Entitas {
 
         /// This is the recommended way to create systems.
         /// It will inject the pools if ISetPools is implemented.
-        public static ISystem CreateSystem(this Pools pools, ISystem system) {
+        public static ISystem CreateSystem(this Contexts pools, ISystem system) {
             SetPools(system, pools);
             return system;
         }
@@ -105,7 +105,7 @@ namespace Entitas {
         /// It will inject the pools if ISetPools is implemented.
         /// It will automatically create a ReactiveSystem
         /// if it is a IEntityCollectorSystem.
-        public static ISystem CreateSystem(this Pools pools,
+        public static ISystem CreateSystem(this Contexts pools,
                                            IReactiveExecuteSystem system) {
             SetPools(system, pools);
 
@@ -122,7 +122,7 @@ namespace Entitas {
         }
 
         [Obsolete("pools.CreateSystem(system) can not infer which pool to set for ISetPool!", true)]
-        public static ISystem CreateSystem(this Pools pools, ISetPool system) {
+        public static ISystem CreateSystem(this Contexts pools, ISetPool system) {
             throw new EntitasException(
                 "pools.CreateSystem(" + system + ") can not infer which pool " +
                 "to set for ISetPool!",
@@ -133,7 +133,7 @@ namespace Entitas {
         }
 
         [Obsolete("pools.CreateSystem(system) can not infer which pool to use to create a ReactiveSystem!", true)]
-        public static ISystem CreateSystem(this Pools pools, IReactiveSystem system) {
+        public static ISystem CreateSystem(this Contexts pools, IReactiveSystem system) {
             throw new EntitasException(
                 "pools.CreateSystem(" + system + ") can not infer which pool " +
                 "to use to create a ReactiveSystem!",
@@ -144,7 +144,7 @@ namespace Entitas {
         }
 
         [Obsolete("pools.CreateSystem(system) can not infer which pool to use to create a ReactiveSystem!", true)]
-        public static ISystem CreateSystem(this Pools pools, IMultiReactiveSystem system) {
+        public static ISystem CreateSystem(this Contexts pools, IMultiReactiveSystem system) {
             throw new EntitasException(
                 "pools.CreateSystem(" + system + ") can not infer which pool " +
                 "to use to create a ReactiveSystem!",
@@ -155,7 +155,7 @@ namespace Entitas {
         }
 
         /// This will set the pool if ISetPool is implemented.
-        public static void SetPool(ISystem system, Pool pool) {
+        public static void SetPool(ISystem system, Context pool) {
             var poolSystem = system as ISetPool;
             if(poolSystem != null) {
                 poolSystem.SetPool(pool);
@@ -163,7 +163,7 @@ namespace Entitas {
         }
 
         /// This will set the pools if ISetPools is implemented.
-        public static void SetPools(ISystem system, Pools pools) {
+        public static void SetPools(ISystem system, Contexts pools) {
             var poolsSystem = system as ISetPools;
             if(poolsSystem != null) {
                 poolsSystem.SetPools(pools);
@@ -173,25 +173,25 @@ namespace Entitas {
         /// Creates an EntityCollector which observes all specified pools.
         /// This is useful when you want to create an EntityCollector
         /// for multiple pools which can be used with IEntityCollectorSystem.
-        public static EntityCollector CreateEntityCollector(
-            this Pool[] pools,
+        public static Collector CreateEntityCollector(
+            this Context[] pools,
             IMatcher matcher,
-            GroupEventType eventType = GroupEventType.OnEntityAdded) {
+            GroupEvent eventType = GroupEvent.Added) {
             var groups = new Group[pools.Length];
-            var eventTypes = new GroupEventType[pools.Length];
+            var eventTypes = new GroupEvent[pools.Length];
 
             for (int i = 0; i < pools.Length; i++) {
                 groups[i] = pools[i].GetGroup(matcher);
                 eventTypes[i] = eventType;
             }
 
-            return new EntityCollector(groups, eventTypes);
+            return new Collector(groups, eventTypes);
         }
 
         /// Creates a new entity and adds copies of all
         /// specified components to it.
         /// If replaceExisting is true it will replace exisintg components.
-        public static Entity CloneEntity(this Pool pool,
+        public static Entity CloneEntity(this Context pool,
                                          Entity entity,
                                          bool replaceExisting = false,
                                          params int[] indices) {

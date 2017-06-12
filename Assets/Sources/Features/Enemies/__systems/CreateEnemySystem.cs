@@ -8,10 +8,10 @@ using UnityEngine;
 public sealed class CreateEnemySystem : ISetPools, IInitializeSystem, IReactiveSystem
 {
     private Vector3 _position;
-    Pools _pools;
+    Contexts _pools;
     public TriggerOnEvent trigger {  get  {  return CoreMatcher.UnitAdd.OnEntityAdded();    }    }
 
-    public void SetPools(Pools pools)
+    public void SetPools(Contexts pools)
     {
         _pools = pools;
     }

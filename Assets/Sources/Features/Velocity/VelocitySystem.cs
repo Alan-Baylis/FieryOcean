@@ -7,7 +7,7 @@ public sealed class VelocitySystem : ISetPools, IExecuteSystem {
 
     Group _camera;
     
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         /*var matcher = Matcher.AllOf(CoreMatcher.Velocity, CoreMatcher.Position);
         _movableGroups = new [] {
             pools.core.GetGroup(matcher),

@@ -2,9 +2,9 @@
 
 public sealed class IncrementTickSystem : ISetPools, IInitializeSystem, IExecuteSystem {
 
-    Pools _pools;
+    Contexts _pools;
 
-    public void SetPools(Pools pools) {
+    public void SetPools(Contexts pools) {
         _pools = pools;
     }
 
