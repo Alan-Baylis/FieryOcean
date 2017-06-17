@@ -15,22 +15,28 @@ using Apex.LoadBalancing;
 using Apex.WorldGeometry;
 using UnityEditor;
 
-public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiveSystem
+public partial class AddViewSystems : ReactiveSystem //IInitializeSystem, IMultiReactiveSystem
 {
-    public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoAMi.OnEntityAdded()/*, CoreMatcher.Asset.OnEntityAdded() */}; } }
+    public AddViewSystems(Contexts contexts) : base(contexts.core)
+    {
+        _container = new GameObject(" PlayerViews").transform;
+    }
+
+    //public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoAMi.OnEntityAdded()/*, CoreMatcher.Asset.OnEntityAdded() */}; } }
 
     Context _pool;
     Transform _container;
 
+    // TODO Entitas 0.36.0 Migration (constructor)
     public void SetPool(Context pool) {
         _pool = pool;
     }
 
-    public void Initialize() {
-        _container = new GameObject(_pool.metaData.poolName + " PlayerViews").transform;
-    }
+    //public void Initialize() {
+    //    _container = new GameObject(_pool.metaData.poolName + " PlayerViews").transform;
+    //}
 
-    public void Execute(List<Entity> entities)
+    protected override void Execute(List<Entity> entities)
     {
         foreach(var e in entities)
         {
@@ -470,6 +476,17 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
 
             return 1 << firstVacant;
         }
+    }
+
+    protected override Collector GetTrigger(Context context)
+    {
+        return context.CreateCollector(CoreMatcher.WhoAMi, GroupEvent.Added);
+        // throw new NotImplementedException();
+    }
+
+    protected override bool Filter(Entity entity)
+    {
+        throw new NotImplementedException();
     }
 #endif
 }

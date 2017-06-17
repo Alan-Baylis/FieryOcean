@@ -1,31 +1,47 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Entitas;
 using UnityEngine;
 
-public sealed class CreateEnemySystem : ISetPools, IInitializeSystem, IReactiveSystem
+public sealed class CreateEnemySystem : ReactiveSystem //IInitializeSystem, ReactiveSystem
 {
     private Vector3 _position;
     Contexts _pools;
-    public TriggerOnEvent trigger {  get  {  return CoreMatcher.UnitAdd.OnEntityAdded();    }    }
-
-    public void SetPools(Contexts pools)
-    {
-        _pools = pools;
+    public CreateEnemySystem(Contexts contexts) : base(contexts.core) {
+        //_pools = pools;
+        _pools.blueprints.blueprints.instance.ApplyEnemy(_pools.core.CreateEntity(), _position);
     }
 
-    void IInitializeSystem.Initialize()
-    {
-        _pools.blueprints.blueprints.instance.ApplyEnemy(_pools.core.CreateEntity(),_position);
+    protected override Collector GetTrigger(Context context) {
+        return context.CreateCollector(CoreMatcher.UnitAdd);
     }
 
-    public CreateEnemySystem(Vector3[] positions)
+    protected override bool Filter(Entity entity) {
+        // TODO Entitas 0.36.0 Migration
+        // ensure was: 
+        // exclude was: 
+
+        return true;
+    }
+
+    //void IInitializeSystem.Initialize()
+    //{
+    //    _pools.blueprints.blueprints.instance.ApplyEnemy(_pools.core.CreateEntity(),_position);
+    //}
+
+    public void SetPosition(Vector3[] positions)
     {
         _position = positions[0];
     }
-    public void Execute(List<Entity> entities)
+
+    //public CreateEnemySystem(Vector3[] positions)
+    //{
+    //    _position = positions[0];
+    //}
+
+    protected override void Execute(List<Entity> entities)
     {
         foreach (var entity in entities)
         {

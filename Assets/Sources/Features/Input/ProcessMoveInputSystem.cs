@@ -1,21 +1,31 @@
-﻿using Entitas;
+using Entitas;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public sealed class ProcessMoveInputSystem : ISetPools, IMultiReactiveSystem
+public sealed class ProcessMoveInputSystem : ReactiveSystem //IMultiReactiveSystem
 {
-    // public TriggerOnEvent trigger { get { return /*Matcher.AllOf(InputMatcher.MoveInput, CoreMatcher.Rigidbody).OnEntityAdded();*/  InputMatcher.MoveInput.OnEntityAdded(); } }
+     public ProcessMoveInputSystem(Contexts contexts) : base(contexts.core) {
+    //    _pools = pools;
+    }
 
-    public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { InputMatcher.MoveInput.OnEntityAdded() /*, CoreMatcher.Rigidbody.OnEntityAdded()*/ }; } }
+    protected override Collector GetTrigger(Context context) {
+        return context.CreateCollector(/*Matcher.AllOf(InputMatcher.MoveInput, CoreMatcher.Rigidbody).OnEntityAdded();*/  InputMatcher.MoveInput);
+    }
+
+    protected override bool Filter(Entity entity) {
+        // TODO Entitas 0.36.0 Migration
+        // ensure was: 
+        // exclude was: 
+
+        return true;
+    }
+
+    //public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { InputMatcher.MoveInput.OnEntityAdded() /*, CoreMatcher.Rigidbody.OnEntityAdded()*/ }; } }
 
     Contexts _pools;
 
-    public void SetPools(Contexts pools) {
-        _pools = pools;
-    }
-
-    public void Execute(List<Entity> entities) {
+    protected override void Execute(List<Entity> entities) {
         var input = entities[entities.Count - 1];
         var ownerId = input.inputOwner.playerId;
 

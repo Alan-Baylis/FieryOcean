@@ -1,12 +1,13 @@
-﻿using Entitas;
+using Entitas;
 using UnityEngine;
 
-public sealed class VelocitySystem : ISetPools, IExecuteSystem {
+public sealed class VelocitySystem : IExecuteSystem {
 
     //Group[] _movableGroups;
 
     Group _camera;
     
+    // TODO Entitas 0.36.0 Migration (constructor)
     public void SetPools(Contexts pools) {
         /*var matcher = Matcher.AllOf(CoreMatcher.Velocity, CoreMatcher.Position);
         _movableGroups = new [] {

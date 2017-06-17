@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using KBEngine;
 
 namespace Entitas.Unity.Serialization.Blueprints {

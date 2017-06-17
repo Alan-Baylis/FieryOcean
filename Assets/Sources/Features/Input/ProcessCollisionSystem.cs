@@ -1,20 +1,29 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Entitas;
 
-public sealed class ProcessCollisionSystem : ISetPool, IReactiveSystem, ICleanupSystem {
+public sealed class ProcessCollisionSystem : ReactiveSystem { //ReactiveSystemICleanupSystem {
 
-    public TriggerOnEvent trigger { get { return InputMatcher.Collision.OnEntityAdded(); } }
+    public ProcessCollisionSystem(Contexts contexts) : base(contexts.core) {
+
+    }
+
+    protected override Collector GetTrigger(Context context) {
+        return context.CreateCollector(InputMatcher.Collision);
+    }
+
+    protected override bool Filter(Entity entity) {
+        // TODO Entitas 0.36.0 Migration
+        // ensure was: 
+        // exclude was: 
+
+        return true;
+    }
 
     Context _pool;
     Group _collisions;
 
-    void ISetPool.SetPool(Context pool) {
-        _pool = pool;
-        _collisions = pool.GetGroup(InputMatcher.Collision);
-    }
-
-    public void Execute(List<Entity> entities) {
+    protected override void Execute(List<Entity> entities) {
        foreach(var e in entities) {
             e.collision.self.ReplaceHealth(e.collision.self.health.value - 1);
             var newHealth = e.collision.other.health.value - e.collision.self.damage.value;

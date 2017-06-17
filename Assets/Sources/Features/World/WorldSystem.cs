@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,25 +6,38 @@ using Entitas;
 using UnityEngine;
 using KBEngine;
 
-public sealed class WorldSystem : ISetPools, IInitializeSystem
+public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
 {
     const string PLAYER_ID = "Player1";
     private float _ocean_y;
-    public TriggerOnEvent trigger { get { return CoreMatcher.PlayerView.OnEntityAdded(); } }
+
+    public WorldSystem(Contexts contexts) : base(contexts.core)
+    {
+        //_pools = pools;
+    }
+
+    protected override Collector GetTrigger(Context context) {
+        return context.CreateCollector(CoreMatcher.PlayerView,GroupEvent.Added);
+    }
+
+    protected override bool Filter(Entitas.Entity entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void Execute(List<Entitas.Entity> entities)
+    {
+        //throw new NotImplementedException();
+    }
 
     Contexts _pools;
 
-    public void SetPools(Contexts pools)
-    {
-        _pools = pools; 
-    }
-
-    public void Initialize()
+    public void InstallEvents()
     {
         installEvents();
     }
 
-    public WorldSystem(float ocean_y)
+    public void SetOcean(float ocean_y)
     {
         _ocean_y = ocean_y;
     }

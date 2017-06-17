@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 using KBEngine;
 
-public sealed class PlayerPositionSystem : ISetPools, IExecuteSystem
+public sealed class PlayerPositionSystem : IExecuteSystem
 {
     const string PLAYER_ID = "Player1";
    // public EntityCollector entityCollector { get { return _groupObserver; } }
@@ -21,6 +21,7 @@ public sealed class PlayerPositionSystem : ISetPools, IExecuteSystem
         _beforePosition = startPosition;
     }
 
+    // TODO Entitas 0.36.0 Migration (constructor)
     public void SetPools(Contexts pools) {
         /*_groupObserver = new [] { pools.core, pools.bullets }
             .CreateEntityCollector(Matcher.AllOf(CoreMatcher.PlayerView,  CoreMatcher.Position, CoreMatcher.Forse));

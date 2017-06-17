@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
-public sealed class CreatePlayerSystem : ISetPools, IInitializeSystem {
+public sealed class CreatePlayerSystem : IInitializeSystem {
     private Vector3 _position;
     Contexts _pools;
 
+    // TODO Entitas 0.36.0 Migration (constructor)
     public void SetPools(Contexts pools) {
         _pools = pools;
     }

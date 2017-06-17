@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Entitas;
 using UnityEngine;
 
-public sealed class InputSystem : ISetPools, IExecuteSystem, IInitializeSystem, ICleanupSystem {
+public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSystem {
 
     const string PLAYER1_ID = "Player1";
 
@@ -15,6 +15,7 @@ public sealed class InputSystem : ISetPools, IExecuteSystem, IInitializeSystem, 
         _playerController = playerController;
     }
 
+    // TODO Entitas 0.36.0 Migration (constructor)
     public void SetPools(Contexts pools) {
         _pools = pools;
         _moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);

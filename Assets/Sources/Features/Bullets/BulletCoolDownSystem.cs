@@ -1,11 +1,12 @@
-﻿using Entitas;
+using Entitas;
 
 
 // TODO Unit Test
-public sealed class BulletCoolDownSystem : ISetPools, IExecuteSystem {
+public sealed class BulletCoolDownSystem : IExecuteSystem {
 
     Group _coolDowns;
 
+    // TODO Entitas 0.36.0 Migration (constructor)
     public void SetPools(Contexts pools) {
         _coolDowns = pools.core.GetGroup(CoreMatcher.BulletCoolDown);
     }

@@ -1,4 +1,4 @@
-﻿using Entitas;
+using Entitas;
 using Entitas.CodeGenerator;
 using Entitas.Unity.Serialization.Blueprints;
 

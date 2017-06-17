@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Entitas;
 using System;
 
-public sealed class CameraSystem : ISetPools, IExecuteSystem, IInitializeSystem
+public sealed class CameraSystem : IExecuteSystem, IInitializeSystem
 {
     const string PLAYER_ID = "Player1";
 
@@ -12,6 +12,7 @@ public sealed class CameraSystem : ISetPools, IExecuteSystem, IInitializeSystem
     Group _cameraGroup;
     Group _playerView;
 
+    // TODO Entitas 0.36.0 Migration (constructor)
     public void SetPools(Contexts pools)
     {
         _pools = pools;

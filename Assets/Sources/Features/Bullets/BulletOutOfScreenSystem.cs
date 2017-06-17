@@ -1,9 +1,10 @@
-﻿using Entitas;
+using Entitas;
 
-public sealed class BulletOutOfScreenSystem : ISetPools, IExecuteSystem {
+public sealed class BulletOutOfScreenSystem : IExecuteSystem {
 
     Group _bullets;
 
+    // TODO Entitas 0.36.0 Migration (constructor)
     public void SetPools(Contexts pools) {
         _bullets = pools.bullets.GetGroup(Matcher.AllOf(BulletsMatcher.Bullet, BulletsMatcher.Position));
     }

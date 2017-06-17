@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Entitas;
 using System;
 
-public sealed class CreateCameraSystem : ISetPools, IInitializeSystem
+public sealed class CreateCameraSystem : IInitializeSystem
 {
 
     Contexts _pools;
     Camera _cam;
 
+    // TODO Entitas 0.36.0 Migration (constructor)
     public void SetPools(Contexts pools)
     {
         _pools = pools;
