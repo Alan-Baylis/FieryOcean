@@ -42,7 +42,7 @@ namespace Entitas {
         public Entity SetTick(ulong newValue) {
             if(hasTick) {
                 throw new EntitasException("Could not set tick!\n" + this + " already has an entity with TickComponent!",
-                    "You should check if the pool already has a tickEntity before setting it or use pool.ReplaceTick().");
+                    "You should check if the context already has a tickEntity before setting it or use context.ReplaceTick().");
             }
             var entity = CreateEntity();
             entity.AddTick(newValue);

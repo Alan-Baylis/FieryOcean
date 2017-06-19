@@ -13,7 +13,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
 
     public WorldSystem(Contexts contexts) : base(contexts.core)
     {
-        //_pools = pools;
+        _pools = contexts;
     }
 
     protected override Collector GetTrigger(Context context) {

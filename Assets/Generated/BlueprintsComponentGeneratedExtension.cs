@@ -42,7 +42,7 @@ namespace Entitas {
         public Entity SetBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newInstance) {
             if(hasBlueprints) {
                 throw new EntitasException("Could not set blueprints!\n" + this + " already has an entity with BlueprintsComponent!",
-                    "You should check if the pool already has a blueprintsEntity before setting it or use pool.ReplaceBlueprints().");
+                    "You should check if the context already has a blueprintsEntity before setting it or use context.ReplaceBlueprints().");
             }
             var entity = CreateEntity();
             entity.AddBlueprints(newInstance);

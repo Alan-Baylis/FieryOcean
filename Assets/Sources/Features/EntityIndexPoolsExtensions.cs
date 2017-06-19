@@ -4,10 +4,12 @@ public static class EntityIndexPoolsExtensions {
 
     public const string PlayerKey = "Player";
 
-    public static void AddEntityIndices(this Contexts pools) {
+    public static void AddEntityIndices(this Contexts pools)
+    {
         var playerIndex = new PrimaryEntityIndex<string>(
             pools.core.GetGroup(CoreMatcher.Player),
-            (entity, component) => {
+            (entity, component) =>
+            {
                 var playerComponent = (PlayerComponent)component;
                 return playerComponent != null
                     ? playerComponent.id

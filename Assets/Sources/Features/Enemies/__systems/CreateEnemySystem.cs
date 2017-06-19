@@ -10,8 +10,8 @@ public sealed class CreateEnemySystem : ReactiveSystem //IInitializeSystem, Reac
     private Vector3 _position;
     Contexts _pools;
     public CreateEnemySystem(Contexts contexts) : base(contexts.core) {
-        //_pools = pools;
-        _pools.blueprints.blueprints.instance.ApplyEnemy(_pools.core.CreateEntity(), _position);
+        //_pools = contexts.blueprints;
+        contexts.blueprints.blueprints.instance.ApplyEnemy(contexts.core.CreateEntity(), _position);
     }
 
     protected override Collector GetTrigger(Context context) {

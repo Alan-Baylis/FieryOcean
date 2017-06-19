@@ -22,14 +22,16 @@ public class AssetComponentDrawer : IComponentDrawer {
 
     public IComponent DrawComponent(IComponent component) {
         var asset = (AssetComponent)component;
-        if (asset.name == null) {
+        if (asset.name == null)
+        {
             asset.name = string.Empty;
         }
 
         var index = Array.IndexOf(_assetNames, asset.name);
         index = EditorGUILayout.Popup("Name", index, _assetNames);
 
-        if (index >= 0) {
+        if (index >= 0)
+        {
             asset.name = _assetNames[index];
         }
 
