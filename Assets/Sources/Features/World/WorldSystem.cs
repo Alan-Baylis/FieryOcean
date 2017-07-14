@@ -16,13 +16,14 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
         _pools = contexts;
     }
 
-    protected override Collector GetTrigger(Context context) {
-        return context.CreateCollector(CoreMatcher.PlayerView,GroupEvent.Added);
+    protected override Collector GetTrigger(Context context)
+    {
+        return context.CreateCollector(CoreMatcher.PlayerView, GroupEvent.Added);
     }
 
     protected override bool Filter(Entitas.Entity entity)
     {
-        throw new NotImplementedException();
+        return false; // throw new NotImplementedException();
     }
 
     protected override void Execute(List<Entitas.Entity> entities)
@@ -279,7 +280,5 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
             ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().OnJump();
         }
     }
-
-   
 }
 

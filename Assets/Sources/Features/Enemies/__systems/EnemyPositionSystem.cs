@@ -36,7 +36,5 @@ public sealed class EnemyPositionSystem : ReactiveSystem
             }
         }
     }
-
-    
 }
 

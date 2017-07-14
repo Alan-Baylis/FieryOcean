@@ -27,7 +27,6 @@ public sealed class ProcessShootInputSystem : ReactiveSystem
 
     Contexts _pools;
     ObjectPool<GameObject> _bulletsObjectPool;
-
     
 
     protected override void Execute(List<Entity> entities)

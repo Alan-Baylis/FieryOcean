@@ -4,12 +4,19 @@ using Entitas;
 
 public sealed class DestroyEntitySystem : ReactiveSystem {//IEntityCollectorSystem {
 
-    public DestroyEntitySystem(Contexts contexts) : base(contexts.core)
-    { }
-    
-    // public Collector entityCollector { get { return _groupObserver; } }
-
     Context[] _pools;
+
+    public DestroyEntitySystem(Contexts contexts) : base(contexts.core)
+    {
+        _pools = new[] { contexts.core };
+    }
+
+    // public Collector entityCollector { get { return _groupObserver; } }
+    protected override Collector GetTrigger(Context context)
+    {
+        return context.CreateCollector(Matcher.AnyOf(CoreMatcher.Destroy, CoreMatcher.OutOfScreen));
+    }
+   
     //Collector _groupObserver;
 
     // TODO Entitas 0.36.0 Migration (constructor)
@@ -32,11 +39,6 @@ public sealed class DestroyEntitySystem : ReactiveSystem {//IEntityCollectorSyst
     }
 
     protected override bool Filter(Entity entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override Collector GetTrigger(Context context)
     {
         throw new NotImplementedException();
     }

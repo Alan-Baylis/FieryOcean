@@ -4,8 +4,9 @@ using Entitas;
 
 public sealed class ProcessCollisionSystem : ReactiveSystem { //ReactiveSystemICleanupSystem {
 
-    public ProcessCollisionSystem(Contexts contexts) : base(contexts.core) {
-
+    public ProcessCollisionSystem(Contexts contexts) : base(contexts.core)
+    {
+        _pool = contexts.core;
     }
 
     protected override Collector GetTrigger(Context context) {
@@ -30,10 +31,10 @@ public sealed class ProcessCollisionSystem : ReactiveSystem { //ReactiveSystemIC
             e.collision.other.ReplaceHealth(Math.Max(0, newHealth));
         }
     }
+    //public void Cleanup() {
+    //    foreach(var e in _collisions.GetEntities()) {
+    //        _pool.DestroyEntity(e);
+    //    }
+    //}
 
-    public void Cleanup() {
-        foreach(var e in _collisions.GetEntities()) {
-            _pool.DestroyEntity(e);
-        }
-    }
 }

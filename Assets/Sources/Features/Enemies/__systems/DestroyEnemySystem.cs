@@ -8,7 +8,7 @@ public sealed class DestroyEnemySystem : ReactiveSystem //IEntityCollectorSystem
 {
     public DestroyEnemySystem(Contexts contexts) : base(contexts.core)
     {
-
+        _pools = new Context[] { contexts.core };
     }
 
     //public Collector entityCollector { get { return _groupObserver; } }
@@ -39,7 +39,7 @@ public sealed class DestroyEnemySystem : ReactiveSystem //IEntityCollectorSystem
 
     protected override bool Filter(Entity entity)
     {
-        throw new NotImplementedException();
+        return true; //throw new NotImplementedException();
     }
 
     protected override Collector GetTrigger(Context context)

@@ -6,7 +6,7 @@ using UnityEngine;
 public sealed class ProcessMoveInputSystem : ReactiveSystem //IMultiReactiveSystem
 {
      public ProcessMoveInputSystem(Contexts contexts) : base(contexts.core) {
-    //    _pools = pools;
+        _pools = contexts;
     }
 
     protected override Collector GetTrigger(Context context) {

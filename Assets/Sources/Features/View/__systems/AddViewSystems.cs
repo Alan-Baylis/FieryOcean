@@ -20,6 +20,7 @@ public partial class AddViewSystems : ReactiveSystem //IInitializeSystem, IMulti
     public AddViewSystems(Contexts contexts) : base(contexts.core)
     {
         _container = new GameObject(" PlayerViews").transform;
+        _pool = contexts.core;
     }
 
     //public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoAMi.OnEntityAdded()/*, CoreMatcher.Asset.OnEntityAdded() */}; } }

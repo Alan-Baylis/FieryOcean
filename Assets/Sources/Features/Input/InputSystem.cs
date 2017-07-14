@@ -10,16 +10,18 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
     Group _moveInputs;
     PlayerInputController _playerController;
 
-    public InputSystem(PlayerInputController playerController)
+    public InputSystem(PlayerInputController playerController, Contexts contexts)
     {
+        _pools = contexts;
+        _moveInputs = _pools.input.GetGroup(InputMatcher.MoveInput);
         _playerController = playerController;
     }
 
     // TODO Entitas 0.36.0 Migration (constructor)
-    public void SetPools(Contexts pools) {
-        _pools = pools;
-        _moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);
-    }
+    //public void SetPools(Contexts pools) {
+    //    _pools = pools;
+    //    _moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);
+    //}
 
     public void Execute()
     {

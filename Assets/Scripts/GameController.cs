@@ -17,13 +17,13 @@ public class GameController : MonoBehaviour {
         GameRandom.core = new Rand(0);
         GameRandom.view = new Rand(0);
         //Pools.sharedInstance.core.CreateEntity().AddCamera(cam).AddCameraPosition(cam.transform.position);
-        var pools = Contexts.sharedInstance;
-       // pools.SetAllContexts();
-        //pools.AddEntityIndices();
+        var contexts = Contexts.sharedInstance;
+        contexts.SetAllContexts();
+        contexts.AddEntityIndices();
 
-        //pools.blueprints.SetBlueprints(blueprints);
+        contexts.blueprints.SetBlueprints(blueprints);
 
-        _systems = createSystems(pools);
+        _systems = createSystems(contexts);
 
         _systems.Initialize();
 
@@ -33,7 +33,6 @@ public class GameController : MonoBehaviour {
             KBEngine.Event.fireIn("selectAvatarGame", (ulong)selAvatarDBID);
         //else
             // TODO : pring error
-
 
     }
 	
@@ -50,19 +49,25 @@ public class GameController : MonoBehaviour {
 
     Systems createSystems(Contexts contexts)
     {
-
         CreateEnemySystem es = new CreateEnemySystem(contexts);
         es.SetPosition(new Vector3[] { enemisStartPositions.startPoint.position });
 
         WorldSystem ws = new WorldSystem(contexts);
         ws.SetOcean(enemisStartPositions.startPoint.position.y);
 
+        CreatePlayerSystem create_player_system = new CreatePlayerSystem(contexts);
+        create_player_system.SetPosition(playerInputController.Position());
+
+        InputSystem input_system = new InputSystem(playerInputController, contexts);
+
+        PlayerPositionSystem player_position_system = new PlayerPositionSystem(contexts);
+        player_position_system.SetParams(playerInputController.joystick, playerInputController.speedMap, playerInputController.Position());
 
         return new Feature("Systems")
             // Initialize
             .Add(ws)
             .Add(new IncrementTickSystem())
-            .Add(new CreatePlayerSystem(playerInputController.Position()))
+            .Add(create_player_system)
             .Add(new CreateCameraSystem(cam))
             .Add(new AddViewSystems(contexts))
             .Add(new AddViewFromObjectPoolSystem(contexts))
@@ -72,7 +77,7 @@ public class GameController : MonoBehaviour {
             .Add(es)
 
             // Input
-            .Add(new InputSystem(playerInputController))
+            .Add(input_system)
             .Add(new ProcessMoveInputSystem(contexts))
             .Add(new CameraSystem())
 
@@ -82,7 +87,7 @@ public class GameController : MonoBehaviour {
 
             .Add(new VelocitySystem())
             .Add(new AddPlayerStartPosition(contexts))
-            .Add(new PlayerPositionSystem(playerInputController.joystick, playerInputController.speedMap, playerInputController.Position()))
+            .Add(player_position_system)
             .Add(new AddEnemyStartPositionSystem(contexts))
             .Add(new EnemyPositionSystem(contexts))
 

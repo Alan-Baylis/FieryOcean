@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 using KBEngine;
+using System;
 
-public sealed class PlayerPositionSystem : IExecuteSystem
+public sealed class PlayerPositionSystem : ReactiveSystem
 {
     const string PLAYER_ID = "Player1";
    // public EntityCollector entityCollector { get { return _groupObserver; } }
@@ -13,7 +14,25 @@ public sealed class PlayerPositionSystem : IExecuteSystem
     Contexts _pools;
     private UltimateJoystick _joystick;
     PlayerMovementController move1;
-    public PlayerPositionSystem(UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap, Vector3 startPosition)
+
+    public PlayerPositionSystem(Contexts contexts) : base(contexts.core)
+    {
+        inputs = contexts.input.GetGroup(InputMatcher.MoveInput);
+        _pools = contexts;
+    }
+
+    protected override Collector GetTrigger(Context context)
+    {
+        return context.CreateCollector(CoreMatcher.Player);
+
+
+    }
+    protected override bool Filter(Entitas.Entity entity)
+    {
+        return false;
+    }
+
+    public void  SetParams(UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap, Vector3 startPosition)
     {
         _joystick = joystick;
         
@@ -22,19 +41,20 @@ public sealed class PlayerPositionSystem : IExecuteSystem
     }
 
     // TODO Entitas 0.36.0 Migration (constructor)
-    public void SetPools(Contexts pools) {
-        /*_groupObserver = new [] { pools.core, pools.bullets }
-            .CreateEntityCollector(Matcher.AllOf(CoreMatcher.PlayerView,  CoreMatcher.Position, CoreMatcher.Forse));
-            */
+    //public void SetPools(Contexts pools) {
+    //    /*_groupObserver = new [] { pools.core, pools.bullets }
+    //        .CreateEntityCollector(Matcher.AllOf(CoreMatcher.PlayerView,  CoreMatcher.Position, CoreMatcher.Forse));
+    //        */
 
-        inputs = pools.input.GetGroup(InputMatcher.MoveInput);
-        _pools = pools;
-    }
+    //    inputs = pools.input.GetGroup(InputMatcher.MoveInput);
+    //    _pools = pools;
+    //}
 
     float lastAc = 0;
     Vector3 _nextPosition;
     Vector3 _beforePosition;
-    public void Execute()
+
+    protected override void Execute(List<Entitas.Entity> entities)
     {    
         var player = _pools.core.GetEntityWithPlayerId(PLAYER_ID);
         createPlayer(player);
@@ -100,4 +120,6 @@ public sealed class PlayerPositionSystem : IExecuteSystem
         //set_position(avatar);
         //set_direction(avatar);
     }
+
+
 }

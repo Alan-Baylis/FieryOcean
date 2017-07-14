@@ -10,7 +10,7 @@ public sealed class CreateEnemySystem : ReactiveSystem //IInitializeSystem, Reac
     private Vector3 _position;
     Contexts _pools;
     public CreateEnemySystem(Contexts contexts) : base(contexts.core) {
-        //_pools = contexts.blueprints;
+        _pools = contexts;
         contexts.blueprints.blueprints.instance.ApplyEnemy(contexts.core.CreateEntity(), _position);
     }
 

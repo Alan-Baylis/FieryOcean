@@ -8,17 +8,12 @@ using UnityEngine;
 public partial class DestroyRemotePlayerSystem : ReactiveSystem //IMultiReactiveSystem
 {
     public DestroyRemotePlayerSystem(Contexts contexts) : base(contexts.core) {
-        //    _pools = pools;
+            _pools = new[] { contexts.core };
     }
+
     //public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.DestroyUnit.OnEntityAdded() }; } }
 
     Context[] _pools;
-
-    // TODO Entitas 0.36.0 Migration (constructor)
-    public void SetPools(Contexts pools)
-    {
-        _pools = new[] { pools.core };
-    }
 
     protected override void Execute(List<Entity> entities)
     {
@@ -37,7 +32,8 @@ public partial class DestroyRemotePlayerSystem : ReactiveSystem //IMultiReactive
 
     protected override bool Filter(Entity entity)
     {
-        throw new NotImplementedException();
+
+        return true;
     }
 
     protected override Collector GetTrigger(Context context)

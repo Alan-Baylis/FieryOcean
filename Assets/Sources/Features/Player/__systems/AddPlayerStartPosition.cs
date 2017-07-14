@@ -13,7 +13,7 @@ public sealed class AddPlayerStartPosition : ReactiveSystem
     }
 
     protected override Collector GetTrigger(Context context) {
-        return context.CreateCollector(CoreMatcher.PlayerView);
+        return context.CreateCollector(CoreMatcher.PlayerView, GroupEvent.Added);
     }
 
     protected override bool Filter(Entity entity) {
@@ -21,12 +21,13 @@ public sealed class AddPlayerStartPosition : ReactiveSystem
         // ensure was: 
         // exclude was: 
 
-        return true;
+        if(entity.playerView!=null)
+           return true;
+
+        return false;
     }
 
     Context _pool;
-
-    
 
     protected override void Execute(List<Entity> entities)
     {

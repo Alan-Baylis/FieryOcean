@@ -35,6 +35,6 @@ public sealed class RederCameraPositionSystem : ReactiveSystem //IEntityCollecto
 
     protected override bool Filter(Entity entity)
     {
-        throw new NotImplementedException();
+        return false; // throw new NotImplementedException();
     }
 }
