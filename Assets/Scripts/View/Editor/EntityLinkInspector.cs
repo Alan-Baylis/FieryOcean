@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Entitas.Unity.VisualDebugging;
+using System.Linq;
+using Entitas.VisualDebugging.Unity;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ using UnityEngine;
 public class EntityLinkInspector : Editor {
 
     void Awake() {
-        EntityDrawer.Initialize();
+        //EntityDrawer.Initialize();
     }
 
     public override void OnInspectorGUI() {
@@ -21,6 +21,6 @@ public class EntityLinkInspector : Editor {
 
         EditorGUILayout.Space();
 
-        EntityDrawer.DrawEntity(link.pool, link.entity);
+        //EntityDrawer.DrawEntity(link.pool, link.entity);
     }
 }

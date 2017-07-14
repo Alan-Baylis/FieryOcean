@@ -9,33 +9,23 @@ public sealed class RenderPositionSystem : IExecuteSystem
    // public EntityCollector entityCollector { get { return _groupObserver; } }
 
     //EntityCollector _groupObserver;
-    Group inputs;
+    IGroup<InputEntity> inputs;
     Contexts _pools;
     private UltimateJoystick _joystick;
     PlayerMovementController move1;
-    public RenderPositionSystem(UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap, float masterY)
+    public RenderPositionSystem(Contexts contexts, UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap, float masterY)
     {
+        _pools = contexts;
+        inputs = contexts.input.GetGroup(InputMatcher.MoveInput);
         _joystick = joystick;
         
         move1 = new PlayerMovementController(speedMap, masterY);
     }
 
-    // TODO Entitas 0.36.0 Migration (constructor)
-    public void SetPools(Contexts pools) {
-        /*_groupObserver = new [] { pools.core, pools.bullets }
-            .CreateEntityCollector(Matcher.AllOf(CoreMatcher.PlayerView,  CoreMatcher.Position, CoreMatcher.Forse));
-            */
-
-        inputs = pools.input.GetGroup(InputMatcher.MoveInput);
-        _pools = pools;
-    }
-
     float lastAc = 0;
     public void Execute()
     {    
-        var player = _pools.core.GetEntityWithPlayerId(PLAYER_ID);
-
-      
+        var player = _pools.game.GetEntityWithPlayerId(PLAYER_ID);
 
         if (Input.GetKeyUp(KeyCode.Space))
         {

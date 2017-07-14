@@ -4,48 +4,27 @@ using System.Linq;
 using System.Text;
 using Entitas;
 
-public sealed class DestroyEnemySystem : ReactiveSystem //IEntityCollectorSystem
-{
-    public DestroyEnemySystem(Contexts contexts) : base(contexts.core)
+public sealed class DestroyEnemySystem : ReactiveSystem<GameEntity> {
+    public DestroyEnemySystem(Contexts contexts) : base(contexts.game)
     {
-
     }
 
-    //public Collector entityCollector { get { return _groupObserver; } }
-    //Collector _groupObserver;
-
-    Context[] _pools;
-    // TODO Entitas 0.36.0 Migration (constructor)
-    //public void SetPools(Contexts pools)
-    //{
-    //    _pools = new[] { pools.core };
-    //    _groupObserver = _pools.CreateEntityCollector(Matcher.AnyOf(CoreMatcher.DestroyUnit));
-    //}
-
-    protected override void Execute(List<Entity> entities)
+    protected override void Execute(List<GameEntity> entities)
     {
         foreach (var e in entities)
         {
-            foreach (var pool in _pools)
-            {
-                if (pool.HasEntity(e))
-                {
-                    pool.DestroyEntity(e);
-                    break;
-                }
-            }
+            e.Destroy();
         }
     }
 
-    protected override bool Filter(Entity entity)
+    protected override bool Filter(GameEntity entity)
     {
-        throw new NotImplementedException();
+        return true;
     }
 
-    protected override Collector GetTrigger(Context context)
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-       return context.CreateCollector(CoreMatcher.DestroyUnit);
-        //throw new NotImplementedException();
+       return context.CreateCollector(GameMatcher.DestroyUnit.Added());
     }
 }
 

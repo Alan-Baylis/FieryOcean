@@ -5,30 +5,26 @@ using System.Text;
 using UnityEngine;
 using Entitas;
 
-public sealed class EnemyPositionSystem : ReactiveSystem
+public sealed class EnemyPositionSystem : ReactiveSystem<GameEntity>
 {
-    Group _movableGroups;
-    public EnemyPositionSystem(Contexts contexts) : base(contexts.core) {
+    IGroup<GameEntity> _movableGroups;
+    public EnemyPositionSystem(Contexts contexts) : base(contexts.game) {
         //_movableGroups = pools.core.GetGroup(CoreMatcher.EnemyView);
-        _movableGroups = contexts.core.GetGroup(CoreMatcher.EnemyView);
-        //contexts.core.ge
+        _movableGroups = contexts.game.GetGroup(GameMatcher.EnemyView);
     }
 
-    protected override Collector GetTrigger(Context context) {
-        return context.CreateCollector(CoreMatcher.PlayerPosition);
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
+        return context.CreateCollector(GameMatcher.PlayerPosition.Added());
     }
 
-    protected override bool Filter(Entity entity) {
-        // TODO Entitas 0.36.0 Migration
-        // ensure was: 
-        // exclude was: 
+    protected override bool Filter(GameEntity entity) {
 
         return true;
     }
 
-    protected override void Execute(List<Entity> entities)
+    protected override void Execute(List<GameEntity> entities)
     {
-        foreach(var e in entities)
+        foreach (var e in entities)
         {
             foreach (var enemy in _movableGroups.GetEntities())
             {
@@ -36,7 +32,6 @@ public sealed class EnemyPositionSystem : ReactiveSystem
             }
         }
     }
-
     
 }
 

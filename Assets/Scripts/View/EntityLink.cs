@@ -5,12 +5,12 @@ using System;
 public class EntityLink : MonoBehaviour {
 
     public Entity entity { get { return _entity; } }
-    public Context pool { get { return _pool; } }
+    public IContext pool { get { return _pool; } }
 
     Entity _entity;
-    Context _pool;
+    IContext _pool;
 
-    public void Link(Entity entity, Context pool) {
+    public void Link(Entity entity, IContext pool) {
         if(_entity != null) {
             throw new Exception("EntityLink is already linked to " + _entity + "!");
         }
@@ -37,7 +37,7 @@ public static class EntityLinkExtension {
         return gameObject.GetComponent<EntityLink>();
     }
 
-    public static EntityLink Link(this GameObject gameObject, Entity entity, Context pool) {
+    public static EntityLink Link(this GameObject gameObject, Entity entity, IContext pool) {
         var link = gameObject.GetEntityLink();
         if(link == null) {
             link = gameObject.AddComponent<EntityLink>();

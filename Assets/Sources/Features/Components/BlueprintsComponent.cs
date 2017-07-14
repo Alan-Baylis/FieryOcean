@@ -1,8 +1,10 @@
 using Entitas;
-using Entitas.CodeGenerator;
+using Entitas.CodeGeneration;
+using Entitas.CodeGeneration.Attributes;
 using Entitas.Unity.Serialization.Blueprints;
 
-[Blueprints, SingleEntity]
+
+[Game, Unique]
 public sealed class BlueprintsComponent : IComponent {
 
     public Blueprints instance;

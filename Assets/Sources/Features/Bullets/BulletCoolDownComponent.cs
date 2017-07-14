@@ -1,6 +1,6 @@
 using Entitas;
 
-[Core]
+[Game]
 public sealed class BulletCoolDownComponent : IComponent {
 
     public int ticks;

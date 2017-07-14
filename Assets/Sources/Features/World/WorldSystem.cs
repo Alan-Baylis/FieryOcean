@@ -6,32 +6,37 @@ using Entitas;
 using UnityEngine;
 using KBEngine;
 
-public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
+public sealed class WorldSystem : IInitializeSystem
 {
+   
     const string PLAYER_ID = "Player1";
     private float _ocean_y;
+    Contexts _pools;
 
-    public WorldSystem(Contexts contexts) : base(contexts.core)
+    public WorldSystem(Contexts contexts) //: base(contexts.game)
     {
         _pools = contexts;
     }
 
-    protected override Collector GetTrigger(Context context) {
-        return context.CreateCollector(CoreMatcher.PlayerView,GroupEvent.Added);
-    }
-
-    protected override bool Filter(Entitas.Entity entity)
+    public void Initialize()
     {
-        throw new NotImplementedException();
+        InstallEvents();
     }
 
-    protected override void Execute(List<Entitas.Entity> entities)
-    {
-        //throw new NotImplementedException();
-    }
+    //protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
+    //    return context.CreateCollector(GameMatcher.PlayerView.Added());
+    //}
 
-    Contexts _pools;
+    //protected override bool Filter(Entitas.Entity entity)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
+    //protected override void Execute(List<Entitas.Entity> entities)
+    //{
+    //    //throw new NotImplementedException();
+    //}
+   
     public void InstallEvents()
     {
         installEvents();
@@ -112,10 +117,10 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
         entity.position.y = _ocean_y;
 
         UnityEngine.GameObject go = new UnityEngine.GameObject();
-        go.AddComponent<GameEntity>();
+        go.AddComponent<GameEntity_>();
         entity.renderObj = go;
 
-        _pools.core.CreateEntity().AddUnitAdd(entity);
+        _pools.game.CreateEntity().AddUnitAdd(entity);
 
         //_pools.core.repl
 
@@ -134,8 +139,8 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
         if (entity.renderObj == null)
             return;
 
-        UnityEngine.GameObject.Destroy(((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().gameEngineEntity.playerView.controller.gameObject);
-        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().gameEngineEntity.AddDestroyUnit(entity.id);
+        UnityEngine.GameObject.Destroy(((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().gameEngineEntity.playerView.controller.gameObject);
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().gameEngineEntity.AddDestroyUnit(entity.id);
         entity.renderObj = null;
 
         Debug.Log("onLeaveWorld was called");
@@ -153,8 +158,8 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
         //Entitas.Entity e = (Entitas.Entity)entity.renderObj;
         //e.playerView.controller.rigidbody.position = new Vector3(entity.position.x,e.playerView.controller.rigidbody.position.y, entity.position.z);
         entity.position.y = _ocean_y;
-        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().destPosition = entity.position;
-        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().position = entity.position;
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().destPosition = entity.position;
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().position = entity.position;
 
         Debug.Log("set_position was called");
     }
@@ -169,7 +174,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
             return;
 
         entity.position.y = _ocean_y;
-        GameEntity gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>();
+        GameEntity_ gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>();
         gameEntity.destPosition = entity.position;
         gameEntity.isOnGround = entity.isOnGround;
 
@@ -180,7 +185,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
         if (entity.renderObj == null)
             return;
 
-        GameEntity gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>();
+        GameEntity_ gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>();
         gameEntity.isControlled = isControlled;
     }
 
@@ -189,7 +194,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
         if (entity.renderObj == null)
             return;
 
-        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().destDirection =
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().destDirection =
             new Vector3(entity.direction.y, entity.direction.z, entity.direction.x);
     }
 
@@ -197,7 +202,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
     {
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = "" + (Int32)v + "/" + (Int32)entity.getDefinedProperty("HP_Max");
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().hp = "" + (Int32)v + "/" + (Int32)entity.getDefinedProperty("HP_Max");
         }
     }
 
@@ -209,7 +214,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
     {
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = (Int32)entity.getDefinedProperty("HP") + "/" + (Int32)v;
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().hp = (Int32)entity.getDefinedProperty("HP") + "/" + (Int32)v;
         }
     }
 
@@ -225,7 +230,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
     {
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().entity_name = (string)v;
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().entity_name = (string)v;
         }
     }
 
@@ -233,7 +238,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
     {
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().set_state((SByte)v);
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().set_state((SByte)v);
         }
 
         if (entity.isPlayer())
@@ -255,7 +260,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
 
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().speed = fspeed;
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().speed = fspeed;
         }
     }
 
@@ -276,7 +281,7 @@ public sealed class WorldSystem : ReactiveSystem //IInitializeSystem
         Debug.Log("otherAvatarOnJump: " + entity.id);
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().OnJump();
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().OnJump();
         }
     }
 

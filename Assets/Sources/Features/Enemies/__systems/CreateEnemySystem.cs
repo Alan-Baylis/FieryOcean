@@ -5,23 +5,23 @@ using System.Text;
 using Entitas;
 using UnityEngine;
 
-public sealed class CreateEnemySystem : ReactiveSystem //IInitializeSystem, ReactiveSystem
-{
+public sealed class CreateEnemySystem : ReactiveSystem<GameEntity> {
     private Vector3 _position;
     Contexts _pools;
-    public CreateEnemySystem(Contexts contexts) : base(contexts.core) {
+    public CreateEnemySystem(Contexts contexts, Vector3[] positions) : base( contexts.game) {
         //_pools = contexts.blueprints;
-        contexts.blueprints.blueprints.instance.ApplyEnemy(contexts.core.CreateEntity(), _position);
+        //contexts.blueprints.blueprints.instance.ApplyEnemy(contexts.game.CreateEntity(), _position);
+
+        foreach(Vector3 v in positions)
+            contexts.game.CreateEnemy(v);
     }
 
-    protected override Collector GetTrigger(Context context) {
-        return context.CreateCollector(CoreMatcher.UnitAdd);
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.UnitAdd);
     }
 
-    protected override bool Filter(Entity entity) {
-        // TODO Entitas 0.36.0 Migration
-        // ensure was: 
-        // exclude was: 
+    protected override bool Filter(GameEntity entity) {
 
         return true;
     }
@@ -41,11 +41,12 @@ public sealed class CreateEnemySystem : ReactiveSystem //IInitializeSystem, Reac
     //    _position = positions[0];
     //}
 
-    protected override void Execute(List<Entity> entities)
+    protected override void Execute(List<GameEntity> entities)
     {
         foreach (var entity in entities)
         {
-            _pools.blueprints.blueprints.instance.AddUnit(_pools.core.CreateEntity(), entity.unitAdd.entity);
+            _pools.game.CreateRemotePlayer(_position, entity.unitAdd.entity);
+            //_pools.blueprints.blueprints.instance.AddUnit(_pools.game.CreateEntity(), entity.unitAdd.entity);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Entitas;
 
-[Core]
+[Game]
 public sealed class EnemyViewComponent : IComponent
 {
     public IEnemyController controller;

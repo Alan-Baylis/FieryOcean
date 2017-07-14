@@ -4,20 +4,17 @@ using System.Collections.Generic;
 using Entitas;
 using System;
 
-public sealed class CameraSystem : IExecuteSystem, IInitializeSystem
+public sealed class CameraSystem : IExecuteSystem, ICleanupSystem
 {
     const string PLAYER_ID = "Player1";
 
-    Contexts _pools;
-    Group _cameraGroup;
-    Group _playerView;
+    IGroup<GameEntity> _cameraGroup;
+    IGroup<GameEntity> _playerView;
 
-    // TODO Entitas 0.36.0 Migration (constructor)
-    public void SetPools(Contexts pools)
+    public CameraSystem(Contexts contexts)
     {
-        _pools = pools;
-        _cameraGroup = pools.core.GetGroup(Matcher.AllOf(CoreMatcher.Camera));
-        _playerView = pools.core.GetGroup(Matcher.AllOf(CoreMatcher.PlayerView));
+        _cameraGroup = contexts.game.GetGroup(GameMatcher.Camera);
+        _playerView = contexts.game.GetGroup(GameMatcher.PlayerView);
     }
 
     private Transform target;
@@ -31,6 +28,9 @@ public sealed class CameraSystem : IExecuteSystem, IInitializeSystem
     {
         foreach (var e1 in _cameraGroup.GetEntities())
         {
+            if (_playerView.count == 0)
+                return;
+
             target = _playerView.GetEntities()[0].playerView.controller.gameObject.transform;
             transform = e1.camera.cam.transform;
 
@@ -75,12 +75,8 @@ public sealed class CameraSystem : IExecuteSystem, IInitializeSystem
         }
     }
 
-    public void Initialize()
+    public void Cleanup()
     {
-        //var player = _pools.core.GetEntityWithPlayerId(PLAYER_ID);
-        //if (player == null)
-        //    throw new NotImplementedException();
-
-        //target = player.playerView.controller.transform;
+       //throw new NotImplementedException();
     }
 }

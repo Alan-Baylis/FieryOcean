@@ -7,17 +7,13 @@ public sealed class CreatePlayerSystem : IInitializeSystem {
     private Vector3 _position;
     Contexts _pools;
 
-    // TODO Entitas 0.36.0 Migration (constructor)
-    public void SetPools(Contexts pools) {
-        _pools = pools;
-    }
-    public CreatePlayerSystem(Vector3 playerStartPosition)
+    public CreatePlayerSystem(Contexts pools, Vector3 playerStartPosition)
     {
+        _pools = pools;
         _position = playerStartPosition;
     }
 
     public void Initialize() {
-        _pools.blueprints.blueprints.instance
-              .ApplyPlayer1(_pools.core.CreateEntity(), _position);
+        _pools.game.CreatePlayer(_position);
     }
 }

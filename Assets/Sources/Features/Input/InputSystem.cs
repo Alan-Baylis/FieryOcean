@@ -7,34 +7,37 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
     const string PLAYER1_ID = "Player1";
 
     Contexts _pools;
-    Group _moveInputs;
+    IGroup<InputEntity> _moveInputs;
     PlayerInputController _playerController;
 
-    public InputSystem(PlayerInputController playerController)
+    public InputSystem(PlayerInputController playerController,Contexts contexts)
     {
         _playerController = playerController;
+        _pools = contexts;
+
+        //_moveInputs = contexts.input.GetGroup
     }
 
     // TODO Entitas 0.36.0 Migration (constructor)
-    public void SetPools(Contexts pools) {
-        _pools = pools;
-        _moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);
-    }
+    //public void SetPools(Contexts pools) {
+    //    _pools = pools;
+    //    _moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);
+    //}
 
     public void Execute()
     {
         if (_playerController.IsSpeedChanged)
         {
-            _pools.input.CreateEntity()
-               .AddMoveInput(_playerController.accelerate)
-               .AddInputOwner(PLAYER1_ID);
+            InputEntity e = _pools.input.CreateEntity();
+            e.ReplaceMoveInput(_playerController.accelerate);
+            e.ReplaceInputOwner(PLAYER1_ID);
         }
     }
 
     public void Cleanup() {
-        foreach(var e in _moveInputs.GetEntities()) {
-            _pools.input.DestroyEntity(e);
-        }
+        //foreach(var e in _moveInputs.GetEntities()) {
+        //    _pools.input.DestroyEntity(e);
+        //}
     }
 
     public void Initialize()

@@ -2,14 +2,12 @@ using System;
 using System.Collections.Generic;
 using Entitas;
 
-public sealed class AnimateOutOfScreenViewSystem : ReactiveSystem //IEntityCollectorSystem {
-{
-    public AnimateOutOfScreenViewSystem(Contexts contexts) : base(contexts.core)
+public sealed class AnimateOutOfScreenViewSystem : ReactiveSystem<GameEntity> {
+    public AnimateOutOfScreenViewSystem(Contexts contexts) : base(contexts.game)
     {
-
     }
 
-    protected override void Execute(List<Entity> entities)
+    protected override void Execute(List<GameEntity> entities)
     {
         foreach (var e in entities)
         {
@@ -18,25 +16,15 @@ public sealed class AnimateOutOfScreenViewSystem : ReactiveSystem //IEntityColle
         }
     }
 
-    protected override bool Filter(Entity entity)
+    protected override bool Filter(GameEntity entity)
     {
-        throw new NotImplementedException();
+        return entity.hasView;
     }
 
-    protected override Collector GetTrigger(Context context)
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        throw new NotImplementedException();
+        return context.CreateCollector(GameMatcher.OutOfScreen.Added());
     }
 }
-
-//public Collector entityCollector { get { return _groupObserver; } }
-
-//Collector _groupObserver;
-
-//// TODO Entitas 0.36.0 Migration (constructor)
-//public void SetPools(Contexts pools) {
-//    _groupObserver = new [] { pools.core, pools.bullets }
-//        .CreateEntityCollector(Matcher.AllOf(CoreMatcher.View, CoreMatcher.OutOfScreen));
-//}
 
 

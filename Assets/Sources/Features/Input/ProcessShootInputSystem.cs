@@ -3,21 +3,21 @@ using Entitas;
 using UnityEngine;
 using System;
 
-public sealed class ProcessShootInputSystem : ReactiveSystem
+public sealed class ProcessShootInputSystem : ReactiveSystem<InputEntity>
 {
 
-    public ProcessShootInputSystem(Contexts contexts) : base(contexts.core) {
+    public ProcessShootInputSystem(Contexts contexts) : base(contexts.input) {
         _pools = contexts;
 
        // TODO Put on a component
        // _bulletsObjectPool = new ObjectPool<GameObject>(() => Assets.Instantiate<GameObject>(Res.Bullet));
     }
 
-    protected override Collector GetTrigger(Context context) {
+    protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) {
         return context.CreateCollector(InputMatcher.ShootInput);
     }
 
-    protected override bool Filter(Entity entity) {
+    protected override bool Filter(InputEntity entity) {
         // TODO Entitas 0.36.0 Migration
         // ensure was: 
         // exclude was: 
@@ -26,11 +26,9 @@ public sealed class ProcessShootInputSystem : ReactiveSystem
     }
 
     Contexts _pools;
-    ObjectPool<GameObject> _bulletsObjectPool;
+    //ObjectPool<GameObject> _bulletsObjectPool;
 
-    
-
-    protected override void Execute(List<Entity> entities)
+    protected override void Execute(List<InputEntity> entities)
     {
         var input = entities[entities.Count - 1];
         //var ownerId = input.inputOwner.playerId;

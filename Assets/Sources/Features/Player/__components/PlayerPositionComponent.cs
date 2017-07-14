@@ -5,7 +5,7 @@ using System.Text;
 using Entitas;
 using UnityEngine;
 
-[Core]
+[Game]
 public sealed class PlayerPositionComponent : IComponent
 {
     public Vector3 position;

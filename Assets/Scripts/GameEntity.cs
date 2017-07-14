@@ -6,11 +6,11 @@ using System;
 using System.Xml;
 using System.Collections.Generic;
 
-public class GameEntity : MonoBehaviour 
+public class GameEntity_ : MonoBehaviour 
 {
 	public bool isPlayer = false;
 
-    public Entitas.Entity gameEngineEntity;
+    public GameEntity gameEngineEntity;
 
 	private Vector3 _position = Vector3.zero;
 	private Vector3 _eulerAngles = Vector3.zero;
@@ -93,7 +93,7 @@ public class GameEntity : MonoBehaviour
             _position = value;
 
             if (gameEngineEntity != null)
-                 gameEngineEntity.playerView.controller.transform.position = value;
+            { }//gameEngineEntity.playerView.controller.transform.position = value;
 
             //	if(gameObject != null)
             //		gameObject.transform.position = _position;
@@ -116,7 +116,7 @@ public class GameEntity : MonoBehaviour
             //}
 
             if (gameEngineEntity != null)
-                gameEngineEntity.playerView.controller.transform.eulerAngles = value;
+            { }// gameEngineEntity.playerView.controller.transform.eulerAngles = value;
         }    
     }  
 
@@ -200,11 +200,11 @@ public class GameEntity : MonoBehaviour
         //	gameObject.transform.position.y, gameObject.transform.position.z, gameObject.transform.rotation.eulerAngles.y);
 
 
-        KBEngine.Event.fireIn("updatePlayer",
-                                gameEngineEntity.playerView.controller.transform.position.x,
-                                gameEngineEntity.playerView.controller.transform.position.y,
-                                gameEngineEntity.playerView.controller.transform.position.z,
-                                gameEngineEntity.playerView.controller.transform.eulerAngles.y);
+        //KBEngine.Event.fireIn("updatePlayer",
+        //                        gameEngineEntity.playerView.controller.transform.position.x,
+        //                        gameEngineEntity.playerView.controller.transform.position.y,
+        //                        gameEngineEntity.playerView.controller.transform.position.z,
+        //                        gameEngineEntity.playerView.controller.transform.eulerAngles.y);
     }
 
     void Update()

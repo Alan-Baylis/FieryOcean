@@ -5,18 +5,18 @@ using System.Text;
 using UnityEngine;
 using Entitas;
 
-public sealed class AddPlayerStartPosition : ReactiveSystem
+public sealed class AddPlayerStartPosition : ReactiveSystem<GameEntity>
 {
     const string PLAYER_ID = "Player1";
-    public AddPlayerStartPosition(Contexts contexts) : base(contexts.core) {
-        _pool = contexts.core;
+    public AddPlayerStartPosition(Contexts contexts) : base(contexts.game) {
+        _pool = contexts.game;
     }
 
-    protected override Collector GetTrigger(Context context) {
-        return context.CreateCollector(CoreMatcher.PlayerView);
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
+        return context.CreateCollector(GameMatcher.PlayerView.Added());
     }
 
-    protected override bool Filter(Entity entity) {
+    protected override bool Filter(GameEntity entity) {
         // TODO Entitas 0.36.0 Migration
         // ensure was: 
         // exclude was: 
@@ -24,11 +24,9 @@ public sealed class AddPlayerStartPosition : ReactiveSystem
         return true;
     }
 
-    Context _pool;
+    GameContext _pool;
 
-    
-
-    protected override void Execute(List<Entity> entities)
+    protected override void Execute(List<GameEntity> entities)
     {
         foreach (var e in entities)
         {

@@ -1,8 +1,8 @@
 ﻿using Entitas;
-using Entitas.Unity.Serialization.Blueprints;
+//using Entitas.Unity.Serialization.Blueprints;
 using UnityEngine;
 using System.Collections;
-
+using Entitas.Unity.Serialization.Blueprints;
 
 public class GameController : MonoBehaviour {
 
@@ -18,8 +18,9 @@ public class GameController : MonoBehaviour {
         GameRandom.view = new Rand(0);
         //Pools.sharedInstance.core.CreateEntity().AddCamera(cam).AddCameraPosition(cam.transform.position);
         var pools = Contexts.sharedInstance;
-       // pools.SetAllContexts();
-        //pools.AddEntityIndices();
+        
+        //pools.SetAllContexts();
+        pools.AddEntityIndices();
 
         //pools.blueprints.SetBlueprints(blueprints);
 
@@ -27,14 +28,13 @@ public class GameController : MonoBehaviour {
 
         _systems.Initialize();
 
-        float selAvatarDBID = PlayerPrefs.GetFloat("selAvatarDBID",0);
+        float selAvatarDBID = PlayerPrefs.GetFloat("selAvatarDBID", 0);
 
         if(selAvatarDBID!=0)
             KBEngine.Event.fireIn("selectAvatarGame", (ulong)selAvatarDBID);
+        
         //else
             // TODO : pring error
-
-
     }
 	
 	// Update is called once per frame
@@ -51,44 +51,43 @@ public class GameController : MonoBehaviour {
     Systems createSystems(Contexts contexts)
     {
 
-        CreateEnemySystem es = new CreateEnemySystem(contexts);
-        es.SetPosition(new Vector3[] { enemisStartPositions.startPoint.position });
+        //CreateEnemySystem es = new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position });
+        //es.SetPosition(new Vector3[] { enemisStartPositions.startPoint.position });
 
         WorldSystem ws = new WorldSystem(contexts);
         ws.SetOcean(enemisStartPositions.startPoint.position.y);
 
 
         return new Feature("Systems")
-            // Initialize
-            .Add(ws)
-            .Add(new IncrementTickSystem())
-            .Add(new CreatePlayerSystem(playerInputController.Position()))
-            .Add(new CreateCameraSystem(cam))
-            .Add(new AddViewSystems(contexts))
-            .Add(new AddViewFromObjectPoolSystem(contexts))
+        // Initialize
+        .Add(ws)
+        //.Add(new IncrementTickSystem())
+        .Add(new CreatePlayerSystem(contexts, playerInputController.Position()))
+        .Add(new CreateCameraSystem(contexts, cam))
+        .Add(new AddViewSystems(contexts))
+        //.Add(new AddViewFromObjectPoolSystem(contexts))
 
+        // Initialize and Reactive
+        .Add(new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position }))
 
-            // Initialize and Reactive
-            .Add(es)
+        // Input
+        .Add(new InputSystem(playerInputController, contexts))
+        .Add(new ProcessMoveInputSystem(contexts))
+        .Add(new CameraSystem(contexts))
 
-            // Input
-            .Add(new InputSystem(playerInputController))
-            .Add(new ProcessMoveInputSystem(contexts))
-            .Add(new CameraSystem())
+        // Update
+        //.Add(pools.core.CreateSystem(new BulletCoolDownSystem()))
+        //.Add(pools.core.CreateSystem(new StartEnemyWaveSystem()))
 
-            // Update
-            //.Add(pools.core.CreateSystem(new BulletCoolDownSystem()))
-            //.Add(pools.core.CreateSystem(new StartEnemyWaveSystem()))
+        //.Add(new VelocitySystem())
+        .Add(new AddPlayerStartPosition(contexts))
+        .Add(new PlayerPositionSystem(contexts, playerInputController.joystick, playerInputController.speedMap, playerInputController.Position()))
+        .Add(new AddEnemyStartPositionSystem(contexts))
+        .Add(new EnemyPositionSystem(contexts))
 
-            .Add(new VelocitySystem())
-            .Add(new AddPlayerStartPosition(contexts))
-            .Add(new PlayerPositionSystem(playerInputController.joystick, playerInputController.speedMap, playerInputController.Position()))
-            .Add(new AddEnemyStartPositionSystem(contexts))
-            .Add(new EnemyPositionSystem(contexts))
-
-            // Destroy
-            //.Add(pools.CreateSystem(new DestroyEntitySystem()));
-            //.Add(pools.CreateSystem(new DestroyEnemySystem()));
-            .Add(new DestroyRemotePlayerSystem(contexts));
+        // Destroy
+        .Add(new DestroyEntitySystem(contexts));
+        //.Add(pools.CreateSystem(new DestroyEnemySystem()));
+        //.Add(new DestroyRemotePlayerSystem(contexts));
     }
 }

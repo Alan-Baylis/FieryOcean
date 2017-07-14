@@ -1,6 +1,6 @@
 using Entitas;
 
-[Core]
+[Game]
 public sealed class EnemyComponent : IComponent {
 
 }

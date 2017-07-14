@@ -8,7 +8,7 @@ public class ViewController : MonoBehaviour, IViewController {
         set { transform.localPosition = value; }
     }
 
-    public virtual void Link(Entity entity, Context pool) {
+    public virtual void Link(Entity entity, IContext pool) {
         gameObject.Link(entity, pool);
     }
 

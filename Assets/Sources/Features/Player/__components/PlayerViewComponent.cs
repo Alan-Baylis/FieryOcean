@@ -1,7 +1,7 @@
 using System;
 using Entitas;
 
-[Core, Bullets]
+[Game, Bullets]
 
 public sealed class PlayerViewComponent : IComponent
 {

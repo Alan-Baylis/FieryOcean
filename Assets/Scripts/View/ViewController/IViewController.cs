@@ -6,7 +6,7 @@ public interface IViewController {
     GameObject gameObject { get; }
     Vector3 position { get; set; }
 
-    void Link(Entity entity, Context pool);
+    void Link(Entity entity, IContext pool);
 
     void Show(bool animated);
     void Hide(bool animated);

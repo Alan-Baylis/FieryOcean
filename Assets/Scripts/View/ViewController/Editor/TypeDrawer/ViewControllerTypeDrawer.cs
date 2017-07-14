@@ -1,19 +1,20 @@
 using System;
 using Entitas;
-using Entitas.Unity.VisualDebugging;
+using Entitas.VisualDebugging.Unity;
 using UnityEditor;
 using UnityEngine;
+using Entitas.VisualDebugging.Unity.Editor;
 
-public class ViewControllerTypeDrawer : ITypeDrawer {
-    public bool HandlesType(Type type) {
-        return type == typeof(IViewController);
-    }
+public class ViewControllerTypeDrawer { //: ITypeDrawer {
+    //public bool HandlesType(Type type) {
+    //    return type == typeof(IViewController);
+    //}
 
-    const string MEMBER_NAME = "gameObject";
+    //const string MEMBER_NAME = "gameObject";
 
-    // Draw only - no value change poosible
-    public object DrawAndGetNewValue(Type memberType, string memberName, object value, Entity entity, int index, IComponent component) {
-        EditorGUILayout.ObjectField(MEMBER_NAME, ((IViewController)value).gameObject, typeof(GameObject), false);
-        return value;
-    }
+    //// Draw only - no value change poosible
+    //public object DrawAndGetNewValue(Type memberType, string memberName, object value, Entity entity, int index, IComponent component) {
+    //    EditorGUILayout.ObjectField(MEMBER_NAME, ((IViewController)value).gameObject, typeof(GameObject), false);
+    //    return value;
+    //}
 }

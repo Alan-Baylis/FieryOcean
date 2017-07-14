@@ -2,12 +2,12 @@ using Entitas;
 
 public sealed class BulletOutOfScreenSystem : IExecuteSystem {
 
-    Group _bullets;
+    IGroup<BulletsEntity> _bullets;
 
     // TODO Entitas 0.36.0 Migration (constructor)
-    public void SetPools(Contexts pools) {
-        _bullets = pools.bullets.GetGroup(Matcher.AllOf(BulletsMatcher.Bullet, BulletsMatcher.Position));
-    }
+    //public void SetPools(Contexts pools) {
+    //    _bullets = pools.bullets.GetGroup(Matcher.AllOf(BulletsMatcher.Bullet, BulletsMatcher.Position));
+    //}
 
     public void Execute() {
         foreach(var e in _bullets.GetEntities()) {
