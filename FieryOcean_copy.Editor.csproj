@@ -124,54 +124,6 @@
     <Reference Include="ApexSharedEditor">
       <HintPath>Assets\Apex\Apex Binaries\Editor\ApexSharedEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Entitas.Blueprints">
-      <HintPath>Assets\Library\Entitas\Entitas.Blueprints.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.CodeGeneration.Attributes">
-      <HintPath>Assets\Library\Entitas\Entitas.CodeGeneration.Attributes.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas">
-      <HintPath>Assets\Library\Entitas\Entitas.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.Unity">
-      <HintPath>Assets\Library\Entitas\Entitas.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.Utils">
-      <HintPath>Assets\Library\Entitas\Entitas.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.VisualDebugging.Unity">
-      <HintPath>Assets\Library\Entitas\Entitas.VisualDebugging.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="fabl">
-      <HintPath>Assets\Library\Entitas\fabl.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.CodeGeneration.CodeGenerator">
-      <HintPath>Assets\Library\Entitas\Editor\Entitas.CodeGeneration.CodeGenerator.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.CodeGeneration">
-      <HintPath>Assets\Library\Entitas\Editor\Entitas.CodeGeneration.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.CodeGeneration.Plugins">
-      <HintPath>Assets\Library\Entitas\Editor\Entitas.CodeGeneration.Plugins.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.CodeGeneration.Unity.Editor">
-      <HintPath>Assets\Library\Entitas\Editor\Entitas.CodeGeneration.Unity.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.Migration">
-      <HintPath>Assets\Library\Entitas\Editor\Entitas.Migration.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.Migration.Unity.Editor">
-      <HintPath>Assets\Library\Entitas\Editor\Entitas.Migration.Unity.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.Unity.Editor">
-      <HintPath>Assets\Library\Entitas\Editor\Entitas.Unity.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.VisualDebugging.CodeGeneration.Plugins">
-      <HintPath>Assets\Library\Entitas\Editor\Entitas.VisualDebugging.CodeGeneration.Plugins.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.VisualDebugging.Unity.Editor">
-      <HintPath>Assets\Library\Entitas\Editor\Entitas.VisualDebugging.Unity.Editor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="FieryOcean_copy.Plugins.csproj">

@@ -76,27 +76,6 @@
     <Reference Include="ApexShared">
       <HintPath>Assets\Apex\Apex Binaries\ApexShared.dll</HintPath>
     </Reference>
-    <Reference Include="Entitas.Blueprints">
-      <HintPath>Assets\Library\Entitas\Entitas.Blueprints.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.CodeGeneration.Attributes">
-      <HintPath>Assets\Library\Entitas\Entitas.CodeGeneration.Attributes.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas">
-      <HintPath>Assets\Library\Entitas\Entitas.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.Unity">
-      <HintPath>Assets\Library\Entitas\Entitas.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.Utils">
-      <HintPath>Assets\Library\Entitas\Entitas.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="Entitas.VisualDebugging.Unity">
-      <HintPath>Assets\Library\Entitas\Entitas.VisualDebugging.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="fabl">
-      <HintPath>Assets\Library\Entitas\fabl.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\Server\Bundle.cs" />
