@@ -28,9 +28,18 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
     {
         if (_playerController.IsSpeedChanged)
         {
-            InputEntity e = _pools.input.CreateEntity();
-            e.ReplaceMoveInput(_playerController.accelerate);
-            e.ReplaceInputOwner(PLAYER1_ID);
+            InputEntity[] inputs = _pools.input.GetEntities();
+            if (inputs.Length == 0)
+            {
+                InputEntity e = _pools.input.CreateEntity();
+                e.ReplaceMoveInput(_playerController.accelerate);
+                e.ReplaceInputOwner(PLAYER1_ID);
+            }
+            else
+            {
+                inputs[0].ReplaceMoveInput(_playerController.accelerate);
+                inputs[0].ReplaceInputOwner(PLAYER1_ID);
+            }
         }
     }
 

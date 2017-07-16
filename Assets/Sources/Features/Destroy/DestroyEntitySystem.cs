@@ -23,9 +23,11 @@ public sealed class DestroyEntitySystem : ReactiveSystem<GameEntity> {
         return new Collector<GameEntity>(
            new[] {
                 context.GetGroup(GameMatcher.OutOfScreen),
-                context.GetGroup(GameMatcher.Destroy)
+                context.GetGroup(GameMatcher.Destroy),
+                context.GetGroup(GameMatcher.DestroyUnit)
            },
            new[] {
+                GroupEvent.Added,
                 GroupEvent.Added,
                 GroupEvent.Added
            });

@@ -12,7 +12,9 @@ public sealed class CreateEnemySystem : ReactiveSystem<GameEntity> {
         //_pools = contexts.blueprints;
         //contexts.blueprints.blueprints.instance.ApplyEnemy(contexts.game.CreateEntity(), _position);
 
-        foreach(Vector3 v in positions)
+        _pools = contexts;
+
+        foreach (Vector3 v in positions)
             contexts.game.CreateEnemy(v);
     }
 
