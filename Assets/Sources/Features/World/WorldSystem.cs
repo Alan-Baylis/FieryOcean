@@ -23,20 +23,6 @@ public sealed class WorldSystem : IInitializeSystem
         InstallEvents();
     }
 
-    //protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
-    //    return context.CreateCollector(GameMatcher.PlayerView.Added());
-    //}
-
-    //protected override bool Filter(Entitas.Entity entity)
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-    //protected override void Execute(List<Entitas.Entity> entities)
-    //{
-    //    //throw new NotImplementedException();
-    //}
-   
     public void InstallEvents()
     {
         installEvents();
@@ -284,7 +270,5 @@ public sealed class WorldSystem : IInitializeSystem
             ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().OnJump();
         }
     }
-
-   
 }
 

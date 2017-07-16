@@ -200,11 +200,11 @@ public class GameEntity_ : MonoBehaviour
         //	gameObject.transform.position.y, gameObject.transform.position.z, gameObject.transform.rotation.eulerAngles.y);
 
 
-        //KBEngine.Event.fireIn("updatePlayer",
-        //                        gameEngineEntity.playerView.controller.transform.position.x,
-        //                        gameEngineEntity.playerView.controller.transform.position.y,
-        //                        gameEngineEntity.playerView.controller.transform.position.z,
-        //                        gameEngineEntity.playerView.controller.transform.eulerAngles.y);
+        KBEngine.Event.fireIn("updatePlayer",
+                                gameEngineEntity.playerView.controller.transform.position.x,
+                                gameEngineEntity.playerView.controller.transform.position.y,
+                                gameEngineEntity.playerView.controller.transform.position.z,
+                                gameEngineEntity.playerView.controller.transform.eulerAngles.y);
     }
 
     void Update()
