@@ -93,10 +93,10 @@ public class GameEntity_ : MonoBehaviour
             _position = value;
 
             if (gameEngineEntity != null)
-            { }//gameEngineEntity.playerView.controller.transform.position = value;
+                gameEngineEntity.playerView.controller.transform.position = value;
 
-            //	if(gameObject != null)
-            //		gameObject.transform.position = _position;
+            if(gameObject != null)
+            		gameObject.transform.position = _position;
         }    
     }  
   
@@ -110,13 +110,13 @@ public class GameEntity_ : MonoBehaviour
 		{
 			_eulerAngles = value;
 
-            //if(gameObject != null)
-            //{
-            //	gameObject.transform.eulerAngles = _eulerAngles;
-            //}
+            if(gameObject != null)
+            {
+            	gameObject.transform.eulerAngles = _eulerAngles;
+            }
 
             if (gameEngineEntity != null)
-            { }// gameEngineEntity.playerView.controller.transform.eulerAngles = value;
+                gameEngineEntity.playerView.controller.transform.eulerAngles = value;
         }    
     }  
 
