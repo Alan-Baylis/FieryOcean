@@ -6,10 +6,189 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: border
+    100004: box
+    100006: Box006
+    100008: Box028
+    100010: Box171
+    100012: Box172
+    100014: Box214
+    100016: Box215
+    100018: Box219
+    100020: Box220
+    100022: box_group
+    100024: building_004
+    100026: building_2
+    100028: building_3
+    100030: building_mini
+    100032: container_red
+    100034: container_white
+    100036: crane
+    100038: crane 1
+    100040: Cylinder009
+    100042: Cylinder034
+    100044: Cylinder037
+    100046: Cylinder038
+    100048: Cylinder039
+    100050: doc_body
+    100052: Group015
+    100054: Group016
+    100056: land
+    100058: lighthouse
+    100060: mr Area Omni001
+    100062: mr Area Omni002
+    100064: Point001
+    100066: rail
+    100068: rails
+    100070: road_1
+    100072: road_2
+    100074: road_2 1
+    100076: tank_mini
+    100078: tank_mini_2
     400000: //RootNode
+    400002: border
+    400004: box
+    400006: Box006
+    400008: Box028
+    400010: Box171
+    400012: Box172
+    400014: Box214
+    400016: Box215
+    400018: Box219
+    400020: Box220
+    400022: box_group
+    400024: building_004
+    400026: building_2
+    400028: building_3
+    400030: building_mini
+    400032: container_red
+    400034: container_white
+    400036: crane
+    400038: crane 1
+    400040: Cylinder009
+    400042: Cylinder034
+    400044: Cylinder037
+    400046: Cylinder038
+    400048: Cylinder039
+    400050: doc_body
+    400052: Group015
+    400054: Group016
+    400056: land
+    400058: lighthouse
+    400060: mr Area Omni001
+    400062: mr Area Omni002
+    400064: Point001
+    400066: rail
+    400068: rails
+    400070: road_1
+    400072: road_2
+    400074: road_2 1
+    400076: tank_mini
+    400078: tank_mini_2
     2300000: //RootNode
+    2300002: border
+    2300004: box
+    2300006: Box006
+    2300008: Box028
+    2300010: Box171
+    2300012: Box172
+    2300014: Box214
+    2300016: Box215
+    2300018: Box219
+    2300020: Box220
+    2300022: box_group
+    2300024: building_004
+    2300026: building_2
+    2300028: building_3
+    2300030: building_mini
+    2300032: container_red
+    2300034: container_white
+    2300036: crane
+    2300038: crane 1
+    2300040: Cylinder009
+    2300042: Cylinder034
+    2300044: Cylinder037
+    2300046: Cylinder038
+    2300048: Cylinder039
+    2300050: doc_body
+    2300052: land
+    2300054: lighthouse
+    2300056: rail
+    2300058: rails
+    2300060: road_1
+    2300062: road_2
+    2300064: road_2 1
+    2300066: tank_mini
+    2300068: tank_mini_2
     3300000: //RootNode
+    3300002: border
+    3300004: box
+    3300006: Box006
+    3300008: Box028
+    3300010: Box171
+    3300012: Box172
+    3300014: Box214
+    3300016: Box215
+    3300018: Box219
+    3300020: Box220
+    3300022: box_group
+    3300024: building_004
+    3300026: building_2
+    3300028: building_3
+    3300030: building_mini
+    3300032: container_red
+    3300034: container_white
+    3300036: crane
+    3300038: crane 1
+    3300040: Cylinder009
+    3300042: Cylinder034
+    3300044: Cylinder037
+    3300046: Cylinder038
+    3300048: Cylinder039
+    3300050: doc_body
+    3300052: land
+    3300054: lighthouse
+    3300056: rail
+    3300058: rails
+    3300060: road_1
+    3300062: road_2
+    3300064: road_2 1
+    3300066: tank_mini
+    3300068: tank_mini_2
     4300000: building_3
+    4300002: lighthouse
+    4300004: rails
+    4300006: land
+    4300008: doc_body
+    4300010: crane
+    4300012: border
+    4300014: container_red
+    4300016: container_white
+    4300018: Box171
+    4300020: Box172
+    4300022: box_group
+    4300024: box
+    4300026: building_2
+    4300028: Cylinder037
+    4300030: Box214
+    4300032: Cylinder038
+    4300034: Box215
+    4300036: rail
+    4300038: building_mini
+    4300040: road_1
+    4300042: tank_mini
+    4300044: tank_mini_2
+    4300046: Box006
+    4300048: Cylinder034
+    4300050: crane
+    4300052: Cylinder009
+    4300054: Box028
+    4300056: building_004
+    4300058: Box219
+    4300060: Box220
+    4300062: Cylinder039
+    4300064: road_2
+    4300066: road_2
     7400000: Take 001
     9500000: //RootNode
   materials:
