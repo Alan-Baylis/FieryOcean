@@ -55,9 +55,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -100,9 +97,6 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.VR">
       <HintPath>Library\UnityAssemblies\UnityEditor.VR.dll</HintPath>
     </Reference>
@@ -129,6 +123,54 @@
     </Reference>
     <Reference Include="ApexSharedEditor">
       <HintPath>Assets\Apex\Apex Binaries\Editor\ApexSharedEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Blueprints">
+      <HintPath>Assets\Libraries\Entitas\Entitas.Blueprints.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.CodeGeneration.Attributes">
+      <HintPath>Assets\Libraries\Entitas\Entitas.CodeGeneration.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas">
+      <HintPath>Assets\Libraries\Entitas\Entitas.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Unity">
+      <HintPath>Assets\Libraries\Entitas\Entitas.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Utils">
+      <HintPath>Assets\Libraries\Entitas\Entitas.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.VisualDebugging.Unity">
+      <HintPath>Assets\Libraries\Entitas\Entitas.VisualDebugging.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="fabl">
+      <HintPath>Assets\Libraries\Entitas\fabl.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.CodeGeneration.CodeGenerator">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.CodeGeneration.CodeGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.CodeGeneration">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.CodeGeneration.Plugins">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.CodeGeneration.Plugins.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.CodeGeneration.Unity.Editor">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.CodeGeneration.Unity.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Migration">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.Migration.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Migration.Unity.Editor">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.Migration.Unity.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Unity.Editor">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.Unity.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.VisualDebugging.CodeGeneration.Plugins">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.VisualDebugging.CodeGeneration.Plugins.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.VisualDebugging.Unity.Editor">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.VisualDebugging.Unity.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -198,82 +240,9 @@
     <Compile Include="Assets\FORGE3D\Sci-Fi Effects\Code\Turrets\Editor\F3DTurretEditor.cs" />
     <Compile Include="Assets\FORGE3D\Sci-Fi Effects\Code\Turrets\Editor\F3DTurretHandles.cs" />
     <Compile Include="Assets\Inspector Name Drawer\Editor\InspectorNameDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\CodeGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Generators\BlueprintsGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Generators\ComponentExtensionsGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Generators\ComponentIndicesGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Generators\OldPoolsGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Generators\PoolAttributesGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Generators\PoolsGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Interfaces\IBlueprintsCodeGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Interfaces\ICodeGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Interfaces\ICodeGeneratorDataProvider.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Interfaces\IComponentCodeGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Interfaces\IPoolCodeGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Intermediate\CodeGenFile.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Intermediate\ComponentInfo.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\Providers\TypeReflectionProvider.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Editor\TypeReflectionCodeGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\Migration\Editor\IMigration.cs" />
-    <Compile Include="Assets\Library\Entitas\Migration\Editor\M0180.cs" />
-    <Compile Include="Assets\Library\Entitas\Migration\Editor\M0190.cs" />
-    <Compile Include="Assets\Library\Entitas\Migration\Editor\M0220.cs" />
-    <Compile Include="Assets\Library\Entitas\Migration\Editor\M0260.cs" />
-    <Compile Include="Assets\Library\Entitas\Migration\Editor\M0300.cs" />
-    <Compile Include="Assets\Library\Entitas\Migration\Editor\M0320.cs" />
-    <Compile Include="Assets\Library\Entitas\Migration\Editor\MigrationFile.cs" />
-    <Compile Include="Assets\Library\Entitas\Migration\Editor\MigrationUtils.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\CodeGenerator\Editor\CodeGeneratorPreferencesDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\CodeGenerator\Editor\UnityCodeGenerator.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Editor\EntitasCheckForUpdates.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Editor\EntitasEditorLayout.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Editor\EntitasFeedback.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Editor\EntitasMenuItems.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Editor\EntitasPreferencesDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Editor\EntitasPreferencesDrawerPriorities.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Editor\EntitasPreferencesWindow.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Editor\ScriptingDefineSymbols.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Migration\Editor\EntitasMigrationWindow.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Serialization\Blueprints\Editor\BinaryBlueprintInspector.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Serialization\Blueprints\Editor\BinaryBlueprintPostprocessor.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Serialization\Blueprints\Editor\BlueprintsInspector.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\DebugSystems\Editor\DebugSystemsInspector.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\DebugSystems\Editor\SystemsMonitor.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Editor\EntitasHierarchyIcon.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Editor\EntitasStats.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Editor\VisualDebuggingConfig.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Editor\VisualDebuggingPreferencesDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\DefaultInstanceCreator\DefaultArrayCreator.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\DefaultInstanceCreator\DefaultStringCreator.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\DefaultInstanceCreator\IDefaultInstanceCreator.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\EntityDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\EntityInspector.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\IComponentDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\AnimationCurveTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\ArrayTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\BoolTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\BoundsTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\CharTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\ColorTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\DateTimeTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\DictionaryTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\DoubleTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\EnumTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\FloatTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\HashSetTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\ITypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\IntTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\ListTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\RectTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\StringTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\UnityObjectTypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\Vector2TypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\Vector3TypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\Editor\TypeDrawer\Vector4TypeDrawer.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\PoolObserver\Editor\PoolObserverInspector.cs" />
     <Compile Include="Assets\Scripts\View\Editor\EntityLinkInspector.cs" />
     <Compile Include="Assets\Scripts\View\ViewController\Editor\TypeDrawer\ViewControllerTypeDrawer.cs" />
-    <Compile Include="Assets\Sources\Assets\Editor\AssetComponentDrawer.cs" />
+    <Compile Include="Assets\Sources\Editor\TypeDrawer\IntVector2TypeDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AQUAS-Lite\Readme.txt" />
@@ -313,8 +282,6 @@
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
-    <None Include="Assets\Ultimate Joystick Examples\Spaceship Example\README_Spaceship.txt" />
-    <None Include="Assets\Ultimate Joystick Examples\Third Person Example\README_ThirdPerson.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

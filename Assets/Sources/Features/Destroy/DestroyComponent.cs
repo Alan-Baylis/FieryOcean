@@ -1,6 +1,6 @@
-﻿using Entitas;
-using Entitas.CodeGenerator;
+using Entitas;
+using Entitas.CodeGeneration.Attributes;
 
-[Core, Bullets, CustomPrefix("flag")]
+[Game, Bullets, CustomPrefix("flag")]
 public sealed class DestroyComponent : IComponent {
 }

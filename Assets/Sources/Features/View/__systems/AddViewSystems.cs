@@ -15,22 +15,23 @@ using Apex.LoadBalancing;
 using Apex.WorldGeometry;
 using UnityEditor;
 
-public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiveSystem
-{
-    public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoAMi.OnEntityAdded()/*, CoreMatcher.Asset.OnEntityAdded() */}; } }
+public partial class AddViewSystems : ReactiveSystem<GameEntity> {
+    public AddViewSystems(Contexts contexts) : base(contexts.game)
+    {
+        _container = new GameObject(" PlayerViews").transform;
+        _pool = contexts.game;
+    }
 
-    Pool _pool;
+    //public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoAMi.OnEntityAdded()/*, CoreMatcher.Asset.OnEntityAdded() */}; } }
+
+    GameContext _pool;
     Transform _container;
 
-    public void SetPool(Pool pool) {
-        _pool = pool;
-    }
+    //public void Initialize() {
+    //    _container = new GameObject(_pool.metaData.poolName + " PlayerViews").transform;
+    //}
 
-    public void Initialize() {
-        _container = new GameObject(_pool.metaData.poolName + " PlayerViews").transform;
-    }
-
-    public void Execute(List<Entity> entities)
+    protected override void Execute(List<GameEntity> entities)
     {
         foreach(var e in entities)
         {
@@ -42,7 +43,7 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
                 gameObject.AddComponent<PlayerViewController>();
                 e.AddPlayerView(gameObject.GetComponent<IPlayerController>());
 
-                ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().gameEngineEntity = e;
+                ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity_>().gameEngineEntity = e;
 
                 ////set start position
                 //if (e.serverImpOfUnit.entity == null)
@@ -470,6 +471,26 @@ public partial class AddViewSystems : ISetPool, IInitializeSystem, IMultiReactiv
 
             return 1 << firstVacant;
         }
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        //return context.CreateCollector(GameMatcher.WhoAMi.Added());
+
+        return new Collector<GameEntity>(
+           new[] {
+                context.GetGroup(GameMatcher.WhoAMi),
+                context.GetGroup(GameMatcher.Asset)
+           },
+           new[] {
+                GroupEvent.Added,
+                GroupEvent.Added
+           });
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return true;
     }
 #endif
 }

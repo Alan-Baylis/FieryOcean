@@ -1,33 +1,26 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 using KBEngine;
 
-public sealed class PlayerPositionSystem : ISetPools, IExecuteSystem
+public sealed class PlayerPositionSystem : IExecuteSystem
 {
     const string PLAYER_ID = "Player1";
    // public EntityCollector entityCollector { get { return _groupObserver; } }
 
     //EntityCollector _groupObserver;
-    Group inputs;
-    Pools _pools;
+    IGroup<InputEntity> inputs;
+    Contexts _pools;
     private UltimateJoystick _joystick;
     PlayerMovementController move1;
-    public PlayerPositionSystem(UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap, Vector3 startPosition)
+    public PlayerPositionSystem(Contexts contexts, UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap, Vector3 startPosition)
     {
+        _pools = contexts;
+        inputs = contexts.input.GetGroup(InputMatcher.MoveInput);
         _joystick = joystick;
         
         move1 = new PlayerMovementController(speedMap, startPosition.y);
         _beforePosition = startPosition;
-    }
-
-    public void SetPools(Pools pools) {
-        /*_groupObserver = new [] { pools.core, pools.bullets }
-            .CreateEntityCollector(Matcher.AllOf(CoreMatcher.PlayerView,  CoreMatcher.Position, CoreMatcher.Forse));
-            */
-
-        inputs = pools.input.GetGroup(InputMatcher.MoveInput);
-        _pools = pools;
     }
 
     float lastAc = 0;
@@ -35,7 +28,7 @@ public sealed class PlayerPositionSystem : ISetPools, IExecuteSystem
     Vector3 _beforePosition;
     public void Execute()
     {    
-        var player = _pools.core.GetEntityWithPlayerId(PLAYER_ID);
+        var player = _pools.game.GetEntityWithPlayerId(PLAYER_ID);
         createPlayer(player);
 
         if (inputs.count > 0)
@@ -52,21 +45,34 @@ public sealed class PlayerPositionSystem : ISetPools, IExecuteSystem
 
     private UnityEngine.GameObject player_server_impl = null;
 
-    private void createPlayer(Entitas.Entity e)
+    private void createPlayer(GameEntity e)
     {
         if (player_server_impl != null)
         {
             //if (terrain != null)
-            player_server_impl.GetComponent<GameEntity>().entityEnable();
+            player_server_impl.GetComponent<GameEntity_>().entityEnable();
             return;
         }
 
-        if (KBEngineApp.app.entity_type != "Avatar")
+        KBEngine.Avatar avatar = null;
+
+        if (KBEngineAppThread.app != null)
         {
-            return;
-        }
+            if (KBEngineAppThread.app.entity_type != "Avatar")
+                return;
 
-        KBEngine.Avatar avatar = (KBEngine.Avatar)KBEngineApp.app.player();
+            avatar = (KBEngine.Avatar)KBEngineAppThread.app.player();
+        }
+        else
+        {
+            if (KBEngineApp.app.entity_type != "Avatar")
+            {
+                return;
+            }
+
+            avatar = (KBEngine.Avatar)KBEngineApp.app.player();
+        }
+         
         if (avatar == null)
         {
             Debug.Log("wait create(palyer)!");
@@ -81,20 +87,20 @@ public sealed class PlayerPositionSystem : ISetPools, IExecuteSystem
         //                     Quaternion.Euler(new Vector3(avatar.direction.y, avatar.direction.z, avatar.direction.x))) as UnityEngine.GameObject;
 
         UnityEngine.GameObject go = new UnityEngine.GameObject();
-        go.AddComponent<GameEntity>();
+        go.AddComponent<GameEntity_>();
         player_server_impl = go;
-        player_server_impl.GetComponent<GameEntity>().entityDisable();
+        player_server_impl.GetComponent<GameEntity_>().entityDisable();
         e.serverImpOfUnit.entity = avatar;
         avatar.renderObj = player_server_impl;
 
-        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().gameEngineEntity = e;
-        ((UnityEngine.GameObject)avatar.renderObj).GetComponent<GameEntity>().isPlayer = true;
+        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity_>().gameEngineEntity = e;
+        ((UnityEngine.GameObject)avatar.renderObj).GetComponent<GameEntity_>().isPlayer = true;
 
         // 有必要设置一下，由于该接口由Update异步调用，有可能set_position等初始化信息已经先触发了
         // 那么如果不设置renderObj的位置和方向将为0，人物会陷入地下
        
-        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().destPosition = avatar.position;
-        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity>().position = avatar.position;
+        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity_>().destPosition = avatar.position;
+        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity_>().position = avatar.position;
 
         //set_position(avatar);
         //set_direction(avatar);

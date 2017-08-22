@@ -1,24 +1,34 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 using System;
 
-public sealed class ProcessShootInputSystem : ISetPools, IReactiveSystem
+public sealed class ProcessShootInputSystem : ReactiveSystem<InputEntity>
 {
 
-    public TriggerOnEvent trigger { get {  return InputMatcher.ShootInput.OnEntityAdded(); } }
-
-    Pools _pools;
-    ObjectPool<GameObject> _bulletsObjectPool;
-
-    public void SetPools(Pools pools) {
-        _pools = pools;
+    public ProcessShootInputSystem(Contexts contexts) : base(contexts.input) {
+        _pools = contexts;
 
        // TODO Put on a component
        // _bulletsObjectPool = new ObjectPool<GameObject>(() => Assets.Instantiate<GameObject>(Res.Bullet));
     }
 
-    public void Execute(List<Entity> entities)
+    protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) {
+        return context.CreateCollector(InputMatcher.ShootInput);
+    }
+
+    protected override bool Filter(InputEntity entity) {
+        // TODO Entitas 0.36.0 Migration
+        // ensure was: 
+        // exclude was: 
+
+        return true;
+    }
+
+    Contexts _pools;
+    //ObjectPool<GameObject> _bulletsObjectPool;
+
+    protected override void Execute(List<InputEntity> entities)
     {
         var input = entities[entities.Count - 1];
         //var ownerId = input.inputOwner.playerId;

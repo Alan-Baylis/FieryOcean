@@ -1,28 +1,35 @@
+using System;
 using System.Collections.Generic;
 using Entitas;
 
-public sealed class DestroyEntitySystem : ISetPools, IEntityCollectorSystem {
+public sealed class DestroyEntitySystem : ReactiveSystem<GameEntity> {
 
-    public EntityCollector entityCollector { get { return _groupObserver; } }
+    public DestroyEntitySystem(Contexts contexts) : base(contexts.game)
+    { }
 
-    Pool[] _pools;
-    EntityCollector _groupObserver;
-
-    public void SetPools(Pools pools) {
-        _pools = new [] { pools.core, pools.bullets };
-        _groupObserver = _pools.CreateEntityCollector(Matcher.AnyOf(CoreMatcher.Destroy, CoreMatcher.OutOfScreen));
+    protected override void Execute(List<GameEntity> entities) {
+        foreach(var e in entities) {
+            e.Destroy();
+        }
     }
 
-    public void Execute(List<Entity> entities) {
-        foreach(var e in entities) {
-            foreach(var pool in _pools) {
-                if(pool.HasEntity(e))
-                {
-                    pool.DestroyEntity(e);
-                    
-                    break;
-                }
-            }
-        }
+    protected override bool Filter(GameEntity entity)
+    {
+        return true;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return new Collector<GameEntity>(
+           new[] {
+                context.GetGroup(GameMatcher.OutOfScreen),
+                context.GetGroup(GameMatcher.Destroy),
+                context.GetGroup(GameMatcher.DestroyUnit)
+           },
+           new[] {
+                GroupEvent.Added,
+                GroupEvent.Added,
+                GroupEvent.Added
+           });
     }
 }

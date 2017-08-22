@@ -1,27 +1,22 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Entitas;
 using System;
 
-public sealed class CreateCameraSystem : ISetPools, IInitializeSystem
+public sealed class CreateCameraSystem : IInitializeSystem
 {
-
-    Pools _pools;
+    Contexts _pools;
     Camera _cam;
 
-    public void SetPools(Pools pools)
+    public CreateCameraSystem(Contexts contexts, Camera cam)
     {
-        _pools = pools;
-    }
-
-    public CreateCameraSystem(Camera cam)
-    {
+        _pools = contexts;
         _cam = cam;
     }
 
     public void Initialize()
     {
-        _pools.core.CreateEntity().AddCamera(_cam).AddCameraPosition(new Vector3(0,0,-10));
+        _pools.game.CreateEntity().AddCamera(_cam,new Vector3(0,0,-10)); 
 
         //_pools.input.CreateEntity()
         //      .AddMoveInput(0f);

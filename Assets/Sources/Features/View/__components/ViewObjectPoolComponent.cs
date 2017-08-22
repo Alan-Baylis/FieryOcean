@@ -1,7 +1,8 @@
-﻿using Entitas;
+using Entitas;
+using Entitas.Utils;
 using UnityEngine;
 
-[Core, Bullets]
+[Game, Bullets]
 public sealed class ViewObjectPoolComponent : IComponent {
 
     public ObjectPool<GameObject> pool;

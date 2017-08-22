@@ -1,11 +1,11 @@
-﻿using Entitas;
+using Entitas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-[Core]
+[Game]
 public sealed class EnemyBehaviourComponent : IComponent
 {
     //private Movement1 _pathController;

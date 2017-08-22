@@ -1,21 +1,37 @@
+using System;
 using System.Collections.Generic;
 using Entitas;
 
-public sealed class AnimateDestroyViewSystem : ISetPools, IEntityCollectorSystem {
+public sealed class AnimateDestroyViewSystem : ReactiveSystem<GameEntity> { 
 
-    public EntityCollector entityCollector { get { return _groupObserver; } }
-
-    EntityCollector _groupObserver;
-
-    public void SetPools(Pools pools) {
-        _groupObserver = new [] { pools.core, pools.bullets }
-            .CreateEntityCollector(Matcher.AllOf(CoreMatcher.View, CoreMatcher.Destroy));
+    readonly GameContext _context;
+    public AnimateDestroyViewSystem(Contexts contexts) :base(contexts.game)
+    {
+        _context = contexts.game;
     }
 
-    public void Execute(List<Entity> entities) {
+    protected override void Execute(List<GameEntity> entities) {
         foreach(var e in entities) {
-            var controller = e.view.controller;
-            controller.Hide(true);
+            //var controller = e.view.controller;
+            //controller.Hide(true);
         }
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return true;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return new Collector<GameEntity>(
+            new[] {
+                context.GetGroup(GameMatcher.View),
+                context.GetGroup(GameMatcher.Destroy)
+            }, 
+            new[] {
+                GroupEvent.AddedOrRemoved,
+                GroupEvent.Added
+            });
     }
 }

@@ -1,8 +1,8 @@
-﻿using Entitas;
+using Entitas;
 using UnityEngine;
 using KBEngine;
 
-[Core]
+[Game]
 public sealed class UnitAddComponent : IComponent
 {
     public KBEngine.Entity entity;

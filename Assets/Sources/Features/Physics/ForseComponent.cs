@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Entitas;
-using Entitas.CodeGenerator;
+using Entitas.CodeGeneration.Attributes;
 
-[Core,Bullets]
+[Game,Bullets]
 public class ForseComponent : IComponent
 {
     public Vector3 force;

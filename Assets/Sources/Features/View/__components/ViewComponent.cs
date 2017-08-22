@@ -1,6 +1,6 @@
-﻿using Entitas;
+using Entitas;
 
-[Core, Bullets]
+[Game, Bullets]
 public sealed class ViewComponent : IComponent {
 
     public IViewController controller;

@@ -5,19 +5,21 @@ using System.Text;
 using UnityEngine;
 using Entitas;
 
-class AddEnemyStartPositionSystem : ISetPool, IReactiveSystem
+class AddEnemyStartPositionSystem : ReactiveSystem<GameEntity>
 {
-    public TriggerOnEvent trigger { get { return CoreMatcher.EnemyView.OnEntityAdded(); } }
-
-    Pool _pool;
-    Group _enemiesGroup;
-    public void SetPool(Pool pool)
-    {
-        _pool = pool;
-        _enemiesGroup = pool.GetGroup(Matcher.AllOf(CoreMatcher.Enemy));
+    public AddEnemyStartPositionSystem(Contexts contexts) : base(contexts.game) {
     }
 
-    public void Execute(List<Entity> entities)
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
+        return context.CreateCollector(GameMatcher.EnemyView.Added());
+    }
+
+    protected override bool Filter(GameEntity entity) {
+
+        return true;
+    }
+
+    protected override void Execute(List<GameEntity> entities)
     {
         foreach (var e in entities)
         {

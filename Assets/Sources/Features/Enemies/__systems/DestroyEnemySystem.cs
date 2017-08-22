@@ -1,34 +1,30 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Entitas;
 
-public sealed class DestroyEnemySystem : ISetPools, IEntityCollectorSystem
-{
-    public EntityCollector entityCollector { get { return _groupObserver; } }
-    EntityCollector _groupObserver;
-
-    Pool[] _pools;
-    public void SetPools(Pools pools)
+public sealed class DestroyEnemySystem : ReactiveSystem<GameEntity> {
+    public DestroyEnemySystem(Contexts contexts) : base(contexts.game)
     {
-        _pools = new[] { pools.core };
-        _groupObserver = _pools.CreateEntityCollector(Matcher.AnyOf(CoreMatcher.DestroyUnit));
     }
 
-    public void Execute(List<Entity> entities)
+    protected override void Execute(List<GameEntity> entities)
     {
         foreach (var e in entities)
         {
-            foreach (var pool in _pools)
-            {
-                if (pool.HasEntity(e))
-                {
-                    pool.DestroyEntity(e);
-                    break;
-                }
-            }
+            e.Destroy();
         }
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return true;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+       return context.CreateCollector(GameMatcher.DestroyUnit.Added());
     }
 }
 

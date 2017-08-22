@@ -11,8 +11,8 @@ public class CollisionEmitter : MonoBehaviour
             var link = gameObject.GetEntityLink();
             var targetLink = collision.gameObject.GetEntityLink();
 
-            Pools.sharedInstance.input.CreateEntity()
-                .AddCollision(link.entity, targetLink.entity);
+            //Contexts.sharedInstance.input.CreateEntity()
+            //    .AddCollision(link.entity, targetLink.entity);
         }
     }
 }

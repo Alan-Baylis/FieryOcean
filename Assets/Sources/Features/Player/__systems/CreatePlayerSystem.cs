@@ -1,22 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
-public sealed class CreatePlayerSystem : ISetPools, IInitializeSystem {
+public sealed class CreatePlayerSystem : IInitializeSystem {
     private Vector3 _position;
-    Pools _pools;
+    Contexts _pools;
 
-    public void SetPools(Pools pools) {
-        _pools = pools;
-    }
-    public CreatePlayerSystem(Vector3 playerStartPosition)
+    public CreatePlayerSystem(Contexts pools, Vector3 playerStartPosition)
     {
+        _pools = pools;
         _position = playerStartPosition;
     }
 
     public void Initialize() {
-        _pools.blueprints.blueprints.instance
-              .ApplyPlayer1(_pools.core.CreateEntity(), _position);
+        _pools.game.CreatePlayer(_position);
     }
 }

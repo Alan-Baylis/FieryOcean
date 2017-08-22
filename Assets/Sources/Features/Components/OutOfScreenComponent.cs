@@ -1,5 +1,5 @@
-﻿using Entitas;
+using Entitas;
 
-[Core, Bullets]
+[Game, Bullets]
 public sealed class OutOfScreenComponent : IComponent {
 }

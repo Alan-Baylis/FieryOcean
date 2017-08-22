@@ -1,23 +1,32 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 using Entitas;
 
-public sealed class AddPlayerStartPosition : ISetPool, IReactiveSystem
+public sealed class AddPlayerStartPosition : ReactiveSystem<GameEntity>
 {
     const string PLAYER_ID = "Player1";
-    public TriggerOnEvent trigger { get { return CoreMatcher.PlayerView.OnEntityAdded(); } }
-
-    Pool _pool;
-
-    public void SetPool(Pool pool)
-    {
-        _pool = pool;
+    public AddPlayerStartPosition(Contexts contexts) : base(contexts.game) {
+        _pool = contexts.game;
     }
 
-    public void Execute(List<Entity> entities)
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
+        return context.CreateCollector(GameMatcher.PlayerView.Added());
+    }
+
+    protected override bool Filter(GameEntity entity) {
+        // TODO Entitas 0.36.0 Migration
+        // ensure was: 
+        // exclude was: 
+
+        return true;
+    }
+
+    GameContext _pool;
+
+    protected override void Execute(List<GameEntity> entities)
     {
         foreach (var e in entities)
         {

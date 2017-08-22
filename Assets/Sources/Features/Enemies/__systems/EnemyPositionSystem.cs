@@ -1,18 +1,30 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 using Entitas;
 
-public sealed class EnemyPositionSystem : ISetPools, IReactiveSystem
+public sealed class EnemyPositionSystem : ReactiveSystem<GameEntity>
 {
-    Group _movableGroups;
-    public TriggerOnEvent trigger { get { return CoreMatcher.PlayerPosition.OnEntityAdded(); } }
+    IGroup<GameEntity> _movableGroups;
+    public EnemyPositionSystem(Contexts contexts) : base(contexts.game) {
+        //_movableGroups = pools.core.GetGroup(CoreMatcher.EnemyView);
+        _movableGroups = contexts.game.GetGroup(GameMatcher.EnemyView);
+    }
 
-    public void Execute(List<Entity> entities)
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
+        return context.CreateCollector(GameMatcher.PlayerPosition.Added());
+    }
+
+    protected override bool Filter(GameEntity entity) {
+
+        return true;
+    }
+
+    protected override void Execute(List<GameEntity> entities)
     {
-        foreach(var e in entities)
+        foreach (var e in entities)
         {
             foreach (var enemy in _movableGroups.GetEntities())
             {
@@ -20,10 +32,6 @@ public sealed class EnemyPositionSystem : ISetPools, IReactiveSystem
             }
         }
     }
-
-    public void SetPools(Pools pools)
-    {
-        _movableGroups = pools.core.GetGroup(CoreMatcher.EnemyView);
-    }
+    
 }
 

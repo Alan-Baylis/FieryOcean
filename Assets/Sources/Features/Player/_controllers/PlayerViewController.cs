@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 public interface IPlayerController : IViewController {
     Rigidbody rigidbody { get; set; }
     Transform transform { get; set; }

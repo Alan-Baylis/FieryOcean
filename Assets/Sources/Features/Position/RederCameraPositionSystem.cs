@@ -1,21 +1,25 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 using Entitas;
 
-public sealed class RederCameraPositionSystem : ISetPools, IEntityCollectorSystem
+public sealed class RederCameraPositionSystem : ReactiveSystem<GameEntity> //IEntityCollectorSystem
 {
-    public EntityCollector entityCollector { get { return _groupObserver; } }
-
-    EntityCollector _groupObserver;
-
-    public void SetPools(Pools pools)
+    public RederCameraPositionSystem(Contexts contexts) : base(contexts.game)
     {
-        _groupObserver = new[] { pools.core, pools.bullets }
-            .CreateEntityCollector(Matcher.AllOf(CoreMatcher.CameraPosition, CoreMatcher.Position));
     }
+    public ICollector<GameEntity> entityCollector { get { return _groupObserver; } }
 
-    public void Execute(List<Entity> entities)
+    Collector<GameEntity> _groupObserver;
+
+    // TODO Entitas 0.36.0 Migration (constructor)
+    //public void SetPools(Contexts pools)
+    //{
+    //    _groupObserver = new[] { pools.core, pools.bullets }
+    //        .CreateEntityCollector(Matcher.AllOf(CoreMatcher.CameraPosition, CoreMatcher.Position));
+    //}
+
+    protected override void Execute(List<GameEntity> entities)
     {
         foreach (var e in entities)
         {
@@ -24,4 +28,13 @@ public sealed class RederCameraPositionSystem : ISetPools, IEntityCollectorSyste
         }
     }
 
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.Camera);
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return true;
+    }
 }

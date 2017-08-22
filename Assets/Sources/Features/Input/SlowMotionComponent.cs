@@ -1,6 +1,6 @@
-﻿using Entitas;
-using Entitas.CodeGenerator;
+using Entitas;
+using Entitas.CodeGeneration.Attributes;
 
-[Input, SingleEntity]
+[Input, Unique]
 public sealed class SlowMotionComponent : IComponent {
 }

@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Entitas;
 
-[Core]
+[Game]
 public sealed class CameraComponent : IComponent
 {
     public Camera cam;
-
+    public Vector3 position;
 }

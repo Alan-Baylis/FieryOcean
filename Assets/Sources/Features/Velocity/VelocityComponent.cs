@@ -1,7 +1,7 @@
-﻿using Entitas;
+using Entitas;
 using UnityEngine;
 
-[Core, Bullets]
+[Game, Bullets]
 public sealed class VelocityComponent : IComponent {
 
     public Vector3 value;

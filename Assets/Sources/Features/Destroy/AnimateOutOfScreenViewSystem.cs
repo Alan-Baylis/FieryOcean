@@ -1,21 +1,30 @@
+using System;
 using System.Collections.Generic;
 using Entitas;
 
-public sealed class AnimateOutOfScreenViewSystem : ISetPools, IEntityCollectorSystem {
-
-    public EntityCollector entityCollector { get { return _groupObserver; } }
-
-    EntityCollector _groupObserver;
-
-    public void SetPools(Pools pools) {
-        _groupObserver = new [] { pools.core, pools.bullets }
-            .CreateEntityCollector(Matcher.AllOf(CoreMatcher.View, CoreMatcher.OutOfScreen));
+public sealed class AnimateOutOfScreenViewSystem : ReactiveSystem<GameEntity> {
+    public AnimateOutOfScreenViewSystem(Contexts contexts) : base(contexts.game)
+    {
     }
 
-    public void Execute(List<Entity> entities) {
-        foreach(var e in entities) {
+    protected override void Execute(List<GameEntity> entities)
+    {
+        foreach (var e in entities)
+        {
             var controller = e.view.controller;
             controller.Hide(false);
         }
     }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return entity.hasView;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.OutOfScreen.Added());
+    }
 }
+
+

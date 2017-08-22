@@ -1,13 +1,16 @@
-﻿using Entitas;
+using Entitas;
+using Entitas.Utils;
 
 public static class EntityIndexPoolsExtensions {
 
     public const string PlayerKey = "Player";
 
-    public static void AddEntityIndices(this Pools pools) {
-        var playerIndex = new PrimaryEntityIndex<string>(
-            pools.core.GetGroup(CoreMatcher.Player),
-            (entity, component) => {
+    public static void AddEntityIndices(this Contexts pools)
+    {
+        var playerIndex = new Entitas.PrimaryEntityIndex<GameEntity,string>(PlayerKey,
+            pools.game.GetGroup(GameMatcher.Player),
+            (entity, component) =>
+            {
                 var playerComponent = (PlayerComponent)component;
                 return playerComponent != null
                     ? playerComponent.id
@@ -15,11 +18,12 @@ public static class EntityIndexPoolsExtensions {
             }
         );
 
-        pools.core.AddEntityIndex(PlayerKey, playerIndex);
+        pools.game.AddEntityIndex(playerIndex);
     }
 
-    public static Entity GetEntityWithPlayerId(this Pool pool, string id) {
-        var index = (PrimaryEntityIndex<string>)pool.GetEntityIndex(PlayerKey);
+    public static GameEntity GetEntityWithPlayerId(this GameContext pool, string id)
+    {
+        var index = (PrimaryEntityIndex<GameEntity,string>)pool.GetEntityIndex(PlayerKey);
         return index.GetEntity(id);
     }
 }

@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -70,9 +67,6 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
@@ -81,6 +75,27 @@
     </Reference>
     <Reference Include="ApexShared">
       <HintPath>Assets\Apex\Apex Binaries\ApexShared.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Blueprints">
+      <HintPath>Assets\Libraries\Entitas\Entitas.Blueprints.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.CodeGeneration.Attributes">
+      <HintPath>Assets\Libraries\Entitas\Entitas.CodeGeneration.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas">
+      <HintPath>Assets\Libraries\Entitas\Entitas.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Unity">
+      <HintPath>Assets\Libraries\Entitas\Entitas.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Utils">
+      <HintPath>Assets\Libraries\Entitas\Entitas.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.VisualDebugging.Unity">
+      <HintPath>Assets\Libraries\Entitas\Entitas.VisualDebugging.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="fabl">
+      <HintPath>Assets\Libraries\Entitas\fabl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -451,109 +466,8 @@
     <Compile Include="Assets\FORGE3D\Sci-Fi Effects\Examples\Code\F3DNebula.cs" />
     <Compile Include="Assets\FORGE3D\Sci-Fi Effects\Examples\Code\F3DTrailExample.cs" />
     <Compile Include="Assets\FORGE3D\Sci-Fi Effects\Examples\Code\F3DTurnTable.cs" />
-    <Compile Include="Assets\Generated\AssetComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\BlueprintsAttribute.cs" />
-    <Compile Include="Assets\Generated\BlueprintsComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\BlueprintsComponentIds.cs" />
-    <Compile Include="Assets\Generated\BlueprintsGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\BulletComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\BulletCoolDownComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\BulletsAttribute.cs" />
-    <Compile Include="Assets\Generated\BulletsComponentIds.cs" />
-    <Compile Include="Assets\Generated\CameraComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\CameraPositionComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\CollisionComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\CoreAttribute.cs" />
-    <Compile Include="Assets\Generated\CoreComponentIds.cs" />
-    <Compile Include="Assets\Generated\DamageComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\DestroyUnitComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\EnemyBehaviourComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\EnemyComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\EnemyPositionComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\EnemyViewComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\ForseComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\HealthComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\InputAttribute.cs" />
-    <Compile Include="Assets\Generated\InputComponentIds.cs" />
-    <Compile Include="Assets\Generated\InputOwnerComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\MoveInputComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\OutOfScreenComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\PlayerComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\PlayerPositionComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\PlayerViewComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\Pools.cs" />
-    <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\RigidbodyComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\ServerImpOfUnitComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\ShootInputComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\SlowMotionComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\TickComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\UnitAddComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\VelocityComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\ViewComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\ViewObjectPoolComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\WhoAMiGeneratedExtension.cs" />
     <Compile Include="Assets\Inspector Name Drawer\InspectorNameAttribute.cs" />
-    <Compile Include="Assets\Library\Entitas\Caching\EntitasCache.cs" />
-    <Compile Include="Assets\Library\Entitas\Caching\ObjectCache.cs" />
-    <Compile Include="Assets\Library\Entitas\Caching\ObjectPool.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Attributes\CustomComponentNameAttribute.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Attributes\CustomPrefixAttribute.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Attributes\DontGenerateAttribute.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Attributes\IndexKeyAttribute.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Attributes\PoolAttribute.cs" />
-    <Compile Include="Assets\Library\Entitas\CodeGenerator\Attributes\SingleEntityAttribute.cs" />
-    <Compile Include="Assets\Library\Entitas\EntitasException.cs" />
-    <Compile Include="Assets\Library\Entitas\Entity.cs" />
-    <Compile Include="Assets\Library\Entitas\EntityCollector.cs" />
-    <Compile Include="Assets\Library\Entitas\EntityIndex.cs" />
-    <Compile Include="Assets\Library\Entitas\Extensions\CollectionExtension.cs" />
-    <Compile Include="Assets\Library\Entitas\Extensions\EntityExtension.cs" />
-    <Compile Include="Assets\Library\Entitas\Extensions\GroupExtension.cs" />
-    <Compile Include="Assets\Library\Entitas\Extensions\IMatcherExtension.cs" />
-    <Compile Include="Assets\Library\Entitas\Extensions\PoolExtension.cs" />
-    <Compile Include="Assets\Library\Entitas\Extensions\TypeExtension.cs" />
-    <Compile Include="Assets\Library\Entitas\Group.cs" />
-    <Compile Include="Assets\Library\Entitas\Interfaces\ICleanupSystem.cs" />
-    <Compile Include="Assets\Library\Entitas\Interfaces\IComponent.cs" />
-    <Compile Include="Assets\Library\Entitas\Interfaces\IExecuteSystem.cs" />
-    <Compile Include="Assets\Library\Entitas\Interfaces\IInitializeSystem.cs" />
-    <Compile Include="Assets\Library\Entitas\Interfaces\IMatcher.cs" />
-    <Compile Include="Assets\Library\Entitas\Interfaces\IReactiveSystem.cs" />
-    <Compile Include="Assets\Library\Entitas\Interfaces\ISystem.cs" />
-    <Compile Include="Assets\Library\Entitas\Interfaces\ITearDownSystem.cs" />
-    <Compile Include="Assets\Library\Entitas\Matcher\Matcher.cs" />
-    <Compile Include="Assets\Library\Entitas\Matcher\MatcherEquals.cs" />
-    <Compile Include="Assets\Library\Entitas\Matcher\MatcherInterfaces.cs" />
-    <Compile Include="Assets\Library\Entitas\Matcher\MatcherStatic.cs" />
-    <Compile Include="Assets\Library\Entitas\Matcher\MatcherToString.cs" />
-    <Compile Include="Assets\Library\Entitas\Matcher\TriggerOnEvent.cs" />
-    <Compile Include="Assets\Library\Entitas\Pool.cs" />
-    <Compile Include="Assets\Library\Entitas\Pools.cs" />
-    <Compile Include="Assets\Library\Entitas\ReactiveSystem.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\Blueprints\Blueprint.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\Blueprints\BlueprintEntityExtension.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\Blueprints\ComponentBlueprint.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\Blueprints\HideInBlueprintInspectorAttribute.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\Blueprints\SerializableMember.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\Configuration\CodeGeneratorConfig.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\Configuration\EntitasPreferences.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\Configuration\EntitasPreferencesConfig.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\Configuration\Properties.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\PublicMemberInfo.cs" />
-    <Compile Include="Assets\Library\Entitas\Serialization\TypeSerializationExtension.cs" />
-    <Compile Include="Assets\Library\Entitas\Systems.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Serialization\Blueprints\BinaryBlueprint.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\Serialization\Blueprints\Blueprints.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\DebugSystems\DebugSystems.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\DebugSystems\DebugSystemsBehaviour.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\DebugSystems\Feature.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\DebugSystems\SystemInfo.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\Entity\EntityBehaviour.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\GameObjectDestroyExtension.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\PoolObserver\PoolObserver.cs" />
-    <Compile Include="Assets\Library\Entitas\Unity\VisualDebugging\PoolObserver\PoolObserverBehaviour.cs" />
+    <Compile Include="Assets\Libraries\Entitas\Compile.cs" />
     <Compile Include="Assets\Scripts\AIController.cs" />
     <Compile Include="Assets\Scripts\ArrayList.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
@@ -597,6 +511,8 @@
     <Compile Include="Assets\Sources\Assets.cs" />
     <Compile Include="Assets\Sources\Assets\Res.cs" />
     <Compile Include="Assets\Sources\CommonTypes.cs" />
+    <Compile Include="Assets\Sources\Extensions\BlueprintsExtensions.cs" />
+    <Compile Include="Assets\Sources\Extensions\GameContextExtensions.cs" />
     <Compile Include="Assets\Sources\Features\BlueprintExtensions.cs" />
     <Compile Include="Assets\Sources\Features\Bullets\BulletComponent.cs" />
     <Compile Include="Assets\Sources\Features\Bullets\BulletCoolDownComponent.cs" />
@@ -604,7 +520,6 @@
     <Compile Include="Assets\Sources\Features\Bullets\BulletOutOfScreenSystem.cs" />
     <Compile Include="Assets\Sources\Features\Bullets\BulletViewController.cs" />
     <Compile Include="Assets\Sources\Features\Camera\__components\CameraComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Camera\__components\CameraPositionComponent.cs" />
     <Compile Include="Assets\Sources\Features\Camera\__systems\CameraSystem.cs" />
     <Compile Include="Assets\Sources\Features\Camera\__systems\CreateCameraSystem.cs" />
     <Compile Include="Assets\Sources\Features\Components\BlueprintsComponent.cs" />
@@ -624,7 +539,6 @@
     <Compile Include="Assets\Sources\Features\Enemies\__systems\AddEnemyStartPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__systems\CreateEnemySystem.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__systems\DestroyEnemySystem.cs" />
-    <Compile Include="Assets\Sources\Features\Enemies\__systems\DestroyRemotePlayerSystem.cs" />
     <Compile Include="Assets\Sources\Features\Enemies\__systems\EnemyPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\EntityIndexPoolsExtensions.cs" />
     <Compile Include="Assets\Sources\Features\Health\DamageComponent.cs" />
@@ -639,7 +553,6 @@
     <Compile Include="Assets\Sources\Features\Input\ShootInputComponent.cs" />
     <Compile Include="Assets\Sources\Features\Input\SlowMotionComponent.cs" />
     <Compile Include="Assets\Sources\Features\Physics\ForseComponent.cs" />
-    <Compile Include="Assets\Sources\Features\Physics\ForseSystem.cs" />
     <Compile Include="Assets\Sources\Features\Physics\RigidbodyComponent.cs" />
     <Compile Include="Assets\Sources\Features\Player\__components\PlayerComponent.cs" />
     <Compile Include="Assets\Sources\Features\Player\__components\PlayerPositionComponent.cs" />
@@ -651,28 +564,95 @@
     <Compile Include="Assets\Sources\Features\Position\PositionComponent.cs" />
     <Compile Include="Assets\Sources\Features\Position\RederCameraPositionSystem.cs" />
     <Compile Include="Assets\Sources\Features\Position\RenderPositionSystem.cs" />
-    <Compile Include="Assets\Sources\Features\Tick\IncrementTickSystem.cs" />
     <Compile Include="Assets\Sources\Features\Tick\TickComponent.cs" />
     <Compile Include="Assets\Sources\Features\Velocity\VelocityComponent.cs" />
     <Compile Include="Assets\Sources\Features\Velocity\VelocitySystem.cs" />
     <Compile Include="Assets\Sources\Features\View\__components\AssetComponent.cs" />
     <Compile Include="Assets\Sources\Features\View\__components\ViewComponent.cs" />
     <Compile Include="Assets\Sources\Features\View\__components\ViewObjectPoolComponent.cs" />
-    <Compile Include="Assets\Sources\Features\View\__systems\AddViewFromObjectPoolSystem.cs" />
     <Compile Include="Assets\Sources\Features\View\__systems\AddViewSystems.cs" />
     <Compile Include="Assets\Sources\Features\WhoAMi\WhoAMi.cs" />
     <Compile Include="Assets\Sources\Features\World\WorldSystem.cs" />
     <Compile Include="Assets\Sources\GameRandom.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\BulletsAttribute.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\BulletsComponentsLookup.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\BulletsContext.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\BulletsEntity.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\BulletsMatcher.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsAssetComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsBulletComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsDamageComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsDestroyComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsForseComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsHealthComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsOutOfScreenComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsPlayerViewComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsPositionComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsVelocityComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsViewComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsViewObjectPoolComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IAsset.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IDestroy.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IForse.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IHealth.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IOutOfScreen.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IPlayerView.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IPosition.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IRigidbody.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IVelocity.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IView.cs" />
+    <Compile Include="Assets\Sources\Generated\Components\Interfaces\IViewObjectPool.cs" />
+    <Compile Include="Assets\Sources\Generated\Contexts.cs" />
+    <Compile Include="Assets\Sources\Generated\Feature.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameAssetComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameBlueprintsComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameBulletCoolDownComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameCameraComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameDestroyComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameDestroyUnitComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameEnemyBehaviourComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameEnemyComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameEnemyPositionComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameEnemyViewComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameForseComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameHealthComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameOutOfScreenComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GamePlayerComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GamePlayerPositionComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GamePlayerViewComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GamePositionComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameRigidbodyComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameServerImpOfUnitComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameUnitAddComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameVelocityComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameViewComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameViewObjectPoolComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameWhoAMiComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameAttribute.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameComponentsLookup.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameContext.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameEntity.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\GameMatcher.cs" />
+    <Compile Include="Assets\Sources\Generated\GameState\GameStateAttribute.cs" />
+    <Compile Include="Assets\Sources\Generated\GameState\GameStateComponentsLookup.cs" />
+    <Compile Include="Assets\Sources\Generated\GameState\GameStateContext.cs" />
+    <Compile Include="Assets\Sources\Generated\GameState\GameStateEntity.cs" />
+    <Compile Include="Assets\Sources\Generated\GameState\GameStateMatcher.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\Components\InputCollisionComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\Components\InputInputOwnerComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\Components\InputMoveInputComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\Components\InputRigidbodyComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\Components\InputShootInputComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\Components\InputSlowMotionComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\Components\InputTickComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\InputAttribute.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\InputComponentsLookup.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\InputContext.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\InputEntity.cs" />
+    <Compile Include="Assets\Sources\Generated\Input\InputMatcher.cs" />
+    <Compile Include="Assets\Sources\IntVector2.cs" />
     <Compile Include="Assets\Sources\VirtualJoystickRegion.cs" />
     <Compile Include="Assets\Tests\Position.cs" />
-    <Compile Include="Assets\Ultimate Joystick Examples\Spaceship Example\Scripts\AsteroidController.cs" />
-    <Compile Include="Assets\Ultimate Joystick Examples\Spaceship Example\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Ultimate Joystick Examples\Spaceship Example\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Ultimate Joystick Examples\Third Person Example\Scripts\AbstractTargetFollower.cs" />
-    <Compile Include="Assets\Ultimate Joystick Examples\Third Person Example\Scripts\FreeLookCam.cs" />
-    <Compile Include="Assets\Ultimate Joystick Examples\Third Person Example\Scripts\PivotBasedCameraRig.cs" />
-    <Compile Include="Assets\Ultimate Joystick Examples\Third Person Example\Scripts\ThirdPersonCharacter.cs" />
-    <Compile Include="Assets\Ultimate Joystick Examples\Third Person Example\Scripts\ThirdPersonUserControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Apex\Apex Path\Scripts\Services\UnityWrappers.tt">
@@ -716,8 +696,6 @@
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
-    <None Include="Assets\Ultimate Joystick Examples\Spaceship Example\README_Spaceship.txt" />
-    <None Include="Assets\Ultimate Joystick Examples\Third Person Example\README_ThirdPerson.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
