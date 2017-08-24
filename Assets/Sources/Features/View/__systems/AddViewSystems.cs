@@ -43,7 +43,7 @@ public partial class AddViewSystems : ReactiveSystem<GameEntity> {
                 gameObject.AddComponent<PlayerViewController>();
                 e.AddPlayerView(gameObject.GetComponent<IPlayerController>());
 
-                ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity_>().gameEngineEntity = e;
+                ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<SrvGameEntity>().gameEngineEntity = e;
 
                 ////set start position
                 //if (e.serverImpOfUnit.entity == null)

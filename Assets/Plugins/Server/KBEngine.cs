@@ -101,7 +101,7 @@
 		public Int32 entity_id = 0;
 		public string entity_type = "";
 
-		private List<Entity> _controlledEntities = new List<Entity>();
+		private List<KbEntity> _controlledEntities = new List<KbEntity>();
 		
 		// 当前服务端最后一次同步过来的玩家位置
 		private Vector3 _entityServerPos = new Vector3(0f, 0f, 0f);
@@ -112,7 +112,7 @@
 		
 		// 所有实体都保存于这里， 请参看API手册关于entities部分
 		// https://github.com/kbengine/kbengine/tree/master/docs/api
-		public Dictionary<Int32, Entity> entities = new Dictionary<Int32, Entity>();
+		public Dictionary<Int32, KbEntity> entities = new Dictionary<Int32, KbEntity>();
 		
 		// 在玩家AOI范围小于256个实体时我们可以通过一字节索引来找到entity
 		private List<Int32> _entityIDAliasIDList = new List<Int32>();
@@ -230,7 +230,7 @@
 			serverErrs.Clear ();
 			Message.clear ();
 			EntityDef.clear ();
-			Entity.clear();
+			KbEntity.clear();
 			Dbg.DEBUG_MSG("KBEngine::resetMessages()");
         }
         
@@ -294,9 +294,9 @@
 		/*
 			当前玩家entity
 		*/
-		public Entity player()
+		public KbEntity player()
 		{
-			Entity e;
+			KbEntity e;
 			if(entities.TryGetValue(entity_id, out e))
 				return e;
 			
@@ -1439,7 +1439,7 @@
 			if(runclass == null)
 				return;
 			
-			Entity entity = (Entity)Activator.CreateInstance(runclass);
+			KbEntity entity = (KbEntity)Activator.CreateInstance(runclass);
 			entity.id = eid;
 			entity.className = entityType;
 			
@@ -1467,9 +1467,9 @@
 				entity.callPropertysSetMethods();
 		}
 		
-		public Entity findEntity(Int32 entityID)
+		public KbEntity findEntity(Int32 entityID)
 		{
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(entityID, out entity))
 			{
@@ -1528,7 +1528,7 @@
 		
 		public void onUpdatePropertys_(Int32 eid, MemoryStream stream)
 		{
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(eid, out entity))
 			{
@@ -1610,7 +1610,7 @@
 	
 		public void onRemoteMethodCall_(Int32 eid, MemoryStream stream)
 		{
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(eid, out entity))
 			{
@@ -1676,7 +1676,7 @@
 			string entityType = EntityDef.idmoduledefs[uentityType].name;
 			// Dbg.DEBUG_MSG("KBEngine::Client_onEntityEnterWorld: " + entityType + "(" + eid + "), spaceID(" + KBEngineApp.app.spaceID + ")!");
 			
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(eid, out entity))
 			{
@@ -1697,7 +1697,7 @@
 				if(runclass == null)
 					return;
 				
-				entity = (Entity)Activator.CreateInstance(runclass);
+				entity = (KbEntity)Activator.CreateInstance(runclass);
 				entity.id = eid;
 				entity.className = entityType;
 				
@@ -1768,7 +1768,7 @@
 		*/
 		public void Client_onEntityLeaveWorld(Int32 eid)
 		{
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(eid, out entity))
 			{
@@ -1808,7 +1808,7 @@
 			if(stream.length() > 0)
 				isOnGround = stream.readInt8();
 			
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(eid, out entity))
 			{
@@ -1826,7 +1826,7 @@
 		*/
 		public void Client_onEntityLeaveSpace(Int32 eid)
 		{
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(eid, out entity))
 			{
@@ -1862,7 +1862,7 @@
 		*/
 		public void Client_onControlEntity(Int32 eid, sbyte isControlled)
 		{
-			Entity entity = null;
+			KbEntity entity = null;
 
 			if (!entities.TryGetValue(eid, out entity))
 			{
@@ -1914,7 +1914,7 @@
 			if (span.Ticks < 1000000)
 				return;
 			
-			Entity playerEntity = player();
+			KbEntity playerEntity = player();
 			if (playerEntity == null || playerEntity.inWorld == false || playerEntity.isControlled)
 				return;
 
@@ -2036,9 +2036,9 @@
 
 			if (!isall)
 			{
-				Entity entity = player();
+				KbEntity entity = player();
 				
-				foreach (KeyValuePair<Int32, Entity> dic in entities)  
+				foreach (KeyValuePair<Int32, KbEntity> dic in entities)  
 				{ 
 					if(dic.Key == entity.id)
 						continue;
@@ -2054,7 +2054,7 @@
 			}
 			else
 			{
-				foreach (KeyValuePair<Int32, Entity> dic in entities)  
+				foreach (KeyValuePair<Int32, KbEntity> dic in entities)  
 				{ 
 					if(dic.Value.inWorld)
 						dic.Value.leaveWorld();
@@ -2127,7 +2127,7 @@
 		{
 			Dbg.DEBUG_MSG("KBEngine::Client_onEntityDestroyed: entity(" + eid + ")");
 			
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(eid, out entity))
 			{
@@ -2202,7 +2202,7 @@
 		public void Client_onUpdateData(MemoryStream stream)
 		{
 			Int32 eid = getAoiEntityIDFromStream(stream);
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(eid, out entity))
 			{
@@ -2218,7 +2218,7 @@
 		public void Client_onSetEntityPosAndDir(MemoryStream stream)
 		{
 			Int32 eid = stream.readInt32();
-			Entity entity = null;
+			KbEntity entity = null;
 			
 			if(!entities.TryGetValue(eid, out entity))
 			{
@@ -2513,7 +2513,7 @@
 		
 		private void _updateVolatileData(Int32 entityID, float x, float y, float z, float yaw, float pitch, float roll, sbyte isOnGround)
 		{
-			Entity entity = null;
+			KbEntity entity = null;
 
 			if(!entities.TryGetValue(entityID, out entity))
 			{

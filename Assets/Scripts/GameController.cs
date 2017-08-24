@@ -1,6 +1,7 @@
 ﻿using Entitas;
 //using Entitas.Unity.Serialization.Blueprints;
 using UnityEngine;
+using KBEngine;
 using System.Collections;
 using Entitas.Unity.Serialization.Blueprints;
 
@@ -57,6 +58,13 @@ public class GameController : MonoBehaviour {
         WorldSystem ws = new WorldSystem(contexts);
         ws.SetOcean(enemisStartPositions.startPoint.position.y);
 
+        ISystem playerPositionSystem = null;
+
+        if (KBEngineApp.app == null)
+            playerPositionSystem = new PlayerPositionSystemLocal(contexts, playerInputController.joystick, playerInputController.speedMap, playerInputController.Position());
+        else
+            playerPositionSystem = new PlayerPositionSystem(contexts, playerInputController.joystick, playerInputController.speedMap, playerInputController.Position());
+
 
         return new Feature("Systems")
         // Initialize
@@ -81,7 +89,7 @@ public class GameController : MonoBehaviour {
 
         //.Add(new VelocitySystem())
         .Add(new AddPlayerStartPosition(contexts))
-        .Add(new PlayerPositionSystem(contexts, playerInputController.joystick, playerInputController.speedMap, playerInputController.Position()))
+        .Add(playerPositionSystem)
         .Add(new AddEnemyStartPositionSystem(contexts))
         .Add(new EnemyPositionSystem(contexts))
 

@@ -29,6 +29,7 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
         if (_playerController.IsSpeedChanged)
         {
             InputEntity[] inputs = _pools.input.GetEntities();
+
             if (inputs.Length == 0)
             {
                 InputEntity e = _pools.input.CreateEntity();

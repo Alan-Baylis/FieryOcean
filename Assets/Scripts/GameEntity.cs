@@ -6,7 +6,7 @@ using System;
 using System.Xml;
 using System.Collections.Generic;
 
-public class GameEntity_ : MonoBehaviour 
+public class SrvGameEntity : MonoBehaviour 
 {
 	public bool isPlayer = false;
 

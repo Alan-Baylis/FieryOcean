@@ -6,6 +6,6 @@ using Entitas;
 [Game]
 public sealed class ServerImpOfUnitComponent : IComponent
 {
-    public KBEngine.Entity entity;
+    public KBEngine.KbEntity entity;
 }
 

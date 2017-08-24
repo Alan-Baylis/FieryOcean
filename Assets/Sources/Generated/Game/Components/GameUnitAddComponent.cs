@@ -11,14 +11,14 @@ public partial class GameEntity {
     public UnitAddComponent unitAdd { get { return (UnitAddComponent)GetComponent(GameComponentsLookup.UnitAdd); } }
     public bool hasUnitAdd { get { return HasComponent(GameComponentsLookup.UnitAdd); } }
 
-    public void AddUnitAdd(KBEngine.Entity newEntity) {
+    public void AddUnitAdd(KBEngine.KbEntity newEntity) {
         var index = GameComponentsLookup.UnitAdd;
         var component = CreateComponent<UnitAddComponent>(index);
         component.entity = newEntity;
         AddComponent(index, component);
     }
 
-    public void ReplaceUnitAdd(KBEngine.Entity newEntity) {
+    public void ReplaceUnitAdd(KBEngine.KbEntity newEntity) {
         var index = GameComponentsLookup.UnitAdd;
         var component = CreateComponent<UnitAddComponent>(index);
         component.entity = newEntity;

@@ -28,7 +28,7 @@ public static class GameEntityExtensions {
 
         return entity;
     }
-    public static GameEntity CreateRemotePlayer(this GameContext context, Vector3 position, KBEngine.Entity server_entity)
+    public static GameEntity CreateRemotePlayer(this GameContext context, Vector3 position, KBEngine.KbEntity server_entity)
     {
         var entity = context.CreateEntity();
         entity.AddAsset("Ships/Prefabs/katran");

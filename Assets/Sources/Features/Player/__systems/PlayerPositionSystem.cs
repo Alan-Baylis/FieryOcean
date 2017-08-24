@@ -26,6 +26,8 @@ public sealed class PlayerPositionSystem : IExecuteSystem
     float lastAc = 0;
     Vector3 _nextPosition;
     Vector3 _beforePosition;
+    float delta;
+
     public void Execute()
     {    
         var player = _pools.game.GetEntityWithPlayerId(PLAYER_ID);
@@ -39,8 +41,15 @@ public sealed class PlayerPositionSystem : IExecuteSystem
                                     _joystick.GetPosition(),
                                     lastAc                                                              );
 
-        if(Vector3.Distance(_beforePosition,_nextPosition)>2f)
+        delta += Vector3.Distance(_beforePosition, _nextPosition);
+
+        if (delta > 2f)
+        {
             player.ReplacePlayerPosition(player.playerView.controller.transform.position);
+            _beforePosition = _nextPosition;
+            delta = 0;
+        }
+            
     }
 
     private UnityEngine.GameObject player_server_impl = null;
@@ -50,7 +59,7 @@ public sealed class PlayerPositionSystem : IExecuteSystem
         if (player_server_impl != null)
         {
             //if (terrain != null)
-            player_server_impl.GetComponent<GameEntity_>().entityEnable();
+            player_server_impl.GetComponent<SrvGameEntity>().entityEnable();
             return;
         }
 
@@ -87,20 +96,20 @@ public sealed class PlayerPositionSystem : IExecuteSystem
         //                     Quaternion.Euler(new Vector3(avatar.direction.y, avatar.direction.z, avatar.direction.x))) as UnityEngine.GameObject;
 
         UnityEngine.GameObject go = new UnityEngine.GameObject();
-        go.AddComponent<GameEntity_>();
+        go.AddComponent<SrvGameEntity>();
         player_server_impl = go;
-        player_server_impl.GetComponent<GameEntity_>().entityDisable();
+        player_server_impl.GetComponent<SrvGameEntity>().entityDisable();
         e.serverImpOfUnit.entity = avatar;
         avatar.renderObj = player_server_impl;
 
-        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity_>().gameEngineEntity = e;
-        ((UnityEngine.GameObject)avatar.renderObj).GetComponent<GameEntity_>().isPlayer = true;
+        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<SrvGameEntity>().gameEngineEntity = e;
+        ((UnityEngine.GameObject)avatar.renderObj).GetComponent<SrvGameEntity>().isPlayer = true;
 
         // 有必要设置一下，由于该接口由Update异步调用，有可能set_position等初始化信息已经先触发了
         // 那么如果不设置renderObj的位置和方向将为0，人物会陷入地下
        
-        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity_>().destPosition = avatar.position;
-        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<GameEntity_>().position = avatar.position;
+        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<SrvGameEntity>().destPosition = avatar.position;
+        ((UnityEngine.GameObject)(e.serverImpOfUnit.entity.renderObj)).GetComponent<SrvGameEntity>().position = avatar.position;
 
         //set_position(avatar);
         //set_direction(avatar);

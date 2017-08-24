@@ -5,7 +5,7 @@ using KBEngine;
 [Game]
 public sealed class UnitAddComponent : IComponent
 {
-    public KBEngine.Entity entity;
+    public KBEngine.KbEntity entity;
     //public Vector3 position;
 }
 

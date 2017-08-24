@@ -22,7 +22,6 @@ public class PlayerMovementController
 
     public Vector3 Move(Vector3 shipDirect, Rigidbody rb, Vector2 jpystickPos, float lastAc)
     {
-
         if (lastAc == speedMap[PlayerInputController.speedTypes.HalfSpeed])
         {
             PlayerRotation(shipDirect, rb, jpystickPos);

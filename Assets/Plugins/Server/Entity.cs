@@ -9,7 +9,7 @@
 		KBEngine逻辑层的实体基础类
 		所有扩展出的游戏实体都应该继承于该模块
 	*/
-    public class Entity 
+    public class KbEntity 
     {
 		// 当前玩家最后一次同步到服务端的位置与朝向
 		// 这两个属性是给引擎KBEngine.cs用的，别的地方不要修改
@@ -52,7 +52,7 @@
 		{
 		}
 
-		public Entity()
+		public KbEntity()
 		{
 			foreach(Property e in EntityDef.moduledefs[GetType().Name].propertys.Values)
 			{

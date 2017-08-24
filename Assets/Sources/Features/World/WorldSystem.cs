@@ -85,12 +85,12 @@ public sealed class WorldSystem : IInitializeSystem
     }
 
 
-    public void onAddSkill(KBEngine.Entity entity)
+    public void onAddSkill(KBEngine.KbEntity entity)
     {
         Debug.Log("onAddSkill");
     }
 
-    public void onEnterWorld(KBEngine.Entity entity)
+    public void onEnterWorld(KBEngine.KbEntity entity)
     {
         Debug.Log("------------ OnEnterWorld -------------");
         Debug.Log(entity.className);
@@ -103,16 +103,10 @@ public sealed class WorldSystem : IInitializeSystem
         entity.position.y = _ocean_y;
 
         UnityEngine.GameObject go = new UnityEngine.GameObject();
-        go.AddComponent<GameEntity_>();
+        go.AddComponent<SrvGameEntity>();
         entity.renderObj = go;
 
         _pools.game.CreateEntity().AddUnitAdd(entity);
-
-        //_pools.core.repl
-
-        //float y = entity.position.y;
-        //if (entity.isOnGround)
-        //    y = 1.3f;
 
         //entity.renderObj = Instantiate(entityPerfab, new Vector3(entity.position.x, y, entity.position.z),
         //    Quaternion.Euler(new Vector3(entity.direction.y, entity.direction.z, entity.direction.x))) as UnityEngine.GameObject;
@@ -120,13 +114,13 @@ public sealed class WorldSystem : IInitializeSystem
         ((UnityEngine.GameObject)entity.renderObj).name = entity.className + "_" + entity.id; 
     }
 
-    public void onLeaveWorld(KBEngine.Entity entity)
+    public void onLeaveWorld(KBEngine.KbEntity entity)
     {
         if (entity.renderObj == null)
             return;
 
-        UnityEngine.GameObject.Destroy(((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().gameEngineEntity.playerView.controller.gameObject);
-        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().gameEngineEntity.AddDestroyUnit(entity.id);
+        UnityEngine.GameObject.Destroy(((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().gameEngineEntity.playerView.controller.gameObject);
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().gameEngineEntity.AddDestroyUnit(entity.id);
         entity.renderObj = null;
 
         Debug.Log("onLeaveWorld was called");
@@ -136,7 +130,7 @@ public sealed class WorldSystem : IInitializeSystem
     /// set remote player position
     /// </summary>
     /// <param name="entity"></param>
-    public void set_position(KBEngine.Entity entity)
+    public void set_position(KBEngine.KbEntity entity)
     {
         if (entity.renderObj == null)
             return;
@@ -144,13 +138,13 @@ public sealed class WorldSystem : IInitializeSystem
         //Entitas.Entity e = (Entitas.Entity)entity.renderObj;
         //e.playerView.controller.rigidbody.position = new Vector3(entity.position.x,e.playerView.controller.rigidbody.position.y, entity.position.z);
         entity.position.y = _ocean_y;
-        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().destPosition = entity.position;
-        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().position = entity.position;
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().destPosition = entity.position;
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().position = entity.position;
 
         Debug.Log("set_position was called");
     }
 
-    public void updatePosition(KBEngine.Entity entity)
+    public void updatePosition(KBEngine.KbEntity entity)
     {
         Debug.Log("---------   updatePosition   ------------");
         Debug.Log(entity.className);
@@ -160,71 +154,71 @@ public sealed class WorldSystem : IInitializeSystem
             return;
 
         entity.position.y = _ocean_y;
-        GameEntity_ gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>();
+        SrvGameEntity gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>();
         gameEntity.destPosition = entity.position;
         gameEntity.isOnGround = entity.isOnGround;
 
     }
 
-    public void onControlled(KBEngine.Entity entity, bool isControlled)
+    public void onControlled(KBEngine.KbEntity entity, bool isControlled)
     {
         if (entity.renderObj == null)
             return;
 
-        GameEntity_ gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>();
+        SrvGameEntity gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>();
         gameEntity.isControlled = isControlled;
     }
 
-    public void set_direction(KBEngine.Entity entity)
+    public void set_direction(KBEngine.KbEntity entity)
     {
         if (entity.renderObj == null)
             return;
 
-        ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().destDirection =
+        ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().destDirection =
             new Vector3(entity.direction.y, entity.direction.z, entity.direction.x);
     }
 
-    public void set_HP(KBEngine.Entity entity, object v)
+    public void set_HP(KBEngine.KbEntity entity, object v)
     {
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().hp = "" + (Int32)v + "/" + (Int32)entity.getDefinedProperty("HP_Max");
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().hp = "" + (Int32)v + "/" + (Int32)entity.getDefinedProperty("HP_Max");
         }
     }
 
-    public void set_MP(KBEngine.Entity entity, object v)
+    public void set_MP(KBEngine.KbEntity entity, object v)
     {
     }
 
-    public void set_HP_Max(KBEngine.Entity entity, object v)
+    public void set_HP_Max(KBEngine.KbEntity entity, object v)
     {
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().hp = (Int32)entity.getDefinedProperty("HP") + "/" + (Int32)v;
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().hp = (Int32)entity.getDefinedProperty("HP") + "/" + (Int32)v;
         }
     }
 
-    public void set_MP_Max(KBEngine.Entity entity, object v)
+    public void set_MP_Max(KBEngine.KbEntity entity, object v)
     {
     }
 
-    public void set_level(KBEngine.Entity entity, object v)
+    public void set_level(KBEngine.KbEntity entity, object v)
     {
     }
 
-    public void set_entityName(KBEngine.Entity entity, object v)
+    public void set_entityName(KBEngine.KbEntity entity, object v)
     {
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().entity_name = (string)v;
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().entity_name = (string)v;
         }
     }
 
-    public void set_state(KBEngine.Entity entity, object v)
+    public void set_state(KBEngine.KbEntity entity, object v)
     {
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().set_state((SByte)v);
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().set_state((SByte)v);
         }
 
         if (entity.isPlayer())
@@ -240,34 +234,34 @@ public sealed class WorldSystem : IInitializeSystem
         }
     }
 
-    public void set_moveSpeed(KBEngine.Entity entity, object v)
+    public void set_moveSpeed(KBEngine.KbEntity entity, object v)
     {
         float fspeed = ((float)(Byte)v) / 10f;
 
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().speed = fspeed;
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().speed = fspeed;
         }
     }
 
-    public void set_modelScale(KBEngine.Entity entity, object v)
+    public void set_modelScale(KBEngine.KbEntity entity, object v)
     {
     }
 
-    public void set_modelID(KBEngine.Entity entity, object v)
+    public void set_modelID(KBEngine.KbEntity entity, object v)
     {
     }
 
-    public void recvDamage(KBEngine.Entity entity, KBEngine.Entity attacker, Int32 skillID, Int32 damageType, Int32 damage)
+    public void recvDamage(KBEngine.KbEntity entity, KBEngine.KbEntity attacker, Int32 skillID, Int32 damageType, Int32 damage)
     {
     }
 
-    public void otherAvatarOnJump(KBEngine.Entity entity)
+    public void otherAvatarOnJump(KBEngine.KbEntity entity)
     {
         Debug.Log("otherAvatarOnJump: " + entity.id);
         if (entity.renderObj != null)
         {
-            ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity_>().OnJump();
+            ((UnityEngine.GameObject)entity.renderObj).GetComponent<SrvGameEntity>().OnJump();
         }
     }
 }
