@@ -28,21 +28,33 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
     {
         if (_playerController.IsSpeedChanged)
         {
-            InputEntity[] inputs = _pools.input.GetEntities();
+            InputEntity input = GetInputEntity();
+           
+            input.ReplaceMoveInput(_playerController.accelerate);
+            input.ReplaceInputOwner(PLAYER1_ID);
+        }
 
-            if (inputs.Length == 0)
-            {
-                InputEntity e = _pools.input.CreateEntity();
-                e.ReplaceMoveInput(_playerController.accelerate);
-                e.ReplaceInputOwner(PLAYER1_ID);
-            }
-            else
-            {
-                inputs[0].ReplaceMoveInput(_playerController.accelerate);
-                inputs[0].ReplaceInputOwner(PLAYER1_ID);
-            }
+        if (_playerController.IsFire())
+        {
+
+
         }
     }
+
+    //<summary>
+    // We assume that the input entity is present in a single copy
+    //</summary>
+    public InputEntity GetInputEntity()
+    {
+        InputEntity[] inputs = _pools.input.GetEntities();
+
+        // we assume that the input entity is present in a single copy
+        if (inputs.Length == 0)
+            return _pools.input.CreateEntity();
+        else
+            return inputs[0];
+    }
+
 
     public void Cleanup() {
         //foreach(var e in _moveInputs.GetEntities()) {

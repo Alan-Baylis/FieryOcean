@@ -430,19 +430,19 @@ public partial class AddViewSystems : ReactiveSystem<GameEntity> {
 #if UNITY_EDITOR
     private static int EnsureLayer(string name, SerializedObject tagManagerAsset)
     {
-#if UNITY_5
+//#if UNITY_5
         SerializedProperty layersProp = tagManagerAsset.FindProperty("layers");
-#endif
+//#endif
         int firstVacant = -1;
         SerializedProperty firstVacantProp = null;
         for (int i = 8; i <= 31; i++)
         {
-#if UNITY_5
+//#if UNITY_5
             var sp = layersProp.GetArrayElementAtIndex(i);
-#else
-                var layerPropName = "User Layer " + i;
-                var sp = tagManagerAsset.FindProperty(layerPropName);
-#endif
+//#else
+//                var layerPropName = "User Layer " + i;
+//                var sp = tagManagerAsset.FindProperty(layerPropName);
+//#endif
             if (sp == null)
             {
                 continue;

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using Entitas;
 using Apex;
 using Apex.Units;
-public sealed class PlayerInputController:MonoBehaviour {
-    public enum speedTypes{ FullSpeed=0,HalfSpeed,Stop,Reversal }
+using UnityEngine.UI;
+
+public sealed class PlayerInputController : MonoBehaviour {
+    public enum speedTypes { FullSpeed = 0, HalfSpeed, Stop, Reversal }
     public Dictionary<speedTypes, float> speedMap;
     public UltimateJoystick joystick;
 
@@ -14,10 +16,10 @@ public sealed class PlayerInputController:MonoBehaviour {
     public float halfSpeed = 1.5f;
     public float revers = -2f;
     public Transform startPosition;
-
+    public Slider slider;
     void Start()
-    {  }
-
+    { }
+    
     void Awake()
     {
         speedMap = new Dictionary<speedTypes, float>()
@@ -45,13 +47,13 @@ public sealed class PlayerInputController:MonoBehaviour {
     }
 
     private bool _IsSpeedChanged;
-    public bool IsSpeedChanged { get {return _IsSpeedChanged; } }
+    public bool IsSpeedChanged { get { return _IsSpeedChanged; } }
     private speedTypes currentSpeed;
     private float _inputAccelerate;
     public float accelerate { get { return _inputAccelerate; } }
     public void FullSpeed()
     {
-        if (currentSpeed == speedTypes.HalfSpeed) 
+        if (currentSpeed == speedTypes.HalfSpeed)
             InputSpeedEventHandler(speedTypes.FullSpeed);
     }
 
@@ -63,8 +65,8 @@ public sealed class PlayerInputController:MonoBehaviour {
 
     public void Stop()
     {
-       // if (currentSpeed != speedTypes.FullSpeed )
-            InputSpeedEventHandler(speedTypes.Stop);
+        // if (currentSpeed != speedTypes.FullSpeed )
+        InputSpeedEventHandler(speedTypes.Stop);
     }
 
     public void Reversal()
@@ -75,6 +77,27 @@ public sealed class PlayerInputController:MonoBehaviour {
 
     public Vector3 Position()
     {
-       return startPosition.position;
+        return startPosition.position;
     }
+
+    public bool fire = false;
+    public void Fire()
+    {
+
+        fire = true; 
+
+    }
+
+    public bool IsFire()
+    {
+        if (fire) {
+            fire = false;
+            return true;
+        }
+        else
+            return false;
+    }
+
+
+    
 }
