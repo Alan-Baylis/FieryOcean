@@ -32,12 +32,18 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
            
             input.ReplaceMoveInput(_playerController.accelerate);
             input.ReplaceInputOwner(PLAYER1_ID);
+            
         }
 
         if (_playerController.IsFire())
         {
+            InputEntity inputShoot = _pools.input.CreateEntity();
 
+            uint cannonId = 1;
+            CannonParams cannonParams = new CannonParams(cannonId);
 
+            inputShoot.AddCannonShoot(cannonParams);
+            inputShoot.AddInputOwner(PLAYER1_ID);
         }
     }
 
