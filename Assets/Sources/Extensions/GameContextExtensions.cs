@@ -37,4 +37,26 @@ public static class GameEntityExtensions {
         entity.AddPosition(server_entity.position);
         return entity;
     }
+
+    public static BulletsEntity ApplyBullet(this BulletsContext context, Vector3 position, Vector3 velocity, Entitas.Utils.ObjectPool<GameObject> gameObjectPool)
+    {
+        BulletsEntity bulletEntity = context.CreateEntity();
+
+        bulletEntity.AddPosition(position);
+        bulletEntity.AddVelocity(velocity);
+        bulletEntity.AddViewObjectPool(gameObjectPool);
+
+        return bulletEntity;
+    }
+
+    public static GameEntity ApplyBullet(this GameContext context, Vector3 position, Vector3 velocity, Entitas.Utils.ObjectPool<GameObject> gameObjectPool)
+    {
+        GameEntity bulletEntity = context.CreateEntity();
+
+        bulletEntity.AddPosition(position);
+        bulletEntity.AddVelocity(velocity);
+        bulletEntity.AddViewObjectPool(gameObjectPool);
+
+        return bulletEntity;
+    }
 }

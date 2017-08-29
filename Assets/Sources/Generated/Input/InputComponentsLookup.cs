@@ -8,17 +8,19 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int Collision = 0;
-    public const int InputOwner = 1;
-    public const int MoveInput = 2;
-    public const int Rigidbody = 3;
-    public const int ShootInput = 4;
-    public const int SlowMotion = 5;
-    public const int Tick = 6;
+    public const int CannonShoot = 0;
+    public const int Collision = 1;
+    public const int InputOwner = 2;
+    public const int MoveInput = 3;
+    public const int Rigidbody = 4;
+    public const int ShootInput = 5;
+    public const int SlowMotion = 6;
+    public const int Tick = 7;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
+        "CannonShoot",
         "Collision",
         "InputOwner",
         "MoveInput",
@@ -29,6 +31,7 @@ public static class InputComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(CannonShootComponent),
         typeof(CollisionComponent),
         typeof(InputOwnerComponent),
         typeof(MoveInputComponent),

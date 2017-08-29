@@ -2,47 +2,40 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 using KBEngine;
+using System;
 
-public sealed class RenderPositionSystem : IExecuteSystem
+public sealed class RenderPositionSystem : ReactiveSystem<BulletsEntity>
 {
-    const string PLAYER_ID = "Player1";
-   // public EntityCollector entityCollector { get { return _groupObserver; } }
-
-    //EntityCollector _groupObserver;
-    IGroup<InputEntity> inputs;
     Contexts _pools;
-    private UltimateJoystick _joystick;
-    PlayerMovementController move1;
-    public RenderPositionSystem(Contexts contexts, UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap, float masterY)
+
+    public RenderPositionSystem(Contexts contexts) : base(contexts.bullets)
     {
         _pools = contexts;
-        inputs = contexts.input.GetGroup(InputMatcher.MoveInput);
-        _joystick = joystick;
-        
-        move1 = new PlayerMovementController(speedMap, masterY);
     }
 
-    float lastAc = 0;
-    public void Execute()
-    {    
-        var player = _pools.game.GetEntityWithPlayerId(PLAYER_ID);
+    protected override ICollector<BulletsEntity> GetTrigger(IContext<BulletsEntity> context)
+    {
+        return new Collector<BulletsEntity>(
+           new[] {
+                 context.GetGroup(BulletsMatcher.Position),
+                 context.GetGroup(BulletsMatcher.View)
+           },
+           new[] {
+                 GroupEvent.Added,
+                 GroupEvent.Added
+           });
+    }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+    protected override void Execute(List<BulletsEntity> entities)
+    {
+        foreach (var e in entities)
         {
-            Debug.Log("KeyCode.Space");
-            KBEngine.Event.fireIn("jump");
+            e.view.controller.position = e.position.value;
         }
+    }
 
-        if (inputs.count > 0)
-            lastAc = inputs.GetEntities()[0].moveInput.accelerate;
-
-        move1.Move (
-                        player.playerView.controller.shipDirectional.GetShipDirectional(),
-                        player.playerView.controller.rigidbody,
-                        _joystick.GetPosition(),
-                        lastAc
-                   );
-
-        player.ReplacePlayerPosition(player.playerView.controller.transform.position);
+    protected override bool Filter(BulletsEntity entity)
+    {
+        return entity.hasView;
     }
 }

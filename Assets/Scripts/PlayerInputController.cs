@@ -81,11 +81,10 @@ public sealed class PlayerInputController : MonoBehaviour {
     }
 
     public bool fire = false;
+
     public void Fire()
     {
-
         fire = true; 
-
     }
 
     public bool IsFire()

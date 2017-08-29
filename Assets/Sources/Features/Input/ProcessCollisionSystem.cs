@@ -2,14 +2,15 @@ using System;
 using System.Collections.Generic;
 using Entitas;
 
-public sealed class ProcessCollisionSystem : ReactiveSystem<InputEntity> { //ReactiveSystemICleanupSystem {
-
+public sealed class ProcessCollisionSystem : ReactiveSystem<InputEntity>, ICleanupSystem
+{ 
     public ProcessCollisionSystem(Contexts contexts) : base(contexts.input) {
+        _pool = contexts.input;
         _collisions = contexts.input.GetGroup(InputMatcher.Collision);
     }
 
     protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) {
-        return context.CreateCollector(InputMatcher.Collision);
+        return context.CreateCollector(InputMatcher.Collision.Added());
     }
 
     protected override bool Filter(InputEntity entity) {
@@ -20,21 +21,22 @@ public sealed class ProcessCollisionSystem : ReactiveSystem<InputEntity> { //Rea
         return true;
     }
 
-    IContext<InputEntity> _pool;
+    InputContext _pool;
     IGroup<InputEntity> _collisions;
 
     protected override void Execute(List<InputEntity> entities) {
-       //foreach(var e in entities) {
+       foreach(var e in entities) {
 
-       //     if (e.collision.self is GameEntity)
-       //     {
-       //         GameEntity ge = (GameEntity)e.collision.self;
+             if (e.collision.self is BulletsEntity)
+             {
+                 BulletsEntity bge = (BulletsEntity)e.collision.self;
 
-       //         ge.ReplaceHealth(ge.health.value - 1);
-       //         var newHealth = e.collision.other.health.value - e.collision.self.damage.value;
-       //         e.collision.other.ReplaceHealth(Math.Max(0, newHealth));
-       //     }
-       // }
+                 bge.ReplaceHealth(/*ge.health.value - 1*/ 0);
+                 //GameEntity ge = ((GameEntity)e.collision.other);
+                 //var newHealth = ge.health.value - ((BulletsEntity)e.collision.self).damage.value;
+                 //ge.ReplaceHealth(Math.Max(0, newHealth));
+             }
+         }
     }
 
     public void Cleanup() {

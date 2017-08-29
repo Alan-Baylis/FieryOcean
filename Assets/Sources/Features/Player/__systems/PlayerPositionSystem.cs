@@ -12,14 +12,14 @@ public sealed class PlayerPositionSystem : IExecuteSystem
     IGroup<InputEntity> inputs;
     Contexts _pools;
     private UltimateJoystick _joystick;
-    PlayerMovementController move1;
+    PlayerMovementController movePlayer;
     public PlayerPositionSystem(Contexts contexts, UltimateJoystick joystick, Dictionary<PlayerInputController.speedTypes, float> speedMap, Vector3 startPosition)
     {
         _pools = contexts;
         inputs = contexts.input.GetGroup(InputMatcher.MoveInput);
         _joystick = joystick;
         
-        move1 = new PlayerMovementController(speedMap, startPosition.y);
+        movePlayer = new PlayerMovementController(speedMap, startPosition.y);
         _beforePosition = startPosition;
     }
 
@@ -36,7 +36,7 @@ public sealed class PlayerPositionSystem : IExecuteSystem
         if (inputs.count > 0)
             lastAc = inputs.GetEntities()[0].moveInput.accelerate;
 
-        _nextPosition = move1.Move( player.playerView.controller.shipDirectional.GetShipDirectional(),
+        _nextPosition = movePlayer.Move( player.playerView.controller.shipDirectional.GetShipDirectional(),
                                     player.playerView.controller.rigidbody,
                                     _joystick.GetPosition(),
                                     lastAc                                                              );

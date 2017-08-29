@@ -51,7 +51,6 @@ public class GameController : MonoBehaviour {
 
     Systems createSystems(Contexts contexts)
     {
-
         //CreateEnemySystem es = new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position });
         //es.SetPosition(new Vector3[] { enemisStartPositions.startPoint.position });
 
@@ -73,16 +72,21 @@ public class GameController : MonoBehaviour {
         .Add(new CreatePlayerSystem(contexts, playerInputController.Position()))
         .Add(new CreateCameraSystem(contexts, cam))
         .Add(new AddViewSystems(contexts))
-        //.Add(new AddViewFromObjectPoolSystem(contexts))
+        .Add(new AddViewFromObjectPoolSystem(contexts))
 
         // Initialize and Reactive
-        .Add(new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position }))
+     //   .Add(new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position }))
 
         // Input
         .Add(new InputSystem(playerInputController, contexts))
         .Add(new ProcessMoveInputSystem(contexts))
-        .Add(new CameraSystem(contexts))
+        .Add(new ProcessShootInputSystem(contexts))
 
+        //
+        .Add(new CameraSystem(contexts))
+        //
+        .Add(new RenderPositionSystem(contexts))
+        
         // Update
         //.Add(pools.core.CreateSystem(new BulletCoolDownSystem()))
         //.Add(pools.core.CreateSystem(new StartEnemyWaveSystem()))
@@ -90,9 +94,11 @@ public class GameController : MonoBehaviour {
         //.Add(new VelocitySystem())
         .Add(new AddPlayerStartPosition(contexts))
         .Add(playerPositionSystem)
-        .Add(new AddEnemyStartPositionSystem(contexts))
-        .Add(new EnemyPositionSystem(contexts))
+     //   .Add(new AddEnemyStartPositionSystem(contexts))
+     //   .Add(new EnemyPositionSystem(contexts))
 
+        .Add(new ProcessCollisionSystem(contexts))
+        .Add(new CheckHealthSystem(contexts))
         // Destroy
         .Add(new DestroyEntitySystem(contexts));
         //.Add(pools.CreateSystem(new DestroyEnemySystem()));

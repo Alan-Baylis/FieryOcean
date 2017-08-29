@@ -475,7 +475,7 @@ public partial class AddViewSystems : ReactiveSystem<GameEntity> {
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        //return context.CreateCollector(GameMatcher.WhoAMi.Added());
+        // return context.CreateCollector(GameMatcher.WhoAMi.Added());
 
         return new Collector<GameEntity>(
            new[] {
