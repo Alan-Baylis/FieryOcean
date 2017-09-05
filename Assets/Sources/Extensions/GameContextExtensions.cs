@@ -38,13 +38,14 @@ public static class GameEntityExtensions {
         return entity;
     }
 
-    public static BulletsEntity ApplyBullet(this BulletsContext context, Vector3 position, Vector3 velocity, Entitas.Utils.ObjectPool<GameObject> gameObjectPool)
+    public static BulletsEntity ApplyBullet(this BulletsContext context, Vector3 position, Vector3 target, Vector3 velocity, Entitas.Utils.ObjectPool<GameObject> gameObjectPool)
     {
         BulletsEntity bulletEntity = context.CreateEntity();
 
         bulletEntity.AddPosition(position);
         bulletEntity.AddVelocity(velocity);
         bulletEntity.AddViewObjectPool(gameObjectPool);
+       // bulletEntity.AddTarget(target);
 
         return bulletEntity;
     }

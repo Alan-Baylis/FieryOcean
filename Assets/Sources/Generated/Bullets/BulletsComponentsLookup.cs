@@ -8,8 +8,8 @@
 //------------------------------------------------------------------------------
 public static class BulletsComponentsLookup {
 
-    public const int Asset = 0;
-    public const int Bullet = 1;
+    public const int Aim = 0;
+    public const int Asset = 1;
     public const int Damage = 2;
     public const int Destroy = 3;
     public const int Forse = 4;
@@ -24,8 +24,8 @@ public static class BulletsComponentsLookup {
     public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
+        "Aim",
         "Asset",
-        "Bullet",
         "Damage",
         "Destroy",
         "Forse",
@@ -39,8 +39,8 @@ public static class BulletsComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AimComponent),
         typeof(AssetComponent),
-        typeof(BulletComponent),
         typeof(DamageComponent),
         typeof(DestroyComponent),
         typeof(ForseComponent),

@@ -3,11 +3,11 @@
 using UnityEngine;
 using KBEngine;
 using System.Collections;
-using Entitas.Unity.Serialization.Blueprints;
+//using Entitas.Unity.Serialization.Blueprints;
 
 public class GameController : MonoBehaviour {
 
-    public Blueprints blueprints;
+    //public Blueprints blueprints;
     public Camera cam;
     public PlayerInputController playerInputController;
     public EnemiesStartPositions enemisStartPositions;
@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour {
         return new Feature("Systems")
         // Initialize
         .Add(ws)
+        .Add(new AnimateDestroyViewSystem(contexts))
         //.Add(new IncrementTickSystem())
         .Add(new CreatePlayerSystem(contexts, playerInputController.Position()))
         .Add(new CreateCameraSystem(contexts, cam))
@@ -75,7 +76,7 @@ public class GameController : MonoBehaviour {
         .Add(new AddViewFromObjectPoolSystem(contexts))
 
         // Initialize and Reactive
-     //   .Add(new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position }))
+        .Add(new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position }))
 
         // Input
         .Add(new InputSystem(playerInputController, contexts))
@@ -86,7 +87,7 @@ public class GameController : MonoBehaviour {
         .Add(new CameraSystem(contexts))
         //
         .Add(new RenderPositionSystem(contexts))
-        
+        .Add(new VelocitySystem(contexts))
         // Update
         //.Add(pools.core.CreateSystem(new BulletCoolDownSystem()))
         //.Add(pools.core.CreateSystem(new StartEnemyWaveSystem()))
@@ -94,8 +95,8 @@ public class GameController : MonoBehaviour {
         //.Add(new VelocitySystem())
         .Add(new AddPlayerStartPosition(contexts))
         .Add(playerPositionSystem)
-     //   .Add(new AddEnemyStartPositionSystem(contexts))
-     //   .Add(new EnemyPositionSystem(contexts))
+        .Add(new AddEnemyStartPositionSystem(contexts))
+        .Add(new EnemyPositionSystem(contexts))
 
         .Add(new ProcessCollisionSystem(contexts))
         .Add(new CheckHealthSystem(contexts))

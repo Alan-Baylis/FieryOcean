@@ -89,6 +89,7 @@ public sealed class PlayerInputController : MonoBehaviour {
 
     public bool IsFire()
     {
+        
         if (fire) {
             fire = false;
             return true;
@@ -97,6 +98,6 @@ public sealed class PlayerInputController : MonoBehaviour {
             return false;
     }
 
-
+     
     
 }
