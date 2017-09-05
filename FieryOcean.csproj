@@ -485,6 +485,7 @@
     <Compile Include="Assets\Scripts\UI\EventsRegistrator.cs" />
     <Compile Include="Assets\Scripts\UI\Login.cs" />
     <Compile Include="Assets\Scripts\UI\SelAvatars.cs" />
+    <Compile Include="Assets\Scripts\UI\SliderAnimation.cs" />
     <Compile Include="Assets\Scripts\UI\StartUI.cs" />
     <Compile Include="Assets\Scripts\UI\UIcommon.cs" />
     <Compile Include="Assets\Scripts\View\AnimationEventHandler\PathCompleteEventHandler.cs" />
