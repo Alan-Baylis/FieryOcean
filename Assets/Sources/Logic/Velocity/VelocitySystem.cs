@@ -6,7 +6,6 @@ public sealed class VelocitySystem : IExecuteSystem
 {
     Contexts _contexts;
     readonly IGroup<BulletsEntity> _bullets;
-    private Contexts contexts;
 
     public VelocitySystem(Contexts contexts) 
     {
@@ -18,8 +17,14 @@ public sealed class VelocitySystem : IExecuteSystem
     {
         foreach(var e in _bullets.GetEntities()) 
         {
-            var pos = e.position.value;
-            e.ReplacePosition(pos + e.velocity.value);
+            if (e.hasView)
+            {
+                if (e.bulletLiveTime.elapse_time < e.bullet.flightDuration)
+                {
+                    e.view.controller.gameObject.transform.Translate(0, (e.bullet.Vy - (e.bullet.gravity * e.bulletLiveTime.elapse_time)) * Time.deltaTime, e.bullet.Vx * Time.deltaTime);
+                    e.ReplaceBulletLiveTime(e.bulletLiveTime.elapse_time + Time.deltaTime);
+                }
+            }
         }
     }
 }

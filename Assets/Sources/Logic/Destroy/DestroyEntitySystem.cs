@@ -5,6 +5,7 @@ using Entitas;
 public sealed class DestroyEntitySystem : ReactiveSystem<BulletsEntity> {
 
     Contexts context;
+
     public DestroyEntitySystem(Contexts contexts) : base(contexts.bullets)
     { }
 
@@ -12,10 +13,8 @@ public sealed class DestroyEntitySystem : ReactiveSystem<BulletsEntity> {
         foreach(var e in entities) {
             e.view.controller.Hide(true);
             e.Destroy();
-            
            
         }
-
     }
 
     protected override bool Filter(BulletsEntity entity)

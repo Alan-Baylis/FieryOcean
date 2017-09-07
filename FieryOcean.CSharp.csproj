@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AEB60FCA-C4E7-2939-72D3-B6AC6307407B}</ProjectGuid>
+    <ProjectGuid>{FD10CD14-1568-8219-3BF9-C10D17ED70DD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -102,9 +102,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="FieryOcean.Plugins.csproj">
-      <Project>{C9FFC3B4-B31A-B203-95F9-2B358235F138}</Project>
-      <Name>FieryOcean.Plugins</Name>
+    <ProjectReference Include="FieryOcean.CSharp.Plugins.csproj">
+      <Project>{4199E1C3-49BD-8CEB-8CF6-C3BC36517ADB}</Project>
+      <Name>FieryOcean.CSharp.Plugins</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -647,6 +647,7 @@
     <Compile Include="Assets\Sources\Logic\View\AddViewFromObjectPoolSystem.cs" />
     <Compile Include="Assets\Sources\Logic\View\AddViewSystems.cs" />
     <Compile Include="Assets\Sources\Logic\World\WorldSystem.cs" />
+    <Compile Include="Assets\Sources\NewBehaviourScript.cs" />
     <Compile Include="Assets\Sources\View\BulletViewController.cs" />
     <Compile Include="Assets\Sources\View\EnemyViewController.cs" />
     <Compile Include="Assets\Sources\View\PlayerViewController.cs" />
@@ -681,6 +682,5 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

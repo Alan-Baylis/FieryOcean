@@ -24,6 +24,9 @@ public partial class AddViewFromObjectPoolSystem : ReactiveSystem<BulletsEntity>
     {
         foreach (var e in entities) {
             var gameObject = e.viewObjectPool.pool.Get();
+
+           // _container.rotation = gameObject.transform.rotation;
+
             gameObject.SetActive(true);
             gameObject.transform.SetParent(_container, false);
             gameObject.Link(e, _pools.bullets);

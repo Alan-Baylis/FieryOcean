@@ -41,11 +41,9 @@ public sealed class ProcessShootInputSystem : ReactiveSystem<InputEntity>
         {
             var player = _pools.game.GetEntityWithPlayerId(e.inputOwner.playerId);
 
-            uint bulletSpeed = 20;
-
-            _pools.bullets.ApplyBullet( player.position.value + Vector3.up*8,
-                                        e.cannonShoot.cannonParams.target,
-                                        player.playerView.controller.rigidbody.velocity * bulletSpeed,
+            _pools.bullets.ApplyBullet( player.position.value + e.cannonShoot.cannonParams.shipPosition,
+                                       /* e.cannonShoot.cannonParams.target*/ new Vector3(30,0,140),
+                                        player.playerView.controller.rigidbody.velocity,
                                         _bulletsObjectPool                                              ); 
         }
     }

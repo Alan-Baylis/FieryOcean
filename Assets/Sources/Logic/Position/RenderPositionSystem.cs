@@ -4,7 +4,7 @@ using UnityEngine;
 using KBEngine;
 using System;
 
-public sealed class RenderPositionSystem : ReactiveSystem<BulletsEntity>, ICleanupSystem
+public sealed class RenderPositionSystem : ReactiveSystem<BulletsEntity>//, ICleanupSystem
 {
     Contexts _pools;
 
@@ -39,8 +39,8 @@ public sealed class RenderPositionSystem : ReactiveSystem<BulletsEntity>, IClean
         return entity.hasView;
     }
 
-    public void Cleanup()
-    {
-        Debug.Log("work cleanup");
-    }
+    //public void Cleanup()
+    //{
+    //    Debug.Log("work cleanup");
+    //}
 }

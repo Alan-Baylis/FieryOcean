@@ -10,7 +10,7 @@ public sealed class CheckHealthSystem : ReactiveSystem<BulletsEntity>
 
     protected override ICollector<BulletsEntity> GetTrigger(IContext<BulletsEntity> context)
     {
-        return context.CreateCollector(BulletsMatcher.Health.AddedOrRemoved());
+        return context.CreateCollector(BulletsMatcher.Health.Added());
     }
 
     protected override bool Filter(BulletsEntity entity)

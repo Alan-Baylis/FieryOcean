@@ -10,22 +10,26 @@ public static class BulletsComponentsLookup {
 
     public const int Aim = 0;
     public const int Asset = 1;
-    public const int Damage = 2;
-    public const int Destroy = 3;
-    public const int Forse = 4;
-    public const int Health = 5;
-    public const int OutOfScreen = 6;
-    public const int PlayerView = 7;
-    public const int Position = 8;
-    public const int Velocity = 9;
-    public const int View = 10;
-    public const int ViewObjectPool = 11;
+    public const int Bullet = 2;
+    public const int BulletLiveTime = 3;
+    public const int Damage = 4;
+    public const int Destroy = 5;
+    public const int Forse = 6;
+    public const int Health = 7;
+    public const int OutOfScreen = 8;
+    public const int PlayerView = 9;
+    public const int Position = 10;
+    public const int Velocity = 11;
+    public const int View = 12;
+    public const int ViewObjectPool = 13;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "Aim",
         "Asset",
+        "Bullet",
+        "BulletLiveTime",
         "Damage",
         "Destroy",
         "Forse",
@@ -41,6 +45,8 @@ public static class BulletsComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(AimComponent),
         typeof(AssetComponent),
+        typeof(BulletComponent),
+        typeof(BulletLiveTimeComponent),
         typeof(DamageComponent),
         typeof(DestroyComponent),
         typeof(ForseComponent),

@@ -8,13 +8,15 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
 
     Contexts _pools;
     IGroup<InputEntity> _moveInputs;
+    IGroup<InputEntity> _cannonShootInputs;
     PlayerInputController _playerController;
 
     public InputSystem(PlayerInputController playerController,Contexts contexts)
     {
         _playerController = playerController;
         _pools = contexts;
-
+        _moveInputs = contexts.input.GetGroup(InputMatcher.MoveInput);
+        _cannonShootInputs = contexts.input.GetGroup(InputMatcher.CannonShoot);
         //_moveInputs = contexts.input.GetGroup
     }
 
@@ -40,7 +42,7 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
             InputEntity inputShoot = _pools.input.CreateEntity();
 
             uint cannonId = 1;
-            CannonParams cannonParams = new CannonParams(cannonId,Input.mousePosition);
+            CannonParams cannonParams = new CannonParams(cannonId, Input.mousePosition,new Vector3(0,2,0));
 
             inputShoot.AddCannonShoot(cannonParams);
             
@@ -64,7 +66,13 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
 
 
     public void Cleanup() {
-        foreach(var e in _pools.input.GetEntities()) {
+
+        foreach(var e in _cannonShootInputs.GetEntities()) {
+            e.Destroy();
+        }
+
+        foreach (var e in _moveInputs.GetEntities())
+        {
             e.Destroy();
         }
     }

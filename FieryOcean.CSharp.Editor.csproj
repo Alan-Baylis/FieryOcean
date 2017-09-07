@@ -5,16 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C9FFC3B4-B31A-B203-95F9-2B358235F138}</ProjectGuid>
+    <ProjectGuid>{64B10D7F-1570-C0CC-4D84-A6EB76CE1CF8}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
-    <UnityProjectType>GamePlugins:3</UnityProjectType>
+    <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.1.0f3</UnityVersion>
     <RootNamespace></RootNamespace>
@@ -55,11 +55,23 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\UnityAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>Library\UnityAssemblies\UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>Library\UnityAssemblies\UnityEngine.TestRunner.dll</HintPath>
@@ -70,14 +82,47 @@
     <Reference Include="UnityEngine.Timeline">
       <HintPath>Library\UnityAssemblies\UnityEngine.Timeline.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Timeline">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TreeEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.TreeEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.HoloLens">
+      <HintPath>Library\UnityAssemblies\UnityEditor.HoloLens.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.VR">
+      <HintPath>Library\UnityAssemblies\UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
     <Reference Include="ApexShared">
       <HintPath>Assets\Apex\Apex Binaries\ApexShared.dll</HintPath>
+    </Reference>
+    <Reference Include="ApexLicensing">
+      <HintPath>Assets\Apex\Apex Binaries\Editor\ApexLicensing.dll</HintPath>
+    </Reference>
+    <Reference Include="ApexSharedEditor">
+      <HintPath>Assets\Apex\Apex Binaries\Editor\ApexSharedEditor.dll</HintPath>
     </Reference>
     <Reference Include="Entitas.Blueprints">
       <HintPath>Assets\Libraries\Entitas\Entitas.Blueprints.dll</HintPath>
@@ -100,39 +145,99 @@
     <Reference Include="fabl">
       <HintPath>Assets\Libraries\Entitas\fabl.dll</HintPath>
     </Reference>
+    <Reference Include="Entitas.CodeGeneration.CodeGenerator">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.CodeGeneration.CodeGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.CodeGeneration">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.CodeGeneration.Plugins">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.CodeGeneration.Plugins.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.CodeGeneration.Unity.Editor">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.CodeGeneration.Unity.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Migration">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.Migration.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Migration.Unity.Editor">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.Migration.Unity.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.Unity.Editor">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.Unity.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.VisualDebugging.CodeGeneration.Plugins">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.VisualDebugging.CodeGeneration.Plugins.dll</HintPath>
+    </Reference>
+    <Reference Include="Entitas.VisualDebugging.Unity.Editor">
+      <HintPath>Assets\Libraries\Entitas\Editor\Entitas.VisualDebugging.Unity.Editor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
-    <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\Displace.cs" />
-    <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
-    <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\MeshContainer.cs" />
-    <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\PlanarReflection.cs" />
-    <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\SpecularLighting.cs" />
-    <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
-    <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
-    <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\ActivateTrigger.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\AlphaButtonClickMask.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\AutoMoveAndRotate.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\CameraRefocus.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\CurveControlledBob.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\DragRigidbody.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\DynamicShadowSettings.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\EventSystemChecker.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\FollowTarget.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\FOVKick.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\FPSCounter.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\LerpControlledBob.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\ObjectResetter.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\PlatformSpecificContent.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\SimpleActivatorMenu.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\SmoothFollow.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\TimedObjectActivator.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\TimedObjectDestructor.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\WaypointCircuit.cs" />
-    <Compile Include="Assets\Standard Assets\Utility\WaypointProgressTracker.cs" />
+    <ProjectReference Include="FieryOcean.CSharp.csproj">
+      <Project>{FD10CD14-1568-8219-3BF9-C10D17ED70DD}</Project>
+      <Name>FieryOcean.CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="FieryOcean.CSharp.Plugins.csproj">
+      <Project>{4199E1C3-49BD-8CEB-8CF6-C3BC36517ADB}</Project>
+      <Name>FieryOcean.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Apex\Apex Path\Editor\ArrivalBaseEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\AttributePropertyDrawer.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\AttributesUtilityWindow.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\DefaultArrivalComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\DefaultHeightNavigatorEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\DefaultOrientationComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\DefaultSpeedComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\DefaultSteeringComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\DynamicObstacleEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\EditorUtilitiesInternal.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\GameServicesInitializerComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\GridComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\GridFieldUtilityWindow.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\GridPortalComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\GridVisualizerEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\HeightNavigationCapabilitiesPropertyDrawer.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\HumanoidSpeedComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\InputReceiverBasicEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\LayerMappingComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\MenuExtentions.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\NavigationSettingsComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\OrientationComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\PathFinderVisualizerEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\PathOptionsComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\PathServiceComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\PathVisualizerEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\PatrolPointsComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\SpeedComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\SteerableUnitComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\SteerForPathComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\SteeringComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\TerrainHeightMapEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\UnitComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\Versioning\ApexPath.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\Versioning\ApexPathPatrolUpgrader.cs" />
+    <Compile Include="Assets\Apex\Apex Path\Editor\Versioning\ApexPathVersionUpgrader.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\DefaultSteerForFormationEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\NavigationSettingsComponentEditorSteering.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\PathVisualizerEditorSteering.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\SteerForBlockedCellRepulsionComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\SteerForContainmentComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\SteerForSeparationComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\SteerForUnitAvoidanceComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\SteeringScannerEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\VectorFieldManagerComponentEditor.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\VectorFieldOptionsPropertyDrawer.cs" />
+    <Compile Include="Assets\Apex\Apex Steer\Editor\Versioning\ApexSteer.cs" />
+    <Compile Include="Assets\Editor\DefaultInstanceCreator\DefaultIViewControllerInstanceCreator.cs" />
+    <Compile Include="Assets\Editor\Ultimate Joystick\UltimateJoystickEditor.cs" />
+    <Compile Include="Assets\Editor\Ultimate Joystick\UltimateJoystickWindow.cs" />
+    <Compile Include="Assets\Inspector Name Drawer\Editor\InspectorNameDrawer.cs" />
+    <Compile Include="Assets\Scripts\View\Editor\EntityLinkInspector.cs" />
+    <Compile Include="Assets\Scripts\View\ViewController\Editor\TypeDrawer\ViewControllerTypeDrawer.cs" />
+    <Compile Include="Assets\Sources\Editor\TypeDrawer\IntVector2TypeDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Apex\Apex Binaries\ApexShared.XML" />
@@ -155,6 +260,5 @@
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
