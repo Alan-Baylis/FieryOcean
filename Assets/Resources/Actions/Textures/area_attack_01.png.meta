@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 346e63b2c5345d04cbe2fdbe2131bca0
-timeCreated: 1503604756
+guid: 1e142fc1d0891dd48a5087f65426d4f1
+timeCreated: 1505856458
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -13,9 +13,9 @@ TextureImporter:
     fadeOut: 0
     borderMipMap: 0
     mipMapsPreserveCoverage: 0
-    alphaTestReferenceValue: 0.5
+    alphaTestReferenceValue: 0.1
     mipMapFadeDistanceStart: 1
-    mipMapFadeDistanceEnd: 3
+    mipMapFadeDistanceEnd: 7
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
@@ -34,8 +34,8 @@ TextureImporter:
     aniso: 16
     mipBias: -1
     wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapV: -1
+    wrapW: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
