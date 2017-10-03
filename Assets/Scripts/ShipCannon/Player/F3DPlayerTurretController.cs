@@ -8,8 +8,8 @@ namespace Forge3D
         RaycastHit hitInfo; // Raycast structure
         public F3DTurret turret;
         bool isFiring; // Is turret currently in firing state
-        public F3DFXController fxController;
-
+        //public F3DFXController fxController;
+        public Transform aimingPointTransform;
         void Update()
         {
             CheckForTurn();
@@ -22,26 +22,31 @@ namespace Forge3D
             if (!isFiring && Input.GetKeyDown(KeyCode.Mouse0))
             {
                 isFiring = true;
-                fxController.Fire();
+                //fxController.Fire();
             }
 
             // Stop firing
             if (isFiring && Input.GetKeyUp(KeyCode.Mouse0))
             {
                 isFiring = false;
-                fxController.Stop();
+                //fxController.Stop();
             }
         }
 
         void CheckForTurn()
         {
             // Construct a ray pointing from screen mouse position into world space
-            Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            // Raycast
-            if (Physics.Raycast(cameraRay, out hitInfo, 500f))
+            if (Input.GetMouseButton(0))
             {
-                turret.SetNewTarget(hitInfo.point);
+                Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                // Raycast
+                if (Physics.Raycast(cameraRay, out hitInfo, 500f))
+                {
+                    turret.SetNewTarget(hitInfo.point);
+                    aimingPointTransform.position = hitInfo.point;
+                    //Debug.Log(hitInfo.point);
+                }
             }
         }
     }

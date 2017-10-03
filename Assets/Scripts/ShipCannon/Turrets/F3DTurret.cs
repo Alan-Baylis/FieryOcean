@@ -9,26 +9,29 @@ namespace Forge3D
         [HideInInspector]
         public bool destroyIt = false;
 
-        public GameObject MountFake;
+        public GameObject MountOrigin;
         public GameObject Mount;
+        public GameObject SwivelOrigin;
         public GameObject Swivel;
 
         private Vector3 defaultDir;
         private Quaternion defaultRot;
 
+        private Transform headTransformOrigin;
         private Transform headTransform;
+        private Transform barrelTransformOrigin;
         private Transform barrelTransform;
-        private Transform barrelTransformOrig;
 
         public float HeadingTrackingSpeed = 2f;
         public float ElevationTrackingSpeed = 2f;
 
         private Vector3 targetPos;
         [HideInInspector]
-        public Vector3 headingVetor; 
-
-        private float curHeadingAngle = 0f;
-        private float curElevationAngle = 0f;
+        public Vector3 headingVetor;
+        [HideInInspector]
+        public float curHeadingAngle = 0f;
+        [HideInInspector]
+        public float curElevationAngle = 0f;
 
         public Vector2 HeadingLimit;
         public Vector2 ElevationLimit;
@@ -39,12 +42,17 @@ namespace Forge3D
         private bool fullAccess = false; 
         public Animator[] Animators;
 
+        public Transform anchorFire;
+        private ThrowSimulation bulletCalculations;
+
         void Awake()
         {
+            bulletCalculations = GetComponent<ThrowSimulation>();
+
+            headTransformOrigin = SwivelOrigin.GetComponent<Transform>();
             headTransform = Swivel.GetComponent<Transform>();
-            barrelTransform = MountFake.GetComponent<Transform>();
-            barrelTransformOrig = Mount.GetComponent<Transform>();
-            //barrelTransform.se
+            barrelTransformOrigin = MountOrigin.GetComponent<Transform>();
+            barrelTransform = Mount.GetComponent<Transform>();
         }
 
         public void PlayAnimation()
@@ -74,6 +82,7 @@ namespace Forge3D
             //defaultRot = Quaternion.FromToRotation(transform.forward, transform.forward);
             if (HeadingLimit.y - HeadingLimit.x >= 359.9f)
                 fullAccess = true; 
+
             StopAnimation();
         }
 
@@ -88,13 +97,78 @@ namespace Forge3D
         {
             return Vector3.Angle(Mount.transform.forward, targetPos - Mount.transform.position);
         }
-         
+
+        private float _elevationAngle;
+
+        public class CannonMath
+        {
+            private static float gravity = 10;
+            public static Vector3 GetNeededBarrelDirectional(Transform barrelTransform, Transform swivel, Vector3 anchorFire, Vector3 targetPos, float distance, float velocity_exp2)
+            {
+                float sin2Alpha = distance * gravity / velocity_exp2;
+                float angleOfSinInDegrees = (Mathf.Asin(sin2Alpha) * Mathf.Rad2Deg) / 2;
+
+                Vector3 elevationVector = Vector3.Normalize(F3DMath.ProjectVectorOnPlane(swivel.right, targetPos - barrelTransform.position));
+
+                Debug.DrawLine(elevationVector, elevationVector * 150, Color.green);
+
+                float _elevationAngle = F3DMath.SignedVectorAngle(swivel.forward, elevationVector, swivel.right);
+
+
+                // ------------------------- try again -------------------------
+               // distance = distance * ThrowSimulation.mashtab;
+                float _b = CalcB(_elevationAngle, velocity_exp2, distance);
+                float a = CalcA(_elevationAngle, velocity_exp2, distance);
+
+                float c = (gravity * distance * distance / 2 * velocity_exp2) + targetPos.y;
+
+                float D = CalcDiscriminant(_b, a, gravity * Mathf.Cos(_elevationAngle * Mathf.Deg2Rad) * Mathf.Cos(_elevationAngle * Mathf.Deg2Rad) * distance);
+                float tabAlpha = (float)((-_b + Math.Sqrt(D)) / 2 * a);
+                float angel = Mathf.Atan(tabAlpha) * Mathf.Rad2Deg;
+
+                // -------------------------------------------------------------
+
+                Vector3 v;
+
+                //if (hightBallistic <= 45f)
+                //    v = Quaternion.AngleAxis(-angleOfSinInDegrees, swivel.right)* anchorFire;
+                //else
+
+                v = Quaternion.AngleAxis(-angleOfSinInDegrees, swivel.right) * anchorFire;
+
+                Debug.Log("Valid angel: " + angleOfSinInDegrees.ToString());
+                Debug.DrawLine(v, v * 200, Color.magenta);
+                return v;
+            }
+
+            private static  float CalcB(float angelSlope, float velocity, float distance)
+            {
+                return -distance;  //-2 * Mathf.Cos(angelSlope * Mathf.Deg2Rad) * velocity;
+            }
+
+            private static float CalcA(float angel, float velocity, float distance)
+            {
+                //float t = -2 * Mathf.Sin(angel * Mathf.Deg2Rad) * velocity  + gravity * Mathf.Cos(angel * Mathf.Deg2Rad) * Mathf.Cos(angel * Mathf.Deg2Rad) * distance;
+                double tt = gravity * distance * distance;
+                double vv = 2 * velocity;
+                doubl e yy = tt / vv;
+                float t = gravity*distance*distance / 2* velocity; //gravity * Mathf.Cos(angel * Mathf.Deg2Rad) * Mathf.Cos(angel * Mathf.Deg2Rad) * distance + 2 * Mathf.Sin(angel * Mathf.Deg2Rad) * velocity;
+                return t;
+            }
+            private static float CalcDiscriminant(float b,float a, float c)
+            {
+                return b*b  - 4 * a * c;
+            }
+        }
+
+
         void Update()
         { 
             if (!smoothControlling)
             {
                 if (barrelTransform != null)
-                { 
+                {
+                    
                     /////// Heading
                     headingVetor = Vector3.Normalize(F3DMath.ProjectVectorOnPlane(headTransform.up, targetPos - headTransform.position));
                     float headingAngle = F3DMath.SignedVectorAngle(headTransform.forward, headingVetor, headTransform.up);
@@ -117,27 +191,44 @@ namespace Forge3D
                     // Heading limits
                     if (curHeadingAngle + headingStep > HeadingLimit.x && curHeadingAngle + headingStep < HeadingLimit.y || HeadingLimit.x <= -180f && HeadingLimit.y >= 180f || fullAccess)
                     {
+                        //ProjectileHelper.ComputeElevationToHitTargetWithSpeed(0, targetPos - headTransform.position, -9.8f, 10f, false, out headAngel);
+
                         curHeadingAngle += headingStep;
                         headTransform.rotation = headTransform.rotation * Quaternion.Euler(0f, headingStep, 0f);
-                        barrelTransformOrig.rotation = barrelTransformOrig.rotation * Quaternion.Euler(0f, headingStep, 0f);
+                        headTransformOrigin.rotation = headTransformOrigin.rotation * Quaternion.Euler( -headingStep,0f, 0f);
+                        //headTransformOrigin.rotation = headTransformOrigin.rotation * Quaternion.Euler(headAngel, 0f, 0f);
                     }
 
                     /////// Elevation
-                    Vector3 elevationVector = Vector3.Normalize(F3DMath.ProjectVectorOnPlane(headTransform.right, targetPos - barrelTransform.position));
-                    Debug.Log(barrelTransform.forward);
-                    float elevationAngle = F3DMath.SignedVectorAngle(barrelTransform.forward, elevationVector, headTransform.right);
+                    Vector3 tmp = targetPos - barrelTransform.position;
+                    //Debug.DrawLine(tmp, tmp * 100, Color.blue);
 
-                    // Elevation step and correction
-                    float elevationStep = Mathf.Sign(elevationAngle) * ElevationTrackingSpeed * Time.deltaTime;
-                    if (Mathf.Abs(elevationStep) > Mathf.Abs(elevationAngle))
-                        elevationStep = elevationAngle;
+                    float target_Distance = Vector3.Distance(anchorFire.position, targetPos);
 
-                    // Elevation limits
-                    if (curElevationAngle + elevationStep < ElevationLimit.y && curElevationAngle + elevationStep > ElevationLimit.x)
+                    if (ThrowSimulation.maxDistance > target_Distance)
                     {
-                        curElevationAngle += elevationStep;
-                        barrelTransform.rotation = barrelTransform.rotation * Quaternion.Euler(elevationStep, 0f, 0f);
-                        barrelTransformOrig.rotation = barrelTransformOrig.rotation * Quaternion.Euler(elevationStep, 0f, 0f);
+                        Vector3 needed = CannonMath.GetNeededBarrelDirectional(barrelTransform, headTransform, headTransform.forward, targetPos, target_Distance, bulletCalculations.projectile_Velocity_exp2);
+
+                        Debug.DrawLine(needed, needed * 100, Color.black);
+
+                        Vector3 elevationVector = Vector3.Normalize(F3DMath.ProjectVectorOnPlane( headTransform.right, needed ));
+                        Debug.DrawLine(elevationVector, elevationVector * 100, Color.yellow);
+                        
+                        float _elevationAngle = F3DMath.SignedVectorAngle(barrelTransform.forward, elevationVector, headTransform.right);
+                    
+                        // Elevation step and correction
+                        float elevationStep = Mathf.Sign(_elevationAngle) * ElevationTrackingSpeed * Time.deltaTime;
+
+                        if (Mathf.Abs(elevationStep) > Mathf.Abs(_elevationAngle))
+                            elevationStep = _elevationAngle;
+
+                        // Elevation limits
+                        if (curElevationAngle + elevationStep < ElevationLimit.y && curElevationAngle + elevationStep > ElevationLimit.x)
+                        {
+                            curElevationAngle += elevationStep;
+                            barrelTransformOrigin.rotation = barrelTransformOrigin.rotation * Quaternion.Euler(0f, 0f, elevationStep);
+                            barrelTransform.rotation = barrelTransform.rotation * Quaternion.Euler(elevationStep, 0f, 0f);
+                        }
                     }
                 }
             }
@@ -192,20 +283,14 @@ namespace Forge3D
 
             if (DebugDraw)
             {
-                // Vector3 end = 
-                //Debug.DrawLine(barrelTransform.position, barrelTransform.position + barrelTransform.forward * Vector3.Distance(barrelTransform.position, targetPos), Color.red);
-                Quaternion rotation = Quaternion.Euler(0f, -90f, 0f);
-
-                Vector3 f = barrelTransform.forward;
-
-                Vector3 t1 = (barrelTransform.position + f * Vector3.Distance(barrelTransform.position, targetPos));
-                //Vector3 rot = Vector3.RotateTowards(t1, Vector3.forward, step, 0f);
-                Vector3 t2 = rotation * t1;
-                //Debug.Log(Vector3.Angle(t1,t2));
-                Debug.DrawLine(barrelTransform.position, t2, Color.green);           
-                Debug.DrawLine(barrelTransform.position, t1, Color.red);
+                Debug.DrawLine(barrelTransform.position, barrelTransform.position + barrelTransform.forward * Vector3.Distance(barrelTransform.position, targetPos), Color.red);
+                Vector3 relative = transformFire.InverseTransformDirection(0, 0, 1);
+                //Debug.DrawLine(relative, relative * 100, Color.green);
             }
         }
+
+        public Transform transformFire;
+
         public float step = 20f;
     }
 }

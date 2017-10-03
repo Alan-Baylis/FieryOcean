@@ -142,15 +142,15 @@ namespace Forge3D
         // Fire turret weapon
         public void Fire()
         {
-            switch (DefaultFXType)
-            {
-                case F3DFXType.Vulcan:
-                    // Fire vulcan at specified rate until canceled
-                    timerID = F3DTime.time.AddTimer(0.05f, Vulcan);
-                    // Invoke manually before the timer ticked to avoid initial delay
-                    Vulcan();
-                    break;
-            }
+            //switch (DefaultFXType)
+            //{
+            //    case F3DFXType.Vulcan:
+            //        // Fire vulcan at specified rate until canceled
+            //        timerID = F3DTime.time.AddTimer(0.05f, Vulcan);
+            //        // Invoke manually before the timer ticked to avoid initial delay
+            //        Vulcan();
+            //        break;
+            //}
         }
 
         // Stop firing 

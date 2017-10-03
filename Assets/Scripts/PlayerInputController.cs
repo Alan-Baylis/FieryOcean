@@ -5,6 +5,8 @@ using Entitas;
 using Apex;
 using Apex.Units;
 using UnityEngine.UI;
+using Apex.WorldGeometry;
+using Apex.Services;
 
 public sealed class PlayerInputController : MonoBehaviour {
     public enum speedTypes { FullSpeed = 0, HalfSpeed, Stop, Reversal }
@@ -98,6 +100,27 @@ public sealed class PlayerInputController : MonoBehaviour {
             return false;
     }
 
-     
-    
+    //void SetDestination(Vector3 destination, bool append)
+    //{
+    //    RaycastHit hit;
+    //    if (Apex.Services.UnityServices.mainCamera.ScreenToLayerHit(destination, Layers.terrain, 1000.0f, out hit))
+    //    {
+    //        var destinationBlock = hit.collider.GetComponent<InvalidDestinationComponent>();
+    //        if (destinationBlock != null)
+    //        {
+    //            if (destinationBlock.entireTransform)
+    //            {
+    //                return;
+    //            }
+
+    //            if (destinationBlock.onlySubArea.Contains(hit.point))
+    //            {
+    //                return;
+    //            }
+    //        }
+
+           
+    //    }
+    //}
+
 }

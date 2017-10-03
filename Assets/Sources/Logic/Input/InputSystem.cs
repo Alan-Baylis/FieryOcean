@@ -45,7 +45,6 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
             CannonParams cannonParams = new CannonParams(cannonId, Input.mousePosition,new Vector3(0,2,0));
 
             inputShoot.AddCannonShoot(cannonParams);
-            
             inputShoot.AddInputOwner(PLAYER1_ID);
         }
     }
