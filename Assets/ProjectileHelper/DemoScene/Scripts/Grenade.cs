@@ -15,7 +15,7 @@ public class Grenade : MonoBehaviour
 	{
 		float dt            = Time.deltaTime;
 		Vector3 position    = transform.position;
-		ProjectileHelper.UpdateProjectile(ref position, ref m_CurrentVelocity, m_Gravity, dt);
+		//ProjectileHelper.UpdateProjectile(ref position, ref m_CurrentVelocity, m_Gravity, dt);
 		transform.position  = position;
 		
 		if (position.y < 0.0f)

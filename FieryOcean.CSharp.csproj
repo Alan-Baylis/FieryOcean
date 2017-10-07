@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.1.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -430,12 +432,21 @@
     <Compile Include="Assets\CustomAssets\AQUAS-Lite\Scripts\AQUAS_Camera.cs" />
     <Compile Include="Assets\CustomAssets\AQUAS-Lite\Scripts\AQUAS_Reflection.cs" />
     <Compile Include="Assets\CustomAssets\Ultimate Joystick\Scripts\UltimateJoystick.cs" />
+    <Compile Include="Assets\DrawSector.cs" />
     <Compile Include="Assets\ExportTerrainData.cs" />
     <Compile Include="Assets\Inspector Name Drawer\InspectorNameAttribute.cs" />
     <Compile Include="Assets\Libraries\Entitas\Compile.cs" />
+    <Compile Include="Assets\ProjectileHelper\DemoScene\Scripts\Grenade.cs" />
+    <Compile Include="Assets\ProjectileHelper\DemoScene\Scripts\GrenadeThrower.cs" />
     <Compile Include="Assets\Scripts\AIController.cs" />
     <Compile Include="Assets\Scripts\ArrayList.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\CannonObjPool\Bullet.cs" />
+    <Compile Include="Assets\Scripts\CannonObjPool\Gun.cs" />
+    <Compile Include="Assets\Scripts\CannonObjPool\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\CannonObjPool\ObjectPoolContainer.cs" />
+    <Compile Include="Assets\Scripts\CannonObjPool\PoolManager.cs" />
+    <Compile Include="Assets\Scripts\CannonObjPool\Singleton.cs" />
     <Compile Include="Assets\Scripts\Commons\Movement\Movement1.cs" />
     <Compile Include="Assets\Scripts\EnemiesStartPositions.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
@@ -478,6 +489,11 @@
     <Compile Include="Assets\Scripts\Server\NPC.cs" />
     <Compile Include="Assets\Scripts\Server\skills\Skill.cs" />
     <Compile Include="Assets\Scripts\Server\skills\SkillObject.cs" />
+    <Compile Include="Assets\Scripts\ShipCannon\F3DFXController.cs" />
+    <Compile Include="Assets\Scripts\ShipCannon\F3DTime.cs" />
+    <Compile Include="Assets\Scripts\ShipCannon\Lib\F3DMath.cs" />
+    <Compile Include="Assets\Scripts\ShipCannon\Player\F3DPlayerTurretController.cs" />
+    <Compile Include="Assets\Scripts\ShipCannon\Turrets\F3DTurret.cs" />
     <Compile Include="Assets\Scripts\ShipDirectional.cs" />
     <Compile Include="Assets\Scripts\ShowFPS.cs" />
     <Compile Include="Assets\Scripts\ThrowSimulation.cs" />
@@ -647,12 +663,12 @@
     <Compile Include="Assets\Sources\Logic\View\AddViewFromObjectPoolSystem.cs" />
     <Compile Include="Assets\Sources\Logic\View\AddViewSystems.cs" />
     <Compile Include="Assets\Sources\Logic\World\WorldSystem.cs" />
-    <Compile Include="Assets\Sources\NewBehaviourScript.cs" />
     <Compile Include="Assets\Sources\View\BulletViewController.cs" />
     <Compile Include="Assets\Sources\View\EnemyViewController.cs" />
     <Compile Include="Assets\Sources\View\PlayerViewController.cs" />
     <Compile Include="Assets\Sources\VirtualJoystickRegion.cs" />
     <Compile Include="Assets\Tests\Position.cs" />
+    <Compile Include="Assets\vectorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Apex\Apex Path\Scripts\Services\UnityWrappers.tt">
@@ -667,11 +683,58 @@
     <None Include="Assets\CustomAssets\AQUAS-Lite\Shaders\AQUAS-Lite.origin.shader" />
     <None Include="Assets\CustomAssets\AQUAS-Lite\Shaders\AQUAS-Lite.shader" />
     <None Include="Assets\CustomAssets\Ultimate Joystick\README.txt" />
+    <None Include="Assets\ProjectileHelper\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
+    <None Include="Assets\ProjectileHelper\readme.txt" />
     <None Include="Assets\Resources\Shaders\OpaqueFlora.shader" />
     <None Include="Assets\Resources\Shaders\OpaqueFloraMask.shader" />
     <None Include="Assets\Resources\Shaders\TransparentFlora.shader" />
     <None Include="Assets\Resources\Shaders\TransparentFloraMask.shader" />
+    <None Include="Assets\Shaders\BuildingSelect.shader" />
+    <None Include="Assets\Shaders\Bullet - Mask.shader" />
+    <None Include="Assets\Shaders\Bullet.shader" />
+    <None Include="Assets\Shaders\Effect - Mask.shader" />
+    <None Include="Assets\Shaders\Effect.shader" />
+    <None Include="Assets\Shaders\Funnel - Mask.shader" />
+    <None Include="Assets\Shaders\Funnel.shader" />
+    <None Include="Assets\Shaders\MaskAlphaTest-Diffuse.shader" />
+    <None Include="Assets\Shaders\MaskAlphaTest-VertexLit.shader" />
+    <None Include="Assets\Shaders\Mobile Particles Additive - Mask.shader" />
+    <None Include="Assets\Shaders\OpaqueFlora.shader" />
+    <None Include="Assets\Shaders\OpaqueFloraMask.shader" />
+    <None Include="Assets\Shaders\Particles - Mask.shader" />
+    <None Include="Assets\Shaders\Particles.shader" />
+    <None Include="Assets\Shaders\TransparentFlora.shader" />
+    <None Include="Assets\Shaders\TransparentFloraMask.shader" />
+    <None Include="Assets\Shaders\Unlit - Additive Colored - Mask 1.shader" />
+    <None Include="Assets\Shaders\Unlit - Additive Colored - Mask 2.shader" />
+    <None Include="Assets\Shaders\Unlit - Additive Colored - Mask 3.shader" />
+    <None Include="Assets\Shaders\Unlit - Additive Colored - Mask.shader" />
+    <None Include="Assets\Shaders\Unlit - Particle Additive (SoftClip).shader" />
+    <None Include="Assets\Shaders\Unlit - Particle Additive 1.shader" />
+    <None Include="Assets\Shaders\Unlit - Particle Additive 2.shader" />
+    <None Include="Assets\Shaders\Unlit - Particle Additive 3.shader" />
+    <None Include="Assets\Shaders\Unlit - Particle Additive.shader" />
+    <None Include="Assets\Shaders\Unlit - Premultiplied Colored - Mask (AlphaClip).shader" />
+    <None Include="Assets\Shaders\Unlit - Premultiplied Colored - Mask (SoftClip).shader" />
+    <None Include="Assets\Shaders\Unlit - Premultiplied Colored - Mask 1.shader" />
+    <None Include="Assets\Shaders\Unlit - Premultiplied Colored - Mask 2.shader" />
+    <None Include="Assets\Shaders\Unlit - Premultiplied Colored - Mask 3.shader" />
+    <None Include="Assets\Shaders\Unlit - Premultiplied Colored - Mask.shader" />
     <None Include="Assets\Shaders\simple1.shader" />
+    <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Readme.txt" />
+    <None Include="Assets\Standard Assets\Effects\Projectors\Guidelines.txt" />
+    <None Include="Assets\Standard Assets\Effects\Projectors\Shaders\AddingLight.shader" />
+    <None Include="Assets\Standard Assets\Effects\Projectors\Shaders\DropShadows.shader" />
+    <None Include="Assets\Standard Assets\Effects\Projectors\Shaders\ProjectorLight.shader" />
+    <None Include="Assets\Standard Assets\Effects\Projectors\Shaders\ProjectorMultiply.shader" />
+    <None Include="Assets\Standard Assets\Effects\Projectors\Shaders\Test.shader" />
+    <None Include="Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularDisplacement.shader" />
+    <None Include="Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularSmooth.shader" />
+    <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
+    <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
+    <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
+    <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
     <None Include="Assets\Standard Assets\Environment\Skyboxes\SkyboxGuidelines.txt" />
     <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />

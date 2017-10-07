@@ -47,9 +47,9 @@ public class GrenadeThrower : MonoBehaviour
 		for (int i = 0; i < m_NumTrajectoryPositions; i++)
 		{
 			float currentTime          = TrajectoryAimingTimeInterval * i;
-			Vector3 trajectoryPosition = ProjectileHelper.ComputePositionAtTimeAhead
-				(startPosition, startVelocity, m_Gravity, currentTime);
-			m_TrajectoryObjects[i].transform.position = trajectoryPosition;
+//			Vector3 trajectoryPosition = ProjectileHelper.ComputePositionAtTimeAhead
+//				(startPosition, startVelocity, m_Gravity, currentTime);
+//			m_TrajectoryObjects[i].transform.position = trajectoryPosition;
 			
 			// orientate the previous object to point to the current object
 			if (i > 0)
@@ -88,12 +88,12 @@ public class GrenadeThrower : MonoBehaviour
 	void Update () 
 	{
 		float timeToLand        = 0.0f;
-		float calulatedMaxSpeed = ProjectileHelper.ComputeSpeedToReachMaxFlatRange(m_GrenadeRange, m_Gravity, out timeToLand);
+		//float calulatedMaxSpeed = ProjectileHelper.ComputeSpeedToReachMaxFlatRange(m_GrenadeRange, m_Gravity, out timeToLand);
 		float horizontalInput 	= Input.GetAxis("Horizontal");
 		float verticalInput   	= Input.GetAxis("Vertical");
 		float dt              	= Time.deltaTime;
 		m_CurrentDesiredAngle 	= Mathf.Clamp(m_CurrentDesiredAngle + horizontalInput * m_TurningSpeed * dt, -60.0f, 60.0f);
-		m_CurrentDesiredSpeed 	= Mathf.Clamp(m_CurrentDesiredSpeed + verticalInput * m_RangeSpeed * dt, 0.5f, calulatedMaxSpeed);
+		//m_CurrentDesiredSpeed 	= Mathf.Clamp(m_CurrentDesiredSpeed + verticalInput * m_RangeSpeed * dt, 0.5f, calulatedMaxSpeed);
 		
 		DrawAimingTrajectory();
 		UpdateFiring();

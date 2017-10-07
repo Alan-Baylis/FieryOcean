@@ -7,6 +7,8 @@ public class DrawSector : MonoBehaviour {
     int quality = 15;
     Mesh mesh;
     public Material material;
+    public Transform owner;
+
 
     float angle_fov = 40;
 
@@ -63,11 +65,11 @@ public class DrawSector : MonoBehaviour {
             Mathf.Sin(Mathf.Deg2Rad * (angle_next)), 0,
             Mathf.Cos(Mathf.Deg2Rad * (angle_next)));
 
-            pos_curr_min = transform.position + sphere_curr * dist_min;
-            pos_curr_max = transform.position + sphere_curr * dist_max;
+            pos_curr_min = Vector3.zero + sphere_curr * dist_min;
+            pos_curr_max = Vector3.zero + sphere_curr * dist_max;
 
-            pos_next_min = transform.position + sphere_next * dist_min;
-            pos_next_max = transform.position + sphere_next * dist_max;
+            pos_next_min = Vector3.zero + sphere_next * dist_min;
+            pos_next_max = Vector3.zero + sphere_next * dist_max;
 
             int a = 4 * i;
             int b = 4 * i + 1;
@@ -94,12 +96,14 @@ public class DrawSector : MonoBehaviour {
         mesh.vertices = vertices;
         mesh.triangles = triangles;
 
-        Graphics.DrawMesh(mesh, Vector3.zero, Quaternion.identity, material, 0);
+        Graphics.DrawMesh(mesh, transform.position, Quaternion.identity, material, 0);
     }
 
     float GetEnemyAngle()
     {
-        return 90 - Mathf.Rad2Deg * Mathf.Atan2(transform.forward.z, transform.forward.x); // Left handed CW. z = angle 0, x = angle 90
+        float tmp = Mathf.Atan2(transform.forward.z, transform.forward.x);
+        tmp = Mathf.Rad2Deg * tmp;
+        return 90 - tmp; // Left handed CW. z = angle 0, x = angle 90
     }
 
 }
