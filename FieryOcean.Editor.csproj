@@ -253,8 +253,8 @@
     <None Include="Assets\CustomAssets\AQUAS-Lite\Shaders\AQUAS-Lite.origin.shader" />
     <None Include="Assets\CustomAssets\AQUAS-Lite\Shaders\AQUAS-Lite.shader" />
     <None Include="Assets\CustomAssets\Ultimate Joystick\README.txt" />
-    <None Include="Assets\ProjectileHelper\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
-    <None Include="Assets\ProjectileHelper\readme.txt" />
+    <None Include="Assets\Resources\Projector\Shaders\AddingLight.shader" />
+    <None Include="Assets\Resources\Projector\Shaders\DropShadows.shader" />
     <None Include="Assets\Resources\Shaders\OpaqueFlora.shader" />
     <None Include="Assets\Resources\Shaders\OpaqueFloraMask.shader" />
     <None Include="Assets\Resources\Shaders\TransparentFlora.shader" />

@@ -24,6 +24,9 @@ namespace Forge3D
 
         public float HeadingTrackingSpeed = 2f;
         public float ElevationTrackingSpeed = 2f;
+        public float bullet_speed = 3000f;
+        [HideInInspector]
+        public float bullet_game_speed { get; set; }
 
         private Vector3 targetPos;
         [HideInInspector]
@@ -31,13 +34,13 @@ namespace Forge3D
         [HideInInspector]
         public float curHeadingAngle = 0f;
         [HideInInspector]
-        public float curElevationAngle = 0f;
-
+        public float curElevationAngle { get; set; }
+        
         public Transform transformFire;
         public float step = 20f;
         public Vector2 HeadingLimit;
         public Vector2 ElevationLimit;
-        public float barrelHeightAboveOcean;
+        public Transform ocean;
 
         public bool smoothControlling = false;
 
@@ -50,6 +53,7 @@ namespace Forge3D
 
         void Awake()
         {
+            bullet_game_speed = bullet_speed / ThrowSimulation.mashtab;
             bulletCalculations = GetComponent<ThrowSimulation>();
 
             headTransformOrigin = SwivelOrigin.GetComponent<Transform>();
@@ -103,52 +107,56 @@ namespace Forge3D
 
         public class CannonMath
         {
-            private static float gravity = 10;
-            public static Vector3 GetNeededBarrelDirectional(Transform barrelTransform, Transform swivel, Vector3 anchorFire, Vector3 targetPos, float distance, float velocity_exp2, float barrelHeightAboveOcean)
+            private static float gravity = 9f;
+            public static Vector3 GetNeededBarrelDirectional(Transform barrel, Transform swivel, Vector3 targetPos, float distance, float velocity_exp2, float barrelHeightAboveOcean, out float angel)
             {
-                float sin2Alpha = distance * gravity / velocity_exp2;
-                float angleOfSinInDegrees = (Mathf.Asin(sin2Alpha) * Mathf.Rad2Deg) / 2;
                 // Vector from barrel to target
-                Vector3 elevationVector = Vector3.Normalize(F3DMath.ProjectVectorOnPlane(swivel.right, targetPos - barrelTransform.position));
+                Vector3 elevationVector = Vector3.Normalize(F3DMath.ProjectVectorOnPlane(swivel.right, targetPos - barrel.position));
+                
                 // Draw
-                Debug.DrawLine(elevationVector, elevationVector * 150, Color.green);
+                Debug.DrawLine(elevationVector + swivel.position, elevationVector * 150 + swivel.position, Color.green);
+                
+                //
                 // Angel of slope
+                //
                 float _elevationAngle = F3DMath.SignedVectorAngle(swivel.forward, elevationVector, swivel.right);
+                //Debug.Log("ElevationAngel: " + _elevationAngle.ToString());
+                
+                //
                 //Calc barrel angel
-                float angel = CalcFireAngel(_elevationAngle, velocity_exp2, distance, targetPos.y - barrelHeightAboveOcean);
+                //
+                angel = CalcFireAngel(velocity_exp2, distance, targetPos.y - barrelHeightAboveOcean);
+                
+                //
+                //Calculate vector for barrel
+                //
+                Vector3 v = Quaternion.AngleAxis(-angel, swivel.right) * swivel.forward;
 
-                Vector3 v = Quaternion.AngleAxis(-angel, swivel.right) * anchorFire;
                 //Draw
-                Debug.DrawLine(v, v * 200, Color.magenta);
+                Debug.DrawLine(v+ swivel.position, v * 200 + swivel.position, Color.magenta);
 
                 return v;
             }
-            private static float CalcFireAngel(float angel, float velocityExp2, float distance, float height)
+            private static float CalcFireAngel(float velocityExp2, float distance, float height)
             {
                 float _b = -distance;
-                float a = CalcA(angel, velocityExp2, distance);
+                float a = CalcA(velocityExp2, distance);
                 float c = (gravity * distance * distance) / (2 * velocityExp2) + height;
 
                 float D = CalcDiscriminant(_b, a, c);
-                //float tabAlpha1 = (float)((-_b + Math.Sqrt(D)) / (2f * a));
+                
                 float tabAlpha2 = (float)((-_b - Math.Sqrt(D)) / (2f * a));
-                //float angel1 = Mathf.Atan(tabAlpha1) * Mathf.Rad2Deg;
+              
                 return Mathf.Atan(tabAlpha2) * Mathf.Rad2Deg;
             }
 
-            private static float CalcA(float angel, float velocity, float distance) { return (gravity * distance * distance) / (2f * velocity); }
+            private static float CalcA( float velocity, float distance) { return (gravity * distance * distance) / (2f * velocity); }
             private static float CalcDiscriminant(float b, float a, float c) { return b * b - 4f * a * c; }
         }
 
 
         void Update()
         {
-
-
-            Debug.DrawRay(Vector3.zero, targetPos, Color.black, 0.5f);
-
-            Ray r = new Ray();
-
             if (!smoothControlling)
             {
                 if (barrelTransform != null)  {
@@ -167,13 +175,16 @@ namespace Forge3D
                 Vector3 relative = transformFire.InverseTransformDirection(0, 0, 1);
             }
         }
-
+        public float angel;
         private void NoSmoothRotateController(Transform barrelOrigin, Transform barrel, Transform headOrigin, Transform head)
         {
             /////// Heading
             headingVetor = Vector3.Normalize(F3DMath.ProjectVectorOnPlane(head.up, targetPos - head.position));
             float headingAngle = F3DMath.SignedVectorAngle(head.forward, headingVetor, head.up);
             float turretDefaultToTargetAngle = F3DMath.SignedVectorAngle(defaultRot * head.forward, headingVetor, head.up);
+
+            Debug.Log("turretDefaultToTargetAngle: " + turretDefaultToTargetAngle.ToString());
+
             float turretHeading = F3DMath.SignedVectorAngle(defaultRot * head.forward, head.forward, head.up);
 
             float headingStep = HeadingTrackingSpeed * Time.deltaTime;
@@ -209,7 +220,8 @@ namespace Forge3D
             if (ThrowSimulation.maxDistance > target_Distance)
             {
                 //get barrel vector to fire tafget
-                Vector3 elevationVector = CannonMath.GetNeededBarrelDirectional(barrel, head, head.forward, targetPos, target_Distance, bulletCalculations.projectile_Velocity_exp2, barrelHeightAboveOcean);
+                float barrelHeightOverOcean = anchorFire.position.y - ocean.position.y;
+                Vector3 elevationVector = CannonMath.GetNeededBarrelDirectional(barrel, head, targetPos, target_Distance, bulletCalculations.projectile_Velocity_exp2, barrelHeightOverOcean, out angel);
 
                 // determine directional of rotation on angel by sign
                 float _elevationAngle = F3DMath.SignedVectorAngle(barrel.forward, elevationVector, head.right);

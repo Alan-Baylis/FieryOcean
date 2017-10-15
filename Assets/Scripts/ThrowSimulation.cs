@@ -6,7 +6,7 @@ public class ThrowSimulation : MonoBehaviour
 {
     public Transform Target;
     public float firingAngle = 45.0f;
-    public float gravity = 9.8f;
+    public float gravity = 9f;
 
     [HideInInspector]
     public float gravityInGameCoord { get; set; }
@@ -36,7 +36,7 @@ public class ThrowSimulation : MonoBehaviour
         PoolManager.WarmPool(bulletPrefab, 3);
         bullet_horizont_speed = 3000f;
         projectile_Velocity_exp2 = Mathf.Pow(bullet_horizont_speed / mashtab, 2);   // speed in game coordinates
-        maxDistance = (projectile_Velocity_exp2 * Mathf.Sin(2 * 45 * Mathf.Deg2Rad)) / gravityInGameCoord;
+        maxDistance = (projectile_Velocity_exp2 * Mathf.Sin(2f * 45f * Mathf.Deg2Rad)) / gravityInGameCoord;
     }
 
     void Start()
