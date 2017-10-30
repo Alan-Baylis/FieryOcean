@@ -12,5 +12,5 @@ public sealed class BulletComponent : IComponent {
     public float flightDuration;
     public float Vx;
     public float Vy;
-    
+    public bool flagDestroy;
 }

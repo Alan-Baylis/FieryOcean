@@ -63,7 +63,7 @@ public static class GameEntityExtensions {
         bulletEntity.AddPosition(position);
         bulletEntity.AddVelocity(velocity);
         bulletEntity.AddViewObjectPool(gameObjectPool);
-        bulletEntity.AddBullet( 45.0f, 9.8f, position, target, flightDuration, Vx, Vy);
+        bulletEntity.AddBullet( 45.0f, 9.8f,0f, position, target, flightDuration, Vx, Vy); 
         bulletEntity.AddBulletLiveTime(0);
 
         return bulletEntity;

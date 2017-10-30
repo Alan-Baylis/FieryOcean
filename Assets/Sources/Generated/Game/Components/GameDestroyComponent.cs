@@ -10,10 +10,10 @@ public partial class GameEntity {
 
     static readonly DestroyComponent destroyComponent = new DestroyComponent();
 
-    public bool flagDestroy {
+    public bool isDestroy {
         get { return HasComponent(GameComponentsLookup.Destroy); }
         set {
-            if (value != flagDestroy) {
+            if (value != isDestroy) {
                 if (value) {
                     AddComponent(GameComponentsLookup.Destroy, destroyComponent);
                 } else {

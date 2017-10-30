@@ -26,8 +26,8 @@ public sealed class CheckHealthSystem : ReactiveSystem<BulletsEntity>
     protected override void Execute(List<BulletsEntity> entities) {
         foreach(var e in entities) {
             //if(e.health.value <= 0) {
-                e.flagDestroy = true;
-            
+            // e.flagDestroy = true;
+            e.isDestroy = true;
             //}
         }
     }

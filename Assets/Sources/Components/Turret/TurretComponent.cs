@@ -5,8 +5,8 @@ using System.Text;
 using Entitas;
 using UnityEngine;
 
-//[Turrets]
-public sealed class TurretComponent:IComponent
+[Turrets]
+public sealed class TurretComponent : IComponent
 {
     public float speed;
     public Vector3 swivelRotation;

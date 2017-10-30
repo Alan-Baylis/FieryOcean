@@ -10,10 +10,10 @@ public partial class BulletsEntity {
 
     static readonly DestroyComponent destroyComponent = new DestroyComponent();
 
-    public bool flagDestroy {
+    public bool isDestroy {
         get { return HasComponent(BulletsComponentsLookup.Destroy); }
         set {
-            if (value != flagDestroy) {
+            if (value != isDestroy) {
                 if (value) {
                     AddComponent(BulletsComponentsLookup.Destroy, destroyComponent);
                 } else {
