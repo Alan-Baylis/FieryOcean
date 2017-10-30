@@ -36,7 +36,7 @@ public class DrawSector : MonoBehaviour {
 
     void Update()
     {
-        dist_max = ThrowSimulation.maxDistance;
+        dist_max = 20; //ThrowSimulation.maxDistance;
         float angle_lookat = GetEnemyAngle();
 
         float angle_start = angle_lookat - angle_fov;

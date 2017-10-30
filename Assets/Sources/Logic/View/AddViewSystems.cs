@@ -14,6 +14,7 @@ using Apex.Services;
 using Apex.LoadBalancing;
 using Apex.WorldGeometry;
 using UnityEditor;
+using Forge3D;
 
 public partial class AddViewSystems : ReactiveSystem<GameEntity> {
     public AddViewSystems(Contexts contexts) : base(contexts.game)
@@ -31,11 +32,42 @@ public partial class AddViewSystems : ReactiveSystem<GameEntity> {
     //    _container = new GameObject(_pool.metaData.poolName + " PlayerViews").transform;
     //}
 
+    private float simulate_coefficient=100f;
+    private float mashtab = 100f;
+
     protected override void Execute(List<GameEntity> entities)
     {
         foreach(var e in entities)
         {
             var gameObject = Assets.Instantiate<GameObject>(e.asset.name);
+            
+            //
+            // Initialize turret controller
+            //
+            F3DTurret[] turrets = gameObject.GetComponentsInChildren<F3DTurret>();
+            foreach (F3DTurret t in turrets)
+            {
+                t.mashtab = this.mashtab;
+                //t.simulate_coefficient = simulate_coefficient;
+                t.gravity = 9f;
+                t.ocean = GameObject.FindGameObjectWithTag("Ocean").transform;
+                t.CustomAwake();
+                t.ship = gameObject.transform;
+            }
+
+            //
+            // Create and initialize projector for cannon
+            //
+            TrajectoryPredictor3D[] trajectoryPredict = gameObject.GetComponentsInChildren<TrajectoryPredictor3D>();
+            foreach (TrajectoryPredictor3D tp in trajectoryPredict)
+            {
+                tp.crosshair = Assets.Instantiate<GameObject>("Projector/Prefabs/ProjectorAim");
+                tp.crosshair.transform.position = new Vector3(0, 20f, 0);
+            }
+
+            F3DPlayerTurretController playerTurretController = gameObject.GetComponentInChildren<F3DPlayerTurretController>();
+            playerTurretController.aimingPointTransform = Assets.Instantiate<GameObject>("SphereAimMarker").transform;
+
             //var gameObject = GameObject.FindGameObjectWithTag("Player");
 
             if (e.whoAMi.value == /*WhoIAm.IAm.ENEMY_PLAYER*/ 2)

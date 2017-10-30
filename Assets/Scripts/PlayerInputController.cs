@@ -17,7 +17,7 @@ public sealed class PlayerInputController : MonoBehaviour {
     public float fullSpeed = 3f;
     public float halfSpeed = 1.5f;
     public float revers = -2f;
-    public Transform startPosition;
+    public GameObject startPosition;
     public Slider slider;
     void Start()
     { }
@@ -79,7 +79,10 @@ public sealed class PlayerInputController : MonoBehaviour {
 
     public Vector3 Position()
     {
-        return startPosition.position;
+        MeshRenderer mr = startPosition.GetComponent<MeshRenderer>();
+
+        float distance =Vector3.Distance( mr.bounds.max , mr.bounds.min);
+        return startPosition.transform.position + new Vector3(-distance, 0f, distance);
     }
 
     public bool fire = false;

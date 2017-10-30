@@ -544,6 +544,7 @@
     <Compile Include="Assets\Sources\Components\Player\PlayerViewComponent.cs" />
     <Compile Include="Assets\Sources\Components\Position\PositionComponent.cs" />
     <Compile Include="Assets\Sources\Components\Tick\TickComponent.cs" />
+    <Compile Include="Assets\Sources\Components\Turret\TurretComponent.cs" />
     <Compile Include="Assets\Sources\Components\Velocity\VelocityComponent.cs" />
     <Compile Include="Assets\Sources\Components\View\AssetComponent.cs" />
     <Compile Include="Assets\Sources\Components\View\ViewComponent.cs" />
@@ -638,6 +639,8 @@
     <Compile Include="Assets\Sources\Logic\Bullets\BulletOutOfScreenSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Camera\CameraSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Camera\CreateCameraSystem.cs" />
+    <Compile Include="Assets\Sources\Logic\Cannons\TrajectoryPredictorSystem.cs" />
+    <Compile Include="Assets\Sources\Logic\Cannons\TurretSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Destroy\AnimateDestroyViewSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Destroy\AnimateOutOfScreenViewSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Destroy\DestroyEntitySystem.cs" />
@@ -664,6 +667,7 @@
     <Compile Include="Assets\Sources\View\EnemyViewController.cs" />
     <Compile Include="Assets\Sources\View\PlayerViewController.cs" />
     <Compile Include="Assets\Sources\VirtualJoystickRegion.cs" />
+    <Compile Include="Assets\Tests\Bulletsimulation\Init.cs" />
     <Compile Include="Assets\Tests\Position.cs" />
     <Compile Include="Assets\vectorTest.cs" />
   </ItemGroup>

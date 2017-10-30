@@ -23,7 +23,7 @@ public class TrajectoryPredictor3D : MonoBehaviour
     //The acceleration of gravity. It is automatically set to the acceleration of the earth's gravity.
     public Vector3 gravity = new Vector3(0, /*-Physics.gravity.y*/-9f, 0);
     //Layers that will stop the trajectory
-    public LayerMask layersToHit;
+    public LayerMask[] layersToHit;
     //Is the projectile being fired out of the xAxis?
     public bool xAxisForward = false;
     // From this obj we get velocity and angel for firing
@@ -66,6 +66,16 @@ public class TrajectoryPredictor3D : MonoBehaviour
     //Holds all of the "Texture Objects"
     GameObject textureObjectsHolder;
     Transform crosshairTransform;
+    public Transform barrel;
+
+    private const int SIZE = 2;
+    void OnValidate()
+    {
+        if (layersToHit.Length != SIZE)
+        {
+            Array.Resize(ref layersToHit, SIZE);
+        }
+    }
 
 
     // Use this for initialization
@@ -90,20 +100,16 @@ public class TrajectoryPredictor3D : MonoBehaviour
 
             if (GameObject.Find("TextureObjectsHolder(Trajectory)") == null)
             {
-
                 textureObjectsHolder = new GameObject("TextureObjectsHolder(Trajectory)");
-
             }
-            else {
-
+            else
+            {
                 textureObjectsHolder = GameObject.Find("TextureObjectsHolder(Trajectory)");
-
             }
 
             //Checks if there is a texture object and if so instantiates them into the objectPoints array
             if (maxNumberOfPoints >= 0)
             {
-
                 objectPoints = new GameObject[maxNumberOfPoints];
 
                 for (x = 0; x < maxNumberOfPoints; x++)
@@ -114,19 +120,16 @@ public class TrajectoryPredictor3D : MonoBehaviour
                     objectPoints[x].transform.parent = textureObjectsHolder.transform;
 
                     objectPoints[x].active = false;
-
                 }
-
             }
-            else {
-
+            else
+            {
                 throw new System.OverflowException("Cannot use a negative number in the 'Max Number Of Points' parameter of the Trajectory Predictor script!");
-
             }
-
         }
-
     }
+
+    Func<LayerMask[],Vector3, bool> ChkLayers = (LayerMask[] ls, Vector3 v) => { foreach (LayerMask l in ls) { if(Physics.CheckSphere(v, 0, l)) return true; } return false; };
 
     // Update is called once per frame
     void Update()
@@ -134,7 +137,8 @@ public class TrajectoryPredictor3D : MonoBehaviour
         //Sets "angle" and "phi" to the Euler equivalent of the object's rotation
         if (hasFired == false)
         {
-            angle = f3dturret.angel;
+            angle = -barrel.rotation.eulerAngles.x; //f3dturret.angel;
+            //barrel.rotation.eulerAngles.x;
             phi = transform.rotation.eulerAngles.y;
         }
 
@@ -153,8 +157,6 @@ public class TrajectoryPredictor3D : MonoBehaviour
         //Gets the horizontal velocity of the object
         horizontalVelocity = velocity * Mathf.Cos(angle * Mathf.Deg2Rad) * Mathf.Sin((phi+90f) * Mathf.Deg2Rad);
         depthVelocity = velocity * Mathf.Sin(phi * Mathf.Deg2Rad);
-
-        Debug.Log("depthVelocity: " + depthVelocity.ToString());
 
         if (timeBetweenPoints != 0)
         {
@@ -175,9 +177,8 @@ public class TrajectoryPredictor3D : MonoBehaviour
             while (lineIndex < maxNumberOfPoints)
             {
                 //Makes sure the current vector point is not intersecting an object with one of the layersToHit layer
-                if (Physics.CheckSphere(vector, 0, layersToHit) == false)
+                if (ChkLayers(layersToHit,vector)==false)
                 {
-
                     if (crosshair != null)
                     {
                         //crosshair.GetComponent<Renderer>().enabled = false;
@@ -198,7 +199,6 @@ public class TrajectoryPredictor3D : MonoBehaviour
                         
                         //Creats a point using the x and y displacement and the zDepth
                         vector = new Vector3(xDisplacement, yDisplacement, zDisplacement);
-                        
                     }
 
                     //Makes sure the texture object isn't null
@@ -237,13 +237,21 @@ public class TrajectoryPredictor3D : MonoBehaviour
 
                         RaycastHit hit;
                         Physics.Linecast(lastVector, vector, out hit);
-                        crosshairTransform.position = new Vector3(hit.point.x, crosshairTransform.position.y,hit.point.z);
+                        crosshairTransform.position = new Vector3(hit.point.x, crosshairTransform.position.y, hit.point.z);
+                        Debug.Log("Projector: " + crosshairTransform.position.ToString());
                         //crosshairTransform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal); ;
                     }
 
                     break;
                 }
             }
+           
+            //string layerName = LayerMask.LayerToName(layersToHit);
+            /*if (chk)
+                Debug.Log(" Trajectory prediction 0: " + layersToHit.value.ToString());
+            if(chk1)
+                Debug.Log(" Trajectory prediction 1: " + layersToHit1.value.ToString());*/
+        
 
             if (textureObject == null)
             {

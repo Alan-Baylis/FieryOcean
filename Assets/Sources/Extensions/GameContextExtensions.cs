@@ -20,6 +20,7 @@ public static class GameEntityExtensions {
     {
         var entity = context.CreateEntity();
         entity.AddAsset("Ships/Prefabs/katran");
+        
         entity.AddWhoAMi(0);
         entity.AddPlayer("Player1");
         entity.AddForse(Vector3.zero, 0);
