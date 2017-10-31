@@ -6,23 +6,25 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity {
+public partial class TurretsEntity {
 
-    public TurretComponent turret { get { return (TurretComponent)GetComponent(GameComponentsLookup.Turret); } }
-    public bool hasTurret { get { return HasComponent(GameComponentsLookup.Turret); } }
+    public TurretComponent turret { get { return (TurretComponent)GetComponent(TurretsComponentsLookup.Turret); } }
+    public bool hasTurret { get { return HasComponent(TurretsComponentsLookup.Turret); } }
 
-    public void AddTurret(float newSpeed, UnityEngine.Vector3 newSwivelRotation, UnityEngine.Vector3 newBarrelRotation) {
-        var index = GameComponentsLookup.Turret;
+    public void AddTurret(bool newIsActive, float newSpeed, UnityEngine.Vector3 newSwivelRotation, UnityEngine.Vector3 newBarrelRotation) {
+        var index = TurretsComponentsLookup.Turret;
         var component = CreateComponent<TurretComponent>(index);
+        component.isActive = newIsActive;
         component.speed = newSpeed;
         component.swivelRotation = newSwivelRotation;
         component.barrelRotation = newBarrelRotation;
         AddComponent(index, component);
     }
 
-    public void ReplaceTurret(float newSpeed, UnityEngine.Vector3 newSwivelRotation, UnityEngine.Vector3 newBarrelRotation) {
-        var index = GameComponentsLookup.Turret;
+    public void ReplaceTurret(bool newIsActive, float newSpeed, UnityEngine.Vector3 newSwivelRotation, UnityEngine.Vector3 newBarrelRotation) {
+        var index = TurretsComponentsLookup.Turret;
         var component = CreateComponent<TurretComponent>(index);
+        component.isActive = newIsActive;
         component.speed = newSpeed;
         component.swivelRotation = newSwivelRotation;
         component.barrelRotation = newBarrelRotation;
@@ -30,7 +32,7 @@ public partial class GameEntity {
     }
 
     public void RemoveTurret() {
-        RemoveComponent(GameComponentsLookup.Turret);
+        RemoveComponent(TurretsComponentsLookup.Turret);
     }
 }
 
@@ -42,15 +44,15 @@ public partial class GameEntity {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class GameMatcher {
+public sealed partial class TurretsMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherTurret;
+    static Entitas.IMatcher<TurretsEntity> _matcherTurret;
 
-    public static Entitas.IMatcher<GameEntity> Turret {
+    public static Entitas.IMatcher<TurretsEntity> Turret {
         get {
             if (_matcherTurret == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Turret);
-                matcher.componentNames = GameComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<TurretsEntity>)Entitas.Matcher<TurretsEntity>.AllOf(TurretsComponentsLookup.Turret);
+                matcher.componentNames = TurretsComponentsLookup.componentNames;
                 _matcherTurret = matcher;
             }
 

@@ -102,6 +102,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsDestroyComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Game\Components\GameDestroyComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Input\Components\InputSlowMotionComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Input\Components\InputTickComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsAimComponent.cs" />
@@ -111,8 +113,6 @@
     <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsBulletLiveTimeComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameCameraComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Input\Components\InputCannonShootComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsDestroyComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\Components\GameDestroyComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameDestroyUnitComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameEnemyBehaviourComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameEnemyComponent.cs" />
@@ -139,7 +139,7 @@
     <Compile Include="Assets\Sources\Generated\Game\Components\GamePlayerViewComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsPositionComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GamePositionComponent.cs" />
-    <Compile Include="Assets\Sources\Generated\Game\Components\GameTurretComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Turrets\Components\TurretsTurretComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsVelocityComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Game\Components\GameVelocityComponent.cs" />
     <Compile Include="Assets\Sources\Generated\Bullets\Components\BulletsAssetComponent.cs" />
@@ -162,10 +162,10 @@
     <Compile Include="Assets\Sources\Generated\Components\Interfaces\IView.cs" />
     <Compile Include="Assets\Sources\Generated\Components\Interfaces\IViewObjectPool.cs" />
     <Compile Include="Assets\Sources\Generated\GameState\GameStateComponentsLookup.cs" />
-    <Compile Include="Assets\Sources\Generated\Turrets\TurretsComponentsLookup.cs" />
     <Compile Include="Assets\Sources\Generated\Bullets\BulletsComponentsLookup.cs" />
     <Compile Include="Assets\Sources\Generated\Game\GameComponentsLookup.cs" />
     <Compile Include="Assets\Sources\Generated\Input\InputComponentsLookup.cs" />
+    <Compile Include="Assets\Sources\Generated\Turrets\TurretsComponentsLookup.cs" />
     <Compile Include="Assets\Sources\Generated\Game\GameAttribute.cs" />
     <Compile Include="Assets\Sources\Generated\GameState\GameStateAttribute.cs" />
     <Compile Include="Assets\Sources\Generated\Input\InputAttribute.cs" />

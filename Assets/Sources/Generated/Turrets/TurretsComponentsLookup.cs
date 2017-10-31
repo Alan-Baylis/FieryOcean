@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 public static class TurretsComponentsLookup {
 
+    public const int Turret = 0;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 1;
 
     public static readonly string[] componentNames = {
-
+        "Turret"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(TurretComponent)
     };
 }

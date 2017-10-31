@@ -27,14 +27,13 @@ public static class GameComponentsLookup {
     public const int Position = 16;
     public const int Rigidbody = 17;
     public const int ServerImpOfUnit = 18;
-    public const int Turret = 19;
-    public const int UnitAdd = 20;
-    public const int Velocity = 21;
-    public const int View = 22;
-    public const int ViewObjectPool = 23;
-    public const int WhoAMi = 24;
+    public const int UnitAdd = 19;
+    public const int Velocity = 20;
+    public const int View = 21;
+    public const int ViewObjectPool = 22;
+    public const int WhoAMi = 23;
 
-    public const int TotalComponents = 25;
+    public const int TotalComponents = 24;
 
     public static readonly string[] componentNames = {
         "Aim",
@@ -56,7 +55,6 @@ public static class GameComponentsLookup {
         "Position",
         "Rigidbody",
         "ServerImpOfUnit",
-        "Turret",
         "UnitAdd",
         "Velocity",
         "View",
@@ -84,7 +82,6 @@ public static class GameComponentsLookup {
         typeof(PositionComponent),
         typeof(RigidbodyComponent),
         typeof(ServerImpOfUnitComponent),
-        typeof(TurretComponent),
         typeof(UnitAddComponent),
         typeof(VelocityComponent),
         typeof(ViewComponent),

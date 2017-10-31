@@ -8,6 +8,7 @@ using UnityEngine;
 [Turrets]
 public sealed class TurretComponent : IComponent
 {
+    public bool isActive;
     public float speed;
     public Vector3 swivelRotation;
     public Vector3 barrelRotation;
