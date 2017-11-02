@@ -7,9 +7,12 @@ using Apex.Units;
 using UnityEngine.UI;
 using Apex.WorldGeometry;
 using Apex.Services;
+using System;
 
 public sealed class PlayerInputController : MonoBehaviour {
     public enum speedTypes { FullSpeed = 0, HalfSpeed, Stop, Reversal }
+    enum InputActions { accelerate, firing, selectTurret }
+
     public Dictionary<speedTypes, float> speedMap;
     public UltimateJoystick joystick;
 
@@ -19,11 +22,26 @@ public sealed class PlayerInputController : MonoBehaviour {
     public float revers = -2f;
     public GameObject startPosition;
     public Slider slider;
+
+    Dictionary<InputActions, Action<PlayerInputController>> _actionsDictonory;
+    Queue<Action<PlayerInputController>> _actionQueue;
+
+    public void SetActions(Action<PlayerInputController> accelerate, Action<PlayerInputController> firing, Action<PlayerInputController> selectTurret)
+    {
+        _actionsDictonory.Add(InputActions.accelerate, accelerate);
+        _actionsDictonory.Add(InputActions.firing, firing);
+        _actionsDictonory.Add(InputActions.selectTurret, selectTurret);
+    }
+
     void Start()
-    { }
+    {      
+    }
     
     void Awake()
     {
+        _actionQueue = new Queue<Action<PlayerInputController>>();
+        _actionsDictonory = new Dictionary<InputActions, Action<PlayerInputController>>();
+
         speedMap = new Dictionary<speedTypes, float>()
         {
             { speedTypes.FullSpeed, fullSpeed},
@@ -44,9 +62,11 @@ public sealed class PlayerInputController : MonoBehaviour {
         if (inputSpeed != currentSpeed) {
             _inputAccelerate = speedMap[inputSpeed];
             currentSpeed = inputSpeed;
-            _IsSpeedChanged = true;
+            _actionQueue.Enqueue(_actionsDictonory[InputActions.accelerate]);
         }
     }
+
+    public Queue<Action<PlayerInputController>> GetQueue()  {  return _actionQueue;  }
 
     private bool _IsSpeedChanged;
     public bool IsSpeedChanged { get { return _IsSpeedChanged; } }
@@ -55,14 +75,12 @@ public sealed class PlayerInputController : MonoBehaviour {
     public float accelerate { get { return _inputAccelerate; } }
     public void FullSpeed()
     {
-        if (currentSpeed == speedTypes.HalfSpeed)
-            InputSpeedEventHandler(speedTypes.FullSpeed);
+        if (currentSpeed == speedTypes.HalfSpeed) InputSpeedEventHandler(speedTypes.FullSpeed);
     }
 
     public void HalfSpeed()
     {
-        if (currentSpeed == speedTypes.FullSpeed || currentSpeed == speedTypes.Stop)
-            InputSpeedEventHandler(speedTypes.HalfSpeed);
+        if (currentSpeed == speedTypes.FullSpeed || currentSpeed == speedTypes.Stop)  InputSpeedEventHandler(speedTypes.HalfSpeed);
     }
 
     public void Stop()
@@ -73,8 +91,7 @@ public sealed class PlayerInputController : MonoBehaviour {
 
     public void Reversal()
     {
-        if (currentSpeed == speedTypes.Stop)
-            InputSpeedEventHandler(speedTypes.Reversal);
+        if (currentSpeed == speedTypes.Stop) InputSpeedEventHandler(speedTypes.Reversal);
     }
 
     public Vector3 Position()
@@ -85,23 +102,22 @@ public sealed class PlayerInputController : MonoBehaviour {
         return startPosition.transform.position + new Vector3(-distance, 0f, distance);
     }
 
-    public bool fire = false;
+    //public bool fire = false;
 
     public void Fire()
     {
-        fire = true; 
+        _actionQueue.Enqueue(_actionsDictonory[InputActions.firing]);
     }
 
-    public bool IsFire()
-    {
-        
-        if (fire) {
-            fire = false;
-            return true;
-        }
-        else
-            return false;
-    }
+    //public bool isfire()
+    //{
+    //    if (fire) {
+    //        fire = false;
+    //        return true;
+    //    }
+    //    else
+    //        return false;
+    //}
 
     //void SetDestination(Vector3 destination, bool append)
     //{

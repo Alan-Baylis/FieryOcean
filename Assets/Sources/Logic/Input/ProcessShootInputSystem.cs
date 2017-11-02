@@ -17,16 +17,8 @@ public sealed class ProcessShootInputSystem : ReactiveSystem<InputEntity>
 
     protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) {
         return new Collector<InputEntity>(
-          new[] {
-                context.GetGroup(InputMatcher.CannonShoot),
-                //context.GetGroup(InputMatcher.InputOwner),
-                context.GetGroup(InputMatcher.ShootInput)
-          },
-          new[] {
-                GroupEvent.Added,
-               // GroupEvent.Added,
-                GroupEvent.Added
-          });
+          new[] { context.GetGroup(InputMatcher.CannonShoot),  context.GetGroup(InputMatcher.ShootInput) },
+          new[] { GroupEvent.Added, GroupEvent.Added });
     }
 
     protected override bool Filter(InputEntity entity) {
@@ -42,7 +34,7 @@ public sealed class ProcessShootInputSystem : ReactiveSystem<InputEntity>
             var player = _pools.game.GetEntityWithPlayerId(e.inputOwner.playerId);
            
             _pools.bullets.ApplyBullet( player.position.value + e.cannonShoot.cannonParams.shipPosition,
-                                       /* e.cannonShoot.cannonParams.target*/ new Vector3(30,0,140),
+                                       /* e.cannonShoot.cannonParams.target*/ new Vector3(30,0,140),                ///TODO
                                         player.playerView.controller.rigidbody.velocity,
                                         _bulletsObjectPool                                              ); 
         }

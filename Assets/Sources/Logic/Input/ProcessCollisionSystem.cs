@@ -31,7 +31,7 @@ public sealed class ProcessCollisionSystem : ReactiveSystem<InputEntity>, IClean
              {
                  BulletsEntity bge = (BulletsEntity)e.collision.self;
 
-                 bge.ReplaceHealth(/*ge.health.value - 1*/ 0);
+                 bge.ReplaceHealth( /*ge.health.value - 1*/ 0);
                  //GameEntity ge = ((GameEntity)e.collision.other);
                  //var newHealth = ge.health.value - ((BulletsEntity)e.collision.self).damage.value;
                  //ge.ReplaceHealth(Math.Max(0, newHealth));

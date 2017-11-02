@@ -23,51 +23,20 @@ public partial class AddViewSystems : ReactiveSystem<GameEntity> {
         _pool = contexts.game;
     }
 
-    //public TriggerOnEvent[] triggers { get { return new TriggerOnEvent[] { CoreMatcher.WhoAMi.OnEntityAdded()/*, CoreMatcher.Asset.OnEntityAdded() */}; } }
-
     GameContext _pool;
     Transform _container;
 
-    //public void Initialize() {
-    //    _container = new GameObject(_pool.metaData.poolName + " PlayerViews").transform;
-    //}
-
-    private float simulate_coefficient=100f;
-    private float mashtab = 100f;
+    private float _mashtab = 100f; ///TODO
 
     protected override void Execute(List<GameEntity> entities)
     {
         foreach(var e in entities)
         {
             var gameObject = Assets.Instantiate<GameObject>(e.asset.name);
-            
-            //
-            // Initialize turret controller
-            //
-            F3DTurret[] turrets = gameObject.GetComponentsInChildren<F3DTurret>();
-            foreach (F3DTurret t in turrets)
-            {
-                t.mashtab = this.mashtab;
-                //t.simulate_coefficient = simulate_coefficient;
-                t.gravity = 9f;
-                t.ocean = GameObject.FindGameObjectWithTag("Ocean").transform;
-                t.CustomAwake();
-                t.ship = gameObject.transform;
-            }
 
-            //
-            // Create and initialize projector for cannon
-            //
-            TrajectoryPredictor3D[] trajectoryPredict = gameObject.GetComponentsInChildren<TrajectoryPredictor3D>();
-            foreach (TrajectoryPredictor3D tp in trajectoryPredict)
-            {
-                tp.crosshair = Assets.Instantiate<GameObject>("Projector/Prefabs/ProjectorAim");
-                tp.crosshair.transform.position = new Vector3(0, 20f, 0);
-            }
-
-            F3DPlayerTurretController playerTurretController = gameObject.GetComponentInChildren<F3DPlayerTurretController>();
-            playerTurretController.aimingPointTransform = Assets.Instantiate<GameObject>("SphereAimMarker").transform;
-
+            F3DPlayerTurretController fireInputController = gameObject.GetComponentInChildren<F3DPlayerTurretController>();
+            if(fireInputController!=null)
+                fireInputController.enabled = false;
             //var gameObject = GameObject.FindGameObjectWithTag("Player");
 
             if (e.whoAMi.value == /*WhoIAm.IAm.ENEMY_PLAYER*/ 2)
@@ -82,12 +51,17 @@ public partial class AddViewSystems : ReactiveSystem<GameEntity> {
                 //    throw new ArgumentNullException();
 
                 //e.playerView.controller.transform.position = e.serverImpOfUnit.entity.position; 
+                
             }
 
             if (e.whoAMi.value == /*WhoIAm.IAm.PLAYER*/ 0)
             {
                 gameObject.AddComponent<PlayerViewController>();
                 e.AddPlayerView(gameObject.GetComponent<IPlayerController>());
+                InitTurrets(e);
+
+                if (fireInputController != null)
+                    fireInputController.enabled = true;
             }
 
             if (e.whoAMi.value == /*WhoIAm.IAm.ENEMY*/ 1)
@@ -170,9 +144,43 @@ public partial class AddViewSystems : ReactiveSystem<GameEntity> {
             //
             gameObject.transform.SetParent(_container, false);
             gameObject.Link(e, _pool);
-            
         }
     }
+
+    private void InitTurrets(GameEntity ge)
+    {
+        //
+        // Initialize turret controller
+        //
+        var go = ge.playerView.controller.gameObject;
+
+        F3DTurret[] turrets = go.GetComponentsInChildren<F3DTurret>();
+        foreach (F3DTurret t in turrets)
+        {
+            t.mashtab = this._mashtab;
+            //t.simulate_coefficient = simulate_coefficient;
+            t.gravity = 9f;
+            t.ocean = GameObject.FindGameObjectWithTag("Ocean").transform; ///TODO
+            t.CustomAwake();
+            t.ship = go.transform;
+        }
+
+        //
+        // Create and initialize projector for cannon
+        //
+        TrajectoryPredictor3D[] trajectoryPredict = go.GetComponentsInChildren<TrajectoryPredictor3D>();
+        foreach (TrajectoryPredictor3D tp in trajectoryPredict)
+        {
+            tp.crosshair = Assets.Instantiate<GameObject>("Projector/Prefabs/ProjectorAim"); ///TODO
+            tp.crosshair.transform.position = new Vector3(0, 20f, 0);
+
+            ge.playerView.controller.AddTurret(new PlayerViewController.TurretShip {turret= tp.f3dturret, trajectoryPredictor= tp });
+        }
+
+        F3DPlayerTurretController playerTurretController = go.GetComponentInChildren<F3DPlayerTurretController>();
+        playerTurretController.aimingPointTransform = Assets.Instantiate<GameObject>("SphereAimMarker").transform;          ///TODO
+    }
+
 
     public static GameObject GameWorld(GameObject target)
     {

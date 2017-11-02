@@ -69,6 +69,7 @@ public class GameController : MonoBehaviour {
         // Initialize
         .Add(ws)
         .Add(new AnimateDestroyViewSystem(contexts))
+        .Add(new TurretSystem(contexts))
         //.Add(new IncrementTickSystem())
         .Add(new CreatePlayerSystem(contexts, playerInputController.Position()))
         .Add(new CreateCameraSystem(contexts, cam))

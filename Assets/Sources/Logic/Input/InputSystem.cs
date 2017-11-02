@@ -1,6 +1,7 @@
 using System;
 using Entitas;
 using UnityEngine;
+using System.Collections.Generic;
 
 public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSystem {
 
@@ -11,38 +12,46 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
     IGroup<InputEntity> _cannonShootInputs;
     PlayerInputController _playerController;
 
-    public InputSystem(PlayerInputController playerController,Contexts contexts)
+    public InputSystem(PlayerInputController playerController, Contexts contexts)
     {
         _playerController = playerController;
+
+        _playerController.SetActions(SpeedInput, FireInput, null);
+
         _pools = contexts;
         _moveInputs = contexts.input.GetGroup(InputMatcher.MoveInput);
         _cannonShootInputs = contexts.input.GetGroup(InputMatcher.CannonShoot);
         //_moveInputs = contexts.input.GetGroup
     }
+    
+    public void SpeedInput(PlayerInputController pc)
+    {
+        InputEntity input = GetInputEntity();
 
-    // TODO Entitas 0.36.0 Migration (constructor)
-    //public void SetPools(Contexts pools) {
-    //    _pools = pools;
-    //    _moveInputs = pools.input.GetGroup(InputMatcher.MoveInput);
-    //}
+        input.ReplaceMoveInput(pc.accelerate);
+        input.ReplaceInputOwner(PLAYER1_ID);
+    }
+
+    public void FireInput(PlayerInputController pc)
+    {
+        InputEntity inputShoot = _pools.input.CreateEntity();
+
+        uint cannonId = 1;
+        inputShoot.AddCannonShoot(new CannonParams(cannonId));
+        inputShoot.AddInputOwner(PLAYER1_ID);
+    }
+
+    public void SelectTurretInput(PlayerInputController pc)
+    { }
 
     public void Execute()
     {
-        if (_playerController.IsSpeedChanged)
-        {
-            InputEntity input = GetInputEntity();
-           
-            input.ReplaceMoveInput(_playerController.accelerate);
-            input.ReplaceInputOwner(PLAYER1_ID);
-        }
+        Queue<Action<PlayerInputController>> queueActions = _playerController.GetQueue();
 
-        if (_playerController.IsFire())
-        {
-            InputEntity inputShoot = _pools.input.CreateEntity();
-
-            uint cannonId = 1;
-            inputShoot.AddCannonShoot(new CannonParams(cannonId));
-            inputShoot.AddInputOwner(PLAYER1_ID);
+        for (int i = 0; i < queueActions.Count; i++) {
+            var ac = queueActions.Dequeue(); 
+            if(ac!=null)
+                ac(_playerController);
         }
     }
 
@@ -54,23 +63,13 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
         InputEntity[] inputs = _pools.input.GetEntities();
 
         // we assume that the input entity is present in a single copy
-        if (inputs.Length == 0)
-            return _pools.input.CreateEntity();
-        else
-            return inputs[0];
+        if (inputs.Length == 0)  return _pools.input.CreateEntity();
+        else   return inputs[0];
     }
 
-
     public void Cleanup() {
-
-        foreach(var e in _cannonShootInputs.GetEntities()) {
-            e.Destroy();
-        }
-
-        foreach (var e in _moveInputs.GetEntities())
-        {
-            e.Destroy();
-        }
+        foreach(var e in _cannonShootInputs.GetEntities()) { e.Destroy(); }
+        foreach (var e in _moveInputs.GetEntities()) { e.Destroy(); }
     }
 
     public void Initialize()

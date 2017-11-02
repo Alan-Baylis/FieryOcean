@@ -60,9 +60,20 @@ namespace Forge3D
         private bool custom_active = false;
         private float projectile_Velocity_exp2 { get; set; }
         public float angel = 0;
+        public UInt32 TurretId;
         void Start() { }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        public bool IsAiming()
+        {
+            return true;
+        }
+
         public void CustomAwake()
         {
+            _cannonParams = new CannonParams(TurretId);
             anchorFireCorrection = 0.5f;
             bullet_game_speed = bullet_speed / mashtab;
             //bulletCalculations = GetComponent<ThrowSimulation>();
@@ -114,8 +125,12 @@ namespace Forge3D
         public float GetGravity() { return gravity; }
         Func<float, float, float> CalcHeightOfAim = (float ty, float sy) => { if (ty > sy) { return Mathf.Abs(ty) - Math.Abs(sy); } else { return -(Mathf.Abs(sy) - Mathf.Abs(ty)); } };
 
-        void Update()
+        CannonParams _cannonParams;
+
+        public void UpdateCustom(out CannonParams p)
         {
+            p = _cannonParams;
+
             if (!custom_active)
                 return;
 
@@ -139,8 +154,7 @@ namespace Forge3D
             }
         }
 
-
-        public float anchorFireCorrection=0f;
+        public float anchorFireCorrection = 0f;
 
         private void NoSmoothRotateController(Transform barrelOrigin, Transform barrel, Transform headOrigin, Transform head)
         {

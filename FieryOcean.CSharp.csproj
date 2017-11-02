@@ -436,8 +436,6 @@
     <Compile Include="Assets\ExportTerrainData.cs" />
     <Compile Include="Assets\Inspector Name Drawer\InspectorNameAttribute.cs" />
     <Compile Include="Assets\Libraries\Entitas\Compile.cs" />
-    <Compile Include="Assets\ProjectileHelper\DemoScene\Scripts\Grenade.cs" />
-    <Compile Include="Assets\ProjectileHelper\DemoScene\Scripts\GrenadeThrower.cs" />
     <Compile Include="Assets\Scripts\AIController.cs" />
     <Compile Include="Assets\Scripts\ArrayList.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
@@ -493,6 +491,7 @@
     <Compile Include="Assets\Scripts\ShipCannon\F3DTime.cs" />
     <Compile Include="Assets\Scripts\ShipCannon\Lib\F3DMath.cs" />
     <Compile Include="Assets\Scripts\ShipCannon\Player\F3DPlayerTurretController.cs" />
+    <Compile Include="Assets\Scripts\ShipCannon\TrajectoryPredictor3D.cs" />
     <Compile Include="Assets\Scripts\ShipCannon\Turrets\F3DTurret.cs" />
     <Compile Include="Assets\Scripts\ShipDirectional.cs" />
     <Compile Include="Assets\Scripts\ShowFPS.cs" />
@@ -547,6 +546,7 @@
     <Compile Include="Assets\Sources\Components\Player\PlayerViewComponent.cs" />
     <Compile Include="Assets\Sources\Components\Position\PositionComponent.cs" />
     <Compile Include="Assets\Sources\Components\Tick\TickComponent.cs" />
+    <Compile Include="Assets\Sources\Components\Turret\TurretComponent.cs" />
     <Compile Include="Assets\Sources\Components\Velocity\VelocityComponent.cs" />
     <Compile Include="Assets\Sources\Components\View\AssetComponent.cs" />
     <Compile Include="Assets\Sources\Components\View\ViewComponent.cs" />
@@ -636,11 +636,20 @@
     <Compile Include="Assets\Sources\Generated\Input\InputContext.cs" />
     <Compile Include="Assets\Sources\Generated\Input\InputEntity.cs" />
     <Compile Include="Assets\Sources\Generated\Input\InputMatcher.cs" />
+    <Compile Include="Assets\Sources\Generated\Turrets\Components\TurretsTurretComponent.cs" />
+    <Compile Include="Assets\Sources\Generated\Turrets\TurretsAttribute.cs" />
+    <Compile Include="Assets\Sources\Generated\Turrets\TurretsComponentsLookup.cs" />
+    <Compile Include="Assets\Sources\Generated\Turrets\TurretsContext.cs" />
+    <Compile Include="Assets\Sources\Generated\Turrets\TurretsEntity.cs" />
+    <Compile Include="Assets\Sources\Generated\Turrets\TurretsMatcher.cs" />
     <Compile Include="Assets\Sources\IntVector2.cs" />
     <Compile Include="Assets\Sources\Logic\Bullets\BulletCoolDownSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Bullets\BulletOutOfScreenSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Camera\CameraSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Camera\CreateCameraSystem.cs" />
+    <Compile Include="Assets\Sources\Logic\Cannons\ThrowSimulationSystem.cs" />
+    <Compile Include="Assets\Sources\Logic\Cannons\TrajectoryPredictorSystem.cs" />
+    <Compile Include="Assets\Sources\Logic\Cannons\TurretSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Destroy\AnimateDestroyViewSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Destroy\AnimateOutOfScreenViewSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Destroy\DestroyEntitySystem.cs" />
@@ -655,8 +664,8 @@
     <Compile Include="Assets\Sources\Logic\Input\ProcessShootInputSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Player\AddPlayerStartPosition.cs" />
     <Compile Include="Assets\Sources\Logic\Player\CreatePlayerSystem.cs" />
-    <Compile Include="Assets\Sources\Logic\Player\PlayerPositionSystem.cs" />
-    <Compile Include="Assets\Sources\Logic\Player\PlayerPositionSystemLocal.cs" />
+    <Compile Include="Assets\Sources\Logic\Player\Postion\PlayerPositionSystem.cs" />
+    <Compile Include="Assets\Sources\Logic\Player\Postion\PlayerPositionSystemLocal.cs" />
     <Compile Include="Assets\Sources\Logic\Position\RederCameraPositionSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Position\RenderPositionSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Velocity\VelocitySystem.cs" />
@@ -667,6 +676,7 @@
     <Compile Include="Assets\Sources\View\EnemyViewController.cs" />
     <Compile Include="Assets\Sources\View\PlayerViewController.cs" />
     <Compile Include="Assets\Sources\VirtualJoystickRegion.cs" />
+    <Compile Include="Assets\Tests\Bulletsimulation\Init.cs" />
     <Compile Include="Assets\Tests\Position.cs" />
     <Compile Include="Assets\vectorTest.cs" />
   </ItemGroup>
@@ -683,8 +693,8 @@
     <None Include="Assets\CustomAssets\AQUAS-Lite\Shaders\AQUAS-Lite.origin.shader" />
     <None Include="Assets\CustomAssets\AQUAS-Lite\Shaders\AQUAS-Lite.shader" />
     <None Include="Assets\CustomAssets\Ultimate Joystick\README.txt" />
-    <None Include="Assets\ProjectileHelper\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
-    <None Include="Assets\ProjectileHelper\readme.txt" />
+    <None Include="Assets\Resources\Projector\Shaders\AddingLight.shader" />
+    <None Include="Assets\Resources\Projector\Shaders\DropShadows.shader" />
     <None Include="Assets\Resources\Shaders\OpaqueFlora.shader" />
     <None Include="Assets\Resources\Shaders\OpaqueFloraMask.shader" />
     <None Include="Assets\Resources\Shaders\TransparentFlora.shader" />

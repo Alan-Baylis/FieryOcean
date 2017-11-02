@@ -132,7 +132,7 @@ public class TrajectoryPredictor3D : MonoBehaviour
     Func<LayerMask[],Vector3, bool> ChkLayers = (LayerMask[] ls, Vector3 v) => { foreach (LayerMask l in ls) { if(Physics.CheckSphere(v, 0, l)) return true; } return false; };
 
     // Update is called once per frame
-    void Update()
+    public void UpdateCustom()
     {
         //Sets "angle" and "phi" to the Euler equivalent of the object's rotation
         if (hasFired == false)
