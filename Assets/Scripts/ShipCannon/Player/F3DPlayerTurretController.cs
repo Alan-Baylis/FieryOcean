@@ -1,62 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.EventSystems;
 
 namespace Forge3D
 {
     public class F3DPlayerTurretController : MonoBehaviour
     {
-        RaycastHit hitInfo; // Raycast structure
         public F3DTurret turret;
-        bool isFiring; // Is turret currently in firing state
-        //public F3DFXController fxController;
         public Transform aimingPointTransform;
         public Transform ocean;
-      
+        public LayerMask[] layersToHit;
+
+        private const int SIZE = 2;
+        private RaycastHit[] hit;// = new RaycastHit[2];
+        private RaycastHit curRay;
+
+        private Func<bool[], bool> ckLayers;
+        private Action<RaycastHit[]> SetEmptyRays;
+        private Func<RaycastHit[], RaycastHit> GetHighestRaycast;
+
+        private bool[] chkLayer;
+
         void Update()
         {
             GetPointOnGroud();
-            //CheckForTurn();
-            CheckForFire();
         }
-
-        void CheckForFire()
-        {
-            // Fire turret
-            if (!isFiring && Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                isFiring = true;
-                //fxController.Fire();
-            }
-
-            // Stop firing
-            if (isFiring && Input.GetKeyUp(KeyCode.Mouse0))
-            {
-                isFiring = false;
-                //fxController.Stop();
-            }
-        }
-
-        void CheckForTurn()
-        {
-            // Construct a ray pointing from screen mouse position into world space
-            if (Input.GetMouseButton(0))
-            {
-                Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                // Raycast
-                if (Physics.Raycast(cameraRay, out hitInfo, 500f))
-                {
-                    turret.SetNewTarget(hitInfo.point);
-                    aimingPointTransform.position = hitInfo.point;
-                    //Debug.Log(hitInfo.point);
-                }
-            }
-        }
-
-        private const int SIZE = 2;
-        RaycastHit[] hit;// = new RaycastHit[2];
-        RaycastHit curRay;
+        
         void OnValidate()
         {
             if (layersToHit.Length != SIZE)
@@ -66,14 +36,6 @@ namespace Forge3D
                 Array.Resize(ref chkLayer, SIZE);
             }
         }
-
-        Func<bool[] , bool> ckLayers;
-        Action<RaycastHit[]> SetEmptyRays;
-        Func<RaycastHit[], RaycastHit> GetHighestRaycast;
-
-        //Layers that will stop the trajectory
-        public LayerMask[] layersToHit;
-        bool[] chkLayer;
 
         void Start()
         {
@@ -88,6 +50,9 @@ namespace Forge3D
         {
             if (Input.GetMouseButton(0))
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return;
+
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 Debug.DrawRay(ray.origin, ray.direction * 400f, Color.red);
@@ -106,6 +71,7 @@ namespace Forge3D
                     curRay = GetHighestRaycast(hit);
                     turret.SetNewTarget(curRay.point);
                     aimingPointTransform.position = curRay.point;
+
                     Debug.Log("Ray: " + curRay.point.ToString());
                 }
             }

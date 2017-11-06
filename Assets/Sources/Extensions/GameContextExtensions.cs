@@ -39,27 +39,19 @@ public static class GameEntityExtensions {
         return entity;
     }
 
-    public static BulletsEntity ApplyBullet(this BulletsContext context, Vector3 position, Vector3 target, Vector3 velocity, Entitas.Utils.ObjectPool<GameObject> gameObjectPool)
+    public static BulletsEntity ApplyBullet(this BulletsContext context, Vector3 position, Transform swivel, Vector3 target, Vector3 velocity, float vX, float vY, float gravity, Entitas.Utils.ObjectPool<GameObject> gameObjectPool)
     {
-       // gameObjectPool.Get().transform.rotation = Quaternion.LookRotation(target - position);
+        // gameObjectPool.Get().transform.rotation = Quaternion.LookRotation(target - position);
         BulletsEntity bulletEntity = context.CreateEntity();
 
         bulletEntity.AddPosition(position);
-        bulletEntity.AddVelocity(velocity);
+        bulletEntity.AddVelocity(velocity, vX, vY);
         bulletEntity.AddViewObjectPool(gameObjectPool);
-        bulletEntity.AddBullet( 45.0f, 9.8f,0f, position, target, 0, 0, 0, false); 
-        bulletEntity.AddBulletLiveTime(0);
-
-        return bulletEntity;
-    }
-
-    public static GameEntity ApplyBullet(this GameContext context, Vector3 position, Vector3 velocity, Entitas.Utils.ObjectPool<GameObject> gameObjectPool)
-    {
-        GameEntity bulletEntity = context.CreateEntity();
-
-        bulletEntity.AddPosition(position);
-        bulletEntity.AddVelocity(velocity);
-        bulletEntity.AddViewObjectPool(gameObjectPool);
+        bulletEntity.AddBullet( 45.0f, gravity, 0f, position, target,0, 0, 0, 0, false);
+        bulletEntity.AddBulletElapsedTime(0);
+        bulletEntity.AddBulletStartPosition(position, swivel);
+        
+        //bulletEntity.AddBulletLiveTime(0);
 
         return bulletEntity;
     }

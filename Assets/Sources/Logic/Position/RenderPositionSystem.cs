@@ -17,21 +17,22 @@ public sealed class RenderPositionSystem : ReactiveSystem<BulletsEntity>//, ICle
     {
         return new Collector<BulletsEntity>(
            new[] {
-                 context.GetGroup(BulletsMatcher.Position),
-                 context.GetGroup(BulletsMatcher.View)
+                 context.GetGroup(BulletsMatcher.View),
+                 context.GetGroup(BulletsMatcher.DeltaPosition)
            },
            new[] {
                  GroupEvent.Added,
-                 GroupEvent.Added
+                 GroupEvent.Added,
            });
     }
 
     protected override void Execute(List<BulletsEntity> entities)
     {
-        foreach (var e in entities)
-        {
-            e.view.controller.position = e.position.value;
-        }
+        //foreach (var e in entities)
+        //{
+        //    e.view.controller.gameObject.transform.Translate(e.deltaPosition.position);
+        //    //e.ReplacePosition()
+        //}
     }
 
     protected override bool Filter(BulletsEntity entity)

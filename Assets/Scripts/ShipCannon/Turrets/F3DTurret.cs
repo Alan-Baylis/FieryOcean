@@ -59,8 +59,11 @@ namespace Forge3D
         private float _maxDistance { get; set; }
         private bool custom_active = false;
         private float projectile_Velocity_exp2 { get; set; }
+
         public float angel = 0;
-        public UInt32 TurretId;
+        public UInt32 TurretId = 1;
+        public float anchorFireCorrection = 0f;
+
         void Start() { }
 
         /// <summary>
@@ -73,6 +76,7 @@ namespace Forge3D
 
         public void CustomAwake()
         {
+            TurretId = 1;
             _cannonParams = new CannonParams(TurretId);
             anchorFireCorrection = 0.5f;
             bullet_game_speed = bullet_speed / mashtab;
@@ -96,7 +100,8 @@ namespace Forge3D
                 fullAccess = true;
 
             StopAnimation();
-
+            _cannonParams.fireAnchor = anchorFire;
+            _cannonParams.swivel = headTransform;
             custom_active = true;
         }
 
@@ -129,16 +134,21 @@ namespace Forge3D
 
         public void UpdateCustom(out CannonParams p)
         {
-            p = _cannonParams;
-
+            //p = _cannonParams;
             if (!custom_active)
+            {
+                p = _cannonParams;
                 return;
+            }
 
             if (!smoothControlling)
             {
                 if (barrelTransform != null)
                 {
                     NoSmoothRotateController(barrelTransformOrigin, barrelTransform, headTransformOrigin, headTransform);
+                    _cannonParams.firingAngel = this.curElevationAngle;
+                    _cannonParams.vX = GetSpeed() * Mathf.Cos(this.curElevationAngle * Mathf.Deg2Rad);
+                    _cannonParams.vY = GetSpeed() * Mathf.Sin(this.curElevationAngle * Mathf.Deg2Rad);
                 }
             }
             else
@@ -147,14 +157,16 @@ namespace Forge3D
             }
 
             // Scene debug draw
-            if (DebugDraw)
-            {
-                Debug.DrawLine(barrelTransform.position, barrelTransform.position + barrelTransform.forward * Vector3.Distance(barrelTransform.position, targetPos), Color.red);
-                Vector3 relative = transformFire.InverseTransformDirection(0, 0, 1);
-            }
+            //if (DebugDraw)
+            //{
+            //    Debug.DrawLine(barrelTransform.position, barrelTransform.position + barrelTransform.forward * Vector3.Distance(barrelTransform.position, targetPos), Color.red);
+            //    Vector3 relative = transformFire.InverseTransformDirection(0, 0, 1);
+            //}
+
+            p = _cannonParams;
         }
 
-        public float anchorFireCorrection = 0f;
+        
 
         private void NoSmoothRotateController(Transform barrelOrigin, Transform barrel, Transform headOrigin, Transform head)
         {
@@ -195,13 +207,11 @@ namespace Forge3D
 
             float target_Distance = Vector3.Distance(anchorFire.position, targetPos);
 
-            
-
             if (_maxDistance > target_Distance)
             {
                 //get barrel vector to fire tafget
-                float barrelHeightOverOcean = /*ship.position.y + */ anchorFire.position.y + anchorFireCorrection; // + ocean.position.y;
-                Vector3 elevationVector = CannonMath.GetNeededBarrelDirectional(gravity, barrel, head, targetPos, target_Distance, projectile_Velocity_exp2, barrelHeightOverOcean, out angel, CalcHeightOfAim);
+                float barrelOceanY = /*ship.position.y + */ anchorFire.position.y + anchorFireCorrection; // + ocean.position.y;
+                Vector3 elevationVector = CannonMath.GetNeededBarrelDirectional(gravity, barrel, head, targetPos, target_Distance, projectile_Velocity_exp2, barrelOceanY, out angel, CalcHeightOfAim);
 
                 // determine directional of rotation on angel by sign
                 float _elevationAngle = F3DMath.SignedVectorAngle(barrel.forward, elevationVector, head.right);
@@ -216,6 +226,7 @@ namespace Forge3D
                 if (curElevationAngle + elevationStep < ElevationLimit.y && curElevationAngle + elevationStep > ElevationLimit.x)
                 {
                     curElevationAngle += elevationStep;
+                    
                     barrelOrigin.rotation = barrelOrigin.rotation * Quaternion.Euler(0f, 0f, elevationStep);
                     barrel.rotation = barrel.rotation * Quaternion.Euler(elevationStep, 0f, 0f);
                 }
@@ -224,7 +235,7 @@ namespace Forge3D
 
         public class CannonMath
         {
-            public static Vector3 GetNeededBarrelDirectional(float gravity, Transform barrel, Transform swivel, Vector3 targetPos, float distance, float velocity_exp2, float barrelHeightAboveOcean, out float angel , Func<float, float, float> f)
+            public static Vector3 GetNeededBarrelDirectional(float gravity, Transform barrel, Transform swivel, Vector3 targetPos, float distance, float velocity_exp2, float barrelOceanY, out float angel , Func<float, float, float> f)
             {
                 // Vector from barrel to target
                 Vector3 elevationVector = Vector3.Normalize(F3DMath.ProjectVectorOnPlane(swivel.right, targetPos - barrel.position));
@@ -233,15 +244,9 @@ namespace Forge3D
                 Debug.DrawLine(elevationVector + swivel.position, elevationVector * 150 + swivel.position, Color.green);
 
                 //
-                // Angel of slope
-                //
-                float _elevationAngle = F3DMath.SignedVectorAngle(swivel.forward, elevationVector, swivel.right);
-                //Debug.Log("ElevationAngel: " + _elevationAngle.ToString());
-
-                //
                 //Calc barrel angel
                 //
-                angel = CalcFireAngel(gravity, velocity_exp2, distance, f(targetPos.y , barrelHeightAboveOcean));
+                angel = CalcFireAngel(gravity, velocity_exp2, distance, f(targetPos.y , barrelOceanY));
 
                 //
                 //Calculate vector for barrel

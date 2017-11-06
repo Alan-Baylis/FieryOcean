@@ -143,13 +143,13 @@ public class TrajectoryPredictor3D : MonoBehaviour
         }
 
         //If there is a texture object set all objects in the objectPoints array to false
-        if (textureObject != null)
-        {
-            for (x = 0; x < maxNumberOfPoints; x++)
-            {
-                objectPoints[x].active = false;
-            }
-        }
+        //if (textureObject != null)
+        //{
+        //    for (x = 0; x < maxNumberOfPoints; x++)
+        //    {
+        //        objectPoints[x].active = false;
+        //    }
+        //}
 
         velocity = f3dturret.bullet_game_speed;
         verticalVelocity = velocity * Mathf.Sin(angle * Mathf.Deg2Rad);
@@ -238,7 +238,7 @@ public class TrajectoryPredictor3D : MonoBehaviour
                         RaycastHit hit;
                         Physics.Linecast(lastVector, vector, out hit);
                         crosshairTransform.position = new Vector3(hit.point.x, crosshairTransform.position.y, hit.point.z);
-                        Debug.Log("Projector: " + crosshairTransform.position.ToString());
+                        //Debug.Log("Projector: " + crosshairTransform.position.ToString());
                         //crosshairTransform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal); ;
                     }
 

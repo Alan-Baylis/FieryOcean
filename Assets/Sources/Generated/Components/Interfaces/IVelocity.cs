@@ -11,7 +11,7 @@ public interface IVelocity {
     VelocityComponent velocity { get; }
     bool hasVelocity { get; }
 
-    void AddVelocity(UnityEngine.Vector3 newValue);
-    void ReplaceVelocity(UnityEngine.Vector3 newValue);
+    void AddVelocity(UnityEngine.Vector3 newValue, float newVX, float newVY);
+    void ReplaceVelocity(UnityEngine.Vector3 newValue, float newVX, float newVY);
     void RemoveVelocity();
 }

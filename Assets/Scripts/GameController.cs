@@ -66,10 +66,15 @@ public class GameController : MonoBehaviour {
 
 
         return new Feature("Systems")
+        // Input
+        .Add(new InputSystem(playerInputController, contexts))
+        .Add(new ProcessMoveInputSystem(contexts))
+        .Add(new ProcessShootInputSystem(contexts))
         // Initialize
         .Add(ws)
         .Add(new AnimateDestroyViewSystem(contexts))
         .Add(new TurretSystem(contexts))
+        
         //.Add(new IncrementTickSystem())
         .Add(new CreatePlayerSystem(contexts, playerInputController.Position()))
         .Add(new CreateCameraSystem(contexts, cam))
@@ -78,15 +83,12 @@ public class GameController : MonoBehaviour {
 
         // Initialize and Reactive
         .Add(new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position }))
-
-        // Input
-        .Add(new InputSystem(playerInputController, contexts))
-        .Add(new ProcessMoveInputSystem(contexts))
-        .Add(new ProcessShootInputSystem(contexts))
-
         //
         .Add(new CameraSystem(contexts))
+        
         //
+        .Add(new RenderStartPositionSystem(contexts))
+        .Add(new BulletsThrowSystem(contexts))
         .Add(new RenderPositionSystem(contexts))
         .Add(new VelocitySystem(contexts))
         // Update

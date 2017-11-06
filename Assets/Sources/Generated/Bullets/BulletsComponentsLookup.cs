@@ -11,26 +11,32 @@ public static class BulletsComponentsLookup {
     public const int Aim = 0;
     public const int Asset = 1;
     public const int Bullet = 2;
-    public const int BulletLiveTime = 3;
-    public const int Damage = 4;
-    public const int Destroy = 5;
-    public const int Forse = 6;
-    public const int Health = 7;
-    public const int OutOfScreen = 8;
-    public const int PlayerView = 9;
-    public const int Position = 10;
-    public const int Velocity = 11;
-    public const int View = 12;
-    public const int ViewObjectPool = 13;
+    public const int BulletElapsedTime = 3;
+    public const int BulletLiveTime = 4;
+    public const int BulletStartPosition = 5;
+    public const int Damage = 6;
+    public const int DeltaPosition = 7;
+    public const int Destroy = 8;
+    public const int Forse = 9;
+    public const int Health = 10;
+    public const int OutOfScreen = 11;
+    public const int PlayerView = 12;
+    public const int Position = 13;
+    public const int Velocity = 14;
+    public const int View = 15;
+    public const int ViewObjectPool = 16;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "Aim",
         "Asset",
         "Bullet",
+        "BulletElapsedTime",
         "BulletLiveTime",
+        "BulletStartPosition",
         "Damage",
+        "DeltaPosition",
         "Destroy",
         "Forse",
         "Health",
@@ -46,8 +52,11 @@ public static class BulletsComponentsLookup {
         typeof(AimComponent),
         typeof(AssetComponent),
         typeof(BulletComponent),
+        typeof(BulletElapsedTime),
         typeof(BulletLiveTimeComponent),
+        typeof(BulletStartPositionComponent),
         typeof(DamageComponent),
+        typeof(DeltaPositionComponent),
         typeof(DestroyComponent),
         typeof(ForseComponent),
         typeof(HealthComponent),

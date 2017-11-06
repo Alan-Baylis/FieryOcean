@@ -12,7 +12,5 @@ public sealed class TurretComponent : IComponent
     public float speed;
     public Vector3 swivelRotation;
     public Vector3 barrelRotation;
-
-
 }
 

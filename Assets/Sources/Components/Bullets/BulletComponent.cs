@@ -8,6 +8,7 @@ public sealed class BulletComponent : IComponent {
     public float speed; // magnitude of speed vector
     public Vector3 position;
     public Vector3 target;
+    public float elapseTime;
 
     public float flightDuration;
     public float Vx;

@@ -13,11 +13,12 @@ public static class InputComponentsLookup {
     public const int InputOwner = 2;
     public const int MoveInput = 3;
     public const int Rigidbody = 4;
-    public const int ShootInput = 5;
-    public const int SlowMotion = 6;
-    public const int Tick = 7;
+    public const int SelectTurret = 5;
+    public const int ShootInput = 6;
+    public const int SlowMotion = 7;
+    public const int Tick = 8;
 
-    public const int TotalComponents = 8;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
         "CannonShoot",
@@ -25,6 +26,7 @@ public static class InputComponentsLookup {
         "InputOwner",
         "MoveInput",
         "Rigidbody",
+        "SelectTurret",
         "ShootInput",
         "SlowMotion",
         "Tick"
@@ -36,6 +38,7 @@ public static class InputComponentsLookup {
         typeof(InputOwnerComponent),
         typeof(MoveInputComponent),
         typeof(RigidbodyComponent),
+        typeof(SelectTurretComponent),
         typeof(ShootInputComponent),
         typeof(SlowMotionComponent),
         typeof(TickComponent)

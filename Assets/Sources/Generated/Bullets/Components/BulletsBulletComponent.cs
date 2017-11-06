@@ -11,7 +11,7 @@ public partial class BulletsEntity {
     public BulletComponent bullet { get { return (BulletComponent)GetComponent(BulletsComponentsLookup.Bullet); } }
     public bool hasBullet { get { return HasComponent(BulletsComponentsLookup.Bullet); } }
 
-    public void AddBullet(float newFiringAngle, float newGravity, float newSpeed, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newTarget, float newFlightDuration, float newVx, float newVy, bool newFlagDestroy) {
+    public void AddBullet(float newFiringAngle, float newGravity, float newSpeed, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newTarget, float newElapseTime, float newFlightDuration, float newVx, float newVy, bool newFlagDestroy) {
         var index = BulletsComponentsLookup.Bullet;
         var component = CreateComponent<BulletComponent>(index);
         component.firingAngle = newFiringAngle;
@@ -19,6 +19,7 @@ public partial class BulletsEntity {
         component.speed = newSpeed;
         component.position = newPosition;
         component.target = newTarget;
+        component.elapseTime = newElapseTime;
         component.flightDuration = newFlightDuration;
         component.Vx = newVx;
         component.Vy = newVy;
@@ -26,7 +27,7 @@ public partial class BulletsEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceBullet(float newFiringAngle, float newGravity, float newSpeed, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newTarget, float newFlightDuration, float newVx, float newVy, bool newFlagDestroy) {
+    public void ReplaceBullet(float newFiringAngle, float newGravity, float newSpeed, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newTarget, float newElapseTime, float newFlightDuration, float newVx, float newVy, bool newFlagDestroy) {
         var index = BulletsComponentsLookup.Bullet;
         var component = CreateComponent<BulletComponent>(index);
         component.firingAngle = newFiringAngle;
@@ -34,6 +35,7 @@ public partial class BulletsEntity {
         component.speed = newSpeed;
         component.position = newPosition;
         component.target = newTarget;
+        component.elapseTime = newElapseTime;
         component.flightDuration = newFlightDuration;
         component.Vx = newVx;
         component.Vy = newVy;
