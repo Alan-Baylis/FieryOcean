@@ -59,6 +59,7 @@ namespace Forge3D
         private float _maxDistance { get; set; }
         private bool custom_active = false;
         private float projectile_Velocity_exp2 { get; set; }
+        private bool _isAiming = false;
 
         public float angel = 0;
         public UInt32 TurretId = 1;
@@ -67,17 +68,14 @@ namespace Forge3D
         void Start() { }
 
         /// <summary>
-        /// TODO
+        /// Return true if turret currently is aiming
         /// </summary>
-        public bool IsAiming()
-        {
-            return true;
-        }
+        public bool IsAiming { get { return _isAiming; } set { _isAiming = value; } }
 
         public void CustomAwake()
         {
             TurretId = 1;
-            _cannonParams = new CannonParams(TurretId);
+            cannonParams = new CannonParams(TurretId);
             anchorFireCorrection = 0.5f;
             bullet_game_speed = bullet_speed / mashtab;
             //bulletCalculations = GetComponent<ThrowSimulation>();
@@ -100,8 +98,8 @@ namespace Forge3D
                 fullAccess = true;
 
             StopAnimation();
-            _cannonParams.fireAnchor = anchorFire;
-            _cannonParams.swivel = headTransform;
+            cannonParams.fireAnchor = anchorFire;
+            cannonParams.swivel = headTransform;
             custom_active = true;
         }
 
@@ -130,14 +128,14 @@ namespace Forge3D
         public float GetGravity() { return gravity; }
         Func<float, float, float> CalcHeightOfAim = (float ty, float sy) => { if (ty > sy) { return Mathf.Abs(ty) - Math.Abs(sy); } else { return -(Mathf.Abs(sy) - Mathf.Abs(ty)); } };
 
-        CannonParams _cannonParams;
+        public CannonParams cannonParams { get; set; }
 
         public void UpdateCustom(out CannonParams p)
         {
             //p = _cannonParams;
             if (!custom_active)
             {
-                p = _cannonParams;
+                p = cannonParams;
                 return;
             }
 
@@ -146,9 +144,9 @@ namespace Forge3D
                 if (barrelTransform != null)
                 {
                     NoSmoothRotateController(barrelTransformOrigin, barrelTransform, headTransformOrigin, headTransform);
-                    _cannonParams.firingAngel = this.curElevationAngle;
-                    _cannonParams.vX = GetSpeed() * Mathf.Cos(this.curElevationAngle * Mathf.Deg2Rad);
-                    _cannonParams.vY = GetSpeed() * Mathf.Sin(this.curElevationAngle * Mathf.Deg2Rad);
+                    cannonParams.firingAngel = this.curElevationAngle;
+                    cannonParams.vX = GetSpeed() * Mathf.Cos(this.curElevationAngle * Mathf.Deg2Rad);
+                    cannonParams.vY = GetSpeed() * Mathf.Sin(this.curElevationAngle * Mathf.Deg2Rad);
                 }
             }
             else
@@ -163,9 +161,8 @@ namespace Forge3D
             //    Vector3 relative = transformFire.InverseTransformDirection(0, 0, 1);
             //}
 
-            p = _cannonParams;
+            p = cannonParams;
         }
-
         
 
         private void NoSmoothRotateController(Transform barrelOrigin, Transform barrel, Transform headOrigin, Transform head)

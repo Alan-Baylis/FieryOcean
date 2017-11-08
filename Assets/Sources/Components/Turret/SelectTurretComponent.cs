@@ -7,6 +7,6 @@ using Entitas;
 [Input]
 public sealed class SelectTurretComponent:IComponent
 {
-    public float turretId;
+    public UInt32 turretId;
     public bool Enable;
 }

@@ -10,35 +10,49 @@ public interface IPlayerController : IViewController {
     ShipDirectional shipDirectional { get; set; }
     void AddTurret(PlayerViewController.TurretShip t);
 
-    List<PlayerViewController.TurretShip> GetTurrets();
+    PlayerViewController.TurretShip GetTurret(UInt32 ID);
+    Dictionary<UInt32, PlayerViewController.TurretShip>.ValueCollection GetTurrets();
 }
 
 public class PlayerViewController : ViewController, IPlayerController {
-    private List<TurretShip> turrets;
+    private Dictionary<UInt32, TurretShip> turrets;
     public PlayerViewController()
     {
-        turrets = new List<TurretShip>();
+        turrets = new Dictionary<UInt32, TurretShip>();
     }
 
     public class TurretShip
     {
-        public F3DTurret turret;
-        public TrajectoryPredictor3D trajectoryPredictor;
+        public F3DTurret turret { get; private set; }
+        public TrajectoryPredictor3D trajectoryPredictor { get; private set; }
+        public UInt32 ID { private set; get; }
+
+        public TurretShip(UInt32 Id, F3DTurret turret, TrajectoryPredictor3D trajectoryPredictor)
+        {
+            this.ID = Id;
+            this.turret = turret;
+            this.trajectoryPredictor = trajectoryPredictor;
+        }
 
         public void Update(out CannonParams p)
         {
             turret.UpdateCustom(out p);
             trajectoryPredictor.UpdateCustom();
         }
+
+        public void Update()
+        {
+            CannonParams p;
+            turret.UpdateCustom(out p);
+            trajectoryPredictor.UpdateCustom();
+        }
+
+        public bool trajectoryEnable { get { return turret.IsAiming; } set { turret.IsAiming = value; } }
     }
 
     public virtual Rigidbody rigidbody
     {
-        set
-        {
-            Rigidbody rb = GetComponent<Rigidbody>();
-            rb = value;
-        }
+        set  { Rigidbody rb = GetComponent<Rigidbody>();  rb = value; }
         get { return GetComponent<Rigidbody>(); }
     }
 
@@ -50,23 +64,22 @@ public class PlayerViewController : ViewController, IPlayerController {
 
     public virtual ShipDirectional shipDirectional
     {
-        set
-        {
-            ShipDirectional shipDirectional = GetComponent<ShipDirectional>();
-            shipDirectional = value;
-        }
-
+        set { ShipDirectional shipDirectional = GetComponent<ShipDirectional>(); shipDirectional = value; }
         get { return GetComponent<ShipDirectional>();  }
     }
 
     public void AddTurret(TurretShip t)
     {
-        turrets.Add(t);
+        turrets[t.ID]= t;
     }
 
-    public List<TurretShip> GetTurrets()
+    public TurretShip GetTurret(UInt32 ID)
     {
-        return turrets;
+        return turrets[ID];
     }
 
+    public Dictionary<UInt32, TurretShip>.ValueCollection GetTurrets()
+    {
+        return turrets.Values;
+    }
 }

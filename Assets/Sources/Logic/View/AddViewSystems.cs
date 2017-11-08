@@ -174,7 +174,7 @@ public partial class AddViewSystems : ReactiveSystem<GameEntity> {
             tp.crosshair = Assets.Instantiate<GameObject>("Projector/Prefabs/ProjectorAim"); ///TODO
             tp.crosshair.transform.position = new Vector3(0, 20f, 0);
 
-            ge.playerView.controller.AddTurret(new PlayerViewController.TurretShip {turret= tp.f3dturret, trajectoryPredictor= tp });
+            ge.playerView.controller.AddTurret(new PlayerViewController.TurretShip(tp.f3dturret.TurretId, tp.f3dturret, tp ));
         }
 
         F3DPlayerTurretController playerTurretController = go.GetComponentInChildren<F3DPlayerTurretController>();

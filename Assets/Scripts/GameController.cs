@@ -69,10 +69,11 @@ public class GameController : MonoBehaviour {
         // Input
         .Add(new InputSystem(playerInputController, contexts))
         .Add(new ProcessMoveInputSystem(contexts))
-        .Add(new ProcessShootInputSystem(contexts))
+        .Add(new ShootSystem(contexts))
         // Initialize
         .Add(ws)
         .Add(new AnimateDestroyViewSystem(contexts))
+        .Add(new TurnTurretSystem(contexts))
         .Add(new TurretSystem(contexts))
         
         //.Add(new IncrementTickSystem())

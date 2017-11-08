@@ -32,6 +32,7 @@ public sealed class BulletsThrowSystem : ReactiveSystem<BulletsEntity>
             }
             else
             {
+                b.view.controller.Hide(true);
                 b.Destroy();
             }
         }

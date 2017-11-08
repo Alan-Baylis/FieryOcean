@@ -46,7 +46,7 @@ public sealed class PlayerInputController : MonoBehaviour {
         {
             if (waitHandle.WaitOne())
             {
-                    waitHandle.Set();
+                waitHandle.Set();
             }
         }
     }

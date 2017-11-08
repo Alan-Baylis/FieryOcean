@@ -11,7 +11,7 @@ public partial class InputEntity {
     public SelectTurretComponent selectTurret { get { return (SelectTurretComponent)GetComponent(InputComponentsLookup.SelectTurret); } }
     public bool hasSelectTurret { get { return HasComponent(InputComponentsLookup.SelectTurret); } }
 
-    public void AddSelectTurret(float newTurretId, bool newEnable) {
+    public void AddSelectTurret(uint newTurretId, bool newEnable) {
         var index = InputComponentsLookup.SelectTurret;
         var component = CreateComponent<SelectTurretComponent>(index);
         component.turretId = newTurretId;
@@ -19,7 +19,7 @@ public partial class InputEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceSelectTurret(float newTurretId, bool newEnable) {
+    public void ReplaceSelectTurret(uint newTurretId, bool newEnable) {
         var index = InputComponentsLookup.SelectTurret;
         var component = CreateComponent<SelectTurretComponent>(index);
         component.turretId = newTurretId;

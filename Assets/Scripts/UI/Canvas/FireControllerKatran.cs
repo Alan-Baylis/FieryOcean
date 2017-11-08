@@ -6,16 +6,16 @@ using System;
 
 public class FireControllerKatran : MonoBehaviour {
 
-    Dictionary<int, bool> turnCheckdic;
-    Action<Dictionary<int, bool>,int> select = (Dictionary<int, bool> d, int id)=> { if (d[id]) d[id] = false; else d[id] = true; };
+    Dictionary<UInt32, bool> turnCheckdic;
+    Action<Dictionary<UInt32, bool>,UInt32> select = (Dictionary<UInt32, bool> d, UInt32 id)=> { if (d[id]) d[id] = false; else d[id] = true; };
 
     void Awake()
     {
-        turnCheckdic = new Dictionary<int, bool>() { { 1, false }, {2, false } };
+        turnCheckdic = new Dictionary<UInt32, bool>() { { 1, false }, {2, false } };
     }
 
-    public Int32 ForwardCannonId = 1;
-    public Int32 BackwardCannonId = 2;
+    public UInt32 ForwardCannonId = 1;
+    public UInt32 BackwardCannonId = 2;
     //public Int32 Board01CannonId = 3;
     //public Int32 Board02CannonId = 4;
 
