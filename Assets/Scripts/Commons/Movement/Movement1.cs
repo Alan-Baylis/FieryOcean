@@ -46,7 +46,7 @@ public class PlayerMovementController
             rb.velocity = shipDirect.normalized * nextAc;
         }
 
-        rb.position = new Vector3(rb.position.x, _masterY, rb.position.z);
+        rb.position = new Vector3(rb.position.x, /*_masterY*/ rb.position.y, rb.position.z);
         return rb.position;
     }
 

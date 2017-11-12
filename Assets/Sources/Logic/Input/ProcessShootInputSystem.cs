@@ -40,7 +40,7 @@ public sealed class ProcessShootInputSystem : ReactiveSystem<InputEntity>
         foreach (InputEntity e in entities)
         {
             var player = _pools.game.GetEntityWithPlayerId(e.inputOwner.playerId);
-
+           
             _pools.bullets.ApplyBullet( player.position.value + e.cannonShoot.cannonParams.shipPosition,
                                        /* e.cannonShoot.cannonParams.target*/ new Vector3(30,0,140),
                                         player.playerView.controller.rigidbody.velocity,

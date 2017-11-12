@@ -8,5 +8,5 @@
 //------------------------------------------------------------------------------
 public interface IDestroy {
 
-    bool flagDestroy { get; set; }
+    bool isDestroy { get; set; }
 }

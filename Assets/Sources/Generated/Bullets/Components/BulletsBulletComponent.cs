@@ -11,11 +11,12 @@ public partial class BulletsEntity {
     public BulletComponent bullet { get { return (BulletComponent)GetComponent(BulletsComponentsLookup.Bullet); } }
     public bool hasBullet { get { return HasComponent(BulletsComponentsLookup.Bullet); } }
 
-    public void AddBullet(float newFiringAngle, float newGravity, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newTarget, float newFlightDuration, float newVx, float newVy) {
+    public void AddBullet(float newFiringAngle, float newGravity, float newSpeed, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newTarget, float newFlightDuration, float newVx, float newVy) {
         var index = BulletsComponentsLookup.Bullet;
         var component = CreateComponent<BulletComponent>(index);
         component.firingAngle = newFiringAngle;
         component.gravity = newGravity;
+        component.speed = newSpeed;
         component.position = newPosition;
         component.target = newTarget;
         component.flightDuration = newFlightDuration;
@@ -24,11 +25,12 @@ public partial class BulletsEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceBullet(float newFiringAngle, float newGravity, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newTarget, float newFlightDuration, float newVx, float newVy) {
+    public void ReplaceBullet(float newFiringAngle, float newGravity, float newSpeed, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newTarget, float newFlightDuration, float newVx, float newVy) {
         var index = BulletsComponentsLookup.Bullet;
         var component = CreateComponent<BulletComponent>(index);
         component.firingAngle = newFiringAngle;
         component.gravity = newGravity;
+        component.speed = newSpeed;
         component.position = newPosition;
         component.target = newTarget;
         component.flightDuration = newFlightDuration;

@@ -5,6 +5,8 @@ using Entitas;
 using Apex;
 using Apex.Units;
 using UnityEngine.UI;
+using Apex.WorldGeometry;
+using Apex.Services;
 
 public sealed class PlayerInputController : MonoBehaviour {
     public enum speedTypes { FullSpeed = 0, HalfSpeed, Stop, Reversal }
@@ -15,7 +17,7 @@ public sealed class PlayerInputController : MonoBehaviour {
     public float fullSpeed = 3f;
     public float halfSpeed = 1.5f;
     public float revers = -2f;
-    public Transform startPosition;
+    public GameObject startPosition;
     public Slider slider;
     void Start()
     { }
@@ -77,7 +79,10 @@ public sealed class PlayerInputController : MonoBehaviour {
 
     public Vector3 Position()
     {
-        return startPosition.position;
+        MeshRenderer mr = startPosition.GetComponent<MeshRenderer>();
+
+        float distance =Vector3.Distance( mr.bounds.max , mr.bounds.min);
+        return startPosition.transform.position + new Vector3(-distance, 0f, distance);
     }
 
     public bool fire = false;
@@ -98,6 +103,27 @@ public sealed class PlayerInputController : MonoBehaviour {
             return false;
     }
 
-     
-    
+    //void SetDestination(Vector3 destination, bool append)
+    //{
+    //    RaycastHit hit;
+    //    if (Apex.Services.UnityServices.mainCamera.ScreenToLayerHit(destination, Layers.terrain, 1000.0f, out hit))
+    //    {
+    //        var destinationBlock = hit.collider.GetComponent<InvalidDestinationComponent>();
+    //        if (destinationBlock != null)
+    //        {
+    //            if (destinationBlock.entireTransform)
+    //            {
+    //                return;
+    //            }
+
+    //            if (destinationBlock.onlySubArea.Contains(hit.point))
+    //            {
+    //                return;
+    //            }
+    //        }
+
+           
+    //    }
+    //}
+
 }

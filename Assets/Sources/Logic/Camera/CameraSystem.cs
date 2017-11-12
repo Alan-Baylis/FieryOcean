@@ -19,10 +19,10 @@ public sealed class CameraSystem : IExecuteSystem, ICleanupSystem
 
     private Transform target;
     private Transform transform;
-    private float distance = 70.0f;
-    private float height = 45.0f;
+    private float distance = 20.0f;
+    private float height = 25.0f;
     private float rotationDamping=1.5f;
-    private float damping=0.5f;
+    private float damping=1.5f;
 
     public void Execute()
     {

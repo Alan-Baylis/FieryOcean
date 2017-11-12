@@ -1,57 +1,83 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Forge3D;
 
 public class ThrowSimulation : MonoBehaviour
 {
-    public Transform Target;
     public float firingAngle = 45.0f;
-    public float gravity = 9.8f;
+    public float gravity = 9f;
 
-    public Transform Projectile;
-    private Transform myTransform;
+    [HideInInspector]
+    public float gravityInGameCoord { get; set; }
+    [HideInInspector]
+    public float projectile_Velocity_exp2 { get; set; }
+    public float bullet_horizont_speed = 1500f;
+    public F3DTurret turretController;
+    public GameObject bulletPrefab;
+    public Transform fireAnchor;
+    public Transform swivel;
+
+    private float simulate_coefficient;
+
+    //public float GetGravity()
+    //{
+    //    return gravityInGameCoord;
+    //}
 
     void Awake()
     {
-        myTransform = transform;
+        swivel = transform;
+        PoolManager.WarmPool(bulletPrefab, 3);
     }
 
     void Start()
+    {   }
+
+    void Update()
     {
-        StartCoroutine(SimulateProjectile());
+        if (Input.GetKeyDown("space"))
+        {
+            if (turretController != null)
+            {
+                firingAngle = -turretController.curElevationAngle;
+                var bullet = PoolManager.SpawnObject(bulletPrefab, swivel.position, Quaternion.identity).GetComponent<Bullet>();
+                StartCoroutine(SimulateProjectile(bullet.transform));
+            }
+        }
     }
 
-
-    IEnumerator SimulateProjectile()
+    IEnumerator SimulateProjectile(Transform bullet)
     {
         // Short delay added before Projectile is thrown
-        yield return new WaitForSeconds(1.5f);
+        //yield return new WaitForSeconds(1.5f);
 
         // Move projectile to the position of throwing object + add some offset if needed.
-        Projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
+        bullet.position = fireAnchor.position + new Vector3(0, 0.0f, 0);
 
         // Calculate distance to target
-        float target_Distance = Vector3.Distance(Projectile.position, Target.position);
-
-        // Calculate the velocity needed to throw the object to the target at specified angle.
-        float projectile_Velocity = target_Distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);
+        float target_Distance = Vector3.Distance(bullet.position, turretController.GetTarget());
 
         // Extract the X  Y componenent of the velocity
-        float Vx = Mathf.Sqrt(projectile_Velocity) * Mathf.Cos(firingAngle * Mathf.Deg2Rad);
-        float Vy = Mathf.Sqrt(projectile_Velocity) * Mathf.Sin(firingAngle * Mathf.Deg2Rad);
+        float Vx = turretController.GetSpeed() * Mathf.Cos(firingAngle * Mathf.Deg2Rad);
+        float Vy = turretController.GetSpeed() * Mathf.Sin(firingAngle * Mathf.Deg2Rad);
+
+        //Debug.Log("angel: " + firingAngle.ToString() + "Vx: " + Vx.ToString());
 
         // Calculate flight time.
         float flightDuration = target_Distance / Vx;
-
         // Rotate projectile to face the target.
-        Projectile.rotation = Quaternion.LookRotation(Target.position - Projectile.position);
+        bullet.rotation = Quaternion.LookRotation(swivel.forward);
 
         float elapse_time = 0;
 
-        while (elapse_time < flightDuration)
+        while (true)
         {
-            Projectile.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
-
             elapse_time += Time.deltaTime;
+            bullet.Translate(0, (Vy - (turretController.GetGravity() * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
+            //Debug.Log("bullet position :" + Projectile.position.ToString()+ "time: "+ Time.deltaTime);
+
+            if (bullet.position.y <= 0)
+                break;
 
             yield return null;
         }

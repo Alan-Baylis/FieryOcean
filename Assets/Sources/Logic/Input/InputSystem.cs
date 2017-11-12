@@ -34,7 +34,6 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
            
             input.ReplaceMoveInput(_playerController.accelerate);
             input.ReplaceInputOwner(PLAYER1_ID);
-            
         }
 
         if (_playerController.IsFire())
@@ -42,10 +41,7 @@ public sealed class InputSystem : IExecuteSystem, IInitializeSystem, ICleanupSys
             InputEntity inputShoot = _pools.input.CreateEntity();
 
             uint cannonId = 1;
-            CannonParams cannonParams = new CannonParams(cannonId, Input.mousePosition,new Vector3(0,2,0));
-
-            inputShoot.AddCannonShoot(cannonParams);
-            
+            inputShoot.AddCannonShoot(new CannonParams(cannonId));
             inputShoot.AddInputOwner(PLAYER1_ID);
         }
     }

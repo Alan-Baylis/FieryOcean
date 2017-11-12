@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class CannonParams
 {
-    public CannonParams(uint ID, Vector3 target, Vector3 shipPosition)
+    public CannonParams(uint ID)
     {
         this.ID = ID;
-        this.target = target;
-        this.shipPosition = shipPosition;
     }
 
     public uint ID;
