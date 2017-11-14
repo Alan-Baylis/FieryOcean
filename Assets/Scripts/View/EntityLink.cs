@@ -36,7 +36,10 @@ public static class EntityLinkExtension {
     public static EntityLink GetEntityLink(this GameObject gameObject) {
         return gameObject.GetComponent<EntityLink>();
     }
-
+    public static EntityLink GetEntityLinkParet(this GameObject gameObject)
+    {
+        return gameObject.GetComponentInParent<EntityLink>();
+    }
     public static EntityLink Link(this GameObject gameObject, Entity entity, IContext pool) {
         var link = gameObject.GetEntityLink();
         if(link == null) {

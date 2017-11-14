@@ -526,6 +526,7 @@
     <Compile Include="Assets\ExportTerrainData.cs" />
     <Compile Include="Assets\Inspector Name Drawer\InspectorNameAttribute.cs" />
     <Compile Include="Assets\Libraries\Entitas\Compile.cs" />
+    <Compile Include="Assets\Pop.cs" />
     <Compile Include="Assets\Scripts\AIController.cs" />
     <Compile Include="Assets\Scripts\ArrayList.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
@@ -540,6 +541,7 @@
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameEntity.cs" />
     <Compile Include="Assets\Scripts\Input\CollisionEmitter.cs" />
+    <Compile Include="Assets\Scripts\Input\CollisionEmmiterShip.cs" />
     <Compile Include="Assets\Scripts\joystickController.cs" />
     <Compile Include="Assets\Scripts\PlayerInputController.cs" />
     <Compile Include="Assets\Scripts\Server\Account.cs" />
@@ -577,12 +579,17 @@
     <Compile Include="Assets\Scripts\Server\NPC.cs" />
     <Compile Include="Assets\Scripts\Server\skills\Skill.cs" />
     <Compile Include="Assets\Scripts\Server\skills\SkillObject.cs" />
-    <Compile Include="Assets\Scripts\ShipCannon\F3DFXController.cs" />
-    <Compile Include="Assets\Scripts\ShipCannon\F3DTime.cs" />
-    <Compile Include="Assets\Scripts\ShipCannon\Lib\F3DMath.cs" />
-    <Compile Include="Assets\Scripts\ShipCannon\Player\F3DPlayerTurretController.cs" />
-    <Compile Include="Assets\Scripts\ShipCannon\TrajectoryPredictor3D.cs" />
-    <Compile Include="Assets\Scripts\ShipCannon\Turrets\F3DTurret.cs" />
+    <Compile Include="Assets\Scripts\Ship\AreaAttackConroller.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCannon\F3DFXController.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCannon\F3DTime.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCannon\Lib\F3DMath.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCannon\Player\F3DPlayerTurretController.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCannon\ProjectorColorController.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCannon\TrajectoryPredictor3D.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCannon\Turrets\F3DTurret.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCollidersController.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipDiagramLoader.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipSectors.cs" />
     <Compile Include="Assets\Scripts\ShipDirectional.cs" />
     <Compile Include="Assets\Scripts\ShowFPS.cs" />
     <Compile Include="Assets\Scripts\ThrowSimulation.cs" />
@@ -604,7 +611,7 @@
     <Compile Include="Assets\Scripts\View\ViewController\IViewController.cs" />
     <Compile Include="Assets\Scripts\View\ViewController\PoolableViewController.cs" />
     <Compile Include="Assets\Scripts\View\ViewController\ViewController.cs" />
-    <Compile Include="Assets\ShipDiagramLoader.cs" />
+    <Compile Include="Assets\SomeClass.cs" />
     <Compile Include="Assets\Sources\Assets.cs" />
     <Compile Include="Assets\Sources\Assets\Res.cs" />
     <Compile Include="Assets\Sources\CommonTypes.cs" />
@@ -658,8 +665,6 @@
     <Compile Include="Assets\Sources\Logic\Bullets\BulletsThrowSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Camera\CameraSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Camera\CreateCameraSystem.cs" />
-    <Compile Include="Assets\Sources\Logic\Cannons\TrajectoryPredictorSystem.cs" />
-    <Compile Include="Assets\Sources\Logic\Cannons\TurretSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Destroy\AnimateDestroyViewSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Destroy\AnimateOutOfScreenViewSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Destroy\DestroyEntitySystem.cs" />
@@ -671,7 +676,6 @@
     <Compile Include="Assets\Sources\Logic\Input\InputSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Input\ProcessCollisionSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Input\ProcessMoveInputSystem.cs" />
-    <Compile Include="Assets\Sources\Logic\Input\ProcessShootInputSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Player\AddPlayerStartPosition.cs" />
     <Compile Include="Assets\Sources\Logic\Player\CreatePlayerSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Player\Postion\PlayerPositionSystem.cs" />
@@ -679,6 +683,9 @@
     <Compile Include="Assets\Sources\Logic\Position\RederCameraPositionSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Position\RenderPositionSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Position\RenderStartPositionSystem.cs" />
+    <Compile Include="Assets\Sources\Logic\Turrets\ShootSystem.cs" />
+    <Compile Include="Assets\Sources\Logic\Turrets\TurnTurretSystem.cs" />
+    <Compile Include="Assets\Sources\Logic\Turrets\TurretSystem.cs" />
     <Compile Include="Assets\Sources\Logic\Velocity\VelocitySystem.cs" />
     <Compile Include="Assets\Sources\Logic\View\AddViewFromObjectPoolSystem.cs" />
     <Compile Include="Assets\Sources\Logic\View\AddViewSystems.cs" />

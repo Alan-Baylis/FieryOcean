@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public Camera cam;
     public PlayerInputController playerInputController;
     public EnemiesStartPositions enemisStartPositions;
+    public ProjectorColorController projectorColorController;
     
     Systems _systems;
     // Use this for initialization
@@ -79,11 +80,11 @@ public class GameController : MonoBehaviour {
         //.Add(new IncrementTickSystem())
         .Add(new CreatePlayerSystem(contexts, playerInputController.Position()))
         .Add(new CreateCameraSystem(contexts, cam))
-        .Add(new AddViewSystems(contexts))
+        .Add(new AddViewSystems(contexts, projectorColorController.projectorColors))
         .Add(new AddViewFromObjectPoolSystem(contexts))
 
         // Initialize and Reactive
-        .Add(new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position }))
+        .Add(new CreateEnemySystem(contexts, new Vector3[] { enemisStartPositions.startPoint.position , new Vector3(200,1,30)}))
         //
         .Add(new CameraSystem(contexts))
         

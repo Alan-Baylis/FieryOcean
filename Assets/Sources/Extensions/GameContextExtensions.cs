@@ -9,7 +9,7 @@ public static class GameEntityExtensions {
     public static GameEntity CreateEnemy(this GameContext context, Vector3 position)
     {
         var entity = context.CreateEntity();
-        entity.AddAsset("Ships/Prefabs/katran");
+        entity.AddAsset("Ships/Prefabs/katran", "CanvasActions", "Projector/Prefabs/ProjectorAim", "Projector/Prefabs/ProjectorAimCross");
         entity.AddWhoAMi(1);
         entity.AddPosition(position);
 
@@ -19,7 +19,7 @@ public static class GameEntityExtensions {
     public static GameEntity CreatePlayer(this GameContext context, Vector3 position)
     {
         var entity = context.CreateEntity();
-        entity.AddAsset("Ships/Prefabs/katran");
+        entity.AddAsset("Ships/Prefabs/katran","Interface/CanvasBattle/CanvasActions","Projector/Prefabs/ProjectorAim", "Projector/Prefabs/ProjectorAimCross");
         
         entity.AddWhoAMi(0);
         entity.AddPlayer("Player1");
@@ -32,7 +32,7 @@ public static class GameEntityExtensions {
     public static GameEntity CreateRemotePlayer(this GameContext context, Vector3 position, KBEngine.KbEntity server_entity)
     {
         var entity = context.CreateEntity();
-        entity.AddAsset("Ships/Prefabs/katran");
+        entity.AddAsset("Ships/Prefabs/katran", "CanvasActions", "Projector/Prefabs/ProjectorAim", "Projector/Prefabs/ProjectorAimCross");
         entity.AddWhoAMi(2);
         entity.AddServerImpOfUnit(server_entity);
         entity.AddPosition(server_entity.position);

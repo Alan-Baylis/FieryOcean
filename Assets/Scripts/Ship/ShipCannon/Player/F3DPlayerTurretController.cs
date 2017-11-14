@@ -70,7 +70,7 @@ namespace Forge3D
                 {
                     curRay = GetHighestRaycast(hit);
                     turret.SetNewTarget(curRay.point);
-                    aimingPointTransform.position = curRay.point;
+                    aimingPointTransform.position = new Vector3(curRay.point.x,50,curRay.point.z); //TODO
 
                     Debug.Log("Ray: " + curRay.point.ToString());
                 }

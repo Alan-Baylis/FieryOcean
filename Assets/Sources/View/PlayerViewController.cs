@@ -37,14 +37,14 @@ public class PlayerViewController : ViewController, IPlayerController {
         public void Update(out CannonParams p)
         {
             turret.UpdateCustom(out p);
-            trajectoryPredictor.UpdateCustom();
+            trajectoryPredictor.TrajectoryPredict();
         }
 
         public void Update()
         {
             CannonParams p;
             turret.UpdateCustom(out p);
-            trajectoryPredictor.UpdateCustom();
+            trajectoryPredictor.TrajectoryPredict();
         }
 
         public bool trajectoryEnable { get { return turret.IsAiming; } set { turret.IsAiming = value; } }

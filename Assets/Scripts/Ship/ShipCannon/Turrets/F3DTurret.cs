@@ -24,9 +24,9 @@ namespace Forge3D
 
         public float HeadingTrackingSpeed = 2f;
         public float ElevationTrackingSpeed = 2f;
-        public float bullet_speed = 3000f;
+        public float bulletSpeed = 3000f;
         [HideInInspector]
-        public float bullet_game_speed { get; set; }
+        public float speed { get; set; }
         private Vector3 targetPos=Vector3.zero;
         [HideInInspector]
         public Vector3 headingVetor;
@@ -77,7 +77,7 @@ namespace Forge3D
             TurretId = 1;
             cannonParams = new CannonParams(TurretId);
             anchorFireCorrection = 0.5f;
-            bullet_game_speed = bullet_speed / mashtab;
+            speed = bulletSpeed / mashtab;
             //bulletCalculations = GetComponent<ThrowSimulation>();
 
             headTransformOrigin = SwivelOrigin.GetComponent<Transform>();
@@ -87,7 +87,7 @@ namespace Forge3D
             
             //swivel = transform;
             //PoolManager.WarmPool(bulletPrefab, 3);
-            projectile_Velocity_exp2 = Mathf.Pow(bullet_game_speed, 2); 
+            projectile_Velocity_exp2 = Mathf.Pow(speed, 2); 
             _maxDistance = (projectile_Velocity_exp2 * Mathf.Sin(2f * 45f * Mathf.Deg2Rad)) / gravity;
 
             targetPos = headTransform.transform.position + headTransform.transform.forward * 100f;
@@ -120,7 +120,7 @@ namespace Forge3D
         /// Return the speed value of bullet in game mathtab
         /// </summary>
         /// <returns></returns>
-        public float GetSpeed() { return bullet_game_speed; }
+        public float GetSpeed() { return speed; }
         /// <summary>
         /// Return the gravity value in game mathtab
         /// </summary>
@@ -163,7 +163,9 @@ namespace Forge3D
 
             p = cannonParams;
         }
-        
+
+
+        public float targetDistance{ get; set; }
 
         private void NoSmoothRotateController(Transform barrelOrigin, Transform barrel, Transform headOrigin, Transform head)
         {
@@ -202,13 +204,13 @@ namespace Forge3D
             Vector3 tmp = targetPos - barrel.position;
             //Debug.DrawLine(tmp, tmp * 100, Color.blue);
 
-            float target_Distance = Vector3.Distance(anchorFire.position, targetPos);
+            targetDistance = Vector3.Distance(anchorFire.position, targetPos);
 
-            if (_maxDistance > target_Distance)
+            if (_maxDistance > targetDistance)
             {
                 //get barrel vector to fire tafget
                 float barrelOceanY = /*ship.position.y + */ anchorFire.position.y + anchorFireCorrection; // + ocean.position.y;
-                Vector3 elevationVector = CannonMath.GetNeededBarrelDirectional(gravity, barrel, head, targetPos, target_Distance, projectile_Velocity_exp2, barrelOceanY, out angel, CalcHeightOfAim);
+                Vector3 elevationVector = CannonMath.GetNeededBarrelDirectional(gravity, barrel, head, targetPos, targetDistance, projectile_Velocity_exp2, barrelOceanY, out angel, CalcHeightOfAim);
 
                 // determine directional of rotation on angel by sign
                 float _elevationAngle = F3DMath.SignedVectorAngle(barrel.forward, elevationVector, head.right);

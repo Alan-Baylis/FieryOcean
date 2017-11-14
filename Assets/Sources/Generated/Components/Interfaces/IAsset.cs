@@ -11,7 +11,7 @@ public interface IAsset {
     AssetComponent asset { get; }
     bool hasAsset { get; }
 
-    void AddAsset(string newName);
-    void ReplaceAsset(string newName);
+    void AddAsset(string newName, string newCanvasActions, string newProjectorAim, string newProjectAimCross);
+    void ReplaceAsset(string newName, string newCanvasActions, string newProjectorAim, string newProjectAimCross);
     void RemoveAsset();
 }

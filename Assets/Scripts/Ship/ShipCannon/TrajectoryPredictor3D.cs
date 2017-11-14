@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using Forge3D;
 using System;
 
+
 //Requires the LineRenderer component
 [RequireComponent(typeof(LineRenderer))]
 
 public class TrajectoryPredictor3D : MonoBehaviour
 {
-    //Velocity that the object will be shot at
-    public float velocity;
+    public struct ProjectorColors { public Color NotSelect; public Color Aiming; public Color Aimed; public Color AimImpossible; }
+
     //Amount of time between each point
-    public float timeBetweenPoints = 0.01f;
+    public float timeBetweenPoints = 0.1f;
     //Max number of points allowed in the trajectory line/Max amount of texture objects allowed
-    public int maxNumberOfPoints = 100;
+    public int maxNumberOfPoints = 80;
     //Object that will be instantiated
     public GameObject textureObject;
     public GameObject crosshair;
@@ -27,11 +28,9 @@ public class TrajectoryPredictor3D : MonoBehaviour
     //Is the projectile being fired out of the xAxis?
     public bool xAxisForward = false;
     // From this obj we get velocity and angel for firing
-    public F3DTurret f3dturret;
+    public F3DTurret turret;
     //
     public Transform anchorFireTransform;
-    //An internal variable that controlles whether or not the
-    internal bool hasFired = false;
 
     //The vertical velocity of the object
     float verticalVelocity;
@@ -55,7 +54,7 @@ public class TrajectoryPredictor3D : MonoBehaviour
     //The line renderer component
     LineRenderer lineRenderer;
     //Vector point of the next point in the trajectory
-    Vector3 vector;
+    Vector3 curVector;
     Vector3 lastVector;
     //Array of objectTextures
     GameObject[] objectPoints;
@@ -67,6 +66,10 @@ public class TrajectoryPredictor3D : MonoBehaviour
     GameObject textureObjectsHolder;
     Transform crosshairTransform;
     public Transform barrel;
+    Projector _projector;
+    Func<LayerMask[], Vector3, bool> ChkLayers = (LayerMask[] ls, Vector3 v) => { foreach (LayerMask l in ls) { if (Physics.CheckSphere(v, 0, l)) return false; } return true; };
+
+    public ProjectorColors projectorColors { set; get; }
 
     private const int SIZE = 2;
     void OnValidate()
@@ -77,12 +80,11 @@ public class TrajectoryPredictor3D : MonoBehaviour
         }
     }
 
-
     // Use this for initialization
-    void Start()
+    public void CustomStart()
     {
         //velocity = 25f;
-        if (f3dturret == null)
+        if (turret == null)
             throw new NullReferenceException("F3DTurrent not set for TrajectoryPredictor3D");
 
         //Gets the line renderer component
@@ -92,7 +94,16 @@ public class TrajectoryPredictor3D : MonoBehaviour
         lineRenderer.endWidth = 0.2f;
 
         if (crosshair != null)
+        {
             crosshairTransform = crosshair.GetComponent<Transform>();
+            _projector = crosshair.GetComponent<Projector>();
+            //Material mat = Resources.Load("Projector/Material/MatAimCrossNotSelect", typeof(Material)) as Material;
+            //pr.material = mat;
+            _projector.material.SetColor("_Color", projectorColors.NotSelect);
+            _curAimColor = projectorColors.NotSelect;
+        }
+        else
+            throw new NullReferenceException("Projector in trajectory prediction is not set");
 
         //Generates an empty game Object to hold the "Texture Objects" if need be
         if (textureObject != null)
@@ -129,34 +140,38 @@ public class TrajectoryPredictor3D : MonoBehaviour
         }
     }
 
-    Func<LayerMask[],Vector3, bool> ChkLayers = (LayerMask[] ls, Vector3 v) => { foreach (LayerMask l in ls) { if(Physics.CheckSphere(v, 0, l)) return true; } return false; };
 
-    // Update is called once per frame
-    public void UpdateCustom()
+    /// <summary>
+    /// Creates a trajectory with the help of objects lineRenders based on the specified angle and velocity of the projectile 
+    /// </summary>
+    public void TrajectoryPredict()
     {
         //Sets "angle" and "phi" to the Euler equivalent of the object's rotation
-        if (hasFired == false)
+        angle = -barrel.rotation.eulerAngles.x; //f3dturret.angel;
+        //barrel.rotation.eulerAngles.x;
+        phi = transform.rotation.eulerAngles.y;
+
+        //verticalVelocity = -turret.cannonParams.vY;
+        verticalVelocity = turret.speed* Mathf.Sin(angle * Mathf.Deg2Rad);
+        //Gets the horizontal velocity of the object
+        //horizontalVelocity = turret.cannonParams.vX * Mathf.Sin((phi + 90f) * Mathf.Deg2Rad);
+        horizontalVelocity = turret.speed * Mathf.Cos(angle * Mathf.Deg2Rad) * Mathf.Sin((phi + 90f) * Mathf.Deg2Rad);
+
+        phi += 90;
+        //Uses Pythagorean's theorem to get the velocity in the z direction
+        if (((phi - 90 > 180 && xAxisForward == true) || ((phi < 90 || phi > 270) && xAxisForward == false)) && turret.speed != verticalVelocity)
         {
-            angle = -barrel.rotation.eulerAngles.x; //f3dturret.angel;
-            //barrel.rotation.eulerAngles.x;
-            phi = transform.rotation.eulerAngles.y;
+            depthVelocity = Mathf.Sqrt((turret.speed * turret.speed) - (horizontalVelocity * horizontalVelocity) - (verticalVelocity * verticalVelocity));
+        }
+        else if (turret.speed != verticalVelocity)
+        {
+            depthVelocity = -Mathf.Sqrt((turret.speed * turret.speed) - (horizontalVelocity * horizontalVelocity) - (verticalVelocity * verticalVelocity));
+        }
+        else {
+            depthVelocity = 0;
         }
 
-        //If there is a texture object set all objects in the objectPoints array to false
-        //if (textureObject != null)
-        //{
-        //    for (x = 0; x < maxNumberOfPoints; x++)
-        //    {
-        //        objectPoints[x].active = false;
-        //    }
-        //}
-
-        velocity = f3dturret.bullet_game_speed;
-        verticalVelocity = velocity * Mathf.Sin(angle * Mathf.Deg2Rad);
-
-        //Gets the horizontal velocity of the object
-        horizontalVelocity = velocity * Mathf.Cos(angle * Mathf.Deg2Rad) * Mathf.Sin((phi+90f) * Mathf.Deg2Rad);
-        depthVelocity = velocity * Mathf.Sin(phi * Mathf.Deg2Rad);
+        depthVelocity = -depthVelocity;
 
         if (timeBetweenPoints != 0)
         {
@@ -171,20 +186,15 @@ public class TrajectoryPredictor3D : MonoBehaviour
 
             i = 0;
 
-            vector = anchorFireTransform.position;
+            curVector = anchorFireTransform.position;
 
             //Makes sure the line Index does not exceed the maxNumberOfPoints
             while (lineIndex < maxNumberOfPoints)
             {
                 //Makes sure the current vector point is not intersecting an object with one of the layersToHit layer
-                if (ChkLayers(layersToHit,vector)==false)
+                if (ChkLayers(layersToHit, curVector))
                 {
-                    if (crosshair != null)
-                    {
-                        //crosshair.GetComponent<Renderer>().enabled = false;
-                    }
-
-                    lastVector = vector;
+                    lastVector = curVector;
 
                     //Iterates i if lineIndex is more than 0 so the
                     if (lineIndex > 0)
@@ -198,7 +208,7 @@ public class TrajectoryPredictor3D : MonoBehaviour
                         xDisplacement = depthVelocity * i + anchorFireTransform.position.x;
                         
                         //Creats a point using the x and y displacement and the zDepth
-                        vector = new Vector3(xDisplacement, yDisplacement, zDisplacement);
+                        curVector = new Vector3(xDisplacement, yDisplacement, zDisplacement);
                     }
 
                     //Makes sure the texture object isn't null
@@ -212,18 +222,16 @@ public class TrajectoryPredictor3D : MonoBehaviour
                                 //Turns one of the objectPoints on
                                 objectPoints[lineIndex].active = true;
                                 //Sets the position of the activated to the vector point
-                                objectPoints[lineIndex].transform.position = vector;
+                                objectPoints[lineIndex].transform.position = curVector;
                             }
                         }
                         else
-                        {
                             throw new System.DivideByZeroException("The 'Texture Object Divisor' parameter cannot be 0 in the 'Trajectory Predictor' script");
-                        }
                     }
                     else
                     {
                         //Sets a line renderer line to the position of the vector point
-                        lineRenderer.SetPosition(lineIndex, vector);
+                        lineRenderer.SetPosition(lineIndex, curVector);
                     }
 
                     //Increments the lineIndex variable by 1
@@ -231,33 +239,61 @@ public class TrajectoryPredictor3D : MonoBehaviour
                 }
                 else
                 {
-                    if (crosshair != null)
-                    {
-                        //crosshair.GetComponent<Renderer>().enabled = true;
+                    RaycastHit hit;
+                    zDisplacement = horizontalVelocity * treajectoryPredictorCorrection;
+                    xDisplacement = depthVelocity * treajectoryPredictorCorrection;
 
-                        RaycastHit hit;
-                        Physics.Linecast(lastVector, vector, out hit);
-                        crosshairTransform.position = new Vector3(hit.point.x, crosshairTransform.position.y, hit.point.z);
-                        //Debug.Log("Projector: " + crosshairTransform.position.ToString());
-                        //crosshairTransform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal); ;
+                    Physics.Linecast(lastVector, new Vector3(curVector.x + xDisplacement, curVector.y, curVector.z + zDisplacement), out hit);
+
+                    lastPosition = new Vector3(hit.point.x, crosshairTransform.position.y, hit.point.z);
+
+                    crosshairTransform.position = Vector3.SmoothDamp(crosshairTransform.position, lastPosition, ref _velocity, smoothTime);
+
+                    if (!AlmostEqual(crosshairTransform.position,lastPosition, 0.2f))
+                    {
+                        SetProjectorColor(_curAimColor, projectorColors.Aiming, _projector.material);
+                    }
+                    else
+                    {
+                        if (AlmostEqual(turret.GetTarget(), hit.point, aimingError))
+                            SetProjectorColor(_curAimColor, projectorColors.Aimed, _projector.material);
+                        else
+                            SetProjectorColor(_curAimColor, projectorColors.AimImpossible, _projector.material);
                     }
 
                     break;
                 }
             }
            
-            //string layerName = LayerMask.LayerToName(layersToHit);
-            /*if (chk)
-                Debug.Log(" Trajectory prediction 0: " + layersToHit.value.ToString());
-            if(chk1)
-                Debug.Log(" Trajectory prediction 1: " + layersToHit1.value.ToString());*/
-        
-
             if (textureObject == null)
             {
                 //Sets the number of lines in the line renderer to lineIndex
                 lineRenderer.SetVertexCount(lineIndex);
             }
         }
+    }
+
+    /// <summary>
+    /// Change the color of the projector if it does not match the required
+    /// </summary>
+    Action<Color , Color, Material> SetProjectorColor = (Color cur, Color c, Material mat) => { if (cur != c) mat.SetColor("_Color", c); };
+
+    public float smoothTime = 0.3f;
+    public float treajectoryPredictorCorrection = 12f;
+    public float aimingError = 3;
+
+    Color _curAimColor;
+    Vector3 lastPosition;
+    Vector3 _velocity;
+
+    public bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)
+    {
+        bool equal = true;
+
+        if (Mathf.Abs(v1.x - v2.x) > precision) equal = false;
+        if (Mathf.Abs(v1.y - v2.y) > precision) equal = false;
+        if (Mathf.Abs(v1.z - v2.z) > precision) equal = false;
+
+        return equal;
     }
 }

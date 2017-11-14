@@ -238,8 +238,8 @@
     <Compile Include="Assets\Editor\Ultimate Joystick\UltimateJoystickEditor.cs" />
     <Compile Include="Assets\Editor\Ultimate Joystick\UltimateJoystickWindow.cs" />
     <Compile Include="Assets\Inspector Name Drawer\Editor\InspectorNameDrawer.cs" />
-    <Compile Include="Assets\Scripts\ShipCannon\Turrets\Editor\F3DTurretEditor.cs" />
-    <Compile Include="Assets\Scripts\ShipCannon\Turrets\Editor\F3DTurretHandles.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCannon\Turrets\Editor\F3DTurretEditor.cs" />
+    <Compile Include="Assets\Scripts\Ship\ShipCannon\Turrets\Editor\F3DTurretHandles.cs" />
     <Compile Include="Assets\Scripts\View\Editor\EntityLinkInspector.cs" />
     <Compile Include="Assets\Scripts\View\ViewController\Editor\TypeDrawer\ViewControllerTypeDrawer.cs" />
     <Compile Include="Assets\Sources\Editor\TypeDrawer\IntVector2TypeDrawer.cs" />

@@ -11,17 +11,23 @@ public partial class GameEntity {
     public AssetComponent asset { get { return (AssetComponent)GetComponent(GameComponentsLookup.Asset); } }
     public bool hasAsset { get { return HasComponent(GameComponentsLookup.Asset); } }
 
-    public void AddAsset(string newName) {
+    public void AddAsset(string newName, string newCanvasActions, string newProjectorAim, string newProjectAimCross) {
         var index = GameComponentsLookup.Asset;
         var component = CreateComponent<AssetComponent>(index);
         component.name = newName;
+        component.canvasActions = newCanvasActions;
+        component.projectorAim = newProjectorAim;
+        component.projectAimCross = newProjectAimCross;
         AddComponent(index, component);
     }
 
-    public void ReplaceAsset(string newName) {
+    public void ReplaceAsset(string newName, string newCanvasActions, string newProjectorAim, string newProjectAimCross) {
         var index = GameComponentsLookup.Asset;
         var component = CreateComponent<AssetComponent>(index);
         component.name = newName;
+        component.canvasActions = newCanvasActions;
+        component.projectorAim = newProjectorAim;
+        component.projectAimCross = newProjectAimCross;
         ReplaceComponent(index, component);
     }
 

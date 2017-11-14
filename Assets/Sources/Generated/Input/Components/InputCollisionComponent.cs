@@ -11,19 +11,21 @@ public partial class InputEntity {
     public CollisionComponent collision { get { return (CollisionComponent)GetComponent(InputComponentsLookup.Collision); } }
     public bool hasCollision { get { return HasComponent(InputComponentsLookup.Collision); } }
 
-    public void AddCollision(Entitas.Entity newSelf, Entitas.Entity newOther) {
+    public void AddCollision(Entitas.Entity newSelf, Entitas.Entity newOther, ShipSectors.ShipSector newShipSector) {
         var index = InputComponentsLookup.Collision;
         var component = CreateComponent<CollisionComponent>(index);
         component.self = newSelf;
         component.other = newOther;
+        component.shipSector = newShipSector;
         AddComponent(index, component);
     }
 
-    public void ReplaceCollision(Entitas.Entity newSelf, Entitas.Entity newOther) {
+    public void ReplaceCollision(Entitas.Entity newSelf, Entitas.Entity newOther, ShipSectors.ShipSector newShipSector) {
         var index = InputComponentsLookup.Collision;
         var component = CreateComponent<CollisionComponent>(index);
         component.self = newSelf;
         component.other = newOther;
+        component.shipSector = newShipSector;
         ReplaceComponent(index, component);
     }
 

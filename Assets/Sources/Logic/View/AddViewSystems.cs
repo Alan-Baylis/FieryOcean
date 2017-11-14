@@ -17,8 +17,10 @@ using UnityEditor;
 using Forge3D;
 
 public partial class AddViewSystems : ReactiveSystem<GameEntity> {
-    public AddViewSystems(Contexts contexts) : base(contexts.game)
+    TrajectoryPredictor3D.ProjectorColors _projectorColors;
+    public AddViewSystems(Contexts contexts , TrajectoryPredictor3D.ProjectorColors pc) : base(contexts.game)
     {
+        _projectorColors = pc;
         _container = new GameObject(" PlayerViews").transform;
         _pool = contexts.game;
     }
@@ -165,20 +167,27 @@ public partial class AddViewSystems : ReactiveSystem<GameEntity> {
             t.ship = go.transform;
         }
 
+        var canvasAction = Assets.Instantiate<GameObject>(ge.asset.canvasActions);
+        canvasAction.transform.SetParent(go.transform);
+        canvasAction.transform.position = new Vector3(0, canvasAction.transform.position.y, 0);
+
         //
         // Create and initialize projector for cannon
         //
-        TrajectoryPredictor3D[] trajectoryPredict = go.GetComponentsInChildren<TrajectoryPredictor3D>();
-        foreach (TrajectoryPredictor3D tp in trajectoryPredict)
+        foreach (TrajectoryPredictor3D tp in go.GetComponentsInChildren<TrajectoryPredictor3D>())
         {
-            tp.crosshair = Assets.Instantiate<GameObject>("Projector/Prefabs/ProjectorAim"); ///TODO
+            tp.crosshair = Assets.Instantiate<GameObject>(ge.asset.projectorAim); 
             tp.crosshair.transform.position = new Vector3(0, 20f, 0);
+            tp.projectorColors = _projectorColors;
 
-            ge.playerView.controller.AddTurret(new PlayerViewController.TurretShip(tp.f3dturret.TurretId, tp.f3dturret, tp ));
+            ge.playerView.controller.AddTurret(new PlayerViewController.TurretShip(tp.turret.TurretId, tp.turret, tp));
+
+            tp.CustomStart();
         }
 
         F3DPlayerTurretController playerTurretController = go.GetComponentInChildren<F3DPlayerTurretController>();
-        playerTurretController.aimingPointTransform = Assets.Instantiate<GameObject>("SphereAimMarker").transform;          ///TODO
+        playerTurretController.aimingPointTransform = Assets.Instantiate<GameObject>(ge.asset.projectAimCross).transform;
+        playerTurretController.aimingPointTransform.position = new Vector3(0, 70, 0); //TODO
     }
 
 
