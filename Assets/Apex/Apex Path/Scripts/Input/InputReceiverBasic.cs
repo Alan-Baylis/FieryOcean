@@ -34,10 +34,10 @@ namespace Apex.Input
 
             if (Application.platform != RuntimePlatform.WindowsPlayer &&
                 Application.platform != RuntimePlatform.WindowsEditor &&
-                Application.platform != RuntimePlatform.WindowsWebPlayer &&
+                /*Application.platform != RuntimePlatform.WindowsWebPlayer &&*/
                 Application.platform != RuntimePlatform.OSXPlayer &&
                 Application.platform != RuntimePlatform.OSXEditor &&
-                Application.platform != RuntimePlatform.OSXWebPlayer &&
+                /*Application.platform != RuntimePlatform.OSXWebPlayer &&*/
                 Application.platform != RuntimePlatform.LinuxPlayer)
             {
                 Debug.LogWarning("The default basic input receiver only works on Windows, Linux and Mac.");
